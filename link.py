@@ -3,6 +3,7 @@ from config import Config
 from utils import str2sha1
 from id_generator import get_new_link_id
 from geopy.distance import vincenty
+import node
 
 
 class Link:
@@ -130,6 +131,27 @@ class Link:
 
         return (Link(self.name + "-b1", nodes_first),
                 Link(self.name + "-b2", nodes_second))
+
+
+    def get_location_on_link(self, distance):
+        """ Get the Node with distance to the start of the link  """
+        if distance > self.length or distance < 0:
+            return None
+
+        # Find the sub-link which the location (node) is on
+        length = 0.0
+        i = 0
+        while length < distance:
+            from_node = self.nodes[i]
+            to_node = self.nodes[i + 1]
+            length += from_node.get_distance_to(to_node)
+            i += 1
+        # Get the GPS position of the location
+        # i must greater than 0 because distance cannot be less than 0
+        src = self.nodes[i - 1]
+        dst = self.nodes[i]
+        ratio = (length - distance) / src.get_distance_to(dst)
+        return node.get_middle_node(src, dst, ratio=ratio)
 
     def __hash__(self):
         return self.hash
