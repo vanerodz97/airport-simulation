@@ -3,6 +3,7 @@ state.
 """
 import enum
 import logging
+import copy
 
 
 class State(enum.Enum):
@@ -18,7 +19,6 @@ class State(enum.Enum):
 class Aircraft:
     """`Aircraft` represents an aircraft in the airport.
     """
-
     def __init__(self, callsign, model, location, state):
 
         self.logger = logging.getLogger(__name__)
@@ -26,24 +26,66 @@ class Aircraft:
         self.callsign = callsign
         self.model = model
         self.location = location
+        self.precise_location = copy.deepcopy(location)
+        self.speed = 100.0
         self.__state = state
 
         self.itinerary = None
 
     def set_location(self, location):
         """Sets the location of this aircraft to a given location."""
-
         self.location = location
         self.logger.info("%s location changed to %s", self, location)
 
+    def set_precise_location(self, precise_location):
+        """Sets the precise location of this aircraft to a given location."""
+        self.precise_location = precise_location
+        self.logger.info("%s precise location changed to %s", self, precise_location)
+
+    # The original function
+    # @property
+    # def next_location(self):
+    #     """Gets the location of this aircraft in the next tick."""
+    #     if self.itinerary:
+    #         next_target = self.itinerary.next_target
+    #         if next_target is not None:
+    #             return next_target
+    #     return self.location
+
     @property
     def next_location(self):
-        """Gets the location of this aircraft in the next tick."""
+        """Gets the precise location of this aircraft in the next tick."""
         if self.itinerary:
-            next_target = self.itinerary.next_target
-            if next_target is not None:
-                return next_target
+            next_index, _, _ = self.itinerary.get_next_location(self.__get_tick_distance())
+            if next_index is not None:
+                return self.itinerary.get_nth_target(next_index).end
         return self.location
+
+    @property
+    def next_precise_location(self):
+        """Gets the precise location of this aircraft in the next tick."""
+        if self.itinerary:
+            _, _, next_location = self.itinerary.get_next_location(self.__get_tick_distance())
+            if next_location is not None:
+                return next_location
+        return self.location
+
+    # TODO: discuss the interface
+    def get_next_speed(self, proceed_aircraft_speed, distance):
+        """ Calculate the speed based on following model."""
+        # TODO: revise model
+        acceleration = self.speed * (self.speed - proceed_aircraft_speed) / distance
+
+        return self.speed + acceleration
+
+    def set_speed(self, speed):
+        """ Set the speed of the aircraft"""
+        self.speed = speed
+
+    def __get_tick_distance(self):
+        """ Get the distance passed in this tick"""
+        # TODO: implement
+        return self.speed * 1 # 1 is the schedule window
 
     def set_itinerary(self, itinerary):
         """Sets the itinerary of this aircraft."""
@@ -76,15 +118,18 @@ class Aircraft:
         """
 
         if self.itinerary:
-            self.itinerary.tick()
+            tick_distance = self.__get_tick_distance()
+            self.itinerary.tick(tick_distance)
             if self.itinerary.is_completed:
                 self.logger.debug("%s: %s completed.", self, self.itinerary)
             else:
-                self.set_location(self.itinerary.current_target)
+                self.set_location(self.itinerary.current_location)
+                self.set_precise_location(self.itinerary.current_precise_location)
         else:
             self.logger.debug("%s: No itinerary request.", self)
 
         self.logger.info("%s at %s", self, self.location)
+
 
     @property
     def state(self):
