@@ -38,7 +38,7 @@ class Airport:
     def apply_schedule(self, schedule):
         """Applies a schedule onto the active aircrafts in the airport."""
 
-        # Clean up the cache (previous states)
+        # Cl\ean up the cache (previous states)
         self.itinerary_cache = {}
 
         # Apply the itinerary onto the aircrafts one by one
@@ -87,6 +87,7 @@ class Airport:
             # Put the first aircraft in queue into the airport
             aircraft = queue.popleft()
             aircraft.set_location(gate)
+            aircraft.set_precise_location(gate)
             self.add_aircraft(aircraft)
 
     def __add_aircrafts_from_scenario(self, scenario, now, sim_time):
@@ -113,6 +114,7 @@ class Airport:
             else:
                 # Adds the flight to the airport
                 aircraft.set_location(gate)
+                aircraft.set_precise_location(gate)
                 self.add_aircraft(aircraft)
                 self.logger.info("Adds %s into the airport", flight)
 
@@ -136,7 +138,7 @@ class Airport:
         for aircraft in self.aircrafts:
             flight = scenario.get_flight(aircraft)
             # Deletion shouldn't be done in the fly
-            if aircraft.location.is_close_to(flight.runway.start):
+            if aircraft.precise_location.is_close_to(flight.runway.start):
                 to_remove_aircrafts.append(aircraft)
 
         for aircraft in to_remove_aircrafts:
@@ -157,6 +159,7 @@ class Airport:
         return self.__get_conflicts(is_next=True)
 
     def __get_conflicts(self, is_next=False):
+        # TODO: may need to be revised
         __conflicts = []
         aircraft_pairs = list(itertools.combinations(self.aircrafts, 2))
         for pair in aircraft_pairs:
@@ -172,7 +175,7 @@ class Airport:
     def is_occupied_at(self, node):
         """Check if an aircraft is occupied at the given node."""
         for aircraft in self.aircrafts:
-            if aircraft.location.is_close_to(node):
+            if aircraft.precise_location.is_close_to(node):
                 return True
         return False
 

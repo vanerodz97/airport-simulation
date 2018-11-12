@@ -28,7 +28,11 @@ class AbstractScheduler:
 
         route = simulation.routing_expert.get_shortest_route(src, dst)
 
-        itinerary = Itinerary(deepcopy(route.nodes))
+        itinerary = Itinerary(deepcopy(route.links))
+        # Merge the new itinerary with the part of link the aircraft is going to pass
+        if aircraft.itinerary:
+            previous_link, previous_distance = aircraft.itinerary.get_current_link_info()
+            itinerary.merge_with_prior_link(previous_link, previous_distance)
 
         # Aggregates the uncertainty delay in previous itinerary if found
         if aircraft.itinerary:
