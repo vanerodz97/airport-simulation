@@ -26,7 +26,11 @@ class Aircraft:
 
         self.callsign = callsign
         self.model = model
+
+        # Aircraft's location as a vertex in on the node-link graph
+        # If it's on the middle of a link, the coarse location will be the next node it will traverse.
         self.__coarse_location = location
+        # aircraft's location as some point on a link
         self.__precise_location = None
         self.speed = 100.0
         self.__state = state
