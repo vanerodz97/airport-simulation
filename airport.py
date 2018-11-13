@@ -1,14 +1,15 @@
 """`Airport` represents both the static and dynamic surface states of an
 airport.
 """
-import os
-import logging
 import itertools
-
+import logging
+import os
 from collections import deque
-from surface import SurfaceFactory
+
+from aircraft import Aircraft
 from config import Config
 from conflict import Conflict
+from surface import SurfaceFactory
 from utils import get_seconds_after
 
 
@@ -86,8 +87,7 @@ class Airport:
 
             # Put the first aircraft in queue into the airport
             aircraft = queue.popleft()
-            aircraft.set_location(gate)
-            aircraft.set_precise_location(gate)
+            aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
             self.add_aircraft(aircraft)
 
     def __add_aircrafts_from_scenario(self, scenario, now, sim_time):
@@ -113,8 +113,7 @@ class Airport:
 
             else:
                 # Adds the flight to the airport
-                aircraft.set_location(gate)
-                aircraft.set_precise_location(gate)
+                aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
                 self.add_aircraft(aircraft)
                 self.logger.info("Adds %s into the airport", flight)
 

@@ -222,8 +222,8 @@ class TestScheduler(unittest.TestCase):
     def test_deterministic_scheduler_with_one_unsolvable_conflict(self):
 
         # Sets two aircraft standing at the same node
-        self.a4.location = self.s1
-        self.a5.location = self.s1
+        self.a4.set_location(self.s1, Aircraft.LOCATION_LEVEL_COARSE)
+        self.a5.set_location(self.s1, Aircraft.LOCATION_LEVEL_COARSE)
 
         # Create mock objects, then schedule it
         simulation = self.SimulationMock(
