@@ -59,22 +59,21 @@ class Aircraft:
         return self.__precise_location if self.__precise_location else self.__coarse_location
 
     @property
-    def next_location(self):
+    def next_location(self, level=LOCATION_LEVEL_COARSE):
         """Gets the precise location of this aircraft in the next tick."""
-        if self.itinerary:
-            next_index, _, _ = self.itinerary.get_next_location(self.__get_tick_distance())
+        if not self.itinerary:
+            return self.__coarse_location
+
+        next_index, _, next_location = self.itinerary.get_next_location(self.__get_tick_distance())
+
+        if level == Aircraft.LOCATION_LEVEL_COARSE:
             if next_index is not None:
                 return self.itinerary.get_nth_target(next_index).end
-        return self.__coarse_location
-
-    @property
-    def next_precise_location(self):
-        """Gets the precise location of this aircraft in the next tick."""
-        if self.itinerary:
-            _, _, next_location = self.itinerary.get_next_location(self.__get_tick_distance())
+        elif level == Aircraft.LOCATION_LEVEL_PRECISE:
             if next_location is not None:
                 return next_location
-        return self.__coarse_location
+        else:
+            raise Exception("Unrecognized location level.")
 
     # TODO: discuss the interface
     def get_next_speed(self, proceed_aircraft_speed, distance):
