@@ -12,8 +12,8 @@ class Itinerary:
             targets = []
 
         self.targets = targets  # links
-        self.index = 0
-        self.distance = 0
+        self.index = 0  # index of current link
+        self.distance = 0  # distance traversed on the current link
 
         self.hash = str2sha1("#".join(str(self.targets)))
         self.uncertainty_delayed_index = []
@@ -35,6 +35,7 @@ class Itinerary:
     @return the current target/link, current distance on the link
     Return (None, None) if completed.
     """
+
     def get_current_link_info(self):
         """ Get the the current target and the distance on it the aircraft has passed by"""
         if self.is_completed:
@@ -44,6 +45,7 @@ class Itinerary:
     """
     @require: This method can only be invoked before the aircraft starts executing it.
     """
+
     def merge_with_prior_link(self, previous_link, previous_distance):
         """ Merge the new itinerary with the previous one by adding to the head the part
             of link that the aircraft has not passed by yet.
@@ -56,32 +58,36 @@ class Itinerary:
     @return index, distance, Node
     Return (None, None, None) if completed.
     """
-    def get_next_location(self, tick_distance):
-        if self.is_completed:
-            return None, None, None
 
-        distance = self.distance
-        current_target = self.current_target
+    def get_next_location(self, tick_distance):
+        # Return the last node in the itinerary if completed
+        last_node_in_itinerary = self.length - 1, self.targets[-1].length, self.targets[-1].end
+
+        if self.is_completed:
+            return last_node_in_itinerary
+
         index = self.index
-        # Find the link which the next location is on
-        rest_link_length = current_target.length - distance
-        while tick_distance >= rest_link_length:
-            tick_distance -= rest_link_length
-            distance = 0
+
+        # Advance on same same link
+        if self.targets[index].length - self.distance < tick_distance:
+            new_distance = self.distance + tick_distance
+            return index, new_distance, self.targets[index].get_middle_node(new_distance)
+        else:
+            tick_distance -= self.targets[index].length - self.distance
             index += 1
             if index >= self.length:
-                return None, None, None
-            rest_link_length = self.get_target_len(index)
+                return last_node_in_itinerary
+
+        # Find the link which the next location is on
+        while tick_distance >= self.targets[index].length:
+            tick_distance -= self.targets[index].length
+            index += 1
+            # Return the last node in the itinerary if completed
+            if index >= self.length:
+                return last_node_in_itinerary
         # Update the distance on the link
-        distance += tick_distance
 
-        return index, distance, self.targets[index].get_middle_node(distance)
-
-    def get_target_len(self, n):
-        """ Returns the length of the nth target. """
-        if n >= self.length:
-            return None
-        return self.targets[n].length
+        return index, tick_distance, self.targets[index].get_middle_node(tick_distance)
 
     def get_nth_target(self, n):
         """ Returns the nth link/target of the route/targets """
