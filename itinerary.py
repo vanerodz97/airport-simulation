@@ -77,7 +77,7 @@ class Itinerary:
         # Update the distance on the link
         distance += tick_distance
 
-        return index, distance, self.targets[index].get_location_on_link(distance)
+        return index, distance, self.targets[index].get_middle_node(distance)
 
     def get_target_len(self, n):
         """ Returns the length of the nth target. """
@@ -171,7 +171,7 @@ class Itinerary:
         """Returns the current location (the precise node of current target/link)."""
         if self.is_completed:
             return None
-        return self.targets[self.index].get_location_on_link(self.distance)
+        return self.targets[self.index].get_middle_node(self.distance)
 
     @property
     def next_target(self):
