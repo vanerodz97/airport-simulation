@@ -131,7 +131,7 @@ class Aircraft:
                 # self.logger.debug("%s: %s completed.", self, self.itinerary)
                 pass
             else:
-                self.set_location(self.itinerary.current_location, Aircraft.LOCATION_LEVEL_COARSE)
+                self.set_location(self.itinerary.current_coarse_location, Aircraft.LOCATION_LEVEL_COARSE)
                 self.set_location(self.itinerary.current_precise_location, Aircraft.LOCATION_LEVEL_PRECISE)
         else:
             # self.logger.debug("%s: No itinerary request.", self)

@@ -39,7 +39,7 @@ class Airport:
     def apply_schedule(self, schedule):
         """Applies a schedule onto the active aircrafts in the airport."""
 
-        # Cl\ean up the cache (previous states)
+        # Clean up the cache (previous states)
         self.itinerary_cache = {}
 
         # Apply the itinerary onto the aircrafts one by one
@@ -60,7 +60,7 @@ class Airport:
                 self.itinerary_cache[aircraft] = itinerary
 
     def add_aircrafts(self, scenario, now, sim_time):
-        """Adds multiple aircrafts according to the given scenario and current
+        """Adds multiple aircraft according to the given scenario and current
         time stamp.
         """
         self.__add_aircrafts_from_queue()
@@ -129,7 +129,7 @@ class Airport:
                 "Adds {} arrival flight into the airport".format(flight))
 
     def remove_aircrafts(self, scenario):
-        """Removes departure aircrafts if they've moved to the runway.
+        """Removes departure aircraft if they've moved to the runway.
         """
 
         to_remove_aircrafts = []
