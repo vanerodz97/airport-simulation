@@ -60,15 +60,6 @@ class StateLogger:
             "scheduler_delayed_index": sc_delayed_index
         }
 
-    # @classmethod
-    # def __parse_itinerary(cls, itinerary):
-    #     return [
-    #         {
-    #             "node_name": target.name,
-    #             "node_location": target.geo_pos
-    #         }
-    #         for target in itinerary.targets
-    #     ] if itinerary is not None else None
     @classmethod
     def __parse_itinerary(cls, itinerary):
         return [
