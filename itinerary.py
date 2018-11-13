@@ -1,5 +1,4 @@
 """Class file for `Itinerary`."""
-from copy import deepcopy
 from utils import str2sha1
 
 
@@ -13,7 +12,6 @@ class Itinerary:
             targets = []
 
         self.targets = targets  # links
-        self.backup = deepcopy(targets)
         self.index = 0
         self.distance = 0
 
