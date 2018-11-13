@@ -68,12 +68,15 @@ class Aircraft:
 
         if level == Aircraft.LOCATION_LEVEL_COARSE:
             if next_index is not None:
-                return self.itinerary.get_nth_target(next_index).end
+                next_target = self.itinerary.get_nth_target(next_index)
+                return next_target.end if next_target else self.__coarse_location
         elif level == Aircraft.LOCATION_LEVEL_PRECISE:
             if next_location is not None:
                 return next_location
         else:
             raise Exception("Unrecognized location level.")
+
+        return self.__coarse_location
 
     # TODO: discuss the interface
     def get_next_speed(self, proceed_aircraft_speed, distance):
