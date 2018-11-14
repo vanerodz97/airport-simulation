@@ -26,12 +26,12 @@ class Itinerary:
             return
         # Change current link if passing the last ones
         index, distance, next_location = self.get_next_location(tick_distance)
-        if not next_location:
-            self.index = self.length
-            self.distance = 0
-        else:
-            self.index = index
-            self.distance = distance
+
+        if index < self.length and type(self.targets[index]) is HoldItinerary:
+            index += 1
+
+        self.index = index
+        self.distance = distance
 
     """
     @return index, distance, Node
@@ -49,7 +49,7 @@ class Itinerary:
 
         # Skip delays
         if type(self.targets[index]) is HoldItinerary:
-            return self.index + 1, self.distance, self.current_precise_location
+            return self.index, self.distance, self.current_precise_location
 
         # Find the link which the next location is on
         while tick_distance >= self.targets[index].length - distance:
