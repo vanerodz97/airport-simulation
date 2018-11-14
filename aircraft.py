@@ -129,21 +129,14 @@ class Aircraft:
             tick_distance = self.__get_tick_distance()
             self.itinerary.tick(tick_distance)
             if self.itinerary.is_completed:
-                # self.logger.debug("%s: %s completed.", self, self.itinerary)
-                pass
-            else:
-                self.set_location(self.itinerary.current_coarse_location, Aircraft.LOCATION_LEVEL_COARSE)
-                self.set_location(self.itinerary.current_precise_location, Aircraft.LOCATION_LEVEL_PRECISE)
+                self.logger.debug("%s: %s completed.", self, self.itinerary)
+            self.set_location(self.itinerary.current_coarse_location, Aircraft.LOCATION_LEVEL_COARSE)
+            self.set_location(self.itinerary.current_precise_location, Aircraft.LOCATION_LEVEL_PRECISE)
         else:
             # self.logger.debug("%s: No itinerary request.", self)
             pass
 
-<<<<<<< HEAD
-        # self.logger.info("%s at %s", self, self.location)
-
-=======
         self.logger.info("%s at %s", self, self.__coarse_location)
->>>>>>> ae7be8fd... Refactor location-related deisgn in aircraft.py.
 
     @property
     def state(self):
