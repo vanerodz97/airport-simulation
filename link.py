@@ -153,7 +153,9 @@ class Link:
         if link_length == 0:
             return src
 
-        ratio = (length - distance) / link_length
+        # TODO: the route returned by RoutingExpert is in reverse order,
+        # TODO: so I added 1 - x here. Should fix in the future.
+        ratio = 1 - (length - distance) / link_length
         return get_middle_node(src, dst, ratio=ratio)
 
     def __hash__(self):
