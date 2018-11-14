@@ -58,8 +58,7 @@ class Aircraft:
     def precise_location(self):
         return self.__precise_location if self.__precise_location else self.__coarse_location
 
-    @property
-    def next_location(self, level=LOCATION_LEVEL_COARSE):
+    def get_next_location(self, level=LOCATION_LEVEL_COARSE):
         """Gets the precise location of this aircraft in the next tick."""
         if not self.itinerary:
             return self.__coarse_location
