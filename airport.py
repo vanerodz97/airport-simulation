@@ -157,8 +157,8 @@ class Airport:
         aircraft_pairs = list(itertools.combinations(self.aircrafts, 2))
         for pair in aircraft_pairs:
             if is_next:
-                loc1, loc2 = pair[0].next_location(
-                    Aircraft.LOCATION_LEVEL_PRECISE), pair[1].next_location(Aircraft.LOCATION_LEVEL_PRECISE)
+                loc1, loc2 = pair[0].get_next_location(Aircraft.LOCATION_LEVEL_PRECISE), \
+                             pair[1].get_next_location(Aircraft.LOCATION_LEVEL_PRECISE)
             else:
                 loc1, loc2 = pair[0].precise_location, pair[1].precise_location
             if not loc1.is_close_to(loc2):

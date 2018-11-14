@@ -50,7 +50,7 @@ class Itinerary:
 
     def get_next_location(self, tick_distance):
         # Return the last node in the itinerary if completed
-        completed_itinerary = None, None, None
+        completed_itinerary = self.length, 0, self.targets[-1].end
 
         if self.is_completed:
             return completed_itinerary
