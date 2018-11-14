@@ -30,13 +30,15 @@ class AbstractScheduler:
 
         # Merge the new itinerary with the part of link the aircraft is going to pass
         new_route = deepcopy(route.links)
+        distance = 0
         if aircraft.itinerary:
             unfinished_link, unfinished_distance = \
                 aircraft.itinerary.current_target, aircraft.itinerary.current_distance
             if unfinished_link:
                 new_route = [unfinished_link] + new_route
+                distance = unfinished_distance
 
-        itinerary = Itinerary(new_route)
+        itinerary = Itinerary(new_route, unfinished_distance=distance)
 
         # Aggregates the uncertainty delay in previous itinerary if found
         if aircraft.itinerary:
