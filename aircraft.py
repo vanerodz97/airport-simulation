@@ -130,9 +130,8 @@ class Aircraft:
             self.itinerary.tick(tick_distance)
             if self.itinerary.is_completed:
                 self.logger.debug("%s: %s completed.", self, self.itinerary)
-            else:
-                self.set_location(self.itinerary.current_coarse_location, Aircraft.LOCATION_LEVEL_COARSE)
-                self.set_location(self.itinerary.current_precise_location, Aircraft.LOCATION_LEVEL_PRECISE)
+            self.set_location(self.itinerary.current_coarse_location, Aircraft.LOCATION_LEVEL_COARSE)
+            self.set_location(self.itinerary.current_precise_location, Aircraft.LOCATION_LEVEL_PRECISE)
         else:
             self.logger.debug("%s: No itinerary request.", self)
 

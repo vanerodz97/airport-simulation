@@ -6,14 +6,15 @@ class Itinerary:
     """Itinerary is a list of target nodes that an aircraft follows per tick.
     """
 
-    def __init__(self, targets=None):
+    def __init__(self, targets=None, unfinished_distance=0):
 
         if targets is None:
             targets = []
 
         self.targets = targets  # links
         self.index = 0  # index of current link
-        self.distance = 0  # distance traversed on the current link
+        self.distance = unfinished_distance  # distance traversed on the current link
+        self.unfinished_distance = unfinished_distance
 
         self.hash = str2sha1("#".join(str(self.targets)))
         self.uncertainty_delayed_index = []
@@ -31,17 +32,6 @@ class Itinerary:
         else:
             self.index = index
             self.distance = distance
-
-    """
-    @return the current target/link, current distance on the link
-    Return (None, None) if completed.
-    """
-
-    def get_current_link_info(self):
-        """ Get the the current target and the distance on it the aircraft has passed by"""
-        if self.is_completed:
-            return None, None
-        return self.targets[self.index:], self.distance
 
     """
     @return index, distance, Node
@@ -63,7 +53,7 @@ class Itinerary:
 
         # Find the link which the next location is on
         while tick_distance >= self.targets[index].length - distance:
-            tick_distance -= self.targets[index].length
+            tick_distance -= self.targets[index].length - distance
             index += 1
             distance = 0
             # Return the last node in the itinerary if completed
@@ -75,7 +65,7 @@ class Itinerary:
                 return completed_itinerary
         # Update the distance on the link
 
-        return index, distance + tick_distance, self.targets[index].get_middle_node(tick_distance)
+        return index, distance + tick_distance, self.targets[index].get_middle_node(distance + tick_distance)
 
     def get_nth_target(self, n):
         """ Returns the nth link/target of the route/targets """
@@ -114,6 +104,7 @@ class Itinerary:
     def reset(self):
         """Reset the index of this itinerary."""
         self.index = 0
+        self.distance = self.unfinished_distance
 
     @property
     def length(self):

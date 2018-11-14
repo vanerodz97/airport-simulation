@@ -125,16 +125,15 @@ class Airport:
     def remove_aircrafts(self, scenario):
         """Removes departure aircraft if they've moved to the runway.
         """
-
-        to_remove_aircrafts = []
+        to_remove_aircraft = []
 
         for aircraft in self.aircrafts:
             flight = scenario.get_flight(aircraft)
             # Deletion shouldn't be done in the fly
             if aircraft.precise_location.is_close_to(flight.runway.start):
-                to_remove_aircrafts.append(aircraft)
+                to_remove_aircraft.append(aircraft)
 
-        for aircraft in to_remove_aircrafts:
+        for aircraft in to_remove_aircraft:
             self.logger.info("Removes %s from the airport", aircraft)
             self.aircrafts.remove(aircraft)
 
