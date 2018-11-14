@@ -59,15 +59,18 @@ class Itinerary:
 
         # Skip delays
         if type(self.targets[index]) is HoldItinerary:
-            self.index += 1
-            return self.index, self.distance, self.current_precise_location
+            return self.index + 1, self.distance, self.current_precise_location
 
         # Find the link which the next location is on
-        while tick_distance >= self.targets[index].length:
+        while tick_distance >= self.targets[index].length - distance:
             tick_distance -= self.targets[index].length
             index += 1
             distance = 0
             # Return the last node in the itinerary if completed
+
+            while index < self.length and type(self.targets[index]) is HoldItinerary:
+                index += 1
+
             if index >= self.length:
                 return completed_itinerary
         # Update the distance on the link
@@ -144,30 +147,45 @@ class Itinerary:
     @property
     def current_target(self):
         """Returns the current target."""
+        index = self.index
+        while index < self.length and type(self.targets[index]) is HoldItinerary:
+            index += 1
+
         if self.is_completed:
             return None
-        return self.targets[self.index]
+
+        return self.targets[index]
 
     @property
     def current_distance(self):
         """Returns the current target."""
         if self.is_completed:
             return None
+
         return self.distance
 
     @property
     def current_coarse_location(self):
         """Returns the current location (the end node of current target/link)."""
+        index = self.index
+        while index < self.length and type(self.targets[index]) is HoldItinerary:
+            index += 1
+
         if self.is_completed:
             return self.targets[-1].end
-        return self.targets[self.index].end
+        return self.targets[index].end
 
     @property
     def current_precise_location(self):
         """Returns the current location (the precise node of current target/link)."""
+        index = self.index
+        while index < self.length and type(self.targets[index]) is HoldItinerary:
+            index += 1
+
         if self.is_completed:
             return self.targets[-1].end
-        return self.targets[self.index].get_middle_node(self.distance)
+
+        return self.targets[index].get_middle_node(self.distance)
 
     @property
     def next_target(self):
