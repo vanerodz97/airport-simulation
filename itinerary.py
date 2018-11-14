@@ -55,28 +55,24 @@ class Itinerary:
         if self.is_completed:
             return completed_itinerary
 
-        index = self.index
+        index, distance = self.index, self.distance
 
-        # Advance on same same link
-        if 0 < self.targets[index].length - self.distance < tick_distance:
-            new_distance = self.distance + tick_distance
-            return index, new_distance, self.targets[index].get_middle_node(new_distance)
-        else:
-            tick_distance -= self.targets[index].length - self.distance
-            index += 1
-            if index >= self.length:
-                return completed_itinerary
+        # Skip delays
+        if type(self.targets[index]) is HoldItinerary:
+            self.index += 1
+            return self.index, self.distance, self.current_precise_location
 
         # Find the link which the next location is on
         while tick_distance >= self.targets[index].length:
             tick_distance -= self.targets[index].length
             index += 1
+            distance = 0
             # Return the last node in the itinerary if completed
             if index >= self.length:
                 return completed_itinerary
         # Update the distance on the link
 
-        return index, tick_distance, self.targets[index].get_middle_node(tick_distance)
+        return index, distance + tick_distance, self.targets[index].get_middle_node(tick_distance)
 
     def get_nth_target(self, n):
         """ Returns the nth link/target of the route/targets """
@@ -87,7 +83,7 @@ class Itinerary:
     def __add_delay(self):
         if self.is_completed:
             return None
-        self.targets.insert(self.index, self.targets[self.index])
+        self.targets.insert(self.index, HoldItinerary())
         return self.targets[self.index]
 
     def add_uncertainty_delay(self, amount=1):
@@ -213,3 +209,7 @@ class Itinerary:
 
     def __ne__(self, other):
         return not self == other
+
+
+class HoldItinerary:
+    pass

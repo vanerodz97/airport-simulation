@@ -4,6 +4,8 @@ state.
 import enum
 import logging
 
+from itinerary import HoldItinerary
+
 
 class State(enum.Enum):
     """`State` is a enum object that represents a possible state of an aircraft.
@@ -146,8 +148,7 @@ class Aircraft:
             return State.stop
 
         _, _, next_precise_location = self.itinerary.get_next_location(self.__get_tick_distance())
-        return State.hold if not next_precise_location or self.itinerary.current_precise_location.is_close_to(
-            next_precise_location) else State.moving
+        return State.hold if type(self.itinerary.current_target) is HoldItinerary else State.moving
 
     @property
     def is_delayed(self):
