@@ -19,6 +19,9 @@ APPEAR_BEFORE = 0  # seconds
 # We stop adding flights before the day ends in order to measure maxspan
 END_TIME = 9 * 60 * 60  # seconds
 
+spots_to_gates = {"S2": ["G2", "G3"],
+                  "S1": ["G1"]}
+
 # Setups logger
 logger = logging.getLogger(__name__)
 logger_handler = logging.StreamHandler(sys.stdout)
@@ -26,10 +29,6 @@ logger_handler.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
 logger_handler.setLevel(logging.DEBUG)
 logger.addHandler(logger_handler)
 logger.setLevel(logging.DEBUG)
-
-spots_to_gates = {"S2": ["G3", "G2"],
-                  "S1": ["S1"]}
-spots = ["S1", "S2"]
 
 flight_template = [
     {
@@ -84,6 +83,7 @@ def main():
     logger.debug("Generating gate spots data")
     gate_spots_filename = OUTPUT_FOLDER + "gates_spots.json"
     export_to_json(gate_spots_filename, spots_to_gates)
+
     logger.debug("Done")
 
 
