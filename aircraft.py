@@ -145,8 +145,10 @@ class Aircraft:
         if self.itinerary.next_target is None or \
                 self.itinerary.current_target is None:
             return State.stop
-        return State.hold if self.itinerary.current_target.is_close_to(
-            self.itinerary.next_target) else State.moving
+
+        _, _, next_precise_location = self.itinerary.get_next_location(self.__get_tick_distance())
+        return State.hold if not next_precise_location or self.itinerary.current_precise_location.is_close_to(
+            next_precise_location) else State.moving
 
     @property
     def is_delayed(self):

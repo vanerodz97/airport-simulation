@@ -58,7 +58,7 @@ class Itinerary:
         index = self.index
 
         # Advance on same same link
-        if self.targets[index].length - self.distance < tick_distance:
+        if 0 < self.targets[index].length - self.distance < tick_distance:
             new_distance = self.distance + tick_distance
             return index, new_distance, self.targets[index].get_middle_node(new_distance)
         else:

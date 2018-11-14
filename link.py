@@ -148,7 +148,12 @@ class Link:
         # Get the geo position of the location
         # i must greater than 0 because distance cannot be less than 0
         src, dst = self.nodes[i - 1], self.nodes[i]
-        ratio = (length - distance) / src.get_distance_to(dst)
+
+        link_length = src.get_distance_to(dst)
+        if link_length == 0:
+            return src
+
+        ratio = (length - distance) / link_length
         return get_middle_node(src, dst, ratio=ratio)
 
     def __hash__(self):
