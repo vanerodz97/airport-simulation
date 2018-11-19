@@ -7,6 +7,7 @@ class Conflict:
     airport.
     """
 
+    # The aircraft are always ranked by priority. Less comes first.
     def __init__(self, locations, aircrafts):
 
         self.locations = locations
@@ -21,6 +22,8 @@ class Conflict:
                              ("#".join(callsigns),
                               "#".join(str(self.locations))))
 
+        self.less_priority_aircraft = aircrafts[0]
+
     def __hash__(self):
         return self.hash
 
@@ -32,15 +35,3 @@ class Conflict:
 
     def __repr__(self):
         return "<Conflict: %s %s>" % (self.locations, self.aircrafts)
-
-    def get_less_priority_aircraft(self, scenario):
-        """Retrieves the less priority aircraft between the two conflicted
-        aircrafts.
-        """
-        first, second = (scenario.get_flight(self.aircrafts[0]),
-                         scenario.get_flight(self.aircrafts[1]))
-        return (
-            self.aircrafts[1]
-            if first.departure_time < second.departure_time
-            else self.aircrafts[0]
-        )
