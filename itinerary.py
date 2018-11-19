@@ -76,8 +76,8 @@ class Itinerary:
     def __add_delay(self):
         if self.is_completed:
             return None
-        self.targets.insert(self.index, HoldItinerary())
-        return self.targets[self.index]
+        self.targets.insert(0, HoldItinerary())
+        return self.targets[0]
 
     def add_uncertainty_delay(self, amount=1):
         """Adds `amount` of uncertainty delays at the head of this itinerary.
