@@ -29,12 +29,7 @@ class Link:
     @property
     def length(self):
         """Returns the physical length of this link in feets."""
-        length = 0.0
-        for i in range(1, len(self.nodes)):
-            from_node = self.nodes[i - 1]
-            to_node = self.nodes[i]
-            length += from_node.get_distance_to(to_node)
-        return length
+        return sum(self.segment_lengths)
 
     @property
     def start(self):
