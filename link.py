@@ -22,6 +22,7 @@ class Link:
 
         self.name = name
         self.nodes = nodes
+        self.segment_lengths = [nodes[i].get_distance_to(nodes[i + 1]) for i in range(len(nodes) - 1)]
         self.boundary = self.__calculate_boundary(nodes)
         self.hash = str2sha1("%s#%s" % (self.name, self.nodes))
 
@@ -142,14 +143,13 @@ class Link:
         length = 0.0
         i = 0
         while length < distance:
-            from_node, to_node = self.nodes[i], self.nodes[i + 1]
-            length += from_node.get_distance_to(to_node)
+            length += self.segment_lengths[i]
             i += 1
         # Get the geo position of the location
         # i must greater than 0 because distance cannot be less than 0
         src, dst = self.nodes[i - 1], self.nodes[i]
 
-        link_length = src.get_distance_to(dst)
+        link_length = self.segment_lengths[i - 1]
         if link_length == 0:
             return src
 
