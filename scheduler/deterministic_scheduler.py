@@ -20,7 +20,6 @@ class Scheduler(AbstractScheduler):
 
         # Assigns route per aircraft without any separation constraint
         for aircraft in simulation.airport.aircrafts:
-
             # NOTE: Itinerary objects are newly created the reference of these
             # object will be used in other objects; however, be ware that the
             # object will be shared instead of being cloned in the later
@@ -40,7 +39,7 @@ class Scheduler(AbstractScheduler):
         (tick_times, max_attempt) = self.__get_params()
 
         # Setups variables
-        attempts = {}   # attemps[conflict] = count
+        attempts = {}  # attemps[conflict] = count
         unsolvable_conflicts = set()
 
         while True:
@@ -118,7 +117,6 @@ class Scheduler(AbstractScheduler):
         # Solves the first conflicts, then reruns everything again.
         aircraft = self.__get_aircraft_to_delay(conflict, simulation)
         if aircraft in itineraries:
-
             # NOTE: New aircraft that only appear in prediction are ignored
             aircraft.add_scheduler_delay()
             self.__mark_attempt(attempts, max_attempt, conflict, aircraft,
@@ -152,14 +150,10 @@ class Scheduler(AbstractScheduler):
 
     @classmethod
     def __get_conflict_to_solve(cls, conflicts, unsolvable_conflicts):
-
-        while True:
-            if not conflicts:
-                return None
-            if conflicts[0] in unsolvable_conflicts:
-                conflicts = conflicts[1:]
-            else:
-                return conflicts[0]
+        for c in conflicts:
+            if c not in unsolvable_conflicts:
+                return c
+        return None
 
     def __get_aircraft_to_delay(self, conflict, simulation):
 
