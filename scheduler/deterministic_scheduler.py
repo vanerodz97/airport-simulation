@@ -17,6 +17,7 @@ class Scheduler(AbstractScheduler):
 
         self.logger.info("Scheduling start")
         itineraries = {}
+        priority_list = {}
 
         # Assigns route per aircraft without any separation constraint
         for aircraft in simulation.airport.aircrafts:
@@ -26,14 +27,15 @@ class Scheduler(AbstractScheduler):
             # phases.
             itinerary = self.schedule_aircraft(aircraft, simulation)
             itineraries[aircraft] = itinerary
+            priority_list[aircraft] = simulation.scenario.get_flight(aircraft).departure_time
 
         # Resolves conflicts
-        schedule = self.__resolve_conflicts(itineraries, simulation)
+        schedule, priority = self.__resolve_conflicts(itineraries, simulation, priority_list)
 
         self.logger.info("Scheduling end")
-        return schedule
+        return schedule, priority
 
-    def __resolve_conflicts(self, itineraries, simulation):
+    def __resolve_conflicts(self, itineraries, simulation, priority_list):
 
         # Gets configuration parameters
         (tick_times, max_attempt) = self.__get_params()
@@ -50,7 +52,7 @@ class Scheduler(AbstractScheduler):
             # Creates simulation copy for prediction
             predict_simulation = simulation.copy
             predict_simulation.airport.apply_schedule(
-                Schedule(itineraries, 0, 0))
+                Schedule(itineraries, 0, 0), priority_list)
 
             for i in range(tick_times):
 
@@ -59,7 +61,7 @@ class Scheduler(AbstractScheduler):
 
                 # Check if all aircraft has an itinerary, if not, assign one
                 self.__schedule_new_aircrafts(simulation, predict_simulation,
-                                              itineraries)
+                                              itineraries, priority_list)
 
                 # Gets conflict in current state
                 conflict = self.__get_conflict_to_solve(
@@ -70,9 +72,8 @@ class Scheduler(AbstractScheduler):
                 # If a conflict is found, tries to resolve it
                 if conflict is not None:
                     try:
-                        self.__resolve_conflict(
-                            simulation, itineraries, conflict, attempts,
-                            max_attempt)
+                        self.__resolve_conflict(itineraries, conflict, attempts,
+                                                max_attempt)
                         # Okay, then re-run everything again
                         break
                     except ConflictException:
@@ -90,7 +91,7 @@ class Scheduler(AbstractScheduler):
                         itineraries,
                         self.__get_n_delay_added(attempts),
                         len(unsolvable_conflicts)
-                    )
+                    ), priority_list
 
                 # After dealing with the conflicts in current state, tick to
                 # next state
@@ -98,7 +99,7 @@ class Scheduler(AbstractScheduler):
                 predict_simulation.post_tick()
 
     def __schedule_new_aircrafts(self, simulation, predict_simulation,
-                                 itineraries):
+                                 itineraries, priority_list):
 
         for aircraft in predict_simulation.airport.aircrafts:
             if not aircraft.itinerary:
@@ -108,14 +109,15 @@ class Scheduler(AbstractScheduler):
                 aircraft.set_itinerary(itinerary)
                 # Store a copy of the itinerary
                 itineraries[aircraft] = itinerary
+                priority_list[aircraft] = simulation.scenario.get_flight(aircraft).departure_time
 
-    def __resolve_conflict(self, simulation, itineraries, conflict, attempts,
+    def __resolve_conflict(self, itineraries, conflict, attempts,
                            max_attempt):
 
         self.logger.info("Try to solve %s", conflict)
 
         # Solves the first conflicts, then reruns everything again.
-        aircraft = self.__get_aircraft_to_delay(conflict, simulation)
+        aircraft = self.__get_aircraft_to_delay(conflict)
         if aircraft in itineraries:
             # NOTE: New aircraft that only appear in prediction are ignored
             aircraft.add_scheduler_delay()
@@ -155,7 +157,7 @@ class Scheduler(AbstractScheduler):
                 return c
         return None
 
-    def __get_aircraft_to_delay(self, conflict, simulation):
+    def __get_aircraft_to_delay(self, conflict):
 
         first, second = conflict.aircrafts
 
@@ -170,7 +172,7 @@ class Scheduler(AbstractScheduler):
             self.logger.debug("Found conflict with two hold aircraft")
             raise ConflictException("Unsolvable conflict found")
 
-        return conflict.get_less_priority_aircraft(simulation.scenario)
+        return conflict.less_priority_aircraft
 
     @classmethod
     def __get_n_delay_added(cls, attempts):

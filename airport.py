@@ -36,13 +36,16 @@ class Airport:
         self.name = name
         self.surface = surface
 
-    def apply_schedule(self, schedule):
-        """Applies a schedule onto the active aircrafts in the airport."""
+        self.priority = None
+
+    def apply_schedule(self, schedule, priority):
+        """Applies a schedule onto the active aircraft in the airport."""
+        self.priority = priority
 
         # Clean up the cache (previous states)
         self.itinerary_cache = {}
 
-        # Apply the itinerary onto the aircrafts one by one
+        # Apply the itinerary onto the aircraft one by one
         for aircraft, itinerary in schedule.itineraries.items():
 
             is_applied = False
@@ -117,11 +120,6 @@ class Airport:
                 self.add_aircraft(aircraft)
                 self.logger.info("Adds %s into the airport", flight)
 
-        # # Deal with the arrival flights
-        # for flight in scenario.arrivals:
-        #     if not (now <= flight.appear_time < next_tick_time):
-        #          continue
-
     def remove_aircrafts(self, scenario):
         """Removes departure aircraft if they've moved to the runway.
         """
@@ -151,7 +149,6 @@ class Airport:
         return self.__get_conflicts(is_next=True)
 
     def __get_conflicts(self, is_next=False):
-        # TODO: may need to be revised
         __conflicts = []
         aircraft_pairs = list(itertools.combinations(self.aircrafts, 2))
         for pair in aircraft_pairs:
@@ -162,6 +159,10 @@ class Airport:
                 loc1, loc2 = pair[0].precise_location, pair[1].precise_location
             if not loc1.is_close_to(loc2):
                 continue
+
+            # Always order the aircraft list by priority. Less comes first.
+            if self.priority[pair[1]] > self.priority[pair[0]]:
+                pair = pair[::-1]
             __conflicts.append(Conflict((loc1, loc2), pair))
         return __conflicts
 
