@@ -207,6 +207,11 @@ class Itinerary:
         return len([i for i in self.uncertainty_delayed_index
                     if i >= self.index])
 
+    def get_detailed_description(self):
+        return "index=" + str(self.index) + \
+               ", distance=" + str(self.distance) + \
+               ", targets=" + "\n".join([link.get_detailed_description() for link in self.targets])
+
     def __repr__(self):
         return "<Itinerary: %d target>" % len(self.targets)
 
@@ -221,4 +226,5 @@ class Itinerary:
 
 
 class HoldItinerary:
-    pass
+    def get_detailed_description(self):
+        return "<Hold>"
