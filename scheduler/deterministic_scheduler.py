@@ -1,4 +1,5 @@
 """Class file for the deterministic `Scheduler`."""
+from link import HoldLink
 from schedule import Schedule
 from config import Config
 from aircraft import State
@@ -65,7 +66,7 @@ class Scheduler(AbstractScheduler):
 
                 # Gets conflict in current state
                 conflict = self.__get_conflict_to_solve(
-                    predict_simulation.airport.get_next_conflicts(simulation.scenario),
+                    predict_simulation.airport.get_next_conflicts(predict_simulation.scenario),
                     unsolvable_conflicts
                 )
 
@@ -180,11 +181,37 @@ class Scheduler(AbstractScheduler):
 
         # TODO: if aircraft A is ahead of B, delay B
         # TODO: below is a simplified workaround
-        first_itinerary, second_itinerary = first.itinerary, second.itinerary
-        if first_itinerary.current_target == second_itinerary.current_target:
-            return first if first_itinerary.current_distance < second_itinerary.current_distance else second
+        overlapped_progress = self.__compare_itinerary_progress(first, second)
+
+        return overlapped_progress if overlapped_progress else conflict.less_priority_aircraft
+
+    def __compare_itinerary_progress(self, aircraft_a, aircraft_b):
+        a_itinerary, b_itinerary = aircraft_a.itinerary, aircraft_b.itinerary
+        a_target, b_target = a_itinerary.current_target, b_itinerary.current_target
+
+        if type(a_target) is not HoldLink and a_target in b_itinerary.targets:
+            a_target_index_in_b = b_itinerary.targets.index(a_target)
+            self.logger.error("A %d %d %f %f" % (
+                a_target_index_in_b, b_itinerary.current_target_index, a_itinerary.current_distance, b_itinerary.current_distance))
+            if a_target_index_in_b > b_itinerary.current_target_index:
+                return aircraft_b
+            elif a_target_index_in_b < b_itinerary.current_target_index:
+                return aircraft_a
+            else:
+                return aircraft_a if a_itinerary.current_distance < b_itinerary.current_distance else aircraft_b
+        elif type(b_target) is not HoldLink and b_target in a_itinerary.targets:
+            b_target_index_in_a = a_itinerary.targets.index(b_target)
+            self.logger.error("B %d %d %f %f" % (
+                b_target_index_in_a, a_itinerary.current_target_index, a_itinerary.current_distance, b_itinerary.current_distance))
+            if b_target_index_in_a > a_itinerary.current_target_index:
+                return aircraft_a
+            elif b_target_index_in_a < a_itinerary.current_target_index:
+                return aircraft_b
+            else:
+                return aircraft_a if a_itinerary.current_distance < b_itinerary.current_distance else aircraft_b
         else:
-            return conflict.less_priority_aircraft
+            self.logger.error("C")
+            return None
 
     @classmethod
     def __get_n_delay_added(cls, attempts):
