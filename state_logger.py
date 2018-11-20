@@ -3,7 +3,7 @@ import os
 import json
 import logging
 
-from itinerary import HoldItinerary
+from link import HoldLink
 from utils import get_output_dir_name
 
 
@@ -66,8 +66,8 @@ class StateLogger:
     def __parse_itinerary(cls, itinerary):
         return [
             {
-                "node_name": target.name if type(target) is not HoldItinerary else None,
-                "node_location": target.start.geo_pos if type(target) is not HoldItinerary else None
+                "node_name": target.name if type(target) is not HoldLink else None,
+                "node_location": target.start.geo_pos if type(target) is not HoldLink else None
             }
             for target in itinerary.targets
         ] if itinerary is not None else None

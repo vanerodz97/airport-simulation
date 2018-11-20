@@ -139,28 +139,19 @@ class Airport:
     def conflicts(self):
         """Retrieve a list of conflicts observed in the current airport state.
         """
-        return self.__get_conflicts(self.aircrafts)
+        return self.__get_conflicts()
 
-    def get_next_conflicts(self, scenario):
+    @property
+    def next_conflicts(self):
         """Retrieve a list of conflicts will observed in the next airport
         state.
         """
-        aircraft_list = []
+        return self.__get_conflicts(is_next=True)
 
-        for aircraft in self.aircrafts:
-            flight = scenario.get_flight(aircraft)
-            # Deletion shouldn't be done in the fly
-            if aircraft.location == flight.runway.start:
-                continue
-            else:
-                aircraft_list.append(aircraft)
-
-        return self.__get_conflicts(aircraft_list, is_next=True)
-
-    def __get_conflicts(self, aircraft_list, is_next=False):
+    def __get_conflicts(self, is_next=False):
         # Remove departed aircraft or
         __conflicts = []
-        aircraft_pairs = list(itertools.combinations(aircraft_list, 2))
+        aircraft_pairs = list(itertools.combinations(self.aircrafts, 2))
         for pair in aircraft_pairs:
             if is_next:
                 loc1, loc2 = pair[0].get_next_location(Aircraft.LOCATION_LEVEL_PRECISE), \

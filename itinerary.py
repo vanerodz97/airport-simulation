@@ -1,4 +1,5 @@
 """Class file for `Itinerary`."""
+from link import HoldLink
 from utils import str2sha1
 
 
@@ -25,10 +26,7 @@ class Itinerary:
         if self.is_completed:
             return
         # Change current link if passing the last ones
-        index, distance, next_location = self.get_next_location(tick_distance)
-
-        if index < self.length and type(self.targets[index]) is HoldItinerary:
-            index += 1
+        index, distance, _ = self.get_next_location(tick_distance)
 
         self.index = index
         self.distance = distance
@@ -48,8 +46,8 @@ class Itinerary:
         index, distance = self.index, self.distance
 
         # Skip delays
-        if type(self.targets[index]) is HoldItinerary:
-            return self.index, self.distance, self.current_precise_location
+        if type(self.targets[index]) is HoldLink:
+            return self.index + 1, self.distance, self.current_precise_location
 
         # Find the link which the next location is on
         while tick_distance >= self.targets[index].length - distance:
@@ -58,7 +56,7 @@ class Itinerary:
             distance = 0
             # Return the last node in the itinerary if completed
 
-            while index < self.length and type(self.targets[index]) is HoldItinerary:
+            while index < self.length and type(self.targets[index]) is HoldLink:
                 index += 1
 
             if index >= self.length:
@@ -76,7 +74,7 @@ class Itinerary:
     def __add_delay(self):
         if self.is_completed:
             return None
-        self.targets.insert(0, HoldItinerary())
+        self.targets.insert(0, HoldLink())
         return self.targets[0]
 
     def add_uncertainty_delay(self, amount=1):
@@ -139,13 +137,22 @@ class Itinerary:
     def current_target(self):
         """Returns the current target."""
         index = self.index
-        while index < self.length and type(self.targets[index]) is HoldItinerary:
+        while index < self.length and type(self.targets[index]) is HoldLink:
             index += 1
 
         if self.is_completed:
             return None
 
         return self.targets[index]
+
+    @property
+    def current_target_index(self):
+        """Returns the current target."""
+        index = self.index
+        while index < self.length and type(self.targets[index]) is HoldLink:
+            index += 1
+
+        return index
 
     @property
     def current_distance(self):
@@ -159,7 +166,7 @@ class Itinerary:
     def current_coarse_location(self):
         """Returns the current location (the end node of current target/link)."""
         index = self.index
-        while index < self.length and type(self.targets[index]) is HoldItinerary:
+        while index < self.length and type(self.targets[index]) is HoldLink:
             index += 1
 
         if self.is_completed:
@@ -170,7 +177,7 @@ class Itinerary:
     def current_precise_location(self):
         """Returns the current location (the precise node of current target/link)."""
         index = self.index
-        while index < self.length and type(self.targets[index]) is HoldItinerary:
+        while index < self.length and type(self.targets[index]) is HoldLink:
             index += 1
 
         if self.is_completed:
@@ -223,8 +230,3 @@ class Itinerary:
 
     def __ne__(self, other):
         return not self == other
-
-
-class HoldItinerary:
-    def get_detailed_description(self):
-        return "<Hold>"
