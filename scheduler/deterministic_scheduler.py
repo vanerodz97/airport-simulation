@@ -66,7 +66,7 @@ class Scheduler(AbstractScheduler):
 
                 # Gets conflict in current state
                 conflict = self.__get_conflict_to_solve(
-                    predict_simulation.airport.get_next_conflicts(predict_simulation.scenario),
+                    predict_simulation.airport.next_conflicts,
                     unsolvable_conflicts
                 )
 

@@ -4,7 +4,7 @@ state.
 import enum
 import logging
 
-from itinerary import HoldItinerary
+from link import HoldLink
 
 
 class State(enum.Enum):
@@ -148,7 +148,7 @@ class Aircraft:
             return State.stop
 
         _, _, next_precise_location = self.itinerary.get_next_location(self.__get_tick_distance())
-        return State.hold if type(self.itinerary.current_target) is HoldItinerary else State.moving
+        return State.hold if type(self.itinerary.current_target) is HoldLink else State.moving
 
     @property
     def is_delayed(self):

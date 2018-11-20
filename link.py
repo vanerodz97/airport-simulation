@@ -1,4 +1,5 @@
 """Class file for `Link`."""
+import random
 from geopy.distance import vincenty
 
 from config import Config
@@ -28,7 +29,7 @@ class Link:
 
     @property
     def length(self):
-        """Returns the physical length of this link in feets."""
+        """Returns the physical length of this link in feet."""
         return sum(self.segment_lengths)
 
     @property
@@ -167,3 +168,16 @@ class Link:
 
     def __repr__(self):
         return "<Link: " + self.name + ">"
+
+
+class HoldLink:
+
+    def __init__(self):
+        self.name = "Hold Link"
+        self.nodes = [None, None]
+        self.segment_lengths = [0]
+        self.boundary = [0, 0, 0, 0]
+        self.hash = random.random()
+
+    def get_detailed_description(self):
+        return "<Hold>"
