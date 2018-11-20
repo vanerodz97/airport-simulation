@@ -41,7 +41,7 @@ class Scheduler(AbstractScheduler):
         (tick_times, max_attempt) = self.__get_params()
 
         # Setups variables
-        attempts = {}  # attemps[conflict] = count
+        attempts = {}  # attempts[conflict] = count
         unsolvable_conflicts = set()
 
         while True:
@@ -65,7 +65,7 @@ class Scheduler(AbstractScheduler):
 
                 # Gets conflict in current state
                 conflict = self.__get_conflict_to_solve(
-                    predict_simulation.airport.next_conflicts,
+                    predict_simulation.airport.get_next_conflicts(simulation.scenario),
                     unsolvable_conflicts
                 )
 
