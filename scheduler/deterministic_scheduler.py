@@ -178,7 +178,13 @@ class Scheduler(AbstractScheduler):
             self.logger.debug("Found conflict with two hold aircraft")
             raise ConflictException("Unsolvable conflict found")
 
-        return conflict.less_priority_aircraft
+        # TODO: if aircraft A is ahead of B, delay B
+        # TODO: below is a simplified workaround
+        first_itinerary, second_itinerary = first.itinerary, second.itinerary
+        if first_itinerary.current_target == second_itinerary.current_target:
+            return first if first_itinerary.current_distance < second_itinerary.current_distance else second
+        else:
+            return conflict.less_priority_aircraft
 
     @classmethod
     def __get_n_delay_added(cls, attempts):
