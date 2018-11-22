@@ -111,6 +111,7 @@ class Simulation:
             if conflicts:
                 for conflict in conflicts:
                     self.logger.error("Found %s", conflict)
+                    self.logger.error(conflict.detailed_description)
                 raise SimulationException("Conflict found")
 
             # Observe
@@ -140,7 +141,8 @@ class Simulation:
 
     def __reschedule(self):
         schedule, priority = self.scheduler.schedule(self)
-        self.airport.apply_schedule(schedule, priority)
+        self.airport.apply_schedule(schedule)
+        self.airport.apply_priority(priority)
         if not Config.params["simulator"]["test_mode"]:
             self.analyst.observe_on_reschedule(self)
 

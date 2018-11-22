@@ -28,7 +28,7 @@ class Scheduler(AbstractScheduler):
             # phases.
             itinerary = self.schedule_aircraft(aircraft, simulation)
             itineraries[aircraft] = itinerary
-            priority_list[aircraft] = simulation.scenario.get_flight(aircraft).departure_time
+            priority_list[aircraft.callsign] = simulation.scenario.get_flight(aircraft).departure_time
 
         # Resolves conflicts
         schedule, priority = self.__resolve_conflicts(itineraries, simulation, priority_list)
@@ -53,7 +53,7 @@ class Scheduler(AbstractScheduler):
             # Creates simulation copy for prediction
             predict_simulation = simulation.copy
             predict_simulation.airport.apply_schedule(
-                Schedule(itineraries, 0, 0), priority_list)
+                Schedule(itineraries, 0, 0))
 
             for i in range(tick_times):
 
@@ -63,6 +63,7 @@ class Scheduler(AbstractScheduler):
                 # Check if all aircraft has an itinerary, if not, assign one
                 self.__schedule_new_aircrafts(simulation, predict_simulation,
                                               itineraries, priority_list)
+                predict_simulation.airport.apply_priority(priority_list)
 
                 # Gets conflict in current state
                 conflict = self.__get_conflict_to_solve(
@@ -110,7 +111,7 @@ class Scheduler(AbstractScheduler):
                 aircraft.set_itinerary(itinerary)
                 # Store a copy of the itinerary
                 itineraries[aircraft] = itinerary
-                priority_list[aircraft] = simulation.scenario.get_flight(aircraft).departure_time
+            priority_list[aircraft.callsign] = simulation.scenario.get_flight(aircraft).departure_time
 
     def __resolve_conflict(self, itineraries, conflict, attempts,
                            max_attempt):
@@ -133,10 +134,7 @@ class Scheduler(AbstractScheduler):
         if attempts[conflict] >= max_attempt:
             self.logger.error("Found deadlock")
 
-            self.logger.error("Aircraft %s itinerary: %s" % (
-                conflict.aircrafts[0], conflict.aircrafts[0].itinerary.get_detailed_description()))
-            self.logger.error("Aircraft %s itinerary: %s" % (
-                conflict.aircrafts[1], conflict.aircrafts[1].itinerary.get_detailed_description()))
+            self.logger.error(conflict.detailed_description)
 
             import pdb
             pdb.set_trace()
@@ -192,7 +190,8 @@ class Scheduler(AbstractScheduler):
         if type(a_target) is not HoldLink and a_target in b_itinerary.targets:
             a_target_index_in_b = b_itinerary.targets.index(a_target)
             self.logger.error("A %d %d %f %f" % (
-                a_target_index_in_b, b_itinerary.current_target_index, a_itinerary.current_distance, b_itinerary.current_distance))
+                a_target_index_in_b, b_itinerary.current_target_index, a_itinerary.current_distance,
+                b_itinerary.current_distance))
             if a_target_index_in_b > b_itinerary.current_target_index:
                 return aircraft_b
             elif a_target_index_in_b < b_itinerary.current_target_index:
@@ -202,7 +201,8 @@ class Scheduler(AbstractScheduler):
         elif type(b_target) is not HoldLink and b_target in a_itinerary.targets:
             b_target_index_in_a = a_itinerary.targets.index(b_target)
             self.logger.error("B %d %d %f %f" % (
-                b_target_index_in_a, a_itinerary.current_target_index, a_itinerary.current_distance, b_itinerary.current_distance))
+                b_target_index_in_a, a_itinerary.current_target_index, a_itinerary.current_distance,
+                b_itinerary.current_distance))
             if b_target_index_in_a > a_itinerary.current_target_index:
                 return aircraft_a
             elif b_target_index_in_a < a_itinerary.current_target_index:

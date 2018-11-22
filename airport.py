@@ -38,15 +38,15 @@ class Airport:
 
         self.priority = None
 
-    def apply_schedule(self, schedule, priority):
+    def apply_schedule(self, schedule):
         """Applies a schedule onto the active aircraft in the airport."""
-        self.priority = priority
+        all_itineraries = {**schedule.itineraries, **self.itinerary_cache}
 
         # Clean up the cache (previous states)
         self.itinerary_cache = {}
 
         # Apply the itinerary onto the aircraft one by one
-        for aircraft, itinerary in schedule.itineraries.items():
+        for aircraft, itinerary in all_itineraries.items():
 
             is_applied = False
 
@@ -61,6 +61,9 @@ class Airport:
                 self.logger.debug("%s hasn't found yet, we will cache its "
                                   "itinerary", aircraft)
                 self.itinerary_cache[aircraft] = itinerary
+
+    def apply_priority(self, priority):
+        self.priority = priority
 
     def add_aircrafts(self, scenario, now, sim_time):
         """Adds multiple aircraft according to the given scenario and current
@@ -173,7 +176,7 @@ class Airport:
                 continue
 
             # Always order the aircraft list by priority. Less comes first.
-            if self.priority[pair[1]] > self.priority[pair[0]]:
+            if self.priority[pair[1].callsign] > self.priority[pair[0].callsign]:
                 pair = pair[::-1]
             __conflicts.append(Conflict((loc1, loc2), pair))
         return __conflicts
