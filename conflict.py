@@ -9,7 +9,6 @@ class Conflict:
 
     # The aircraft are always ranked by priority. Less comes first.
     def __init__(self, locations, aircrafts):
-
         self.locations = locations
         self.aircrafts = aircrafts
 
@@ -23,6 +22,13 @@ class Conflict:
                               "#".join(str(self.locations))))
 
         self.less_priority_aircraft = aircrafts[0]
+
+    @property
+    def detailed_description(self):
+        return "<Conflict>\n" + "Aircraft %s itinerary: %s" % (
+            self.aircrafts[0], self.aircrafts[0].itinerary.detailed_description) + "\n" \
+               + "Aircraft %s itinerary: %s" % (
+                   self.aircrafts[1], self.aircrafts[1].itinerary.detailed_description) + "</Conflict>\n"
 
     def __hash__(self):
         return self.hash

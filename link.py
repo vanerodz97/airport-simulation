@@ -154,7 +154,8 @@ class Link:
         ratio = 1 - (length - distance) / link_length
         return get_middle_node(src, dst, ratio=ratio)
 
-    def get_detailed_description(self):
+    @property
+    def detailed_description(self):
         return "Nodes: " + " -> ".join([str(node) for node in self.nodes])
 
     def __hash__(self):
@@ -179,5 +180,6 @@ class HoldLink:
         self.boundary = [0, 0, 0, 0]
         self.hash = random.random()
 
-    def get_detailed_description(self):
+    @property
+    def detailed_description(self):
         return "<Hold>"
