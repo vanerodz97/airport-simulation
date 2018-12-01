@@ -15,7 +15,10 @@ html, body {
     top: 0;
     left: 0;
     max-width: 460px;
-    padding: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
 }
 
 #plan-name {
@@ -44,18 +47,17 @@ html, body {
 }
 
 .control-card {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 #traffic-table {
-    max-height: 50%;
-    max-width: 280px;
+    max-width: 250px;
     margin: 0;
 }
 
 #traffic-table tbody {
     display: block;
-    max-height: 200px;
+    max-height: 400px;
     overflow-y: scroll;
 }
 
@@ -64,6 +66,10 @@ tbody tr {
     display: table;
     width: 100%;
     table-layout: fixed;
+}
+
+#traffic-table td {
+    padding: 2px 2px;
 }
 
 #airport-traffic-title, #traffic-summary {
@@ -79,6 +85,10 @@ span.nav-next {
     display: none;
 }
 
-.uk-article+.uk-article {
+.uk-article + .uk-article {
     margin: 0 !important;
+}
+
+#traffic-card {
+    flex-grow: 1;
 }
