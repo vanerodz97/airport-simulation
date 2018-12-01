@@ -217,7 +217,6 @@ class VisualizationView {
                 <tr>
                     <td>${aircraft["callsign"]}</td>
                     <td>${statusLabel}</td>
-                    <td><span uk-icon="settings"></span></td>
                 </tr>
             `;
         }
@@ -248,13 +247,4 @@ function parseNodes(rawNodes) {
         nodes.push({"lat": node[1], "lng": node[0]});
     }
     return nodes;
-}
-
-function getTargetClassName(current_index, index) {
-    if (current_index < index) {
-        return "past-target";
-    } else if (current_index == index) {
-        return "current-target";
-    }
-    return "future-target";
 }
