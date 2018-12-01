@@ -14,7 +14,7 @@ from utils import get_seconds_after
 
 
 class Airport:
-    """`Airport` contains the surface and all the aircrafts currently moving or
+    """`Airport` contains the surface and all the aircraft currently moving or
     stopped in this airport.
     """
 
@@ -40,24 +40,17 @@ class Airport:
 
     def apply_schedule(self, schedule):
         """Applies a schedule onto the active aircraft in the airport."""
-        all_itineraries = {**schedule.itineraries, **self.itinerary_cache}
+        all_itineraries = {**self.itinerary_cache, **schedule.itineraries}
 
         # Clean up the cache (previous states)
         self.itinerary_cache = {}
 
         # Apply the itinerary onto the aircraft one by one
         for aircraft, itinerary in all_itineraries.items():
-
-            is_applied = False
-
-            for airport_aircraft in self.aircrafts:
-                if airport_aircraft == aircraft:
-                    airport_aircraft.set_itinerary(itinerary)
-                    is_applied = True
-                    break
-
-            # If the aircraft is not found, we cache the itinerary for it
-            if not is_applied:
+            if aircraft in self.aircrafts:
+                aircraft.set_itinerary(itinerary)
+            else:
+                # If the aircraft is not found, we cache the itinerary for it
                 self.logger.debug("%s hasn't found yet, we will cache its "
                                   "itinerary", aircraft)
                 self.itinerary_cache[aircraft] = itinerary
@@ -116,7 +109,6 @@ class Airport:
                 queue.append(aircraft)
                 self.gate_queue[gate] = queue
                 self.logger.info("Adds %s into gate queue", flight)
-
             else:
                 # Adds the flight to the airport
                 aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
@@ -167,17 +159,17 @@ class Airport:
         __conflicts = []
         aircraft_pairs = list(itertools.combinations(self.aircrafts, 2))
         for pair in aircraft_pairs:
+            if pair[0] == pair[1]:
+                continue
+
             if is_next:
                 loc1, loc2 = pair[0].get_next_location(Aircraft.LOCATION_LEVEL_PRECISE), \
                              pair[1].get_next_location(Aircraft.LOCATION_LEVEL_PRECISE)
             else:
                 loc1, loc2 = pair[0].precise_location, pair[1].precise_location
-            if not loc1.is_close_to(loc2):
+            if not loc1 or not loc2 or not loc1.is_close_to(loc2):
                 continue
 
-            # Always order the aircraft list by priority. Less comes first.
-            if self.priority[pair[1].callsign] > self.priority[pair[0].callsign]:
-                pair = pair[::-1]
             __conflicts.append(Conflict((loc1, loc2), pair))
         return __conflicts
 
