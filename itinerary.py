@@ -8,14 +8,13 @@ class Itinerary:
     """
 
     def __init__(self, targets=None, unfinished_distance=0):
+        # unfinished_distance == 0 means it's
+        self.targets = [HoldLink()] if unfinished_distance == 0 else []
+        self.targets += targets if targets else []  # links\
 
-        if targets is None:
-            targets = []
-
-        self.targets = targets  # links
-        self.index = 0  # index of current link
-        self.distance = unfinished_distance  # distance traversed on the current link
         self.unfinished_distance = unfinished_distance
+        self.index, self.distance, self.distance_left = None, None, None
+        self.reset()
 
         self.hash = str2sha1("#".join(str(self.targets)))
         self.uncertainty_delayed_index = []
@@ -25,6 +24,9 @@ class Itinerary:
         """Ticks this itinerary for moving to the next state."""
         if self.is_completed:
             return
+
+        if type(self.current_target) is not HoldLink:
+            self.distance_left = max(0, self.distance_left - tick_distance)
         # Change current link if passing the last ones
         index, distance, _ = self.get_next_location(tick_distance)
 
@@ -103,6 +105,9 @@ class Itinerary:
         """Reset the index of this itinerary."""
         self.index = 0
         self.distance = self.unfinished_distance
+        self.distance_left = -self.unfinished_distance  # distance till destination
+        for link in self.targets:
+            self.distance_left += link.length
 
     @property
     def length(self):
@@ -218,6 +223,7 @@ class Itinerary:
     def detailed_description(self):
         return "index=" + str(self.index) + \
                ", distance=" + str(self.distance) + \
+               ", distance_left=" + str(self.distance_left) + \
                ", targets=" + "\n".join([link.detailed_description for link in self.targets])
 
     def __repr__(self):

@@ -1,4 +1,5 @@
 """Class file for the deterministic `Scheduler`."""
+from itinerary import Itinerary
 from link import HoldLink
 from schedule import Schedule
 from config import Config
@@ -7,11 +8,11 @@ from scheduler.abstract_scheduler import AbstractScheduler
 
 
 class Scheduler(AbstractScheduler):
-    """The deterministic scheduler scheduler implements the `Abstractscheduler`
+    """The deterministic scheduler scheduler implements the `AbstractScheduler`
     by offering `scheduler(simulation)`. The scheduler first generates a list
     of itinerary ignoring any conflict then it resolves the conflicts by
     cloning the simulation and ticking on the cloned simulation. Conflicts are
-    resolved by adding delays on one of the aircrafts.
+    resolved by adding delays on one of the aircraft.
     """
 
     def schedule(self, simulation):
@@ -28,6 +29,7 @@ class Scheduler(AbstractScheduler):
             # phases.
             itinerary = self.schedule_aircraft(aircraft, simulation)
             itineraries[aircraft] = itinerary
+            aircraft.set_itinerary(itinerary)
             priority_list[aircraft.callsign] = simulation.scenario.get_flight(aircraft).departure_time
 
         # Resolves conflicts
@@ -120,16 +122,15 @@ class Scheduler(AbstractScheduler):
 
         # Solves the first conflicts, then reruns everything again.
         aircraft = self.__get_aircraft_to_delay(conflict)
-        if aircraft in itineraries:
-            # NOTE: New aircraft that only appear in prediction are ignored
-            aircraft.add_scheduler_delay()
-            self.__mark_attempt(attempts, max_attempt, conflict, aircraft,
-                                itineraries)
-            self.logger.info("Added delay on %s", aircraft)
+
+        aircraft.add_scheduler_delay()
+        itineraries[aircraft] = aircraft.itinerary
+        self.__mark_attempt(attempts, max_attempt, conflict, aircraft,
+                            itineraries)
+        self.logger.info("Added delay on %s", aircraft)
 
     def __mark_attempt(self, attempts, max_attempt, conflict, aircraft,
                        itineraries):
-
         attempts[conflict] = attempts.get(conflict, 0) + 1
         if attempts[conflict] >= max_attempt:
             self.logger.error("Found deadlock")
@@ -177,41 +178,7 @@ class Scheduler(AbstractScheduler):
             self.logger.debug("Found conflict with two hold aircraft")
             raise ConflictException("Unsolvable conflict found")
 
-        # TODO: if aircraft A is ahead of B, delay B
-        # TODO: below is a simplified workaround
-        overlapped_progress = self.__compare_itinerary_progress(first, second)
-
-        return overlapped_progress if overlapped_progress else conflict.less_priority_aircraft
-
-    def __compare_itinerary_progress(self, aircraft_a, aircraft_b):
-        a_itinerary, b_itinerary = aircraft_a.itinerary, aircraft_b.itinerary
-        a_target, b_target = a_itinerary.current_target, b_itinerary.current_target
-
-        if type(a_target) is not HoldLink and a_target in b_itinerary.targets:
-            a_target_index_in_b = b_itinerary.targets.index(a_target)
-            self.logger.error("A %d %d %f %f" % (
-                a_target_index_in_b, b_itinerary.current_target_index, a_itinerary.current_distance,
-                b_itinerary.current_distance))
-            if a_target_index_in_b > b_itinerary.current_target_index:
-                return aircraft_b
-            elif a_target_index_in_b < b_itinerary.current_target_index:
-                return aircraft_a
-            else:
-                return aircraft_a if a_itinerary.current_distance < b_itinerary.current_distance else aircraft_b
-        elif type(b_target) is not HoldLink and b_target in a_itinerary.targets:
-            b_target_index_in_a = a_itinerary.targets.index(b_target)
-            self.logger.error("B %d %d %f %f" % (
-                b_target_index_in_a, a_itinerary.current_target_index, a_itinerary.current_distance,
-                b_itinerary.current_distance))
-            if b_target_index_in_a > a_itinerary.current_target_index:
-                return aircraft_a
-            elif b_target_index_in_a < a_itinerary.current_target_index:
-                return aircraft_b
-            else:
-                return aircraft_a if a_itinerary.current_distance < b_itinerary.current_distance else aircraft_b
-        else:
-            self.logger.error("C")
-            return None
+        return second if first.itinerary.distance_left < second.itinerary.distance_left else first
 
     @classmethod
     def __get_n_delay_added(cls, attempts):

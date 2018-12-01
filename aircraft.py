@@ -65,7 +65,7 @@ class Aircraft:
         if not self.itinerary:
             return self.__coarse_location
 
-        next_index, _, next_location = self.itinerary.get_next_location(self.__get_tick_distance())
+        next_index, _, next_location = self.itinerary.get_next_location(self.tick_distance)
 
         if level == Aircraft.LOCATION_LEVEL_COARSE:
             if next_index < self.itinerary.length:
@@ -90,7 +90,8 @@ class Aircraft:
         """ Set the speed of the aircraft"""
         self.speed = speed
 
-    def __get_tick_distance(self):
+    @property
+    def tick_distance(self):
         """ Get the distance passed in this tick"""
         # TODO: implement
         return self.speed * 1  # 1 is the schedule window
@@ -125,8 +126,7 @@ class Aircraft:
         """Ticks on this aircraft and its children to move to the next state.
         """
         if self.itinerary:
-            tick_distance = self.__get_tick_distance()
-            self.itinerary.tick(tick_distance)
+            self.itinerary.tick(self.tick_distance)
             if self.itinerary.is_completed:
                 self.logger.debug("%s: %s completed.", self, self.itinerary)
             self.set_location(self.itinerary.current_coarse_location, Aircraft.LOCATION_LEVEL_COARSE)
@@ -146,7 +146,7 @@ class Aircraft:
                 self.itinerary.current_target is None:
             return State.stop
 
-        _, _, next_precise_location = self.itinerary.get_next_location(self.__get_tick_distance())
+        _, _, next_precise_location = self.itinerary.get_next_location(self.tick_distance)
         return State.hold if type(self.itinerary.current_target) is HoldLink else State.moving
 
     @property
