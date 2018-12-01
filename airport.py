@@ -1,19 +1,20 @@
 """`Airport` represents both the static and dynamic surface states of an
 airport.
 """
-import os
-import logging
 import itertools
-
+import logging
+import os
 from collections import deque
-from surface import SurfaceFactory
+
+from aircraft import Aircraft
 from config import Config
 from conflict import Conflict
+from surface import SurfaceFactory
 from utils import get_seconds_after
 
 
 class Airport:
-    """`Airport` contains the surface and all the aircrafts currently moving or
+    """`Airport` contains the surface and all the aircraft currently moving or
     stopped in this airport.
     """
 
@@ -35,31 +36,30 @@ class Airport:
         self.name = name
         self.surface = surface
 
+        self.priority = None
+
     def apply_schedule(self, schedule):
-        """Applies a schedule onto the active aircrafts in the airport."""
+        """Applies a schedule onto the active aircraft in the airport."""
+        all_itineraries = {**self.itinerary_cache, **schedule.itineraries}
 
         # Clean up the cache (previous states)
         self.itinerary_cache = {}
 
-        # Apply the itinerary onto the aircrafts one by one
-        for aircraft, itinerary in schedule.itineraries.items():
-
-            is_applied = False
-
-            for airport_aircraft in self.aircrafts:
-                if airport_aircraft == aircraft:
-                    airport_aircraft.set_itinerary(itinerary)
-                    is_applied = True
-                    break
-
-            # If the aircraft is not found, we cache the itinerary for it
-            if not is_applied:
+        # Apply the itinerary onto the aircraft one by one
+        for aircraft, itinerary in all_itineraries.items():
+            if aircraft in self.aircrafts:
+                aircraft.set_itinerary(itinerary)
+            else:
+                # If the aircraft is not found, we cache the itinerary for it
                 self.logger.debug("%s hasn't found yet, we will cache its "
                                   "itinerary", aircraft)
                 self.itinerary_cache[aircraft] = itinerary
 
+    def apply_priority(self, priority):
+        self.priority = priority
+
     def add_aircrafts(self, scenario, now, sim_time):
-        """Adds multiple aircrafts according to the given scenario and current
+        """Adds multiple aircraft according to the given scenario and current
         time stamp.
         """
         self.__add_aircrafts_from_queue()
@@ -86,7 +86,7 @@ class Airport:
 
             # Put the first aircraft in queue into the airport
             aircraft = queue.popleft()
-            aircraft.set_location(gate)
+            aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
             self.add_aircraft(aircraft)
 
     def __add_aircrafts_from_scenario(self, scenario, now, sim_time):
@@ -109,10 +109,9 @@ class Airport:
                 queue.append(aircraft)
                 self.gate_queue[gate] = queue
                 self.logger.info("Adds %s into gate queue", flight)
-
             else:
                 # Adds the flight to the airport
-                aircraft.set_location(gate)
+                aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
                 self.add_aircraft(aircraft)
                 self.logger.info("Adds %s into the airport", flight)
 
@@ -122,24 +121,23 @@ class Airport:
             if not (now <= flight.appear_time < next_tick_time):
                 continue
             runway, aircraft = flight.runway.start, flight.aircraft
-            aircraft.set_location(runway)
+            aircraft.set_location(runway, Aircraft.LOCATION_LEVEL_COARSE)
             self.add_aircraft(aircraft)
             self.logger.info(
                 "Adds {} arrival flight into the airport".format(flight))
 
     def remove_aircrafts(self, scenario):
-        """Removes departure aircrafts if they've moved to the runway.
+        """Removes departure aircraft if they've moved to the runway.
         """
-
-        to_remove_aircrafts = []
+        to_remove_aircraft = []
 
         for aircraft in self.aircrafts:
             flight = scenario.get_flight(aircraft)
             # Deletion shouldn't be done in the fly
-            if aircraft.location.is_close_to(flight.runway.start):
-                to_remove_aircrafts.append(aircraft)
+            if aircraft.precise_location.is_close_to(flight.runway.start):
+                to_remove_aircraft.append(aircraft)
 
-        for aircraft in to_remove_aircrafts:
+        for aircraft in to_remove_aircraft:
             self.logger.info("Removes %s from the airport", aircraft)
             self.aircrafts.remove(aircraft)
 
@@ -157,22 +155,28 @@ class Airport:
         return self.__get_conflicts(is_next=True)
 
     def __get_conflicts(self, is_next=False):
+        # Remove departed aircraft or
         __conflicts = []
         aircraft_pairs = list(itertools.combinations(self.aircrafts, 2))
         for pair in aircraft_pairs:
-            if is_next:
-                loc1, loc2 = pair[0].next_location, pair[1].next_location
-            else:
-                loc1, loc2 = pair[0].location, pair[1].location
-            if not loc1.is_close_to(loc2):
+            if pair[0] == pair[1]:
                 continue
+
+            if is_next:
+                loc1, loc2 = pair[0].get_next_location(Aircraft.LOCATION_LEVEL_PRECISE), \
+                             pair[1].get_next_location(Aircraft.LOCATION_LEVEL_PRECISE)
+            else:
+                loc1, loc2 = pair[0].precise_location, pair[1].precise_location
+            if not loc1 or not loc2 or not loc1.is_close_to(loc2):
+                continue
+
             __conflicts.append(Conflict((loc1, loc2), pair))
         return __conflicts
 
     def is_occupied_at(self, node):
         """Check if an aircraft is occupied at the given node."""
         for aircraft in self.aircrafts:
-            if aircraft.location.is_close_to(node):
+            if aircraft.precise_location.is_close_to(node):
                 return True
         return False
 

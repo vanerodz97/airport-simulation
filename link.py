@@ -1,8 +1,11 @@
 """Class file for `Link`."""
-from config import Config
-from utils import str2sha1
-from id_generator import get_new_link_id
+import random
 from geopy.distance import vincenty
+
+from config import Config
+from id_generator import get_new_link_id
+from node import get_middle_node
+from utils import str2sha1
 
 
 class Link:
@@ -20,18 +23,14 @@ class Link:
 
         self.name = name
         self.nodes = nodes
+        self.segment_lengths = [nodes[i].get_distance_to(nodes[i + 1]) for i in range(len(nodes) - 1)]
         self.boundary = self.__calculate_boundary(nodes)
         self.hash = str2sha1("%s#%s" % (self.name, self.nodes))
 
     @property
     def length(self):
-        """Returns the physical length of this link in feets."""
-        length = 0.0
-        for i in range(1, len(self.nodes)):
-            from_node = self.nodes[i - 1]
-            to_node = self.nodes[i]
-            length += from_node.get_distance_to(to_node)
-        return length
+        """Returns the physical length of this link in feet."""
+        return sum(self.segment_lengths)
 
     @property
     def start(self):
@@ -76,7 +75,7 @@ class Link:
     def __node_in_boundary(self, node):
         """Returns true if this node is inside the boundary"""
         return self.boundary[0] <= node.geo_pos["lat"] <= self.boundary[1] and \
-            self.boundary[2] <= node.geo_pos["lng"] <= self.boundary[3]
+               self.boundary[2] <= node.geo_pos["lng"] <= self.boundary[3]
 
     def contains_node(self, node):
         """Returns true if this link contains a given `node`."""
@@ -105,7 +104,7 @@ class Link:
                 src.get_distance_to(dst)) < threshold
 
     def break_at(self, node):
-        """Breaks this link into two links at a given `node`. An expection is
+        """Breaks this link into two links at a given `node`. An exception is
         raised if the node isn't be contained by this link.
         """
 
@@ -131,6 +130,37 @@ class Link:
         return (Link(self.name + "-b1", nodes_first),
                 Link(self.name + "-b2", nodes_second))
 
+    def get_middle_node(self, distance):
+        """Get the Node with distance to the start of the link"""
+        if distance > self.length or distance < 0:
+            return None
+
+        if distance == 0.0:
+            return self.nodes[0]
+
+        # Find the sub-link which the location (node) is on
+        length = 0.0
+        i = 0
+        while length < distance:
+            length += self.segment_lengths[i]
+            i += 1
+        # Get the geo position of the location
+        # i must greater than 0 because distance cannot be less than 0
+        src, dst = self.nodes[i - 1], self.nodes[i]
+
+        link_length = self.segment_lengths[i - 1]
+        if link_length == 0:
+            return src
+
+        # TODO: the route returned by RoutingExpert is in reverse order,
+        # TODO: so I added 1 - x here. Should fix in the future.
+        ratio = 1 - (length - distance) / link_length
+        return get_middle_node(src, dst, ratio=ratio)
+
+    @property
+    def detailed_description(self):
+        return "Nodes: " + " -> ".join([str(node) for node in self.nodes])
+
     def __hash__(self):
         return self.hash
 
@@ -142,3 +172,21 @@ class Link:
 
     def __repr__(self):
         return "<Link: " + self.name + ">"
+
+
+class HoldLink:
+
+    def __init__(self):
+        self.name = "Hold Link"
+        self.nodes = [None, None]
+        self.segment_lengths = [0]
+        self.boundary = [0, 0, 0, 0]
+        self.hash = random.random()
+
+    @property
+    def detailed_description(self):
+        return "<Hold>"
+
+    @property
+    def length(self):
+        return 0

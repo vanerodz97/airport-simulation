@@ -37,7 +37,7 @@ class Uncertainty:
         def __is_runway(aircraft):
             return (
                 Config.params["uncertainty"]["at_runway"] and
-                aircraft.next_location.is_close_to(runway_start)
+                aircraft.get_next_location().is_close_to(runway_start)
             )
 
         for aircraft in simulation.airport.aircrafts:

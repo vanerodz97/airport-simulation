@@ -2,6 +2,8 @@
 import os
 import json
 import logging
+
+from link import HoldLink
 from utils import get_output_dir_name
 
 
@@ -53,7 +55,7 @@ class StateLogger:
             "callsign": aircraft.callsign,
             "state": aircraft.state.name,
             "is_delayed": aircraft.is_delayed,
-            "location": aircraft.location.geo_pos,
+            "location": aircraft.precise_location.geo_pos,
             "itinerary": itinerary,
             "itinerary_index": itinerary_index,
             "uncertainty_delayed_index": uc_delayed_index,
@@ -64,8 +66,8 @@ class StateLogger:
     def __parse_itinerary(cls, itinerary):
         return [
             {
-                "node_name": target.name,
-                "node_location": target.geo_pos
+                "node_name": target.name if type(target) is not HoldLink else None,
+                "node_location": target.start.geo_pos if type(target) is not HoldLink else None
             }
             for target in itinerary.targets
         ] if itinerary is not None else None
