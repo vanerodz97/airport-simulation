@@ -33,6 +33,10 @@ simulation:
   # aircraft if we're not using the makespan metric)
   end_time: "9:00"
 
+aircraft_model:
+  # Pilot's seeing distance in feet. Used to find the aircraft ahead.
+  pilot_vision: 350
+
 uncertainty:
   # Enable or disable the uncertain in simulation
   enabled: false
