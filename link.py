@@ -135,6 +135,9 @@ class Link:
         if distance > self.length or distance < 0:
             return None
 
+        if distance == 0.0:
+            return self.nodes[0]
+
         # Find the sub-link which the location (node) is on
         length = 0.0
         i = 0
@@ -183,3 +186,7 @@ class HoldLink:
     @property
     def detailed_description(self):
         return "<Hold>"
+
+    @property
+    def length(self):
+        return 0
