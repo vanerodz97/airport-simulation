@@ -7,7 +7,6 @@ class Conflict:
     airport.
     """
 
-    # The aircraft are always ranked by priority. Less comes first.
     def __init__(self, locations, aircrafts):
         self.locations = locations
         self.aircrafts = aircrafts
@@ -20,8 +19,6 @@ class Conflict:
         self.hash = str2sha1("%s#%s" %
                              ("#".join(callsigns),
                               "#".join(str(self.locations))))
-
-        self.less_priority_aircraft = aircrafts[0]
 
     @property
     def detailed_description(self):
