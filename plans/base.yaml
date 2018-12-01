@@ -9,7 +9,7 @@ simulator:
   # Enable for test mode
   test_mode: false
   # Enable scenario regeneration
-  scenario_regeneration: true
+  scenario_regeneration: false
   # Number of simulation runs with one same setting (only works in batch mode)
   times: 1
   # Enable the simulator continue to try until it reaches the required `times`

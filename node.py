@@ -34,7 +34,7 @@ class Node:
         return round(distance.feet, Config.DECIMAL_ROUND)
 
     def is_close_to(self, node):
-        """If the node is in CLOSE_NODE_THRESHOLD_FEET feets from the current
+        """If the node is in CLOSE_NODE_THRESHOLD_FEET feet from the current
         node, we take them as the same node.
         """
         distance_feet = self.get_distance_to(node)

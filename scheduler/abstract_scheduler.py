@@ -5,6 +5,7 @@ from copy import deepcopy
 from itinerary import Itinerary
 from flight import ArrivalFlight
 
+
 class AbstractScheduler:
     """Parent class for different schedulers to extend."""
 
@@ -13,7 +14,7 @@ class AbstractScheduler:
 
     def schedule(self, simulation):
         """Schedule the aircraft within a simulation."""
-        raise NotImplementedError("Schedule function should be overrided.")
+        raise NotImplementedError("Schedule function should be overridden.")
 
     @classmethod
     def schedule_aircraft(cls, aircraft, simulation):
@@ -28,7 +29,17 @@ class AbstractScheduler:
 
         route = simulation.routing_expert.get_shortest_route(src, dst)
 
-        itinerary = Itinerary(deepcopy(route.nodes))
+        # Merge the new itinerary with the part of link the aircraft is going to pass
+        new_route = deepcopy(route.links)
+        distance = 0
+        if aircraft.itinerary:
+            unfinished_link, unfinished_distance = \
+                aircraft.itinerary.current_target, aircraft.itinerary.current_distance
+            if unfinished_link:
+                new_route = [unfinished_link] + new_route
+                distance = unfinished_distance
+
+        itinerary = Itinerary(new_route, unfinished_distance=distance)
 
         # Aggregates the uncertainty delay in previous itinerary if found
         if aircraft.itinerary:
