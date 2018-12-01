@@ -9,6 +9,7 @@ from collections import deque
 from aircraft import Aircraft
 from config import Config
 from conflict import Conflict
+from controller import Controller
 from surface import SurfaceFactory
 from utils import get_seconds_after
 
@@ -37,6 +38,8 @@ class Airport:
         self.surface = surface
 
         self.priority = None
+        # Ground controller
+        self.controller = Controller(self)
 
     def apply_schedule(self, schedule):
         """Applies a schedule onto the active aircraft in the airport."""
@@ -181,9 +184,10 @@ class Airport:
         return False
 
     def tick(self):
-        """Ticks on all subobjects under the airport to move them into the next
-        state.
-        """
+        # Ground Controller should observe all the activities on the ground.
+        self.controller.tick()
+
+        # Ticks on all subjects under the airport to move them into the next state
         for aircraft in self.aircrafts:
             aircraft.tick()
 
