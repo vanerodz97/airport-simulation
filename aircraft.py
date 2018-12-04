@@ -3,7 +3,7 @@ state.
 """
 import enum
 import logging
-
+from surface import Spot, Gate
 
 class State(enum.Enum):
     """`State` is a enum object that represents a possible state of an aircraft.
@@ -29,6 +29,7 @@ class Aircraft:
         self.__state = state
 
         self.itinerary = None
+        self.is_reroute_necessary = True
 
     def set_location(self, location):
         """Sets the location of this aircraft to a given location."""
@@ -85,6 +86,12 @@ class Aircraft:
                 # self.logger.debug("%s: %s completed.", self, self.itinerary)
                 pass
             else:
+                last_target = self.itinerary.backup[-1]
+                is_arrival_aircraft = type(last_target) is Gate
+                if is_arrival_aircraft and type(
+                        self.itinerary.current_target) is Spot:
+                    self.is_reroute_necessary = False
+                    # self.itinerary.tick()
                 self.set_location(self.itinerary.current_target)
         else:
             # self.logger.debug("%s: No itinerary request.", self)

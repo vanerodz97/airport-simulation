@@ -10,6 +10,7 @@ from surface import SurfaceFactory
 from config import Config
 from conflict import Conflict
 from utils import get_seconds_after
+from flight import ArrivalFlight
 
 
 class Airport:
@@ -118,6 +119,7 @@ class Airport:
 
         # Deal with the arrival flights, assume that the runway is always not
         #  occupied because this is an arrival flight
+
         for flight in scenario.arrivals:
             if not (now <= flight.appear_time < next_tick_time):
                 continue
@@ -135,6 +137,11 @@ class Airport:
 
         for aircraft in self.aircrafts:
             flight = scenario.get_flight(aircraft)
+            if type(flight) == ArrivalFlight:
+                # if it is the arrival aircraft, do not remove it.
+                if aircraft.location.is_close_to(flight.to_gate):
+                    to_remove_aircrafts.append(aircraft)
+                continue
             # Deletion shouldn't be done in the fly
             if aircraft.location.is_close_to(flight.runway.start):
                 to_remove_aircrafts.append(aircraft)
