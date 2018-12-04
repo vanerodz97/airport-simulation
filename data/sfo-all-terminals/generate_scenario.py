@@ -14,11 +14,11 @@ from utils import export_to_json, create_output_folder
 
 OUTPUT_FOLDER = "./build/"
 
-TIGHTNESS_TIME_MEAN = 90  # seconds
+TIGHTNESS_TIME_MEAN = 180  # seconds
 TIGHTNESS_TIME_DEVIATION = 30  # seconds
 
-TIGHTNESS_ARRIVAL_TIME_MEAN = 1800  # seconds
-TIGHTNESS_ARRIVAL_TIME_DEVIATION = 300  # seconds
+TIGHTNESS_ARRIVAL_TIME_MEAN = 540  # seconds
+TIGHTNESS_ARRIVAL_TIME_DEVIATION = 30  # seconds
 
 APPEAR_BEFORE = 0  # seconds
 
@@ -71,7 +71,8 @@ def main():
     # Generate for the arrival flights
     arrivals = []
     current_time = 0
-    while current_time < END_TIME:
+    arrival_max_num = 10
+    while current_time < END_TIME and len(arrivals) < arrival_max_num:
         flight = generate_flight_at(current_time, True)
         arrivals.append(flight)
         interval = get_random_time_interval(is_arrival=True)

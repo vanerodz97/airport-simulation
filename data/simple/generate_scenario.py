@@ -9,6 +9,8 @@ import sys
 import numpy
 import logging
 from utils import export_to_json, create_output_folder
+TIGHTNESS_ARRIVAL_TIME_MEAN = 1800  # seconds
+TIGHTNESS_ARRIVAL_TIME_DEVIATION = 300  # seconds
 
 OUTPUT_FOLDER = "./build/"
 
@@ -54,6 +56,30 @@ flight_template = [
     }
 ]
 
+arrival_flight_template = [
+    {
+        "model": "A319",
+        "airport": "SJC",
+        "gate": "G1",
+        "spot": "S1",
+        "runway": "R1",
+    },
+    {
+        "model": "A319",
+        "airport": "SJC",
+        "gate": "G2",
+        "spot": "S2",
+        "runway": "R1",
+    },
+    {
+        "model": "A319",
+        "airport": "SJC",
+        "gate": "G3",
+        "spot": "S2",
+        "runway": "R1",
+    }
+]
+
 
 def main():
     """
@@ -74,6 +100,15 @@ def main():
         interval = get_random_time_interval()
         current_time += interval
 
+    # Generate for the arrival flights
+    arrivals = []
+    current_time = 0
+    while current_time < END_TIME:
+        flight = generate_flight_at(current_time, True)
+        arrivals.append(flight)
+        interval = get_random_time_interval(is_arrival=True)
+        current_time += interval
+
     scenario = {"arrivals": [], "departures": departures}
 
     # Saves to file
@@ -90,9 +125,13 @@ def main():
 index = 1
 
 
-def generate_flight_at(time):
+def generate_flight_at(time, is_arrival = False):
     global index
-    flight = flight_template[index % len(flight_template)].copy()
+    if is_arrival:
+        pass
+        flight = arrival_flight_template[index % len(arrival_flight_template)].copy()
+    else:
+        flight = flight_template[index % len(flight_template)].copy()
 
     flight["callsign"] = "F" + str(index)
     flight["time"] = sec2time_str(time)
@@ -112,9 +151,13 @@ def sec2time_str(time):
     return "%02d%02d" % (hour, minute)
 
 
-def get_random_time_interval():
+def get_random_time_interval(is_arrival=False):
     while True:
-        interval = numpy.random.normal(TIGHTNESS_TIME_MEAN,
+        if is_arrival:
+            interval = numpy.random.normal(TIGHTNESS_ARRIVAL_TIME_MEAN,
+                                           TIGHTNESS_ARRIVAL_TIME_DEVIATION)
+        else:
+            interval = numpy.random.normal(TIGHTNESS_TIME_MEAN,
                                        TIGHTNESS_TIME_DEVIATION)
         if interval > 0:
             return interval
