@@ -4,6 +4,7 @@ state.
 import enum
 import logging
 import random
+from surface import Spot, Gate
 
 from link import HoldLink
 from config import Config
@@ -31,6 +32,7 @@ class Aircraft:
     IDEAL_SPEED = Config.params["aircraft_model"]["ideal_speed"]
 
     def __init__(self, callsign, model, location, state):
+
         self.logger = logging.getLogger(__name__)
 
         self.callsign = callsign
@@ -47,6 +49,7 @@ class Aircraft:
         self.speed = Config.params["aircraft_model"]["init_speed"]
         self.fronter_info = None
         self.speed_uncertainty = 0
+        self.is_reroute_necessary = True
 
     def set_location(self, location, level=LOCATION_LEVEL_COARSE):
         """Sets the location of this aircraft to a given location."""
@@ -59,6 +62,15 @@ class Aircraft:
             self.logger.info("%s precise location changed to %s", self, location)
         else:
             raise Exception("Unrecognized location level.")
+
+    @property
+    def location(self):
+        """Same as coarse location. Keep the naming for compatibility. """
+        return self.__coarse_location
+
+    @property
+    def precise_location(self):
+        return self.__precise_location if self.__precise_location else self.__coarse_location
 
     @property
     def location(self):
@@ -185,14 +197,19 @@ class Aircraft:
         #                   self, delay_added_at)
 
     def tick(self):
-        """Ticks on this aircraft and its children to move to the next state.
+        """Ticks on this aircraft and its subobjects to move to the next state.
         """
+
         if self.itinerary:
             new_speed = self.get_next_speed(self.fronter_info) + self.speed_uncertainty
             self.set_speed(new_speed)
             self.itinerary.tick(self.tick_distance)
             if self.itinerary.is_completed:
                 self.logger.debug("%s: %s completed.", self, self.itinerary)
+            last_target = self.itinerary.backup[-1]
+            is_arrival_aircraft = type(last_target) is Gate
+            if is_arrival_aircraft and type(self.itinerary.current_target) is Spot:
+                self.is_reroute_necessary = False
             self.set_location(self.itinerary.current_coarse_location, Aircraft.LOCATION_LEVEL_COARSE)
             self.set_location(self.itinerary.current_precise_location, Aircraft.LOCATION_LEVEL_PRECISE)
         else:
