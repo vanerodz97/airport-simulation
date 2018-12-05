@@ -5,6 +5,8 @@ import enum
 import logging
 
 from link import HoldLink
+from config import Config
+from controller import Controller
 
 
 class State(enum.Enum):
@@ -22,6 +24,8 @@ class Aircraft:
     """
     LOCATION_LEVEL_COARSE = 0
     LOCATION_LEVEL_PRECISE = 1
+    SAFE_DISTANCE = Config.params["aircraft_model"]["safe_distance"]
+    MAX_SPEED = Config.params["aircraft_model"]["max_speed"]
 
     def __init__(self, callsign, model, location, state):
         self.logger = logging.getLogger(__name__)
@@ -34,7 +38,8 @@ class Aircraft:
         self.__coarse_location = location
         # aircraft's location as some point on a link
         self.__precise_location = None
-        self.speed = 100.0
+        self.speed = Config.params["aircraft_model"]["init_speed"]
+        self.fronter_info = None
         self.__state = state
 
         self.itinerary = None
@@ -78,13 +83,41 @@ class Aircraft:
 
         return next_location
 
-    # TODO: discuss the interface
-    def get_next_speed(self, proceed_aircraft_speed, distance):
-        """ Calculate the speed based on following model."""
-        # TODO: revise model
-        acceleration = self.speed * (self.speed - proceed_aircraft_speed) / distance
+    """
+    @:param fronter_info (target_speed, relative_distance)
+    """
+    def set_fronter_info(self, fronter_info):
+        """ Set the information of the preceding aircraft. """
+        self.fronter_info = fronter_info
 
-        return self.speed + acceleration
+    """
+    @:param fronter_info (target_speed, relative_distance)
+    """
+    def get_next_speed(self, fronter_info):
+        """ Calculate the speed based on following model."""
+        if fronter_info is None:
+            return self.MAX_SPEED
+
+        # calculate the new speed when it is following another aircraft
+        fronter_speed = fronter_info[0]
+        relative_distance = fronter_info[1]
+        if relative_distance > self.SAFE_DISTANCE:
+            # acceleration phase
+            c, l, m = 1.1, 0.1, 0.2
+        else:
+            # deceleration phase
+            c, l, m = -1.1, 1.2, 0.7
+
+        acceleration = c * (self.speed ** m) \
+                       * (abs(self.speed - fronter_speed) / (relative_distance ** l))
+        """ Make sure the speed is always valid """
+        new_speed = self.speed + acceleration
+        if new_speed < 0:
+            new_speed = 0
+        # TODO: consider different speed limits for different type of roads
+        if new_speed > self.MAX_SPEED:
+            new_speed = self.MAX_SPEED
+        return new_speed
 
     def set_speed(self, speed):
         """ Set the speed of the aircraft"""
@@ -92,9 +125,8 @@ class Aircraft:
 
     @property
     def tick_distance(self):
-        """ Get the distance passed in this tick"""
-        # TODO: implement
-        return self.speed * 1  # 1 is the schedule window
+        """ Get the distance the aircraft passed in this tick"""
+        return self.speed * 1  # 1 is the time of a tick
 
     def set_itinerary(self, itinerary):
         """Sets the itinerary of this aircraft."""
@@ -126,6 +158,8 @@ class Aircraft:
         """Ticks on this aircraft and its children to move to the next state.
         """
         if self.itinerary:
+            new_speed = self.get_next_speed(self.fronter_info)
+            self.set_speed(new_speed)
             self.itinerary.tick(self.tick_distance)
             if self.itinerary.is_completed:
                 self.logger.debug("%s: %s completed.", self, self.itinerary)
