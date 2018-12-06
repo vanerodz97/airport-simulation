@@ -37,7 +37,7 @@ aircraft_model:
   # Pilot's seeing distance in feet. Used to find the aircraft ahead.
   pilot_vision: 1000
   # Safe distance between two aircraft
-  ideal_distance: 900.0
+  ideal_distance: 800.0
   # The min distance between two aircraft where brake hard should be used.
   min_distance: 500.0
   # Initial speed of aircraft
