@@ -3,5 +3,5 @@ name: sfo-all-terminals
 airport: sfo-all-terminals
 
 uncertainty:
-  enabled: true
+  enabled: false
   prob_hold: 0.9

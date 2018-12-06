@@ -144,7 +144,7 @@ class Aircraft:
     def brake_hard(self):
         """ Brake hard to avoid potential crash"""
         # TODO: revise the model
-        new_speed = self.speed / 1.2
+        new_speed = self.speed / 1.5
         #self.set_speed(new_speed)
         self.logger.info("%s with speed %f brakes hard", self, self.speed)
         return new_speed
