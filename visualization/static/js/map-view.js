@@ -108,6 +108,8 @@ class MapView {
         this.gates = [];
         this.spots = [];
 
+        this.runways_endpoints = [];
+
         this.map.addListener('zoom_changed', this.__zoomChangeHandler.bind(this));
 
         initMarkerAnimate();
@@ -134,6 +136,7 @@ class MapView {
     drawRunway(nodes) {
         const link = this.__drawLink(nodes, "#9fa8da", RUNWAY_UNIT_LINK_WEIGHT / ZOOM_FACTORS[this.map.getZoom()]);
         this.runways.push(link);
+        this.runways_endpoints.push([nodes[0], nodes[nodes.length - 1]])
     }
 
     drawTaxiway(nodes) {
@@ -170,7 +173,7 @@ class MapView {
         let color;
         switch (state) {
             case "Stopped":
-                color = "#e53935";
+                color = "#64b5f6";
                 break;
             case "Hold":
                 color = "#f9a825";
@@ -224,6 +227,7 @@ class MapView {
 
         for (let each of allAircraft) {
             if (this.aircraft.has(each.name)) {
+                // Existing aircraft
                 const aircraft = this.aircraft.get(each.name);
                 let angle;
 
@@ -262,14 +266,49 @@ class MapView {
                 newAircraftSet.set(each.name, aircraft);
                 this.aircraft.delete(each.name);
             } else {
+                // New aircraft
                 const aircraft = this.drawAircraft(each.lat, each.lng, each.state, each.name, "");
                 newAircraftSet.set(each.name, aircraft);
             }
         }
 
-        // Clean previous state
-        this.aircraft.forEach(v => {
-            v.setMap(null);
+        // Aircraft to remove
+        this.aircraft.forEach(aircraft => {
+            // Get the runway to take off
+
+            let runway = null;
+            this.runways_endpoints.forEach(each_runway => {
+                if (this.__isCloseNode(
+                    aircraft.getPosition().lat(),
+                    aircraft.getPosition().lng(),
+                    each_runway[0]["lat"],
+                    each_runway[0]["lng"])) {
+                    runway = each_runway;
+                }
+            });
+
+            if (use_animation && runway) {
+                const angle = this.__calcAngle(
+                    aircraft.getPosition().lat(),
+                    aircraft.getPosition().lng(),
+                    runway[1]["lat"],
+                    runway[1]["lng"]
+                );
+
+                aircraft.setOptions({
+                    icon: this.__getAircraftIcon(-angle, "Stopped")
+                });
+
+                aircraft.animateTo(new google.maps.LatLng(runway[1]["lat"], runway[1]["lng"]), {
+                    easing: "easeInCirc",
+                    duration: 5000
+                });
+                setTimeout(() => {
+                    aircraft.setMap(null);
+                }, 4950);
+            } else {
+                aircraft.setMap(null);
+            }
         });
 
         this.aircraft = newAircraftSet;
@@ -304,7 +343,7 @@ class MapView {
     }
 
     __isCloseNode(lat1, lng1, lat2, lng2) {
-        const THRESHOLD = 0.0000001;
+        const THRESHOLD = 0.00005;
         return Math.abs(lat1 - lat2) < THRESHOLD && Math.abs(lng1 - lng2) < THRESHOLD;
     }
 }
