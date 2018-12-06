@@ -47,7 +47,11 @@ class Controller:
             try:
                 target_speed, relative_distance = self.__find_aircraft_ahead(aircraft)
                 self.aircraft_ahead_lookup[aircraft] = (target_speed, relative_distance)
+                # TODO: discuss with zy & what if none
+                aircraft.set_fronter_info((target_speed, relative_distance))
             except NoCloseAircraftFoundError:
+                # TODO: discuss with zy & what if none
+                aircraft.set_fronter_info(None)
                 pass
 
     def __find_aircraft_ahead(self, aircraft):

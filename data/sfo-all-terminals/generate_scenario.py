@@ -14,8 +14,8 @@ from utils import export_to_json, create_output_folder
 
 OUTPUT_FOLDER = "./build/"
 
-TIGHTNESS_TIME_MEAN = 90  # seconds
-TIGHTNESS_TIME_DEVIATION = 30  # seconds
+TIGHTNESS_TIME_MEAN = 420  # seconds
+TIGHTNESS_TIME_DEVIATION = 60  # seconds
 
 TIGHTNESS_ARRIVAL_TIME_MEAN = 1800  # seconds
 TIGHTNESS_ARRIVAL_TIME_DEVIATION = 300  # seconds
@@ -41,12 +41,20 @@ flight_template = {
 departure_runway = ["10R/28L"]
 arrival_runway = ["1R/19L"]
 
-gates = ["50", "55", "53", "52", "54A", "51A", "51B", "54B", "56B", "56A", "57", "59", "58B", "58A"]
+gates = ["21", "23", "40", "42",
+         "50", "51A", "51B","52",
+         "57",
+         "68", "69", "70", "71",
+         "77", "77A", "78", "79",
+         "32", "33", "34", "36"]
 
-spots_to_gates = {"S2": ["51A", "51B", "50", "52", "53", "41", "43", "45",
-                         "47"],
-                  "S3": ["57", "59", "58B", "58A"]}
-spots = ["S2", "S3"]
+spots_to_gates = {"S1": ["21", "23", "40", "42"],
+                  "S2": ["50", "51A", "51B","52"],
+                  "S3": ["57"], # "58B", "58A", "59"
+                  "S4": ["68", "69", "70", "71"],
+                  "S5": ["77", "77A", "78", "79"],
+                  "S8": ["32", "33", "34", "36"],}
+spots = ["S1", "S2", "S4", "S5", "S8"] #"S3",
 
 
 def main():
