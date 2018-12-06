@@ -3,6 +3,7 @@ state.
 """
 import enum
 import logging
+import random
 
 from link import HoldLink
 from config import Config
@@ -38,11 +39,12 @@ class Aircraft:
         self.__coarse_location = location
         # aircraft's location as some point on a link
         self.__precise_location = None
-        self.speed = Config.params["aircraft_model"]["init_speed"]
-        self.fronter_info = None
         self.__state = state
 
         self.itinerary = None
+        self.speed = Config.params["aircraft_model"]["init_speed"]
+        self.fronter_info = None
+        self.speed_uncertainty = 0
 
     def set_location(self, location, level=LOCATION_LEVEL_COARSE):
         """Sets the location of this aircraft to a given location."""
@@ -111,7 +113,7 @@ class Aircraft:
         acceleration = c * (self.speed ** m) \
                        * (abs(self.speed - fronter_speed) / (relative_distance ** l))
         """ Make sure the speed is always valid """
-        new_speed = self.speed + acceleration
+        new_speed = self.speed + acceleration + self.speed_uncertainty
         if new_speed < 0:
             new_speed = 0
         # TODO: consider different speed limits for different type of roads
@@ -121,6 +123,14 @@ class Aircraft:
 
     def set_speed(self, speed):
         """ Set the speed of the aircraft"""
+        # Revise the value if the input speed is valid
+        if speed < 0:
+            self.speed = 0
+            return
+        if speed > self.MAX_SPEED:
+            self.speed = self.MAX_SPEED
+            return
+
         self.speed = speed
 
     @property
@@ -136,6 +146,10 @@ class Aircraft:
         # for target in itinerary.targets:
         #     self.logger.debug(target)
 
+    def add_speed_uncertainty(self, speed_bias):
+        self.speed_uncertainty = speed_bias
+
+    """ original """
     def add_uncertainty_delay(self):
         """Adds an uncertainty delay on this aircraft."""
         if not self.itinerary:

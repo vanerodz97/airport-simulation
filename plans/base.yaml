@@ -48,6 +48,10 @@ uncertainty:
   enabled: false
   # Probability of an aircraft holds at node unexpectedly (depends on time_unit)
   prob_hold: 0.05
+  # Sigma of the normal distribution of the speed perturbation
+  speed_bias_sigma: 5
+  # Mu of the normal distribution of the speed perturbation
+  speed_bias_mu: 0
   # Number of ticks of each delay added
   ticks_hold: 5
   # Enable or disable uncertainty at gate
