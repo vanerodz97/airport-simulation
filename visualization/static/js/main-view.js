@@ -204,7 +204,7 @@ class VisualizationView {
             let statusLabel;
 
             if (aircraft["state"] === "stop") {
-                statusLabel = `<span class="uk-label uk-label-danger">No Schedule</span>`;
+                statusLabel = `<span class="uk-label uk-label-success">Taking Off</span>`;
             } else if (aircraft["is_delayed"]) {
                 statusLabel = `<span class="uk-label uk-label-danger">Hold</span>`;
                 holdCount += 1;
