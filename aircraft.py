@@ -133,6 +133,12 @@ class Aircraft:
 
         self.speed = speed
 
+    def brake_hard(self):
+        """ Brake hard to avoid potential crash"""
+        # TODO: revise the model
+        new_speed = self.speed / 2
+        self.set_speed(new_speed)
+
     @property
     def tick_distance(self):
         """ Get the distance the aircraft passed in this tick"""

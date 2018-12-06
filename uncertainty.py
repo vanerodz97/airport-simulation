@@ -80,9 +80,9 @@ class Uncertainty:
                 speed_bias = self.__speed_bias(self.speed_bias_sigma,
                                                 self.speed_bias_mu)
                 aircraft.add_speed_uncertainty(speed_bias)
-                self.logger.info("%s speed changed from %f to %f", aircraft,
+                self.logger.info("%s speed %f is changed by %f", aircraft,
                                                                     original_speed,
-                                                                    aircraft.speed)
+                                                                    speed_bias)
 
     @classmethod
     def __happens_with_prob(cls, prob):

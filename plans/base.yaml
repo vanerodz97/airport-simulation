@@ -37,7 +37,7 @@ aircraft_model:
   # Pilot's seeing distance in feet. Used to find the aircraft ahead.
   pilot_vision: 350
   # Safe distance between two aircraft
-  safe_distance: 100.0
+  safe_distance: 200.0
   # Initial speed of aircraft
   init_speed: 100.0
   # Maximum speed of aircraft
@@ -47,7 +47,7 @@ uncertainty:
   # Enable or disable the uncertain in simulation
   enabled: false
   # Probability of an aircraft holds at node unexpectedly (depends on time_unit)
-  prob_hold: 0.05
+  prob_hold: 0.7
   # Sigma of the normal distribution of the speed perturbation
   speed_bias_sigma: 5
   # Mu of the normal distribution of the speed perturbation
