@@ -25,7 +25,8 @@ class Aircraft:
     """
     LOCATION_LEVEL_COARSE = 0
     LOCATION_LEVEL_PRECISE = 1
-    SAFE_DISTANCE = Config.params["aircraft_model"]["safe_distance"]
+    IDEAL_DISTANCE = Config.params["aircraft_model"]["ideal_distance"]
+    MIN_DISTANCE = Config.params["aircraft_model"]["min_distance"]
     MAX_SPEED = Config.params["aircraft_model"]["max_speed"]
     IDEAL_SPEED = Config.params["aircraft_model"]["ideal_speed"]
 
@@ -105,7 +106,12 @@ class Aircraft:
         # calculate the new speed when it is following another aircraft
         fronter_speed = fronter_info[0]
         relative_distance = fronter_info[1]
-        if relative_distance > self.SAFE_DISTANCE:
+        # Brake hard if less than MIN_DISTANCE
+        if relative_distance <= self.MIN_DISTANCE:
+            return self.brake_hard()
+
+        # Adjust the speed
+        if relative_distance > self.IDEAL_DISTANCE:
             # acceleration phase
             c, l, m = 1.1, 0.1, 0.2
         else:
@@ -138,8 +144,10 @@ class Aircraft:
     def brake_hard(self):
         """ Brake hard to avoid potential crash"""
         # TODO: revise the model
-        new_speed = self.speed / 2
-        self.set_speed(new_speed)
+        new_speed = self.speed / 1.2
+        #self.set_speed(new_speed)
+        self.logger.info("%s with speed %f brakes hard", self, self.speed)
+        return new_speed
 
     @property
     def tick_distance(self):
