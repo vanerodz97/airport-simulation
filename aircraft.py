@@ -27,6 +27,7 @@ class Aircraft:
     LOCATION_LEVEL_PRECISE = 1
     SAFE_DISTANCE = Config.params["aircraft_model"]["safe_distance"]
     MAX_SPEED = Config.params["aircraft_model"]["max_speed"]
+    IDEAL_SPEED = Config.params["aircraft_model"]["ideal_speed"]
 
     def __init__(self, callsign, model, location, state):
         self.logger = logging.getLogger(__name__)
@@ -97,8 +98,9 @@ class Aircraft:
     """
     def get_next_speed(self, fronter_info):
         """ Calculate the speed based on following model."""
+        # Drive at the ideal speed if no aircraft exists in the pilot's sight
         if fronter_info is None:
-            return self.MAX_SPEED
+            return self.IDEAL_SPEED
 
         # calculate the new speed when it is following another aircraft
         fronter_speed = fronter_info[0]
@@ -113,7 +115,7 @@ class Aircraft:
         acceleration = c * (self.speed ** m) \
                        * (abs(self.speed - fronter_speed) / (relative_distance ** l))
         """ Make sure the speed is always valid """
-        new_speed = self.speed + acceleration + self.speed_uncertainty
+        new_speed = self.speed + acceleration
         if new_speed < 0:
             new_speed = 0
         # TODO: consider different speed limits for different type of roads
@@ -178,7 +180,7 @@ class Aircraft:
         """Ticks on this aircraft and its children to move to the next state.
         """
         if self.itinerary:
-            new_speed = self.get_next_speed(self.fronter_info)
+            new_speed = self.get_next_speed(self.fronter_info) + self.speed_uncertainty
             self.set_speed(new_speed)
             self.itinerary.tick(self.tick_distance)
             if self.itinerary.is_completed:

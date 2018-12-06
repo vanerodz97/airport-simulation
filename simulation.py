@@ -53,7 +53,7 @@ class Simulation:
         self.uncertainty = (Uncertainty(params["uncertainty"]["prob_hold"],
                                         params["uncertainty"]["speed_bias_sigma"],
                                         params["uncertainty"]["speed_bias_mu"])
-                            if params["uncertainty"]["enabled"] else (None, None, None))
+                            if params["uncertainty"]["enabled"] else None)
 
         # Loads the requested scheduler
         self.scheduler = get_scheduler()

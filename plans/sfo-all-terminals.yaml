@@ -4,4 +4,4 @@ airport: sfo-all-terminals
 
 uncertainty:
   enabled: true
-  prob_hold: 0.5
+  prob_hold: 0.9

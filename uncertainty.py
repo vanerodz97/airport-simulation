@@ -73,6 +73,7 @@ class Uncertainty:
             if not (__is_gate(aircraft) or
                     __is_spot(aircraft) or
                     __is_runway(aircraft)):
+                aircraft.add_speed_uncertainty(0)
                 continue
 
             if aircraft.itinerary is not None:

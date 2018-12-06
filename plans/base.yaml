@@ -38,10 +38,15 @@ aircraft_model:
   pilot_vision: 350
   # Safe distance between two aircraft
   safe_distance: 200.0
+  # The min distance between two aircraft where brake hard should be used.
+  min_distance: 200.0
   # Initial speed of aircraft
   init_speed: 100.0
   # Maximum speed of aircraft
-  max_speed: 120.0
+  max_speed: 140.0
+  # Ideal speed of aircraft
+  ideal_speed: 125.0
+
 
 uncertainty:
   # Enable or disable the uncertain in simulation
