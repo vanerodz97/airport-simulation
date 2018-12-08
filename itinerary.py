@@ -1,7 +1,7 @@
 """Class file for `Itinerary`."""
 from link import HoldLink
 from utils import str2sha1
-
+from copy import deepcopy
 
 class Itinerary:
     """Itinerary is a list of target nodes that an aircraft follows per tick.
@@ -11,7 +11,7 @@ class Itinerary:
         # unfinished_distance == 0 means it's
         self.targets = [HoldLink()] if unfinished_distance == 0 else []
         self.targets += targets if targets else []  # links\
-
+        self.backup = deepcopy(targets)
         self.unfinished_distance = unfinished_distance
         self.index, self.distance, self.distance_left = None, None, None
         self.reset()

@@ -141,7 +141,7 @@ class Airport:
             if type(flight) == ArrivalFlight:
                 # if it is the arrival aircraft, do not remove it.
                 if aircraft.location.is_close_to(flight.to_gate):
-                    to_remove_aircrafts.append(aircraft)
+                    to_remove_aircraft.append(aircraft)
                 continue
             # Deletion shouldn't be done in the fly
             if aircraft.precise_location.is_close_to(flight.runway.start):
