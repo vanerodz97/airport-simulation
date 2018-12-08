@@ -53,12 +53,14 @@ $ pip install -r requirements.txt
 
 ### Run
 
-## quick start(just use stream mode)
+### Quick start (use stream mode)
 ```sh
 python visualization/server.py
-and select sfo-all-terminals as the data, and then you can see the simulation right away.
+In the web page, select sfo-all-terminals as the data, and then you can see the simulation right away.
 ```
+Besides that, you can also use batch mode according to the following.
 
+### batch mode
 ```sh
 $ python simulator.py -f plans/base.yaml
 $ python simulator.py -f batch_plans/simple-uc.yaml # Batch Run
