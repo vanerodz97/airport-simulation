@@ -17,8 +17,8 @@ OUTPUT_FOLDER = "./build/"
 TIGHTNESS_TIME_MEAN = 420  # seconds
 TIGHTNESS_TIME_DEVIATION = 60  # seconds
 
-TIGHTNESS_ARRIVAL_TIME_MEAN = 1800  # seconds
-TIGHTNESS_ARRIVAL_TIME_DEVIATION = 300  # seconds
+TIGHTNESS_ARRIVAL_TIME_MEAN = 840  # seconds
+TIGHTNESS_ARRIVAL_TIME_DEVIATION = 60  # seconds
 
 APPEAR_BEFORE = 0  # seconds
 
@@ -77,14 +77,13 @@ def main():
         current_time += interval
 
     # Generate for the arrival flights
-    # TODO: arrivals are disabled in `master`, for now.
     arrivals = []
-    # current_time = 0
-    # while current_time < END_TIME:
-    #     flight = generate_flight_at(current_time, True)
-    #     arrivals.append(flight)
-    #     interval = get_random_time_interval(is_arrival=True)
-    #     current_time += interval
+    current_time = 0
+    while current_time < END_TIME:
+        flight = generate_flight_at(current_time, True)
+        arrivals.append(flight)
+        interval = get_random_time_interval(is_arrival=True)
+        current_time += interval
 
     scenario = {"arrivals": arrivals, "departures": departures}
 
@@ -97,7 +96,6 @@ def main():
     export_to_json(gate_spots_filename, spots_to_gates)
 
     logger.debug("Done")
-
 
 index = 1
 
@@ -141,7 +139,7 @@ def get_random_time_interval(is_arrival=False):
                                            TIGHTNESS_ARRIVAL_TIME_DEVIATION)
         else:
             interval = numpy.random.normal(TIGHTNESS_TIME_MEAN,
-                                           TIGHTNESS_TIME_DEVIATION)
+                                       TIGHTNESS_TIME_DEVIATION)
         if interval > 0:
             return interval
 

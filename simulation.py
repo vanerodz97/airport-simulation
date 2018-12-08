@@ -80,11 +80,11 @@ class Simulation:
 
         try:
 
-            # Reschedule happens before the tick
+            # Reschedule happens before the tick. It will resolve conflict here
             if self.__is_time_to_reschedule():
                 self.logger.info("Time to reschedule")
                 start = time.time()
-                self.__reschedule()
+                self.__reschedule() # it will try to resolve conflict
                 self.last_schedule_exec_time = time.time() - start  # seconds
                 self.last_schedule_time = self.now
                 self.logger.info("Last schedule time is updated to %s",
@@ -105,7 +105,7 @@ class Simulation:
                 state = self.state_logger.log_on_tick(self)
             self.clock.tick()
 
-            # Remove aircraft
+            # Remove aircraft close to the runway
             self.airport.remove_aircrafts(self.scenario)
 
             # Abort on conflict

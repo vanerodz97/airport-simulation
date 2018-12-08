@@ -5,6 +5,7 @@ from schedule import Schedule
 from config import Config
 from aircraft import State
 from scheduler.abstract_scheduler import AbstractScheduler
+from flight import ArrivalFlight, DepartureFlight
 
 
 class Scheduler(AbstractScheduler):
@@ -30,10 +31,16 @@ class Scheduler(AbstractScheduler):
             itinerary = self.schedule_aircraft(aircraft, simulation)
             itineraries[aircraft] = itinerary
             aircraft.set_itinerary(itinerary)
-            priority_list[aircraft.callsign] = simulation.scenario.get_flight(aircraft).departure_time
+
+            cur_flight = simulation.scenario.get_flight(aircraft)
+            calltime = cur_flight.departure_time if type(cur_flight) is \
+                                                    DepartureFlight else \
+                cur_flight.arrival_time
+            priority_list[aircraft.callsign] = calltime
 
         # Resolves conflicts
-        schedule, priority = self.__resolve_conflicts(itineraries, simulation, priority_list)
+        schedule, priority = self.__resolve_conflicts(itineraries, simulation,
+                                                      priority_list)
 
         self.logger.info("Scheduling end")
         return schedule, priority
@@ -113,7 +120,13 @@ class Scheduler(AbstractScheduler):
                 aircraft.set_itinerary(itinerary)
                 # Store a copy of the itinerary
                 itineraries[aircraft] = itinerary
-            priority_list[aircraft.callsign] = simulation.scenario.get_flight(aircraft).departure_time
+            cur_flight = simulation.scenario.get_flight(aircraft)
+            if type(cur_flight) is ArrivalFlight:
+                call_time = cur_flight.arrival_time
+            else:
+                call_time = cur_flight.departure_time
+
+            priority_list[aircraft.callsign] = call_time
 
     def __resolve_conflict(self, itineraries, conflict, attempts,
                            max_attempt):

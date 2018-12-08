@@ -183,9 +183,15 @@ class RoutingExpert:
         if type(end) == Gate:
             spot = end.get_spots()
             # spot = SP1
+            gate_to_spot = self.arrival_routing_table[spot][end]
+            gate_to_spot_links = gate_to_spot.get_links()
+            spot_to_gate = Route(spot, end, [])
+            for i in range(len(gate_to_spot_links) - 1, -1, -1):
+                spot_to_gate.add_link(gate_to_spot_links[i].reverse)
+
+            if type(start) == Spot:
+                return spot_to_gate
             node_to_spot = self.arrival_routing_table[spot][start]
-            spot_to_gate = self.arrival_routing_table[spot][end]
-            spot_to_gate.reverse()
             result = Route(start, end, [])
             result.add_links(node_to_spot.get_links())
             result.add_links(spot_to_gate.get_links())

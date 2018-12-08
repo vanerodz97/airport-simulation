@@ -28,6 +28,7 @@ class ArrivalFlight(Flight):
         self.runway = runway
         self.arrival_time = arrival_time
         self.appear_time = appear_time
+        self.passed_spot = False
 
     def __repr__(self):
         return "<Arrival:%s time:%s appear:%s>" \

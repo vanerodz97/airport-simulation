@@ -11,7 +11,7 @@ import pandas as pd
 
 from utils import get_time_delta, get_output_dir_name
 from config import Config
-
+from flight import ArrivalFlight
 
 class TaxitimeMetric():
     """`TaxitimeMetric` logs the taxi-time of all aircrafts in the simulation.
@@ -32,8 +32,11 @@ class TaxitimeMetric():
         for aircraft in aircrafts:
             # If an aircraft is not close to its gate, it's on its taxiway
             flight = scenario.get_flight(aircraft)
-            if not aircraft.location.is_close_to(flight.from_gate):
+            if type(flight) == ArrivalFlight:
                 self.moving_aircraft_count_on_tick += 1
+            else:
+                if not aircraft.location.is_close_to(flight.from_gate):
+                    self.moving_aircraft_count_on_tick += 1
 
     @property
     def taxi_time(self):
