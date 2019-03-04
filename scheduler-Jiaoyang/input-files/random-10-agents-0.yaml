@@ -1,0 +1,41 @@
+departures:
+    - gate: g0
+      runway: 10R/28L
+      appear_time: 0
+      model: A319
+    - gate: g2
+      runway: 10R/28L
+      appear_time: 0
+      model: A319
+    - gate: g4
+      runway: 10R/28L
+      appear_time: 2
+      model: A319
+    - gate: g5
+      runway: 10R/28L
+      appear_time: 2
+      model: A319
+    - gate: g5
+      runway: 10R/28L
+      appear_time: 4
+      model: A319
+    - gate: g5
+      runway: 10R/28L
+      appear_time: 6
+      model: A319
+    - gate: g0
+      runway: 10R/28L
+      appear_time: 7
+      model: A319
+    - gate: g3
+      runway: 10R/28L
+      appear_time: 7
+      model: A319
+    - gate: g5
+      runway: 10R/28L
+      appear_time: 8
+      model: A319
+    - gate: g5
+      runway: 10R/28L
+      appear_time: 9
+      model: A319

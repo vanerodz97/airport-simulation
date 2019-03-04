@@ -1,0 +1,4 @@
+models:
+  - name: A319
+    v_max: 20
+    v_avg: 15
