@@ -1,6 +1,7 @@
 """Class file for `RoutingExpert`."""
 import logging
 import cache
+import json
 
 from link import Link
 from route import Route
@@ -40,6 +41,7 @@ class RoutingExpert:
             self.__build_or_load_routes()
         else:
             self.__build_routes()
+
 
     def __build_or_load_routes(self):
 
@@ -210,6 +212,44 @@ class RoutingExpert:
     def set_quiet(self, logger):
         """Sets this object into quiet mode where less logs are printed."""
         self.logger = logger
+
+    def dump_routing_expert(self):
+        """ Dump routing expert """
+        self.__dump_routing_table(self.depart_routing_table, "depart_routing_table")
+
+        self.__dump_links(self.links, "links")
+
+        self.__dump_nodes(self.nodes, "nodes")
+        self.__dump_nodes(self.runway_nodes, "runway_nodes")
+        self.__dump_nodes(self.spot_nodes, "spot_nodes")
+        # self.__dump_routing_table(self.arrival_routing_table, "arrival_routing_table")
+
+    def __dump_routing_table(self, routing_table, file_name):
+        """ Dump routing table """
+        with open('dump_files/' + file_name, 'w') as f:
+            for start in self.runway_nodes:
+                for end in self.nodes:
+                    if start == end:
+                        continue
+                    f.write("[%s - %s]" % (end, start))
+                    route = routing_table[start][end]
+                    if route:
+                        f.write(route.description)
+                    else:
+                        f.write("No Route")
+                    f.write("\n")
+
+    def __dump_links(self, links, file_name):
+        """ Dump link """
+        with open('dump_files/' + file_name, 'w') as f:
+            for link in links:
+                f.write("<Link: %s to %s, distance: %f>\n" % (link.start, link.end, link.length))
+
+    def __dump_nodes(self, nodes, file_name):
+        """ Dump nodes """
+        with open('dump_files/' + file_name, 'w') as f:
+            for node in nodes:
+                f.write("%s\n" % node)
 
 
 class CandidateNeighbor:
