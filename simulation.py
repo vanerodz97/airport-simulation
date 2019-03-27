@@ -48,7 +48,7 @@ class Simulation:
         self.routing_expert = RoutingExpert(self.airport.surface.links,
                                             self.airport.surface.nodes,
                                             params["simulation"]["cache"])
-        # TODO: generate json file
+        # generate dump file
         self.routing_expert.dump_routing_expert()
 
         # Sets up the uncertainty module

@@ -219,7 +219,7 @@ class RoutingExpert:
 
         self.__dump_links(self.links, "links")
 
-        self.__dump_nodes(self.nodes, "nodes")
+        self.__dump_all_nodes("nodes")
         self.__dump_nodes(self.runway_nodes, "runway_nodes")
         self.__dump_nodes(self.spot_nodes, "spot_nodes")
         # self.__dump_routing_table(self.arrival_routing_table, "arrival_routing_table")
@@ -254,6 +254,20 @@ class RoutingExpert:
         with open('dump_files/' + file_name, 'w') as f:
             for node in nodes:
                 f.write("%s\n" % node)
+
+    def __dump_all_nodes(self, file_name):
+        """ Dump all nodes, including intermediate ones """
+        with open('dump_files/' + file_name, 'w') as f:
+            # dump nodes in the node link model
+            for node in self.nodes:
+                f.write("%s\n" % node)
+
+            # dump intermediate nodes
+            for link in self.links:
+                for i in range(1, len(link.nodes) - 1):
+                    node = link.nodes[i]
+                    f.write("%s\n" % node)
+
 
 
 class CandidateNeighbor:
