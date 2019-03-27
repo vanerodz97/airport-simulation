@@ -256,7 +256,7 @@ class RoutingExpert:
                 f.write("%s\n" % node)
 
     def __dump_all_nodes(self, file_name):
-        """ Dump all nodes, including intermediate ones """
+        """ Dump all nodes, including intermediate ones except runway nodes"""
         with open('dump_files/' + file_name, 'w') as f:
             # dump nodes in the node link model
             for node in self.nodes:
@@ -264,6 +264,8 @@ class RoutingExpert:
 
             # dump intermediate nodes
             for link in self.links:
+                if type(link) == Runway:
+                    continue
                 for i in range(1, len(link.nodes) - 1):
                     node = link.nodes[i]
                     f.write("%s\n" % node)
