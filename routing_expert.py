@@ -243,7 +243,11 @@ class RoutingExpert:
         """ Dump link """
         with open('dump_files/' + file_name, 'w') as f:
             for link in links:
-                f.write("<Link: %s to %s, distance: %f>\n" % (link.start, link.end, link.length))
+                for i in range(0, len(link.segment_lengths)):
+                    start = link.nodes[i]
+                    end = link.nodes[i + 1]
+                    f.write("<Link: %s to %s, distance: %f>\n" % (start, end
+                                                                  , link.segment_lengths[i]))
 
     def __dump_nodes(self, nodes, file_name):
         """ Dump nodes """
