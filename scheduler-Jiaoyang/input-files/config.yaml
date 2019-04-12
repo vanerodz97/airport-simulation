@@ -1,10 +1,10 @@
 config:
   - wait_cost: 0.5
     wait_time: 1
-    safety_time: 1
+    safety_time: 4
     gate_delay_time: [0, 1, 2, 3, 4]
-    gate_delay_prob: [0.2, 0.2, 0.2, 0.2, 0.2]
-    runway_delay_time: [0, 1, 2, 3, 4]
-    runway_delay_prob: [0.2, 0.2, 0.2, 0.2, 0.2]
+    gate_delay_prob: [0.3, 0.5, 0.1, 0.05, 0.05]
+    runway_delay_time: [0]
+    runway_delay_prob: [1]
 
   
