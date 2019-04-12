@@ -160,8 +160,6 @@ bool Schedule::loadInstance(const std::string& fileName)
 			departures.push_back(a);
 		}
 	}
-	//std::cout << "#Arrivals = " << arrivals.size() << " ; #Departures = " << departures.size() << std::endl;
-	//std::cout << "******Instance loaded successfully******" << std::endl << std::endl;
 	return true;
 }
 
@@ -405,8 +403,9 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 		if (curr->state.loc == a.goal) {
 			updatePath(a, curr);
 			
-			for (it = allNodes_table.begin(); it != allNodes_table.end(); it++) {
-				delete ((*it).second);  // Node* s = (*it).first; delete (s);
+			for (it = allNodes_table.begin(); it != allNodes_table.end(); it++) 
+			{
+				delete ((*it).second);
 			}
 			expanded_nodes += num_expanded;
 			generated_nodes += num_generated;
