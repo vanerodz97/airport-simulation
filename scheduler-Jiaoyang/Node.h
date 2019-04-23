@@ -1,12 +1,15 @@
 #pragma once
 #include "stdafx.h"
 
+using namespace std;
+
 struct State
 {
 	vertex_t loc;
+  edge_t* edge_from;
 	vector<int> time;
 	vector<double> prob;
-	State(){}
+	State():edge_from(nullptr){}
 	State(int t, double p){time.push_back(t); prob.push_back(p);}
 	void print(){ 
 		std::cout << "loc = " << loc <<  " ; time = ";

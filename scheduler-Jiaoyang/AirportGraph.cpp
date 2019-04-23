@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "AirportGraph.h"
 #include <fstream>
 #include "yaml-cpp/yaml.h"
@@ -6,6 +5,7 @@
 #include <iostream>   // std::cout
 #include <string>     // std::string, std::stod
 #include <iomanip>      // std::setprecision
+#include <cfloat>
 
 position_t nodeAsPos(const YAML::Node& node)
 {
@@ -310,8 +310,8 @@ bool AirportGraph::GenerateAbstractGraph(const std::string& nodeFile, const std:
 
 	eliminateIntermidiateNodes(); // eliminate intermidiate nodes	
 	getGraphInfo();
-	//printNodes(); 	//print all nodes
-	//saveGraph(outputFile); // output for visualization
+	// printNodes(); 	//print all nodes
+	// saveGraph(outputFile); // output for visualization
 	computeHeuristics();
 	return true;
 }
@@ -441,6 +441,11 @@ void AirportGraph::eliminateIntermidiateNodes()
 			break;
 		}
 	}
+  auto es = edges(G);
+  for (auto eit = es.first; eit != es.second; ++eit){
+    eNameToE[G[*eit].name] = *eit;
+  }
+
 }
 
 void AirportGraph::saveGraph(const std::string& outputFile) // for visualization

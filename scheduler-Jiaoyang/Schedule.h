@@ -1,58 +1,29 @@
 #pragma once
-#include "AirportGraph.h"
 #include "Node.h"
-
-struct Aircraft
-{
-	// Input
-	std::string id;
-	vertex_t start;
-	vertex_t goal;
-	double appear_time;
-	int model;
-	// Output
-	vector<State> path;
-	double pushback_time;
-	double expected_runway_time;
-	double cost;
-	// Functions
-	void clearPlan(){path.clear(); }
-};
-
-struct AircraftModel
-{
-	std::string name;
-	double v_max;
-	vector<double> v;
-	vector<double> prob;
-};
+#include "stdafx.h"
+#include "Aircraft.h"
+#include "AirportGraph.h"
 
 class Schedule
 {
 public:
-	AirportGraph airport;
+  // TODO changed to auto ptr
+  AirportGraph airport;
 	vector<Aircraft> departures;
 	vector<Aircraft> arrivals;
 	std::unordered_map<std::string, int> modelNameToModel;
 	vector<AircraftModel> aircraftModels;
 
-	// Parameters
-	double wait_cost = 0.1;
-	double wait_time = 10; // the time interval on waiting location
-	double safety_time = 10;
-	State gate_delay;
-	State runway_delay;
-
 	// Performance analysis
 	int expanded_nodes;
 	int generated_nodes;
 
-	// Load files
-	bool loadGraph(const std::string& fileName);
-	bool loadConfig(const std::string& fileName);
-	bool loadAircraftModels(const std::string& fileName);
-	bool loadInstance(const std::string& fileName);
-	void generateInstance(const std::string& fileName, int num_of_agent, int interval_min, int interval_max);
+	double wait_cost = 0.1;
+	double wait_time = 10; // the time interval on waiting location
+	double safety_time = 10;
+	State gate_delay;
+
+
 
 	// Path planning
 	void updatePath(Aircraft& a, Node* goal);
