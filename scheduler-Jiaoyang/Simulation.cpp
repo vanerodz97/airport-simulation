@@ -122,10 +122,8 @@ bool Simulation::loadInstance(const std::string& fileName)
 
 void Simulation::update_aircraft_edge_path(){
   for (auto &a:schedule.departures){
-    a.wait_cnt = 0;
     for(int i = 0; i < a.path.size() - 1; i ++){
       if (a.path[i].loc == a.path[i + 1].loc){
-        a.wait_cnt ++;
         continue;
       }
       auto prev = a.path[i].loc;
@@ -140,8 +138,8 @@ void Simulation::update_aircraft_edge_path(){
           break;
         };
       };
-
     }
+
   }
   departures = schedule.departures;
 
@@ -222,13 +220,12 @@ bool Simulation::near_check_point(const Aircraft& a){
   return a.edge_path[a.pos.first].length - a.pos.second <= safety_distance_check_point;
 }
 
-
 void Simulation::update_fronter(){
   // n^2 iter
   for (auto ptr_0 : aircraft_on_graph){
     ptr_0 -> prev_aircraft = nullptr;
     for (auto ptr_1 : aircraft_on_graph){
-      if (ptr_0 -> id == ptr_0->id){
+      if (ptr_0 -> id == ptr_1->id){
         continue;
       }
       if (ptr_0 -> current_edge_name() != ptr_1 -> current_edge_name()){
@@ -247,7 +244,6 @@ void Simulation::update_fronter(){
   }
 }
 
-
 void Simulation::update_schedule(){
   checkpoint_pass_order.clear();
   for (auto& a: departures){
@@ -255,7 +251,6 @@ void Simulation::update_schedule(){
 
       auto vertex_name = airport.G[state.loc].name;
 
-      cout << vertex_name << "   " << a.id << endl;
       if (checkpoint_pass_order[vertex_name].size() > 0 && checkpoint_pass_order[vertex_name].back() == a.id){
         cout << "dup" << endl;
         continue;
@@ -327,13 +322,12 @@ void Simulation::tick(){
     }
   }
 
+  update_fronter();
   for (auto a_ptr:aircraft_on_graph){
     if (a_ptr -> prev_aircraft!= nullptr &&
         aircraft_on_graph.find(a_ptr -> prev_aircraft)!= aircraft_on_graph.end()){
       if (a_ptr->prev_aircraft->pos.second - a_ptr->pos.second < safety_distance){
         handle_conflict();
-
-
       }
     }
   }

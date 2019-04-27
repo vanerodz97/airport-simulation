@@ -3,7 +3,7 @@
 
 double Aircraft::get_velocity(){
   // TODO Car following model joins here
-  double distance;
+  double distance = 1000;
 
   if (command == STOP_COMMAND){
     cout << this -> id << "stop" << endl;
@@ -88,7 +88,7 @@ void Aircraft::simulation_begin(){
 }
 
 void Aircraft::generate_actual_appear_time(){
-  actual_appear_time = appear_time + wait_cnt; // TODO add disturb
+  actual_appear_time = path[0].time[0]; // TODO add disturb
 }
 
 string Aircraft::current_edge_name(){

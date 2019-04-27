@@ -52,7 +52,6 @@ public:
 
   // simulation
   void simulation_init();
-  int wait_cnt;
 
   // should be appear_time + wait_time + delay
   double actual_appear_time;
