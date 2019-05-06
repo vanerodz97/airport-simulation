@@ -74,6 +74,7 @@ public:
 
   string position_str();
   string current_edge_name();
+  double distance_to_next_point();
 
   vector<string> passed_check_point;
 

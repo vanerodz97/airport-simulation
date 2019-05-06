@@ -7,6 +7,7 @@
 #include <boost/property_tree/json_parser.hpp>
 
 #include "Simulation.h"
+#include "Simulation_baseline.h"
 #include "Schedule.h"
 
 int main(int argc, char** argv)
@@ -43,7 +44,7 @@ int main(int argc, char** argv)
 	po::notify(vm);
 	srand((int)time(0));
 
-  Simulation simulation;
+  Simulation_baseline simulation;
 	if(vm.count("graph"))
 	{
 		if(!simulation.loadGraph(vm["graph"].as<std::string>()))

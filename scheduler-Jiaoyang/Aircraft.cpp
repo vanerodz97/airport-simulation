@@ -1,6 +1,10 @@
 #include "Aircraft.h"
 #include <cmath>
 
+double Aircraft::distance_to_next_point(){
+  return edge_path[pos.first].length - pos.second;
+}
+
 double Aircraft::get_velocity(){
   // TODO Car following model joins here
   double distance = 1000;
