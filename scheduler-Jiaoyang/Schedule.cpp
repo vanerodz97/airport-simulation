@@ -110,7 +110,7 @@ bool Schedule::computeNextState(const State& curr, State& next, double length, c
 {
   vector<int> leave_time;
   vector<double> leave_prob;
-  if (airport.G[curr.loc].type == GATE) // add gate_delay
+  if (airport->G[curr.loc].type == GATE) // add gate_delay
   {
     addTimeDistribution(curr.time, curr.prob, gate_delay.time, gate_delay.prob, leave_time, leave_prob);
   }
@@ -245,7 +245,7 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
   int num_generated = 0;
 
   // generate start and add it to the OPEN list
-  vector<double> h_table = airport.heuristics[a.goal]; //Heuristics table
+  vector<double> h_table = airport->heuristics[a.goal]; //Heuristics table
   Node* start = new Node(a.start, 0, (int)(h_table[a.start]/a.model.v_max), NULL);
   start->state.time.push_back(a.appear_time);
   start->state.prob.push_back(1);
@@ -294,7 +294,7 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
       open_list.push(next);
     }
     // Move to neighbors
-    auto neighbours = boost::out_edges(curr->state.loc, airport.G);
+    auto neighbours = boost::out_edges(curr->state.loc, airport->G);
     for (auto e : boost::make_iterator_range(neighbours))
     {
       Node* next = new Node();
@@ -308,7 +308,7 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
         next->move = next->parent->move;
       }
 
-      if (!computeNextState(curr->state, next->state, airport.G[e].length, constraints[e.m_target], a))
+      if (!computeNextState(curr->state, next->state, airport->G[e].length, constraints[e.m_target], a))
       {
         return false;
       }
@@ -341,14 +341,14 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 bool compareAppearTime(const Aircraft& a, const Aircraft& b) { return (a.appear_time < b.appear_time); }
 bool Schedule::runFirstComeFirstServe()
 {
-  std::sort(departures.begin(), departures.end(), compareAppearTime);
-  vector<State> constraints(boost::num_vertices(airport.G), State(-INT_MAX,1));
-  for (int i = 0; i < departures.size(); i++)
+  std::sort(departures->begin(), departures->end(), compareAppearTime);
+  vector<State> constraints(boost::num_vertices(airport->G), State(-INT_MAX,1));
+  for (int i = 0; i < departures->size(); i++)
   {
-    if(!AStarSearch(departures[i], constraints))
+    if(!AStarSearch((*departures)[i], constraints))
       return false;
     // Update constarints
-    for (auto s : departures[i].path)
+    for (auto s : (*departures)[i].path)
       constraints[s.loc] = s;
   }
   return true;
@@ -358,19 +358,19 @@ bool compareRunwayTime(const Aircraft& a, const Aircraft& b) { return (a.expecte
 bool Schedule::runFirstLeaveFirstServe()
 {
   //std::sort(departures.begin() + 4, departures.end(), &Schedule::compareLeaveTime);
-  vector<State> constraints(boost::num_vertices(airport.G), State(-INT_MAX, 1));
-  for (int i = 0; i < departures.size(); i++)
+  vector<State> constraints(boost::num_vertices(airport->G), State(-INT_MAX, 1));
+  for (int i = 0; i < departures->size(); i++)
   {
-    if (!AStarSearch(departures[i], constraints))
+    if (!AStarSearch((*departures)[i], constraints))
       return false;
   }
-  std::sort(departures.begin(), departures.end(), compareRunwayTime);
-  for (int i = 0; i < departures.size(); i++)
+  std::sort(departures->begin(), departures->end(), compareRunwayTime);
+  for (int i = 0; i < departures->size(); i++)
   {
-    if (!AStarSearch(departures[i], constraints))
+    if (!AStarSearch((*departures)[i], constraints))
       return false;
     // Update constarints
-    for (auto s : departures[i].path)
+    for (auto s : (*departures)[i].path)
       constraints[s.loc] = s;
   }
   return true;
@@ -394,9 +394,9 @@ bool Schedule::run(const std::string& solver)
 
 void Schedule::clearPlans()
 {
-  for(int i = 0; i < departures.size(); i++)
+  for(int i = 0; i < departures->size(); i++)
   {
-    departures[i].clearPlan();
+    (*departures)[i].clearPlan();
   }
   expanded_nodes = 0;
   generated_nodes = 0;

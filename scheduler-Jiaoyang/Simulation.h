@@ -1,4 +1,5 @@
 #include "Schedule.h"
+#include <deque>
 
 class Simulation
 {
@@ -19,6 +20,8 @@ private:
   void handle_conflict();
 
   void update_aircraft_edge_path();
+
+  unordered_map<string, deque<Aircraft*> > traffic;
 
 
 public:

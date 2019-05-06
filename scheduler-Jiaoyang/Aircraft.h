@@ -11,6 +11,9 @@ struct AircraftModel
 {
 	std::string name;
 	double v_max;
+  double a_brake = 20;
+  double a_max = 10;
+
 	vector<double> v;
 	vector<double> prob;
 };
@@ -26,7 +29,7 @@ private:
 
 public:
 
-  double speed;
+  double actual_runway_time;
 
 	// Input
 	std::string id;
@@ -44,7 +47,9 @@ public:
 	// Output
 	vector<State> path;
 	double pushback_time;
-  double ideal_distance=800;
+
+
+  double ideal_distance=400;
 	double expected_runway_time;
 	double cost;
 	// Functions
@@ -61,6 +66,7 @@ public:
   bool ready_for_runway;
   position pos;
   double velocity=0;
+  double acceleration = 0;
   double get_velocity();
 
   void simulation_begin();

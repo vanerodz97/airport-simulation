@@ -7,12 +7,14 @@ double Aircraft::get_velocity(){
 
   if (command == STOP_COMMAND){
     cout << this -> id << "stop" << endl;
+    acceleration = - velocity;
     return 0;
   }
 
 
   if (prev_aircraft == nullptr){
-    return model.v_max;
+    acceleration = model.a_max;
+    return velocity + acceleration;
   }
 
 
@@ -26,20 +28,41 @@ double Aircraft::get_velocity(){
   }
 
 
-
-
-  double c, l, m;
-  if(distance > ideal_distance){
-    // c = 1.1, l = 0.1, m = 0.2;
-    c = 10;
-  }else{
-    // c = -1.1, l = 1.2, m = 0.7;
-    c = - 20;
+  if (distance < 150){
+    // hard brake
+    acceleration = - velocity;
+    return 0;
   }
 
-  double acc = c;
+  if (distance > ideal_distance){
+    // Not need to care about prev aircraft
+    acceleration = model.a_max;
+    return velocity + acceleration;
+  }
 
-  return velocity + acc;
+
+  if (prev_aircraft -> acceleration < 0){
+    acceleration = -model.a_brake;
+    return velocity + acceleration;
+  }
+
+  // Accelerating 
+  double v_other = prev_aircraft->velocity;
+  double a_brake_other = prev_aircraft ->model.a_brake;
+
+
+
+  double h = distance + (v_other * v_other / (2 * a_brake_other)) - 100;
+
+  double T = 1/tick_per_time_unit;
+
+  double a_eq = T * T;
+  double b_eq = model.a_brake * T * T + 2 * velocity * T;
+  double c_eq = velocity * velocity + 2 * model.a_brake * (velocity * T - h);
+
+  acceleration =  min(model.a_max, (-b_eq + sqrt(b_eq * b_eq - 4 * a_eq * c_eq))/ (2 * a_eq));
+  
+  return velocity + acceleration;
 }
 
 void Aircraft::move(){

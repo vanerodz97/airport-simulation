@@ -121,7 +121,7 @@ bool Simulation::loadInstance(const std::string& fileName)
 
 
 void Simulation::update_aircraft_edge_path(){
-  for (auto &a:schedule.departures){
+  for (auto &a:departures){
     for(int i = 0; i < a.path.size() - 1; i ++){
       if (a.path[i].loc == a.path[i + 1].loc){
         continue;
@@ -141,7 +141,6 @@ void Simulation::update_aircraft_edge_path(){
     }
 
   }
-  departures = schedule.departures;
 
 }
 
@@ -208,11 +207,11 @@ void Simulation::update_scheduler_params(){
 
 
   // TODO hmmm this ain't cool?
-  schedule.airport = airport;
-  schedule.departures = departures;
-  schedule.arrivals = arrivals;
-  schedule.modelNameToModel = modelNameToModel;
-  schedule.aircraftModels = aircraftModels;
+  schedule.airport = &airport;
+  schedule.departures = &departures;
+  schedule.arrivals = &arrivals;
+  schedule.modelNameToModel = &modelNameToModel;
+  schedule.aircraftModels = &aircraftModels;
 
 }
 
@@ -221,30 +220,90 @@ bool Simulation::near_check_point(const Aircraft& a){
 }
 
 void Simulation::update_fronter(){
+
+    // Iterate over an unordered_map using range based for loop
+    for (auto & element : traffic){
+
+      if (element.second.size() == 0){
+        continue;
+      }
+
+      // element = (name_of_edge, deque<Aircraft*>)
+      Aircraft* prev_ptr = nullptr;
+      for (auto & aircraft_ptr : element.second){
+        assert(aircraft_ptr->ready_for_runway == false);
+        if (prev_ptr != nullptr){
+          aircraft_ptr -> prev_aircraft = prev_ptr;
+        }
+
+        prev_ptr = aircraft_ptr;
+      }
+
+      // prev_aircraft for front
+      prev_ptr = nullptr;
+      double dist;
+
+      auto e_to = target(airport.eNameToE[element.first], airport.G);
+
+      /*
+        for front of each edge e, we try to find its prev_aircraft from
+        last aircraft in outedge of e
+       */
+
+      boost::graph_traits<searchGraph_t>::out_edge_iterator ei, ei_end;
+      boost::tie(ei, ei_end) = out_edges(e_to, airport.G);
+      for( ; ei != ei_end; ++ei) {
+        string edge_name = airport.G[*ei].name;
+
+        if (traffic[edge_name].size() == 0){
+          continue;
+        }
+
+        if (prev_ptr == nullptr){
+          prev_ptr = traffic[edge_name].back();
+          dist = prev_ptr->pos.second;
+        }else{
+          auto prev_ptr_candidate = traffic[edge_name].back();
+          if (prev_ptr_candidate->pos.second < dist){
+            prev_ptr = prev_ptr_candidate;
+            dist = prev_ptr->pos.second;
+          }
+        }
+      }
+      element.second.front()->prev_aircraft = prev_ptr;
+
+
+      }
+
+
   // n^2 iter
-  for (auto ptr_0 : aircraft_on_graph){
-    ptr_0 -> prev_aircraft = nullptr;
-    for (auto ptr_1 : aircraft_on_graph){
-      if (ptr_0 -> id == ptr_1->id){
-        continue;
-      }
-      if (ptr_0 -> current_edge_name() != ptr_1 -> current_edge_name()){
-        continue;
-      }
-      if (ptr_0->pos.second > ptr_1->pos.second){
-        continue;
-      }
-      if (ptr_0->prev_aircraft != nullptr && ptr_0->prev_aircraft->pos.second < ptr_1->pos.second ){
-        continue;
-      }
+  // for (auto ptr_0 : aircraft_on_graph){
+  //   ptr_0 -> prev_aircraft = nullptr;
+  //   for (auto ptr_1 : aircraft_on_graph){
+  //     if (ptr_0 -> id == ptr_1->id){
+  //       continue;
+  //     }
+  //     if (ptr_0 -> current_edge_name() != ptr_1 -> current_edge_name()){
+  //       continue;
+  //     }
+  //     if (ptr_0->pos.second > ptr_1->pos.second){
+  //       continue;
+  //     }
+  //     if (ptr_0->prev_aircraft != nullptr && ptr_0->prev_aircraft->pos.second < ptr_1->pos.second ){
+  //       continue;
+  //     }
 
-      ptr_0->prev_aircraft = ptr_1;
+  //     ptr_0->prev_aircraft = ptr_1;
 
-    }
-  }
+  //   }
+  // }
 }
 
 void Simulation::update_schedule(){
+  /*
+    Generate passing order of aircraft in each node.
+
+   */
   checkpoint_pass_order.clear();
   for (auto& a: departures){
     for (const auto &state: a.path){
@@ -271,6 +330,7 @@ void Simulation::tick(){
       for (auto a_ptr:appear_schedule[simulation_time/tick_per_time_unit]){
         (*a_ptr).simulation_begin();
         aircraft_on_graph.insert(a_ptr);
+        traffic[a_ptr -> current_edge_name()].push_back(a_ptr);
       }
     }
   }
@@ -289,7 +349,7 @@ void Simulation::tick(){
         cout << a->id << " got delay at "<< v_name <<", waiting for " << checkpoint_pass_order[v_name].front() << endl;
         a->send_command(STOP_COMMAND);
       }
-      }
+    }
   }
 
   // find fronter
@@ -298,7 +358,7 @@ void Simulation::tick(){
 
   // tick aircraft
   for (auto a:aircraft_on_graph){
-    (*a).move();
+    a->move();
     for (auto passed : a->passed_check_point){
       cout << a->id << " passed " << passed << endl;
       // find coresponding node and pop.
@@ -307,13 +367,22 @@ void Simulation::tick(){
       assert (checkpoint_pass_order[airport.G[e_to].name].front() == a->id);
       checkpoint_pass_order[airport.G[e_to].name].pop();
 
+      // TODO traffic and checkpoint_pass_order may merge
+      if (traffic[passed].size() > 0 && traffic[passed].front()->id == a->id){
+        traffic[passed].pop_front();
+      }
 
+    }
+    auto current_edge_name = a->current_edge_name();
+    if (!a->ready_for_runway && a->passed_check_point.size() > 0){
+      traffic[current_edge_name].push_back(a);
     }
   }
 
   // remove aircraft near to the runways
   for (auto it = aircraft_on_graph.begin(); it != aircraft_on_graph.end(); ) {
     if ((*it)->ready_for_runway){
+      (*it) ->actual_runway_time = simulation_time/ tick_per_time_unit;
       it = aircraft_on_graph.erase(it);
       completed_count += 1;
     }
@@ -323,19 +392,24 @@ void Simulation::tick(){
   }
 
   update_fronter();
+
+
+  // check conflict
   for (auto a_ptr:aircraft_on_graph){
     if (a_ptr -> prev_aircraft!= nullptr &&
         aircraft_on_graph.find(a_ptr -> prev_aircraft)!= aircraft_on_graph.end()){
-      if (a_ptr->prev_aircraft->pos.second - a_ptr->pos.second < safety_distance){
+      if (a_ptr->prev_aircraft->current_edge_name() == a_ptr->current_edge_name() &&
+          a_ptr->prev_aircraft->pos.second - a_ptr->pos.second < safety_distance){
         handle_conflict();
       }
     }
   }
 
-  //
+  // print stat of simulation
 
   for (auto a:aircraft_on_graph){
     cout << a->id << " - loc: "<< a->position_str() << endl;
+    cout << "v:  " << a->velocity << " acc: "<< a->acceleration << endl;
     if (a->prev_aircraft != nullptr){
       cout << a->prev_aircraft->id << " in front of " << a->id << endl;
     }

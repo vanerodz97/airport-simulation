@@ -7,17 +7,17 @@
 class Schedule
 {
 public:
-  // TODO changed to auto ptr
-  AirportGraph airport;
-	vector<Aircraft> departures;
-	vector<Aircraft> arrivals;
-	std::unordered_map<std::string, int> modelNameToModel;
-	vector<AircraftModel> aircraftModels;
+  AirportGraph* airport;
+	vector<Aircraft>* departures;
+	vector<Aircraft>* arrivals;
+	std::unordered_map<std::string, int>* modelNameToModel;
+	vector<AircraftModel>* aircraftModels;
 
 	// Performance analysis
 	int expanded_nodes;
 	int generated_nodes;
 
+  // scheduling params
 	double wait_cost = 0.1;
 	double wait_time = 10; // the time interval on waiting location
 	double safety_time = 10;
@@ -32,7 +32,7 @@ public:
 	bool AStarSearch(Aircraft& a, const std::vector<State>& constraints);
 
 	// Priority
-	bool compareLeaveTime(const Aircraft& a, const Aircraft& b) { return (a.appear_time + airport.heuristics[a.goal][a.start] < b.appear_time + airport.heuristics[b.goal][b.start]); }
+	bool compareLeaveTime(const Aircraft& a, const Aircraft& b) { return (a.appear_time + airport->heuristics[a.goal][a.start] < b.appear_time + airport->heuristics[b.goal][b.start]); }
 
 	// Solver
 	bool runFirstComeFirstServe();

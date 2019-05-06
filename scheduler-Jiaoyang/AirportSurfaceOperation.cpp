@@ -125,6 +125,11 @@ int main(int argc, char** argv)
       simulation.tick();
     }
 
+    for (auto a : simulation.departures){
+      cout << a.id << "  runway:  " << a.actual_runway_time << "  expected: " << a.expected_runway_time << endl;
+    }
+
+
   }
 
 
