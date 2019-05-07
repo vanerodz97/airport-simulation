@@ -7,7 +7,7 @@
 class Schedule
 {
 public:
-  AirportGraph* airport;
+	AirportGraph* airport;
 	vector<Aircraft>* departures;
 	vector<Aircraft>* arrivals;
 	std::unordered_map<std::string, int>* modelNameToModel;
@@ -17,7 +17,7 @@ public:
 	int expanded_nodes;
 	int generated_nodes;
 
-  // scheduling params
+	// scheduling params
 	double wait_cost = 0.1;
 	double wait_time = 10; // the time interval on waiting location
 	double safety_time = 10;
@@ -35,6 +35,7 @@ public:
 	bool compareLeaveTime(const Aircraft& a, const Aircraft& b) { return (a.appear_time + airport->heuristics[a.goal][a.start] < b.appear_time + airport->heuristics[b.goal][b.start]); }
 
 	// Solver
+	bool runBase();
 	bool runFirstComeFirstServe();
 	bool runFirstLeaveFirstServe();
 	bool run(const std::string& solver);
