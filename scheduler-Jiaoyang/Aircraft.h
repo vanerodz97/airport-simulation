@@ -40,6 +40,7 @@ public:
 	// to track the previous passed node and the corresponding time
 	vertex_t location;
 	double time;
+	vertex_t next_location;
 
 
 	int tick_per_time_unit = 50;

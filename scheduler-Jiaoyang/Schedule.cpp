@@ -245,8 +245,8 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 
 	// generate start and add it to the OPEN list
 	vector<double> h_table = airport->heuristics[a.goal]; //Heuristics table
-	Node* root = new Node(a.location, a.time, h_table[a.location] / a.model.v_max, NULL);
-	root->state.time.push_back(a.appear_time);
+	Node* root = new Node(a.location, 0, h_table[a.location] / a.model.v_max, NULL);
+	root->state.time.push_back(a.time);
 	root->state.prob.push_back(1);
 	num_generated++;
 	root->open_handle = open_list.push(root);
@@ -274,6 +274,43 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 			generated_nodes += num_generated;
 			return true;
 		}
+
+		// check whether this is the edge that the agent is forced to follow.
+		if (curr == root && a.next_location != a.location)
+		{
+			Node* next = new Node();
+			next->parent = curr;
+			next->state.loc = a.next_location;
+			auto e = boost::out_edges(curr->state.loc, airport->G).first;
+			while (target(*e, airport->G) != a.next_location)
+				e++;
+			next->state.edge_from = &(*e);
+			next->move = next->parent->move;
+
+			if (!computeNextState(curr->state, next->state, airport->G[*e].length, constraints[a.next_location], a))
+			{
+				return false;
+			}
+			next->depth = curr->depth + 1;
+			next->g_val = computeGValue(next->state, next->move->state, a);
+			next->h_val = h_table[next->state.loc] / a.model.v_max;
+
+			it = allNodes_table.find(next);
+			if (it == allNodes_table.end())
+			{
+				next->open_handle = open_list.push(next);
+				next->in_openlist = true;
+				num_generated++;
+				allNodes_table[next] = next;
+			}
+			else
+			{
+				delete(next);
+			}
+			continue;
+		}
+
+
 
 		// Wait at gates
 		if (airport->G[curr->state.loc].type == vertex_type::GATE)
