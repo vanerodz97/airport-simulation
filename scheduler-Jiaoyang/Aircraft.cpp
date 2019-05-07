@@ -11,6 +11,10 @@ double Aircraft::get_velocity(){
 
   if (command == STOP_COMMAND){
     cout << this -> id << "stop" << endl;
+
+    wait_tick += 1;
+
+
     acceleration = - velocity;
     return 0;
   }
@@ -81,6 +85,13 @@ void Aircraft::move(){
   if (v < 0){
     v = 0;
   }
+
+  if (v == 0){
+    zero_velocity_tick += 1;
+  }
+
+
+
   velocity = v;
 
   double l = pos.second + velocity / (double)tick_per_time_unit;
@@ -104,8 +115,20 @@ string Aircraft::position_str(){
     + to_string(pos.second);
 }
 
+
+void Aircraft::init_expr_data(){
+  zero_velocity_tick = 0;
+  wait_tick = 0;
+}
+
 void Aircraft::simulation_init(){
   generate_actual_appear_time();
+
+  /*
+    init exp data
+   */
+  init_expr_data();
+
   ready_for_runway = false;
 }
 

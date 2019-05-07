@@ -1,7 +1,11 @@
 #pragma once
 #include "AirportGraph.h"
 
-// aircrafts position is defined by two vertex and a double
+/*
+  aircrafts position is defined by an index on edge_path
+  and a double number represent by the distance already traversed.
+  
+*/
 typedef pair<int, double> position;
 
 const int NO_COMMAND = 0;
@@ -23,6 +27,8 @@ struct AircraftModel
 struct Aircraft
 {
 private:
+  void init_expr_data();
+
 	void generate_actual_appear_time();
 	int command;
 
@@ -77,6 +83,7 @@ public:
 	void simulation_begin();
 	void move();
 
+  // used for debuging
 	string position_str();
 	string current_edge_name();
 	double distance_to_next_point();
@@ -84,4 +91,9 @@ public:
 	vector<string> passed_check_point;
 
 	vector<Edge> edge_path;
+
+  /* experiment stat */
+  // 
+  int zero_velocity_tick;
+  int wait_tick;
 };

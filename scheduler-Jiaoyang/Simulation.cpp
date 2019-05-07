@@ -365,6 +365,11 @@ void Simulation::tick(){
       auto e_to = target(airport.eNameToE[passed], airport.G);
       cout << airport.G[e_to].name << endl;
       assert (checkpoint_pass_order[airport.G[e_to].name].front() == a->id);
+
+
+
+      a-> time = (int) (simulation_time / tick_per_time_unit);
+
       checkpoint_pass_order[airport.G[e_to].name].pop();
 
       // TODO traffic and checkpoint_pass_order may merge
@@ -373,8 +378,13 @@ void Simulation::tick(){
       }
 
     }
+
+    
+
     auto current_edge_name = a->current_edge_name();
     if (!a->ready_for_runway && a->passed_check_point.size() > 0){
+      a->location = source(airport.eNameToE[a->current_edge_name()], airport.G);
+
       traffic[current_edge_name].push_back(a);
     }
   }
@@ -406,6 +416,7 @@ void Simulation::tick(){
   }
 
   // print stat of simulation
+
 
   for (auto a:aircraft_on_graph){
     cout << a->id << " - loc: "<< a->position_str() << endl;
