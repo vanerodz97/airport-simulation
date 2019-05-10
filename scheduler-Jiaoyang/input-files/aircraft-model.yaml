@@ -1,4 +1,6 @@
 models:
   - name: A319
-    v_max: 140
-    v_avg: 100
+    v_max: 30
+    v_avg: 27
+    a_max: 2
+    a_brake: 2

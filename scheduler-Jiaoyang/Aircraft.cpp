@@ -7,16 +7,12 @@ double Aircraft::distance_to_next_point(){
 
 double Aircraft::get_velocity(){
   // TODO Car following model joins here
-  double distance = 1000;
 
   if (command == STOP_COMMAND){
-    cout << this -> id << "stop" << endl;
-
     wait_tick += 1;
 
-
-    acceleration = - velocity;
-    return 0;
+    acceleration = - model.a_brake;
+    return velocity + acceleration;
   }
 
 
@@ -25,28 +21,7 @@ double Aircraft::get_velocity(){
     return velocity + acceleration;
   }
 
-
-  if (prev_aircraft->current_edge_name()
-      == this-> current_edge_name()){
-    distance = prev_aircraft->pos.second - pos.second;
-  }else{
-    // what if there are more edges apart..
-    distance = prev_aircraft->pos.second - pos.second +
-      edge_path[pos.first].length;
-  }
-
-
-  if (distance < 150){
-    // hard brake
-    acceleration = - velocity;
-    return 0;
-  }
-
-  if (distance > ideal_distance){
-    // Not need to care about prev aircraft
-    acceleration = model.a_max;
-    return velocity + acceleration;
-  }
+  double distance = distance_to_prev;
 
 
   if (prev_aircraft -> acceleration < 0){
@@ -60,15 +35,17 @@ double Aircraft::get_velocity(){
 
 
 
-  double h = distance + (v_other * v_other / (2 * a_brake_other)) - 100;
+  double h = distance + (v_other * v_other / (2 * a_brake_other)) - model.safety_distance;
 
-  double T = 1/tick_per_time_unit;
+  double T = 1.0/tick_per_time_unit;
 
   double a_eq = T * T;
   double b_eq = model.a_brake * T * T + 2 * velocity * T;
   double c_eq = velocity * velocity + 2 * model.a_brake * (velocity * T - h);
 
-  acceleration =  min(model.a_max, (-b_eq + sqrt(b_eq * b_eq - 4 * a_eq * c_eq))/ (2 * a_eq));
+  double acc =  (-b_eq + sqrt(b_eq * b_eq - 4 * a_eq * c_eq))/ (2 * a_eq);
+
+  acceleration =  min(model.a_max, acc);
   
   return velocity + acceleration;
 }
@@ -89,7 +66,6 @@ void Aircraft::move(){
   if (v == 0){
     zero_velocity_tick += 1;
   }
-
 
 
   velocity = v;
@@ -114,6 +90,8 @@ string Aircraft::position_str(){
   return edge_path[pos.first].name + string(" - ")
     + to_string(pos.second);
 }
+
+
 
 
 void Aircraft::init_expr_data(){
@@ -148,4 +126,35 @@ string Aircraft::current_edge_name(){
 
 void Aircraft::send_command(int given_command){
   command = given_command;
+}
+
+vector<string> Aircraft::intersection_in_sight(double sight_length){
+  /*
+    return the edge that aircraft will cross in coming dist of
+    sight_length
+   */
+  vector<string> edge_list;
+
+  if (sight_length > distance_to_next_point()){
+    sight_length -= distance_to_next_point();
+
+    int i = pos.first;
+    // we have to_node in edge_path
+    edge_list.push_back(edge_path[i].name);
+    i++;
+
+    while (sight_length > 0 && i < edge_path.size()){
+      if (sight_length > edge_path[i].length){
+        edge_list.push_back(edge_path[i].name);
+      }
+      sight_length -= edge_path[i].length;
+      i ++;
+    }
+  }
+  // cout << id << endl;
+  // for (auto e: edge_list){
+  //   cout << e << endl;
+  // }
+
+  return edge_list;
 }

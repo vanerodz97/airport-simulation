@@ -7,7 +7,7 @@
 #include <boost/property_tree/json_parser.hpp>
 
 #include "Simulation.h"
-#include "Simulation_baseline.h"
+// #include "Simulation_baseline.h"
 #include "Schedule.h"
 
 int main(int argc, char** argv)
@@ -44,7 +44,8 @@ int main(int argc, char** argv)
 	po::notify(vm);
 	srand((int)time(0));
 
-	Simulation_baseline simulation;
+	// Simulation_baseline simulation;
+	Simulation simulation;
 	if (vm.count("graph"))
 	{
 		if (!simulation.loadGraph(vm["graph"].as<std::string>()))
@@ -73,6 +74,7 @@ int main(int argc, char** argv)
 	for (int i = 0; i < simulation.departures.size(); i++)
 	{
 		simulation.departures[i].location = simulation.departures[i].start;
+		simulation.departures[i].next_location = simulation.departures[i].start;
 		simulation.departures[i].time = simulation.departures[i].appear_time;
 	}
 
@@ -107,25 +109,29 @@ int main(int argc, char** argv)
 		}
 	}
 	else {
-		simulation.schedule.run(vm["solver"].as<std::string>());
+
+
+		simulation.solver_name = vm["solver"].as<std::string>();
+    simulation.run_scheduler();
 		simulation.init_simulation_setting();
-
-
 
 		while (simulation.completed_count < simulation.departures.size()) {
 			simulation.tick();
 		}
 
     int total_wait_tick = 0;
+    int total_travel_time = 0;
     int total_zero_velocity_tick = 0;
 
 		for (auto a : simulation.departures) {
 			cout << a.id << "  runway:  " << a.actual_runway_time << "  expected: " << a.expected_runway_time << endl;
       total_wait_tick += a.wait_tick;
+      total_travel_time += a.actual_runway_time - a.actual_appear_time;
       total_zero_velocity_tick += a.zero_velocity_tick;
 		}
     cout << "avg wait tick: " << ((double)total_wait_tick) / simulation.completed_count << endl;
     cout << "avg zero velocity tick: " << ((double)total_zero_velocity_tick) / simulation.completed_count << endl;
+    cout << "avg travel time: " << ((double)total_travel_time) / simulation.completed_count << endl;
 
 	}
 

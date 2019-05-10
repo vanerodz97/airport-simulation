@@ -16,8 +16,10 @@ struct AircraftModel
 {
 	std::string name;
 	double v_max;
-	double a_brake = 20;
-	double a_max = 10;
+  double v_avg;
+	double a_brake = 100;
+	double a_max = 70;
+  double safety_distance = 500;
 
 	vector<double> v;
 	vector<double> prob;
@@ -33,10 +35,10 @@ private:
 	int command;
 
 
-
 public:
 
-	double actual_runway_time;
+  double brake_distance(){return 150;};
+
 
 	// Input
 	std::string id;
@@ -48,11 +50,13 @@ public:
 	double time;
 	vertex_t next_location;
 
+  vector<string> intersection_in_sight(double);
 
 	int tick_per_time_unit = 50;
 
 
 	Aircraft* prev_aircraft;
+  double distance_to_prev;
 
 	double appear_time;
 	AircraftModel model;
@@ -61,7 +65,7 @@ public:
 	double pushback_time;
 
 
-	double ideal_distance = 400;
+	double ideal_distance = 2000;
 	double expected_runway_time;
 	double cost;
 	// Functions
@@ -69,9 +73,6 @@ public:
 
 	// simulation
 	void simulation_init();
-
-	// should be appear_time + wait_time + delay
-	double actual_appear_time;
 
 	void send_command(int command);
 
@@ -97,4 +98,8 @@ public:
   // 
   int zero_velocity_tick;
   int wait_tick;
+
+  // should be appear_time + wait_time + delay
+	double actual_appear_time;
+	double actual_runway_time;
 };

@@ -245,7 +245,7 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 
 	// generate start and add it to the OPEN list
 	vector<double> h_table = airport->heuristics[a.goal]; //Heuristics table
-	Node* root = new Node(a.location, 0, h_table[a.location] / a.model.v_max, NULL);
+	Node* root = new Node(a.location, 0, h_table[a.location] / a.model.v_avg, NULL);
 	root->state.time.push_back(a.time);
 	root->state.prob.push_back(1);
 	num_generated++;
@@ -284,7 +284,6 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 			auto e = boost::out_edges(curr->state.loc, airport->G).first;
 			while (target(*e, airport->G) != a.next_location)
 				e++;
-			next->state.edge_from = &(*e);
 			next->move = next->parent->move;
 
 			if (!computeNextState(curr->state, next->state, airport->G[*e].length, constraints[a.next_location], a))
@@ -293,7 +292,7 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 			}
 			next->depth = curr->depth + 1;
 			next->g_val = computeGValue(next->state, next->move->state, a);
-			next->h_val = h_table[next->state.loc] / a.model.v_max;
+			next->h_val = h_table[next->state.loc] / a.model.v_avg;
 
 			it = allNodes_table.find(next);
 			if (it == allNodes_table.end())
@@ -318,7 +317,6 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 			Node* next = new Node();
 			// Node* start = new Node(a.start, 0, h_table[a.start], NULL);
 			next->parent = curr;
-			next->state.edge_from = nullptr;
 			next->state.time = shiftTimeDistribution(curr->state.time, wait_time);
 			next->state.prob = curr->state.prob;
 			next->state.loc = curr->state.loc; // remain at the same location as start
@@ -336,7 +334,6 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 			Node* next = new Node();
 			next->parent = curr;
 			next->state.loc = e.m_target;
-			next->state.edge_from = &e;
 			if (next->state.loc == a.start) {
 				next->move = next;
 			}

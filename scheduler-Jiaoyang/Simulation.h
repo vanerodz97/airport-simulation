@@ -23,8 +23,19 @@ private:
 
   unordered_map<string, deque<Aircraft*> > traffic;
 
+  vector<Aircraft*> ready_to_start;
+
 
 public:
+
+  bool strict_passing_order = false;
+
+
+  string solver_name = "FLFS";
+  void run_scheduler(){
+    schedule.run(solver_name);
+  }
+
   int completed_count;
   int tick_per_time_unit;
   // need to be encapsulated
@@ -42,13 +53,12 @@ public:
 	// Parameters
 	double wait_cost = 0.1;
 	double wait_time = 10; // the time interval on waiting location
-	double safety_time = 10;
-  double safety_distance = 50;
-  double safety_distance_check_point = 200;
+	double safety_time;
+  double safety_distance;
 	State gate_delay;
 	State runway_delay;
 
-  // Load files 
+  // Load files
 	bool loadGraph(const std::string& fileName);
 	bool loadConfig(const std::string& fileName);
 	bool loadAircraftModels(const std::string& fileName);
