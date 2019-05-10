@@ -108,10 +108,12 @@ void Aircraft::simulation_init(){
   init_expr_data();
 
   ready_for_runway = false;
+  actual_runway_time = 0;
 }
 
 void Aircraft::simulation_begin(){
   ready_for_runway = false;
+  actual_runway_time = 0;
   pos = {0, 0};
 }
 

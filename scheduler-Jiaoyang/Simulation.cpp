@@ -62,6 +62,9 @@ bool Simulation::loadAircraftModels(const std::string& fileName)
 			a.name = model["name"].as<std::string>();
 			a.v_max = model["v_max"].as<double>();
 			a.v_avg = model["v_avg"].as<double>();
+
+			a.a_max = model["a_max"].as<double>();
+			a.a_brake = model["a_brake"].as<double>();
 			for(auto v: model["velocity"])
 				a.v.push_back(v.as<double>());
 			for (auto prob : model["prob"])
@@ -151,10 +154,14 @@ void Simulation::update_aircraft_edge_path(){
 
 std::default_random_engine generator;
 
-int sample_distribution(State prob_state){
-  discrete_distribution<double> distribution(prob_state.prob.begin(), prob_state.prob.end());
+int sample_distribution(const vector<int>& time, const vector<double>& prob){
+  discrete_distribution<double> distribution(prob.begin(), prob.end());
   int number = distribution(generator);
-  return prob_state.time[number];
+  return time[number];
+}
+
+int sample_distribution(State prob_state){
+  return sample_distribution(prob_state.time, prob_state.prob);
 }
 
 void Simulation::init_simulation_setting(){
@@ -167,7 +174,7 @@ void Simulation::init_simulation_setting(){
     a.simulation_init();
 
     auto delay = sample_distribution(gate_delay);
-    cout << a.id  << " get delayed for " << delay << endl;
+    // cout << a.id  << " get delayed for " << delay << endl;
    a.actual_appear_time += delay;
 
     a.tick_per_time_unit = tick_per_time_unit;
@@ -247,7 +254,6 @@ void Simulation::update_fronter(){
       // element = (name_of_edge, deque<Aircraft*>)
       Aircraft* prev_ptr = nullptr;
       for (auto & aircraft_ptr : element.second){
-        assert(aircraft_ptr->ready_for_runway == false);
         if (prev_ptr != nullptr){
           aircraft_ptr -> prev_aircraft = prev_ptr;
           aircraft_ptr -> distance_to_prev = prev_ptr->pos.second - aircraft_ptr -> pos.second;
@@ -527,6 +533,11 @@ void Simulation::tick(){
 
   // tick aircraft
   for (auto a:aircraft_on_graph){
+
+    if (a-> ready_for_runway){
+      continue;
+    }
+
     a->move();
     for (auto passed : a->passed_check_point){
       passed_flag = true;
@@ -547,11 +558,6 @@ void Simulation::tick(){
 
     }
 
-
-    // Fogot why we have passed_flag
-    // if (passed_flag){
-    //   }
-
     auto current_edge_name = a->current_edge_name();
     if (!a->ready_for_runway && a->passed_check_point.size() > 0){
       a->location = source(airport.eNameToE[a->current_edge_name()], airport.G);
@@ -564,9 +570,21 @@ void Simulation::tick(){
   // remove aircraft near to the runways
   for (auto it = aircraft_on_graph.begin(); it != aircraft_on_graph.end(); ) {
     if ((*it)->ready_for_runway){
-      (*it) ->actual_runway_time = simulation_time/ tick_per_time_unit;
-      it = aircraft_on_graph.erase(it);
-      completed_count += 1;
+      if ((*it) -> actual_runway_time == 0){
+        int runway_delay_time = sample_distribution(runway_delay);
+        cout << "runway time of " << (*it)->id << " get delayed by " << runway_delay_time << endl;
+        (*it) ->actual_runway_time = simulation_time/ tick_per_time_unit + runway_delay_time;
+      }
+
+      if (simulation_time / tick_per_time_unit == (*it)->actual_runway_time){
+        cout <<(*it)->id << " departs " << endl;
+
+        it = aircraft_on_graph.erase(it);
+        completed_count += 1;
+      }else{
+        ++it;
+      }
+
     }
     else {
       ++it;

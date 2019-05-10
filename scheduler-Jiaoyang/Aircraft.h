@@ -77,6 +77,8 @@ public:
 	void send_command(int command);
 
 	bool ready_for_runway;
+
+
 	position pos;
 	double velocity = 0;
 	double acceleration = 0;
