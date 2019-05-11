@@ -114,6 +114,10 @@ bool Schedule::computeNextState(const State& curr, State& next, double length, c
 	{
 		addTimeDistribution(curr.time, curr.prob, gate_delay.time, gate_delay.prob, leave_time, leave_prob);
 	}
+	else if (airport->G[next.loc].type == RUNWAY) // add runway_delay
+	{
+		addTimeDistribution(leave_time, leave_prob, runway_delay.time, runway_delay.prob, leave_time, leave_prob);
+	}
 	else
 	{
 		leave_time = curr.time;
