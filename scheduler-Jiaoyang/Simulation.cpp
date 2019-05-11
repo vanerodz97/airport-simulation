@@ -155,7 +155,12 @@ void Simulation::update_aircraft_edge_path(){
 std::default_random_engine generator;
 
 int sample_distribution(const vector<int>& time, const vector<double>& prob){
-  discrete_distribution<double> distribution(prob.begin(), prob.end());
+  const double FACTOR = 10000;
+  vector<int> prob_int;
+  for (auto d: prob){
+    prob_int.push_back((int) (FACTOR * d));
+  }
+  discrete_distribution<int> distribution(prob_int.begin(), prob_int.end());
   int number = distribution(generator);
   return time[number];
 }
