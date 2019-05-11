@@ -232,13 +232,13 @@ void Simulation::update_scheduler_params(){
 
   // call after loading data and before scheduling
 
-  this->schedule.wait_cost = this -> wait_cost;
-  this->schedule.wait_time = this -> wait_time;
-  this->schedule.safety_time = this -> safety_time;
-  this->schedule.gate_delay = this -> gate_delay;
+  schedule.wait_cost = this -> wait_cost;
+  schedule.wait_time = this -> wait_time;
+  schedule.safety_time = this -> safety_time;
+  schedule.gate_delay = this -> gate_delay;
+  schedule.runway_delay = this -> runway_delay;
 
 
-  // TODO hmmm this ain't cool?
   schedule.airport = &airport;
   schedule.departures = &departures;
   schedule.arrivals = &arrivals;
