@@ -22,6 +22,7 @@ public:
 	double wait_time = 10; // the time interval on waiting location
 	double safety_time = 10;
 	State gate_delay;
+	State runway_delay;
 
 
 
