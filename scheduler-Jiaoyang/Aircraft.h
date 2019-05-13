@@ -2,9 +2,9 @@
 #include "AirportGraph.h"
 
 /*
-  aircrafts position is defined by an index on edge_path
-  and a double number represent by the distance already traversed.
-  
+aircrafts position is defined by an index on edge_path
+and a double number represent by the distance already traversed.
+
 */
 typedef pair<int, double> position;
 
@@ -16,10 +16,10 @@ struct AircraftModel
 {
 	std::string name;
 	double v_max;
-  double v_avg;
+	double v_avg;
 	double a_brake = 100;
 	double a_max = 70;
-  double safety_distance = 500;
+	double safety_distance = 500;
 
 	vector<double> v;
 	vector<double> prob;
@@ -29,7 +29,7 @@ struct AircraftModel
 struct Aircraft
 {
 private:
-  void init_expr_data();
+	void init_expr_data();
 
 	void generate_actual_appear_time();
 	int command;
@@ -37,7 +37,7 @@ private:
 
 public:
 
-  double brake_distance(){return 150;};
+	double brake_distance() { return 150; };
 
 
 	// Input
@@ -50,13 +50,13 @@ public:
 	double time;
 	vertex_t next_location;
 
-  vector<string> intersection_in_sight(double);
+	vector<string> intersection_in_sight(double);
 
 	int tick_per_time_unit = 50;
 
 
 	Aircraft* prev_aircraft;
-  double distance_to_prev;
+	double distance_to_prev;
 
 	double appear_time;
 	AircraftModel model;
@@ -66,7 +66,7 @@ public:
 
 
 	double ideal_distance = 2000;
-	double expected_runway_time;
+	double expected_runway_time = 0;
 	double cost;
 	// Functions
 	void clearPlan() { path.clear(); }
@@ -77,7 +77,7 @@ public:
 	void send_command(int command);
 
 	bool ready_for_runway;
-
+	bool planned = false; // have being planed or not
 
 	position pos;
 	double velocity = 0;
@@ -87,7 +87,7 @@ public:
 	void simulation_begin();
 	void move();
 
-  // used for debuging
+	// used for debuging
 	string position_str();
 	string current_edge_name();
 	double distance_to_next_point();
@@ -96,12 +96,12 @@ public:
 
 	vector<Edge> edge_path;
 
-  /* experiment stat */
-  // 
-  int zero_velocity_tick;
-  int wait_tick;
+	/* experiment stat */
+	// 
+	int zero_velocity_tick;
+	int wait_tick;
 
-  // should be appear_time + wait_time + delay
+	// should be appear_time + wait_time + delay
 	double actual_appear_time;
 	double actual_runway_time;
 };

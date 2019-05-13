@@ -376,14 +376,19 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 }
 
 bool compareAppearTime(const Aircraft& a, const Aircraft& b) { return (a.appear_time < b.appear_time); }
-bool Schedule::runFirstComeFirstServe()
+bool Schedule::runFirstComeFirstServe(double curr_time, double time_window)
 {
 	std::sort(departures->begin(), departures->end(), compareAppearTime);
 	vector<State> constraints(boost::num_vertices(airport->G), State(-INT_MAX, 1));
 	for (int i = 0; i < departures->size(); i++)
 	{
-		if (!AStarSearch((*departures)[i], constraints))
+		if ((*departures)[i].appear_time > curr_time + time_window)
+			break;
+		else if ((*departures)[i].ready_for_runway)
+			continue;
+		else if (!AStarSearch((*departures)[i], constraints))
 			return false;
+		(*departures)[i].planned = true;
 		// Update constarints
 		for (auto s : (*departures)[i].path)
 			constraints[s.loc] = s;
@@ -392,20 +397,29 @@ bool Schedule::runFirstComeFirstServe()
 }
 
 bool compareRunwayTime(const Aircraft& a, const Aircraft& b) { return (a.expected_runway_time < b.expected_runway_time); }
-bool Schedule::runFirstLeaveFirstServe()
+bool Schedule::runFirstLeaveFirstServe(double curr_time, double time_window)
 {
 	//std::sort(departures.begin() + 4, departures.end(), &Schedule::compareLeaveTime);
 	vector<State> constraints(boost::num_vertices(airport->G), State(-INT_MAX, 1));
 	for (int i = 0; i < departures->size(); i++)
 	{
-		if (!AStarSearch((*departures)[i], constraints))
+		if ((*departures)[i].appear_time > curr_time + time_window)
+			continue;
+		else if ((*departures)[i].ready_for_runway)
+			continue;
+		else if (!AStarSearch((*departures)[i], constraints))
 			return false;
 	}
 	std::sort(departures->begin(), departures->end(), compareRunwayTime);
 	for (int i = 0; i < departures->size(); i++)
 	{
-		if (!AStarSearch((*departures)[i], constraints))
+		if ((*departures)[i].appear_time > curr_time + time_window)
+			continue;
+		else if ((*departures)[i].ready_for_runway)
+			continue;
+		else if (!AStarSearch((*departures)[i], constraints))
 			return false;
+		(*departures)[i].planned = true;
 		// Update constarints
 		for (auto s : (*departures)[i].path)
 			constraints[s.loc] = s;
@@ -413,30 +427,35 @@ bool Schedule::runFirstLeaveFirstServe()
 	return true;
 }
 
-bool Schedule::runBase()
+bool Schedule::runBase(double curr_time, double time_window)
 {
 	for (int i = 0; i < departures->size(); i++)
 	{
+		if ((*departures)[i].appear_time > curr_time + time_window)
+			continue;
+		else if ((*departures)[i].ready_for_runway)
+			continue;
 		vector<State> constraints(boost::num_vertices(airport->G), State(-INT_MAX, 1));
 		if (!AStarSearch((*departures)[i], constraints))
 			return false;
+		(*departures)[i].planned = true;
 	}
 	return true;
 }
 
-bool Schedule::run(const std::string& solver)
+bool Schedule::run(const std::string& solver, double curr_time, double time_window)
 {
 	if (solver == "FCFS")
 	{
-		return runFirstComeFirstServe();
+		return runFirstComeFirstServe(curr_time, time_window);
 	}
 	else if (solver == "FLFS")
 	{
-		return runFirstLeaveFirstServe();
+		return runFirstLeaveFirstServe(curr_time, time_window);
 	}
 	else if (solver == "BASE")
 	{
-		return runBase();
+		return runBase(curr_time, time_window);
 	}
 	else
 	{
