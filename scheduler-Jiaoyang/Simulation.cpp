@@ -2,6 +2,24 @@
 #include "yaml-cpp/yaml.h"
 #include <random>
 
+std::default_random_engine generator;
+
+int sample_distribution(const vector<int>& time, const vector<double>& prob){
+  const double FACTOR = 10000;
+  vector<int> prob_int;
+  for (auto d: prob){
+    prob_int.push_back((int) (FACTOR * d));
+  }
+  discrete_distribution<int> distribution(prob_int.begin(), prob_int.end());
+  int number = distribution(generator);
+  return time[number];
+}
+
+int sample_distribution(State prob_state){
+  return sample_distribution(prob_state.time, prob_state.prob);
+}
+
+
 bool Simulation::loadGraph(const std::string& fileName)
 {
 	return airport.loadGraph(fileName);
@@ -25,6 +43,7 @@ bool Simulation::loadConfig(const std::string& fileName)
 
       safety_distance = config["safety_distance"].as<double>();
       safety_time = config["safety_time"].as<double>();
+      schedule_time_window = config["schedule_time_window"].as<int>();
 
       strict_passing_order = (bool) (config["strict_passing_order"].as<int>());
 
@@ -129,7 +148,27 @@ bool Simulation::loadInstance(const std::string& fileName)
 
 
 void Simulation::update_aircraft_edge_path(){
+  appear_schedule.clear();
   for (auto &a:departures){
+    if (a.ready_for_runway || ! a.planned){
+      continue;
+    }
+
+    if (! a.begin_moving){
+      auto delay = sample_distribution(gate_delay);
+      a.actual_appear_time = a.path[0].time[0] + delay;
+      appear_schedule[a.actual_appear_time].push_back(&a);
+    }
+
+    string old_edge_name;
+    if (a.begin_moving){
+      // ensure consistency for aircraft that already begin moving
+      old_edge_name = a.current_edge_name();
+      a.pos.first = 0;
+    }
+
+    a.edge_path.clear();
+    // edge path
     for(int i = 0; i < a.path.size() - 1; i ++){
       if (a.path[i].loc == a.path[i + 1].loc){
         continue;
@@ -148,49 +187,40 @@ void Simulation::update_aircraft_edge_path(){
       };
     }
 
+    if (a.begin_moving){
+      // should still stay at same edge
+      assert(a.current_edge_name() == old_edge_name);
+    }
   }
 
+  update_schedule();
+
+
 }
 
-std::default_random_engine generator;
-
-int sample_distribution(const vector<int>& time, const vector<double>& prob){
-  const double FACTOR = 10000;
-  vector<int> prob_int;
-  for (auto d: prob){
-    prob_int.push_back((int) (FACTOR * d));
-  }
-  discrete_distribution<int> distribution(prob_int.begin(), prob_int.end());
-  int number = distribution(generator);
-  return time[number];
-}
-
-int sample_distribution(State prob_state){
-  return sample_distribution(prob_state.time, prob_state.prob);
-}
 
 void Simulation::init_simulation_setting(){
-  update_aircraft_edge_path();
   appear_schedule.clear();
   aircraft_on_graph.clear();
   completed_count = 0;
 
+
   for (auto &a:departures){
     a.simulation_init();
 
-    auto delay = sample_distribution(gate_delay);
+    // auto delay = sample_distribution(gate_delay);
     // cout << a.id  << " get delayed for " << delay << endl;
-   a.actual_appear_time += delay;
+    // a.actual_appear_time += delay;
 
     a.tick_per_time_unit = tick_per_time_unit;
   }
   simulation_time = 0;
-  for (auto& a:departures){
-    appear_schedule[a.actual_appear_time].push_back(&a);
-  }
+  // for (auto& a:departures){
+    // appear_schedule[a.actual_appear_time].push_back(&a);
+  // }
 
-
-  update_schedule();
+  // update_aircraft_edge_path();
+  // update_schedule();
 }
 
 void Simulation::generateInstance(const std::string& fileName, int num_of_agents, int interval_min, int interval_max)
@@ -237,7 +267,6 @@ void Simulation::update_scheduler_params(){
   schedule.safety_time = this -> safety_time;
   schedule.gate_delay = this -> gate_delay;
   schedule.runway_delay = this -> runway_delay;
-
 
   schedule.airport = &airport;
   schedule.departures = &departures;
@@ -375,10 +404,20 @@ void Simulation::update_schedule(){
   /*
     Generate passing order of aircraft in each node.
    */
-  checkpoint_pass_order.clear();
   if (strict_passing_order){
+    checkpoint_pass_order.clear();
     for (auto& a: departures){
-      for (const auto &state: a.path){
+      if (a.ready_for_runway || ! a.planned){
+        continue;
+      }
+
+      // for (const auto &state: a.path){
+      for (int i = 0; i < a.path.size(); i++){
+        if (a.ready_to_start && i == 0){
+          continue;
+        }
+
+        auto state = a.path[i];
 
         auto vertex_name = airport.G[state.loc].name;
 
@@ -389,11 +428,50 @@ void Simulation::update_schedule(){
         checkpoint_pass_order[vertex_name].push(a.id);
       }
     }
+  }else{
+    for (auto& a: departures){
+      if (a.ready_for_runway || ! a.planned){
+        continue;
+      }
+      if (a.mutex_held.size() == 0){
+        continue;
+      }
+      deque<string> mutex_kept;
+      for (int i = a.pos.first; i < a.edge_path.size(); i++){
+        auto e_str = a.edge_path[i].name;
+        auto v_str = airport.G[target(airport.eNameToE[e_str], airport.G)].name;
+        if (a.mutex_held.front() != v_str){
+          while (!a.mutex_held.empty()){
+            auto v_str_to_del = a.mutex_held.front();
+            a.mutex_held.pop_front();
+            assert(checkpoint_pass_order[v_str_to_del].front() == a.id);
+            checkpoint_pass_order[v_str_to_del].pop();
+          }
+          break;
+        }
+        a.mutex_held.pop_front();
+        mutex_kept.push_back(v_str);
+
+      }
+      cout << a.id << " keep mutexes of size " << mutex_kept.size() << " after replanning." <<endl; 
+
+      a.mutex_held = mutex_kept;
+
+    }
+
   }
 }
 
 void Simulation::tick(){
   // reschedule
+
+  if (simulation_time % tick_per_time_unit == 0 &&
+      ((simulation_time / tick_per_time_unit) % schedule_time_window) == 0){
+    cout << "run scheduler" << endl;
+    run_scheduler();
+    update_aircraft_edge_path();
+  }
+
 
   // add aircrafts
   // TODO before adding aircrafts, check will it cause conflict
@@ -401,6 +479,7 @@ void Simulation::tick(){
     if (appear_schedule[simulation_time/tick_per_time_unit].size() > 0){
       for (auto a_ptr:appear_schedule[simulation_time/tick_per_time_unit]){
         (*a_ptr).simulation_begin();
+        a_ptr -> ready_to_start = true;
         ready_to_start.push_back(a_ptr);
         //aircraft_on_graph.insert(a_ptr);
         //traffic[a_ptr -> current_edge_name()].push_back(a_ptr);
@@ -437,6 +516,7 @@ void Simulation::tick(){
     if (! aircraft_in_front_flag && checkpoint_pass_order[name].front() == a_ptr->id){
 
       checkpoint_pass_order[name].pop();
+      a_ptr->begin_moving = true;
       aircraft_on_graph.insert(a_ptr);
       traffic[a_ptr -> current_edge_name()].push_back(a_ptr);
     }else{
@@ -456,43 +536,40 @@ void Simulation::tick(){
 
     vector<string> intersection_to_grab;
 
-    for (auto e_str: a->intersection_in_sight(safety_distance + 100)){
-
-      if (a->id == "departure_17"){
-        cout << "boom" << endl;
-      }
+    for (auto e_str: a->intersection_in_sight(safety_distance + 200)){
 
       auto v_to = target(airport.eNameToE[e_str], airport.G);
 
-      auto name = airport.G[v_to].name;
+      auto v_name = airport.G[v_to].name;
 
-      if (!strict_passing_order && ! deceleration_flag && checkpoint_pass_order[name].size() == 0){
+      if (!strict_passing_order && checkpoint_pass_order[v_name].size() == 0){
 
         // TODO additional grabbing condition, that path must be empty
 
         if (e_str == a-> current_edge_name() && traffic[e_str].front()->id != a->id){
 
-          cross = name;
+          cross = v_name;
           deceleration_flag = true;
           break;
         }
 
         if (e_str != a-> current_edge_name() && traffic[e_str].size()> 0){
-          cross = name;
+          cross = v_name;
           deceleration_flag = true;
           break;
         }
 
 
-        cout << a->id << " grab " << name << endl;
+        cout << a->id << " grab " << v_name << endl;
 
-        intersection_to_grab.push_back(name);
-        //checkpoint_pass_order[name].push(a->id);
+        // intersection_to_grab.push_back(name);
+        checkpoint_pass_order[v_name].push(a->id);
+        a->mutex_held.push_back(v_name);
       }
 
 
 
-      if (checkpoint_pass_order[airport.G[v_to].name].size() != 0 && checkpoint_pass_order[airport.G[v_to].name].front() != a->id ){
+      if (checkpoint_pass_order[v_name].front() != a->id ){
         cross = airport.G[v_to].name;
         deceleration_flag = true;
         break;
@@ -507,11 +584,11 @@ void Simulation::tick(){
       a->send_command(STOP_COMMAND);
     }else{
 
-      if (! strict_passing_order){
-        for (auto v_name: intersection_to_grab){
-          checkpoint_pass_order[v_name].push(a->id);
-        }
-      }
+      // if (! strict_passing_order){
+      //   for (auto v_name: intersection_to_grab){
+      //     checkpoint_pass_order[v_name].push(a->id);
+      //   }
+      // }
 
       a->send_command(GO_COMMAND);
     }
@@ -554,11 +631,19 @@ void Simulation::tick(){
 
       a-> time = (int) (simulation_time / tick_per_time_unit);
 
-      checkpoint_pass_order[airport.G[e_to].name].pop();
+      if (airport.G[e_to].type != RUNWAY){
+        checkpoint_pass_order[airport.G[e_to].name].pop();
 
-      // TODO traffic and checkpoint_pass_order may merge
-      if (traffic[passed].size() > 0 && traffic[passed].front()->id == a->id){
-        traffic[passed].pop_front();
+        if (! strict_passing_order){
+          assert(a->mutex_held.front() == airport.G[e_to].name);
+          a->mutex_held.pop_front();
+        }
+        // TODO traffic and checkpoint_pass_order may merge
+        if (traffic[passed].size() > 0 && traffic[passed].front()->id == a->id){
+          traffic[passed].pop_front();
+        }
+      }else{
+        cout << "reach runway " << airport.G[e_to].name << endl;
       }
 
     }
@@ -582,6 +667,15 @@ void Simulation::tick(){
       }
 
       if (simulation_time / tick_per_time_unit == (*it)->actual_runway_time){
+        auto runway_node = target(airport.eNameToE[(*it)->current_edge_name()], airport.G);
+        assert (airport.G[runway_node].type == RUNWAY);
+        auto v_name = airport.G[runway_node].name;
+        assert(traffic[(*it)->current_edge_name()].front()->id == (*it) -> id);
+        traffic[(*it)->current_edge_name()].pop_front();
+
+        assert(checkpoint_pass_order[v_name].front() == (*it) -> id);
+        checkpoint_pass_order[v_name].pop();
+
         cout <<(*it)->id << " departs " << endl;
 
         it = aircraft_on_graph.erase(it);
@@ -607,7 +701,7 @@ void Simulation::tick(){
         continue;
       }
       if (a_ptr -> distance_to_prev < safety_distance){
-        handle_conflict();
+        handle_conflict(a_ptr);
       }
     }
   }
@@ -628,7 +722,7 @@ void Simulation::tick(){
   simulation_time ++;
 }
 
-void Simulation::handle_conflict(){
-  cout << "conflict" << endl;
+void Simulation::handle_conflict(Aircraft* a_ptr){
+  cout << "conflict between " << a_ptr->id << " and " << a_ptr->prev_aircraft->id << " by " << a_ptr->distance_to_prev << endl;
 }
 

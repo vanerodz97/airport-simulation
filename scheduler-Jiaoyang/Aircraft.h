@@ -76,8 +76,11 @@ public:
 
 	void send_command(int command);
 
-	bool ready_for_runway;
-	bool planned = false; // have being planed or not
+  // TODO init
+  bool ready_to_start = false;
+  bool begin_moving = false;
+	bool ready_for_runway = false;
+	bool planned = false; // have being planned or not
 
 	position pos;
 	double velocity = 0;
@@ -93,6 +96,8 @@ public:
 	double distance_to_next_point();
 
 	vector<string> passed_check_point;
+  deque<string> mutex_held;
+
 
 	vector<Edge> edge_path;
 

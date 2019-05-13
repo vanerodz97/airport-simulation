@@ -85,7 +85,8 @@ int main(int argc, char** argv)
 		for (int i = 0; i < 3; i++)
 		{
 			time_t t = std::clock();
-			simulation.schedule.run(solvers[i]);
+      cout << "ALL mode currently not available" << endl;
+			// simulation.schedule.run(solvers[i]);
 			double runtime = std::clock() - t;
 			double wait_time = 0, travel_time = 0, cost = 0, makespan = 0;
 			for (auto a : simulation.departures)
@@ -112,7 +113,7 @@ int main(int argc, char** argv)
 
 
 		simulation.solver_name = vm["solver"].as<std::string>();
-    simulation.run_scheduler();
+    // simulation.run_scheduler();
 		simulation.init_simulation_setting();
 
 		while (simulation.completed_count < simulation.departures.size()) {

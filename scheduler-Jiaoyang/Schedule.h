@@ -36,10 +36,10 @@ public:
 	bool compareLeaveTime(const Aircraft& a, const Aircraft& b) { return (a.appear_time + airport->heuristics[a.goal][a.start] < b.appear_time + airport->heuristics[b.goal][b.start]); }
 
 	// Solver
-	bool runBase();
-	bool runFirstComeFirstServe();
-	bool runFirstLeaveFirstServe();
-	bool run(const std::string& solver);
+	bool runBase(double, double);
+	bool runFirstComeFirstServe(double, double);
+	bool runFirstLeaveFirstServe(double, double);
+	bool run(const std::string& solver, double, double);
 	void clearPlans();
 	Schedule();
 	~Schedule();

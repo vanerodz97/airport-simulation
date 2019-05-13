@@ -5,7 +5,6 @@ class Simulation
 {
 
 private:
-  int simulation_time;
   unordered_map<int, vector<Aircraft*>> appear_schedule;
   unordered_set<Aircraft*> aircraft_on_graph;
 
@@ -17,7 +16,7 @@ private:
 
   unordered_map<string, queue<string>> checkpoint_pass_order;
   void update_schedule();
-  void handle_conflict();
+  void handle_conflict(Aircraft*);
 
   void update_aircraft_edge_path();
 
@@ -28,12 +27,16 @@ private:
 
 public:
 
+  int simulation_time;
+  int schedule_time_window;
+
   bool strict_passing_order = false;
+
 
 
   string solver_name = "FLFS";
   void run_scheduler(){
-    schedule.run(solver_name);
+    schedule.run(solver_name, simulation_time / tick_per_time_unit, schedule_time_window);
   }
 
   int completed_count;

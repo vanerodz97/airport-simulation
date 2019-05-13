@@ -100,7 +100,7 @@ void Aircraft::init_expr_data(){
 }
 
 void Aircraft::simulation_init(){
-  generate_actual_appear_time();
+  // generate_actual_appear_time();
 
   /*
     init exp data
@@ -118,7 +118,7 @@ void Aircraft::simulation_begin(){
 }
 
 void Aircraft::generate_actual_appear_time(){
-  actual_appear_time = path[0].time[0]; // TODO add disturb
+  actual_appear_time = path[0].time[0]; 
 }
 
 string Aircraft::current_edge_name(){
