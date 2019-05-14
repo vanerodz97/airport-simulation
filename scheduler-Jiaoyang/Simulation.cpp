@@ -154,7 +154,7 @@ void Simulation::update_aircraft_edge_path(){
       continue;
     }
 
-    if (! a.begin_moving){
+    if (! a.ready_to_start){
       auto delay = sample_distribution(gate_delay);
       a.actual_appear_time = a.path[0].time[0] + delay;
       appear_schedule[a.actual_appear_time].push_back(&a);
@@ -269,7 +269,13 @@ void Simulation::update_scheduler_params(){
   schedule.runway_delay = this -> runway_delay;
 
   schedule.airport = &airport;
-  schedule.departures = &departures;
+
+  vector<Aircraft*> departure_ptrs;
+  for (auto & a: departures){
+    departure_ptrs.push_back(&a);
+  }
+
+  schedule.departures = departure_ptrs;
   schedule.arrivals = &arrivals;
   schedule.modelNameToModel = &modelNameToModel;
   schedule.aircraftModels = &aircraftModels;
@@ -345,59 +351,8 @@ void Simulation::update_fronter(){
 
       }
 
-      // auto e_to = target(airport.eNameToE[element.first], airport.G);
-
-
-      // pair of node, distance
-      // distance smaller than the lookup distance
-
-      // Old method for looking up prev_aircraft
-      // boost::graph_traits<searchGraph_t>::out_edge_iterator ei, ei_end;
-      // boost::tie(ei, ei_end) = out_edges(e_to, airport.G);
-      // for( ; ei != ei_end; ++ei) {
-      //   string edge_name = airport.G[*ei].name;
-
-      //   if (traffic[edge_name].size() == 0){
-      //     continue;
-      //   }
-
-      //   if (prev_ptr == nullptr){
-      //     prev_ptr = traffic[edge_name].back();
-      //     dist = prev_ptr->pos.second;
-      //   }else{
-      //     auto prev_ptr_candidate = traffic[edge_name].back();
-      //     if (prev_ptr_candidate->pos.second < dist){
-      //       prev_ptr = prev_ptr_candidate;
-      //       dist = prev_ptr->pos.second;
-      //     }
-      //   }
-      // }
-      // element.second.front()->prev_aircraft = prev_ptr;
-
-
       }
 
-  // n^2 iter
-  // for (auto ptr_0 : aircraft_on_graph){
-  //   ptr_0 -> prev_aircraft = nullptr;
-  //   for (auto ptr_1 : aircraft_on_graph){
-  //     if (ptr_0 -> id == ptr_1->id){
-  //       continue;
-  //     }
-  //     if (ptr_0 -> current_edge_name() != ptr_1 -> current_edge_name()){
-  //       continue;
-  //     }
-  //     if (ptr_0->pos.second > ptr_1->pos.second){
-  //       continue;
-  //     }
-  //     if (ptr_0->prev_aircraft != nullptr && ptr_0->prev_aircraft->pos.second < ptr_1->pos.second ){
-  //       continue;
-  //     }
-
-  //     ptr_0->prev_aircraft = ptr_1;
-
-  //   }
-  // }
 }
 
 void Simulation::update_schedule(){
@@ -479,6 +434,8 @@ void Simulation::tick(){
     if (appear_schedule[simulation_time/tick_per_time_unit].size() > 0){
       for (auto a_ptr:appear_schedule[simulation_time/tick_per_time_unit]){
         (*a_ptr).simulation_begin();
+        a_ptr->next_location = a_ptr->path[1].loc;
+        a_ptr->time = simulation_time/tick_per_time_unit;
         a_ptr -> ready_to_start = true;
         ready_to_start.push_back(a_ptr);
         //aircraft_on_graph.insert(a_ptr);
@@ -502,8 +459,6 @@ void Simulation::tick(){
       aircraft_in_front_flag = true;
     }
 
-
-
     string name = airport.G[a_ptr->path[0].loc].name;
 
     if (! strict_passing_order){
@@ -516,9 +471,14 @@ void Simulation::tick(){
     if (! aircraft_in_front_flag && checkpoint_pass_order[name].front() == a_ptr->id){
 
       checkpoint_pass_order[name].pop();
-      a_ptr->begin_moving = true;
-      aircraft_on_graph.insert(a_ptr);
-      traffic[a_ptr -> current_edge_name()].push_back(a_ptr);
+      // assert (!a_ptr->begin_moving);
+      if (a_ptr->begin_moving){
+        cout << "WARNING: aircraft reinserted into graph" << endl;
+      }else{
+        a_ptr->begin_moving = true;
+        aircraft_on_graph.insert(a_ptr);
+        traffic[a_ptr -> current_edge_name()].push_back(a_ptr);
+      }
     }else{
       new_ready_to_start.push_back(a_ptr);
     }
@@ -670,6 +630,7 @@ void Simulation::tick(){
         auto runway_node = target(airport.eNameToE[(*it)->current_edge_name()], airport.G);
         assert (airport.G[runway_node].type == RUNWAY);
         auto v_name = airport.G[runway_node].name;
+
         assert(traffic[(*it)->current_edge_name()].front()->id == (*it) -> id);
         traffic[(*it)->current_edge_name()].pop_front();
 

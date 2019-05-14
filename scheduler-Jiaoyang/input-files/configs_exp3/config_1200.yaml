@@ -9,4 +9,4 @@ config:
     safety_distance: 500
     tick_per_time_unit: 1
     strict_passing_order: 0
-    schedule_time_window: 1500
+    schedule_time_window: 1200

@@ -1,0 +1,1201 @@
+departures:
+    - gate: 76
+      runway: n-id-35
+      appear_time: 0
+      model: A319
+    - gate: 61
+      runway: n-id-0
+      appear_time: 0
+      model: A319
+    - gate: A5
+      runway: n-id-35
+      appear_time: 2
+      model: A319
+    - gate: A6
+      runway: n-id-35
+      appear_time: 10
+      model: A319
+    - gate: 89
+      runway: n-id-35
+      appear_time: 10
+      model: A319
+    - gate: G102
+      runway: n-id-0
+      appear_time: 12
+      model: A319
+    - gate: 57
+      runway: n-id-35
+      appear_time: 19
+      model: A319
+    - gate: 83
+      runway: n-id-35
+      appear_time: 24
+      model: A319
+    - gate: 66
+      runway: n-id-35
+      appear_time: 25
+      model: A319
+    - gate: 83
+      runway: n-id-0
+      appear_time: 27
+      model: A319
+    - gate: G102
+      runway: n-id-35
+      appear_time: 32
+      model: A319
+    - gate: 82
+      runway: n-id-35
+      appear_time: 34
+      model: A319
+    - gate: 85
+      runway: n-id-0
+      appear_time: 36
+      model: A319
+    - gate: A6
+      runway: n-id-0
+      appear_time: 37
+      model: A319
+    - gate: G102
+      runway: n-id-35
+      appear_time: 40
+      model: A319
+    - gate: 51B
+      runway: n-id-35
+      appear_time: 40
+      model: A319
+    - gate: G93
+      runway: n-id-0
+      appear_time: 49
+      model: A319
+    - gate: 74
+      runway: n-id-35
+      appear_time: 54
+      model: A319
+    - gate: A3
+      runway: n-id-0
+      appear_time: 60
+      model: A319
+    - gate: G95
+      runway: n-id-0
+      appear_time: 64
+      model: A319
+    - gate: 90
+      runway: n-id-0
+      appear_time: 65
+      model: A319
+    - gate: G99
+      runway: n-id-0
+      appear_time: 68
+      model: A319
+    - gate: 79
+      runway: n-id-35
+      appear_time: 77
+      model: A319
+    - gate: G98
+      runway: n-id-0
+      appear_time: 85
+      model: A319
+    - gate: 65
+      runway: n-id-0
+      appear_time: 85
+      model: A319
+    - gate: 42
+      runway: n-id-35
+      appear_time: 89
+      model: A319
+    - gate: 83
+      runway: n-id-35
+      appear_time: 89
+      model: A319
+    - gate: G91
+      runway: n-id-35
+      appear_time: 98
+      model: A319
+    - gate: 40
+      runway: n-id-35
+      appear_time: 98
+      model: A319
+    - gate: G98
+      runway: n-id-35
+      appear_time: 107
+      model: A319
+    - gate: G102
+      runway: n-id-0
+      appear_time: 114
+      model: A319
+    - gate: G94
+      runway: n-id-35
+      appear_time: 118
+      model: A319
+    - gate: A11
+      runway: n-id-35
+      appear_time: 124
+      model: A319
+    - gate: 87A
+      runway: n-id-0
+      appear_time: 131
+      model: A319
+    - gate: 69
+      runway: n-id-0
+      appear_time: 138
+      model: A319
+    - gate: 78
+      runway: n-id-0
+      appear_time: 145
+      model: A319
+    - gate: 52
+      runway: n-id-0
+      appear_time: 146
+      model: A319
+    - gate: 76
+      runway: n-id-0
+      appear_time: 155
+      model: A319
+    - gate: 23
+      runway: n-id-0
+      appear_time: 164
+      model: A319
+    - gate: 68
+      runway: n-id-35
+      appear_time: 166
+      model: A319
+    - gate: G99A
+      runway: n-id-35
+      appear_time: 171
+      model: A319
+    - gate: 73A
+      runway: n-id-0
+      appear_time: 174
+      model: A319
+    - gate: 54B
+      runway: n-id-35
+      appear_time: 182
+      model: A319
+    - gate: 65
+      runway: n-id-0
+      appear_time: 183
+      model: A319
+    - gate: 56A
+      runway: n-id-0
+      appear_time: 185
+      model: A319
+    - gate: 53
+      runway: n-id-35
+      appear_time: 186
+      model: A319
+    - gate: A11
+      runway: n-id-35
+      appear_time: 190
+      model: A319
+    - gate: 77
+      runway: n-id-0
+      appear_time: 199
+      model: A319
+    - gate: G92A
+      runway: n-id-35
+      appear_time: 204
+      model: A319
+    - gate: 63
+      runway: n-id-35
+      appear_time: 208
+      model: A319
+    - gate: A2
+      runway: n-id-0
+      appear_time: 211
+      model: A319
+    - gate: 76
+      runway: n-id-35
+      appear_time: 214
+      model: A319
+    - gate: 45
+      runway: n-id-35
+      appear_time: 215
+      model: A319
+    - gate: 54B
+      runway: n-id-35
+      appear_time: 222
+      model: A319
+    - gate: 82
+      runway: n-id-35
+      appear_time: 224
+      model: A319
+    - gate: 57
+      runway: n-id-0
+      appear_time: 230
+      model: A319
+    - gate: G97
+      runway: n-id-0
+      appear_time: 230
+      model: A319
+    - gate: 66A
+      runway: n-id-35
+      appear_time: 239
+      model: A319
+    - gate: 43
+      runway: n-id-0
+      appear_time: 241
+      model: A319
+    - gate: G92
+      runway: n-id-0
+      appear_time: 249
+      model: A319
+    - gate: 68
+      runway: n-id-0
+      appear_time: 255
+      model: A319
+    - gate: 45
+      runway: n-id-35
+      appear_time: 262
+      model: A319
+    - gate: 32
+      runway: n-id-0
+      appear_time: 265
+      model: A319
+    - gate: 86
+      runway: n-id-35
+      appear_time: 265
+      model: A319
+    - gate: A11
+      runway: n-id-0
+      appear_time: 266
+      model: A319
+    - gate: 70
+      runway: n-id-35
+      appear_time: 267
+      model: A319
+    - gate: G93
+      runway: n-id-0
+      appear_time: 275
+      model: A319
+    - gate: 46
+      runway: n-id-35
+      appear_time: 281
+      model: A319
+    - gate: 65
+      runway: n-id-0
+      appear_time: 283
+      model: A319
+    - gate: G98
+      runway: n-id-35
+      appear_time: 286
+      model: A319
+    - gate: G102
+      runway: n-id-35
+      appear_time: 287
+      model: A319
+    - gate: 69
+      runway: n-id-0
+      appear_time: 289
+      model: A319
+    - gate: G102
+      runway: n-id-35
+      appear_time: 293
+      model: A319
+    - gate: 50
+      runway: n-id-35
+      appear_time: 296
+      model: A319
+    - gate: 71
+      runway: n-id-35
+      appear_time: 300
+      model: A319
+    - gate: A12
+      runway: n-id-35
+      appear_time: 302
+      model: A319
+    - gate: 54B
+      runway: n-id-0
+      appear_time: 310
+      model: A319
+    - gate: 54B
+      runway: n-id-35
+      appear_time: 318
+      model: A319
+    - gate: G94
+      runway: n-id-0
+      appear_time: 325
+      model: A319
+    - gate: 46
+      runway: n-id-35
+      appear_time: 328
+      model: A319
+    - gate: 68
+      runway: n-id-35
+      appear_time: 334
+      model: A319
+    - gate: G93
+      runway: n-id-35
+      appear_time: 342
+      model: A319
+    - gate: G92
+      runway: n-id-35
+      appear_time: 344
+      model: A319
+    - gate: 55
+      runway: n-id-35
+      appear_time: 353
+      model: A319
+    - gate: 83
+      runway: n-id-0
+      appear_time: 353
+      model: A319
+    - gate: 90
+      runway: n-id-35
+      appear_time: 357
+      model: A319
+    - gate: 23
+      runway: n-id-0
+      appear_time: 363
+      model: A319
+    - gate: G99
+      runway: n-id-35
+      appear_time: 370
+      model: A319
+    - gate: A4
+      runway: n-id-0
+      appear_time: 371
+      model: A319
+    - gate: 58A
+      runway: n-id-35
+      appear_time: 376
+      model: A319
+    - gate: G102
+      runway: n-id-0
+      appear_time: 377
+      model: A319
+    - gate: 77
+      runway: n-id-0
+      appear_time: 380
+      model: A319
+    - gate: G94
+      runway: n-id-0
+      appear_time: 388
+      model: A319
+    - gate: 66
+      runway: n-id-35
+      appear_time: 396
+      model: A319
+    - gate: A2
+      runway: n-id-35
+      appear_time: 396
+      model: A319
+    - gate: A11
+      runway: n-id-35
+      appear_time: 401
+      model: A319
+    - gate: 52
+      runway: n-id-0
+      appear_time: 401
+      model: A319
+    - gate: 80
+      runway: n-id-35
+      appear_time: 409
+      model: A319
+    - gate: 69
+      runway: n-id-35
+      appear_time: 418
+      model: A319
+    - gate: 24
+      runway: n-id-0
+      appear_time: 419
+      model: A319
+    - gate: G97
+      runway: n-id-0
+      appear_time: 423
+      model: A319
+    - gate: 23
+      runway: n-id-0
+      appear_time: 423
+      model: A319
+    - gate: 61
+      runway: n-id-0
+      appear_time: 425
+      model: A319
+    - gate: 59
+      runway: n-id-35
+      appear_time: 428
+      model: A319
+    - gate: 86
+      runway: n-id-35
+      appear_time: 435
+      model: A319
+    - gate: A11
+      runway: n-id-0
+      appear_time: 438
+      model: A319
+    - gate: G99A
+      runway: n-id-35
+      appear_time: 443
+      model: A319
+    - gate: 72
+      runway: n-id-35
+      appear_time: 447
+      model: A319
+    - gate: G94
+      runway: n-id-35
+      appear_time: 454
+      model: A319
+    - gate: 32
+      runway: n-id-0
+      appear_time: 461
+      model: A319
+    - gate: 71
+      runway: n-id-0
+      appear_time: 464
+      model: A319
+    - gate: 32
+      runway: n-id-35
+      appear_time: 469
+      model: A319
+    - gate: 76
+      runway: n-id-0
+      appear_time: 470
+      model: A319
+    - gate: 88
+      runway: n-id-0
+      appear_time: 474
+      model: A319
+    - gate: 36
+      runway: n-id-35
+      appear_time: 475
+      model: A319
+    - gate: G91
+      runway: n-id-35
+      appear_time: 484
+      model: A319
+    - gate: 76
+      runway: n-id-35
+      appear_time: 492
+      model: A319
+    - gate: 76
+      runway: n-id-35
+      appear_time: 495
+      model: A319
+    - gate: 58B
+      runway: n-id-35
+      appear_time: 495
+      model: A319
+    - gate: 85
+      runway: n-id-0
+      appear_time: 499
+      model: A319
+    - gate: A8
+      runway: n-id-0
+      appear_time: 500
+      model: A319
+    - gate: 73A
+      runway: n-id-0
+      appear_time: 502
+      model: A319
+    - gate: 66
+      runway: n-id-0
+      appear_time: 506
+      model: A319
+    - gate: 77
+      runway: n-id-35
+      appear_time: 514
+      model: A319
+    - gate: G97
+      runway: n-id-35
+      appear_time: 515
+      model: A319
+    - gate: G92A
+      runway: n-id-0
+      appear_time: 518
+      model: A319
+    - gate: 67
+      runway: n-id-35
+      appear_time: 519
+      model: A319
+    - gate: G97
+      runway: n-id-35
+      appear_time: 522
+      model: A319
+    - gate: 32
+      runway: n-id-35
+      appear_time: 531
+      model: A319
+    - gate: A7
+      runway: n-id-35
+      appear_time: 536
+      model: A319
+    - gate: G96
+      runway: n-id-35
+      appear_time: 543
+      model: A319
+    - gate: 67
+      runway: n-id-35
+      appear_time: 551
+      model: A319
+    - gate: 64A
+      runway: n-id-0
+      appear_time: 554
+      model: A319
+    - gate: 77
+      runway: n-id-35
+      appear_time: 556
+      model: A319
+    - gate: 65A
+      runway: n-id-35
+      appear_time: 565
+      model: A319
+    - gate: 60
+      runway: n-id-0
+      appear_time: 568
+      model: A319
+    - gate: 88
+      runway: n-id-0
+      appear_time: 572
+      model: A319
+    - gate: G99
+      runway: n-id-0
+      appear_time: 574
+      model: A319
+    - gate: 51B
+      runway: n-id-0
+      appear_time: 574
+      model: A319
+    - gate: G92A
+      runway: n-id-0
+      appear_time: 580
+      model: A319
+    - gate: 74
+      runway: n-id-35
+      appear_time: 587
+      model: A319
+    - gate: 56B
+      runway: n-id-35
+      appear_time: 592
+      model: A319
+    - gate: 23
+      runway: n-id-35
+      appear_time: 597
+      model: A319
+    - gate: 62A
+      runway: n-id-35
+      appear_time: 602
+      model: A319
+    - gate: 84
+      runway: n-id-0
+      appear_time: 609
+      model: A319
+    - gate: 84
+      runway: n-id-35
+      appear_time: 611
+      model: A319
+    - gate: 60
+      runway: n-id-0
+      appear_time: 613
+      model: A319
+    - gate: 32A
+      runway: n-id-35
+      appear_time: 614
+      model: A319
+    - gate: 71
+      runway: n-id-0
+      appear_time: 621
+      model: A319
+    - gate: 90
+      runway: n-id-35
+      appear_time: 623
+      model: A319
+    - gate: 73A
+      runway: n-id-0
+      appear_time: 624
+      model: A319
+    - gate: 42
+      runway: n-id-35
+      appear_time: 627
+      model: A319
+    - gate: G93
+      runway: n-id-35
+      appear_time: 630
+      model: A319
+    - gate: 87
+      runway: n-id-0
+      appear_time: 639
+      model: A319
+    - gate: 40
+      runway: n-id-35
+      appear_time: 644
+      model: A319
+    - gate: 34
+      runway: n-id-0
+      appear_time: 647
+      model: A319
+    - gate: 62B
+      runway: n-id-35
+      appear_time: 648
+      model: A319
+    - gate: A4
+      runway: n-id-35
+      appear_time: 651
+      model: A319
+    - gate: 23
+      runway: n-id-0
+      appear_time: 660
+      model: A319
+    - gate: 90
+      runway: n-id-35
+      appear_time: 663
+      model: A319
+    - gate: 44
+      runway: n-id-35
+      appear_time: 665
+      model: A319
+    - gate: G95
+      runway: n-id-0
+      appear_time: 665
+      model: A319
+    - gate: 86
+      runway: n-id-0
+      appear_time: 667
+      model: A319
+    - gate: 85
+      runway: n-id-0
+      appear_time: 674
+      model: A319
+    - gate: 80
+      runway: n-id-35
+      appear_time: 683
+      model: A319
+    - gate: 64
+      runway: n-id-35
+      appear_time: 688
+      model: A319
+    - gate: 66
+      runway: n-id-35
+      appear_time: 691
+      model: A319
+    - gate: 58B
+      runway: n-id-0
+      appear_time: 697
+      model: A319
+    - gate: 50
+      runway: n-id-0
+      appear_time: 705
+      model: A319
+    - gate: 64A
+      runway: n-id-35
+      appear_time: 711
+      model: A319
+    - gate: 51A
+      runway: n-id-0
+      appear_time: 713
+      model: A319
+    - gate: A7
+      runway: n-id-0
+      appear_time: 715
+      model: A319
+    - gate: 66A
+      runway: n-id-35
+      appear_time: 717
+      model: A319
+    - gate: 65A
+      runway: n-id-35
+      appear_time: 723
+      model: A319
+    - gate: G95
+      runway: n-id-35
+      appear_time: 727
+      model: A319
+    - gate: 80
+      runway: n-id-35
+      appear_time: 728
+      model: A319
+    - gate: 42
+      runway: n-id-35
+      appear_time: 734
+      model: A319
+    - gate: 32A
+      runway: n-id-0
+      appear_time: 737
+      model: A319
+    - gate: G93
+      runway: n-id-35
+      appear_time: 740
+      model: A319
+    - gate: A12
+      runway: n-id-0
+      appear_time: 740
+      model: A319
+    - gate: 80
+      runway: n-id-0
+      appear_time: 745
+      model: A319
+    - gate: 48
+      runway: n-id-35
+      appear_time: 749
+      model: A319
+    - gate: 36
+      runway: n-id-35
+      appear_time: 752
+      model: A319
+    - gate: 36
+      runway: n-id-35
+      appear_time: 760
+      model: A319
+    - gate: 71
+      runway: n-id-35
+      appear_time: 760
+      model: A319
+    - gate: 20
+      runway: n-id-35
+      appear_time: 764
+      model: A319
+    - gate: 85
+      runway: n-id-0
+      appear_time: 767
+      model: A319
+    - gate: G101
+      runway: n-id-35
+      appear_time: 768
+      model: A319
+    - gate: 75
+      runway: n-id-35
+      appear_time: 768
+      model: A319
+    - gate: 84
+      runway: n-id-35
+      appear_time: 768
+      model: A319
+    - gate: 64
+      runway: n-id-0
+      appear_time: 768
+      model: A319
+    - gate: 59
+      runway: n-id-35
+      appear_time: 776
+      model: A319
+    - gate: 66
+      runway: n-id-0
+      appear_time: 781
+      model: A319
+    - gate: A9
+      runway: n-id-35
+      appear_time: 785
+      model: A319
+    - gate: 81
+      runway: n-id-35
+      appear_time: 793
+      model: A319
+    - gate: 76
+      runway: n-id-0
+      appear_time: 801
+      model: A319
+    - gate: G98
+      runway: n-id-0
+      appear_time: 803
+      model: A319
+    - gate: 74
+      runway: n-id-35
+      appear_time: 806
+      model: A319
+    - gate: 72
+      runway: n-id-35
+      appear_time: 806
+      model: A319
+    - gate: 69
+      runway: n-id-35
+      appear_time: 806
+      model: A319
+    - gate: A6
+      runway: n-id-0
+      appear_time: 812
+      model: A319
+    - gate: 23
+      runway: n-id-35
+      appear_time: 818
+      model: A319
+    - gate: A7
+      runway: n-id-0
+      appear_time: 821
+      model: A319
+    - gate: 51B
+      runway: n-id-0
+      appear_time: 829
+      model: A319
+    - gate: A1
+      runway: n-id-0
+      appear_time: 836
+      model: A319
+    - gate: 62A
+      runway: n-id-0
+      appear_time: 843
+      model: A319
+    - gate: 82
+      runway: n-id-35
+      appear_time: 851
+      model: A319
+    - gate: 87A
+      runway: n-id-0
+      appear_time: 855
+      model: A319
+    - gate: 66A
+      runway: n-id-0
+      appear_time: 860
+      model: A319
+    - gate: A4
+      runway: n-id-35
+      appear_time: 860
+      model: A319
+    - gate: 64
+      runway: n-id-0
+      appear_time: 860
+      model: A319
+    - gate: 35
+      runway: n-id-0
+      appear_time: 868
+      model: A319
+    - gate: G95
+      runway: n-id-35
+      appear_time: 869
+      model: A319
+    - gate: 85
+      runway: n-id-0
+      appear_time: 871
+      model: A319
+    - gate: G91
+      runway: n-id-0
+      appear_time: 877
+      model: A319
+    - gate: 66
+      runway: n-id-35
+      appear_time: 880
+      model: A319
+    - gate: 23
+      runway: n-id-0
+      appear_time: 885
+      model: A319
+    - gate: 56A
+      runway: n-id-0
+      appear_time: 887
+      model: A319
+    - gate: 56A
+      runway: n-id-0
+      appear_time: 889
+      model: A319
+    - gate: A4
+      runway: n-id-35
+      appear_time: 889
+      model: A319
+    - gate: A1
+      runway: n-id-35
+      appear_time: 889
+      model: A319
+    - gate: 72
+      runway: n-id-0
+      appear_time: 889
+      model: A319
+    - gate: 72
+      runway: n-id-0
+      appear_time: 892
+      model: A319
+    - gate: 32A
+      runway: n-id-0
+      appear_time: 898
+      model: A319
+    - gate: 21
+      runway: n-id-0
+      appear_time: 905
+      model: A319
+    - gate: 48
+      runway: n-id-0
+      appear_time: 907
+      model: A319
+    - gate: G94
+      runway: n-id-0
+      appear_time: 916
+      model: A319
+    - gate: 62A
+      runway: n-id-0
+      appear_time: 923
+      model: A319
+    - gate: 32
+      runway: n-id-0
+      appear_time: 927
+      model: A319
+    - gate: 23
+      runway: n-id-0
+      appear_time: 933
+      model: A319
+    - gate: 35
+      runway: n-id-35
+      appear_time: 940
+      model: A319
+    - gate: 45
+      runway: n-id-35
+      appear_time: 941
+      model: A319
+    - gate: G101
+      runway: n-id-35
+      appear_time: 947
+      model: A319
+    - gate: A3
+      runway: n-id-35
+      appear_time: 954
+      model: A319
+    - gate: 50
+      runway: n-id-0
+      appear_time: 961
+      model: A319
+    - gate: 32
+      runway: n-id-35
+      appear_time: 962
+      model: A319
+    - gate: A11
+      runway: n-id-0
+      appear_time: 969
+      model: A319
+    - gate: 80
+      runway: n-id-0
+      appear_time: 976
+      model: A319
+    - gate: 68
+      runway: n-id-35
+      appear_time: 981
+      model: A319
+    - gate: G94
+      runway: n-id-0
+      appear_time: 985
+      model: A319
+    - gate: A1
+      runway: n-id-0
+      appear_time: 988
+      model: A319
+    - gate: 58B
+      runway: n-id-35
+      appear_time: 989
+      model: A319
+    - gate: 83
+      runway: n-id-35
+      appear_time: 998
+      model: A319
+    - gate: 55
+      runway: n-id-35
+      appear_time: 998
+      model: A319
+    - gate: 35
+      runway: n-id-35
+      appear_time: 1007
+      model: A319
+    - gate: 90
+      runway: n-id-0
+      appear_time: 1015
+      model: A319
+    - gate: G96
+      runway: n-id-0
+      appear_time: 1016
+      model: A319
+    - gate: A7
+      runway: n-id-35
+      appear_time: 1021
+      model: A319
+    - gate: 25
+      runway: n-id-35
+      appear_time: 1021
+      model: A319
+    - gate: G101A
+      runway: n-id-35
+      appear_time: 1029
+      model: A319
+    - gate: G97
+      runway: n-id-35
+      appear_time: 1029
+      model: A319
+    - gate: 48
+      runway: n-id-0
+      appear_time: 1033
+      model: A319
+    - gate: A3
+      runway: n-id-35
+      appear_time: 1038
+      model: A319
+    - gate: A6
+      runway: n-id-0
+      appear_time: 1045
+      model: A319
+    - gate: G92A
+      runway: n-id-0
+      appear_time: 1047
+      model: A319
+    - gate: 51A
+      runway: n-id-0
+      appear_time: 1051
+      model: A319
+    - gate: 22
+      runway: n-id-35
+      appear_time: 1060
+      model: A319
+    - gate: 51B
+      runway: n-id-0
+      appear_time: 1069
+      model: A319
+    - gate: 62B
+      runway: n-id-0
+      appear_time: 1074
+      model: A319
+    - gate: A6
+      runway: n-id-0
+      appear_time: 1081
+      model: A319
+    - gate: A9
+      runway: n-id-35
+      appear_time: 1086
+      model: A319
+    - gate: A11
+      runway: n-id-0
+      appear_time: 1091
+      model: A319
+    - gate: 63
+      runway: n-id-35
+      appear_time: 1094
+      model: A319
+    - gate: 82
+      runway: n-id-35
+      appear_time: 1094
+      model: A319
+    - gate: 76
+      runway: n-id-35
+      appear_time: 1101
+      model: A319
+    - gate: 40
+      runway: n-id-0
+      appear_time: 1107
+      model: A319
+    - gate: 87A
+      runway: n-id-0
+      appear_time: 1114
+      model: A319
+    - gate: A6
+      runway: n-id-35
+      appear_time: 1118
+      model: A319
+    - gate: 54B
+      runway: n-id-0
+      appear_time: 1121
+      model: A319
+    - gate: 48
+      runway: n-id-35
+      appear_time: 1125
+      model: A319
+    - gate: 42
+      runway: n-id-35
+      appear_time: 1125
+      model: A319
+    - gate: 58A
+      runway: n-id-0
+      appear_time: 1129
+      model: A319
+    - gate: 35
+      runway: n-id-0
+      appear_time: 1138
+      model: A319
+    - gate: A5
+      runway: n-id-35
+      appear_time: 1147
+      model: A319
+    - gate: 24
+      runway: n-id-0
+      appear_time: 1147
+      model: A319
+    - gate: G99
+      runway: n-id-0
+      appear_time: 1156
+      model: A319
+    - gate: 36
+      runway: n-id-35
+      appear_time: 1156
+      model: A319
+    - gate: 87A
+      runway: n-id-35
+      appear_time: 1160
+      model: A319
+    - gate: 51A
+      runway: n-id-35
+      appear_time: 1169
+      model: A319
+    - gate: 76
+      runway: n-id-0
+      appear_time: 1170
+      model: A319
+    - gate: A11
+      runway: n-id-0
+      appear_time: 1170
+      model: A319
+    - gate: G92
+      runway: n-id-35
+      appear_time: 1170
+      model: A319
+    - gate: 79
+      runway: n-id-35
+      appear_time: 1175
+      model: A319
+    - gate: 23
+      runway: n-id-35
+      appear_time: 1176
+      model: A319
+    - gate: 21
+      runway: n-id-35
+      appear_time: 1180
+      model: A319
+    - gate: 60A
+      runway: n-id-35
+      appear_time: 1185
+      model: A319
+    - gate: A8
+      runway: n-id-0
+      appear_time: 1190
+      model: A319
+    - gate: 56B
+      runway: n-id-0
+      appear_time: 1194
+      model: A319
+    - gate: 82
+      runway: n-id-0
+      appear_time: 1198
+      model: A319
+    - gate: 24
+      runway: n-id-0
+      appear_time: 1198
+      model: A319
+    - gate: 70
+      runway: n-id-35
+      appear_time: 1199
+      model: A319
+    - gate: 48
+      runway: n-id-35
+      appear_time: 1202
+      model: A319
+    - gate: G98
+      runway: n-id-0
+      appear_time: 1204
+      model: A319
+    - gate: 62A
+      runway: n-id-0
+      appear_time: 1209
+      model: A319
+    - gate: 21
+      runway: n-id-0
+      appear_time: 1209
+      model: A319
+    - gate: G94
+      runway: n-id-0
+      appear_time: 1209
+      model: A319
+    - gate: A7
+      runway: n-id-0
+      appear_time: 1218
+      model: A319
+    - gate: G102
+      runway: n-id-35
+      appear_time: 1219
+      model: A319
+    - gate: G91
+      runway: n-id-0
+      appear_time: 1228
+      model: A319
+    - gate: A8
+      runway: n-id-35
+      appear_time: 1229
+      model: A319

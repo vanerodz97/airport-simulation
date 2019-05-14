@@ -32,7 +32,8 @@ private:
 	void init_expr_data();
 
 	void generate_actual_appear_time();
-	int command;
+	int command = NO_COMMAND;
+	int prev_command = NO_COMMAND;
 
 
 public:
@@ -47,7 +48,7 @@ public:
 
 	// to track the previous passed node and the corresponding time
 	vertex_t location;
-	double time;
+	double time = 0;
 	vertex_t next_location;
 
 	vector<string> intersection_in_sight(double);
@@ -102,7 +103,8 @@ public:
 	vector<Edge> edge_path;
 
 	/* experiment stat */
-	// 
+	//
+  int stop_received;
 	int zero_velocity_tick;
 	int wait_tick;
 

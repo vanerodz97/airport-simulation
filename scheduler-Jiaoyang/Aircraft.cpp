@@ -9,6 +9,12 @@ double Aircraft::get_velocity(){
   // TODO Car following model joins here
 
   if (command == STOP_COMMAND){
+
+    if (prev_command != STOP_COMMAND){
+      stop_received += 1;
+    }
+
+
     wait_tick += 1;
 
     acceleration = - model.a_brake;
@@ -83,6 +89,7 @@ void Aircraft::move(){
     ready_for_runway = true;
   }
   pos = {edge_idx, l};
+  prev_command = command;
   command = NO_COMMAND;
 }
 
@@ -95,6 +102,7 @@ string Aircraft::position_str(){
 
 
 void Aircraft::init_expr_data(){
+  stop_received = 0;
   zero_velocity_tick = 0;
   wait_tick = 0;
 }
@@ -107,6 +115,8 @@ void Aircraft::simulation_init(){
    */
   init_expr_data();
 
+  command = NO_COMMAND;
+  prev_command = NO_COMMAND;
   ready_for_runway = false;
   actual_runway_time = 0;
 }

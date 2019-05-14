@@ -57,13 +57,13 @@ void Schedule::addTimeDistribution(const vector<int>& vec1, const vector<double>
 }
 
 
-void Schedule::updatePath(Aircraft& a, Node* goal)
+void Schedule::updatePath(Aircraft* a, Node* goal)
 {
-	a.path.resize(goal->depth + 1 - goal->move->depth);
+	a->path.resize(goal->depth + 1 - goal->move->depth);
 	Node* curr = goal;
-	a.pushback_time = goal->move->state.getExpectation();
-	a.expected_runway_time = goal->state.getExpectation();
-	a.cost = a.expected_runway_time - a.pushback_time + wait_cost * (a.pushback_time - a.appear_time);
+	a->pushback_time = goal->move->state.getExpectation();
+	a->expected_runway_time = goal->state.getExpectation();
+	a->cost = a->expected_runway_time - a->pushback_time + wait_cost * (a->pushback_time - a->appear_time);
 	/*std::cerr << "---" << a.model << "---\n";
 	std::cout << "Leave: ";
 	curr->move->state.print();
@@ -71,7 +71,7 @@ void Schedule::updatePath(Aircraft& a, Node* goal)
 	curr->state.print();*/
 	for (int t = goal->depth - goal->move->depth; t >= 0; t--)
 	{
-		a.path[t] = curr->state;
+		a->path[t] = curr->state;
 		//curr->state.print();
 		//std::cerr << curr->state.loc << " -> ";
 		curr = curr->parent;
@@ -81,14 +81,14 @@ void Schedule::updatePath(Aircraft& a, Node* goal)
 
 }
 
-double Schedule::computeGValue(const State& curr, const State& move, const Aircraft& a)
+double Schedule::computeGValue(const State& curr, const State& move, const Aircraft* a)
 {
 	double expected_wait = 0;
 	for (unsigned int i = 0; i < move.time.size(); i++)
 	{
 		expected_wait += move.time[i] * move.prob[i];
 	}
-	expected_wait -= a.appear_time;
+	expected_wait -= a->appear_time;
 
 	double expected_traveltime = 0;
 	for (unsigned int i = 0; i < curr.time.size(); i++)
@@ -106,7 +106,7 @@ double Schedule::computeGValue(const State& curr, const State& move, const Aircr
 	return wait_cost * expected_wait + expected_traveltime;
 }
 
-bool Schedule::computeNextState(const State& curr, State& next, double length, const State& constraint, const Aircraft& a)
+bool Schedule::computeNextState(const State& curr, State& next, double length, const State& constraint, const Aircraft* a)
 {
 	vector<int> leave_time;
 	vector<double> leave_prob;
@@ -125,7 +125,7 @@ bool Schedule::computeNextState(const State& curr, State& next, double length, c
 	}
 	if (constraint.time[0] < 0)
 	{
-		next.time = shiftTimeDistribution(leave_time, length / a.model.v_max);
+		next.time = shiftTimeDistribution(leave_time, length / a->model.v_max);
 		next.prob = leave_prob;
 		/*next.time.resize(curr.time.size());
 		next.prob.resize(curr.prob.size());
@@ -140,7 +140,7 @@ bool Schedule::computeNextState(const State& curr, State& next, double length, c
 
 
 	// travel time with v_average
-	double travel_time = length / a.model.v_max;
+	double travel_time = length / a->model.v_max;
 	vector<int> newCurrTime = shiftTimeDistribution(leave_time, travel_time);
 	vector<int> newConstraint = shiftTimeDistribution(constraint.time, safety_time);
 
@@ -228,7 +228,7 @@ bool Schedule::computeNextState(const State& curr, State& next, double length, c
 
 
 
-bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
+bool Schedule::AStarSearch(Aircraft* a, const std::vector<State>& constraints, const double curr_time)
 {
 	typedef boost::heap::fibonacci_heap< Node*, boost::heap::compare<Node::compare_node> > heap_open_t;
 	heap_open_t open_list;
@@ -248,9 +248,13 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 	int num_generated = 0;
 
 	// generate start and add it to the OPEN list
-	vector<double> h_table = airport->heuristics[a.goal]; //Heuristics table
-	Node* root = new Node(a.location, 0, h_table[a.location] / a.model.v_avg, NULL);
-	root->state.time.push_back(a.time);
+	vector<double> h_table = airport->heuristics[a->goal]; //Heuristics table
+	Node* root = new Node(a->location, 0, h_table[a->location] / a->model.v_avg, NULL);
+  if (a->location == a->start){
+    root->state.time.push_back(max(a->appear_time, curr_time));
+  }else{
+    root->state.time.push_back(a->time);
+  }
 	root->state.prob.push_back(1);
 	num_generated++;
 	root->open_handle = open_list.push(root);
@@ -267,7 +271,7 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 		// cout << a.goal << curr->state.loc << endl;
 
 		// Check if the popped node is a goal
-		if (curr->state.loc == a.goal) {
+		if (curr->state.loc == a->goal) {
 			updatePath(a, curr);
 
 			for (it = allNodes_table.begin(); it != allNodes_table.end(); it++)
@@ -280,23 +284,23 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 		}
 
 		// check whether this is the edge that the agent is forced to follow.
-		if (curr == root && a.next_location != a.location)
+		if (curr == root && a->next_location != a->location)
 		{
 			Node* next = new Node();
 			next->parent = curr;
-			next->state.loc = a.next_location;
+			next->state.loc = a->next_location;
 			auto e = boost::out_edges(curr->state.loc, airport->G).first;
-			while (target(*e, airport->G) != a.next_location)
+			while (target(*e, airport->G) != a->next_location)
 				e++;
 			next->move = next->parent->move;
 
-			if (!computeNextState(curr->state, next->state, airport->G[*e].length, constraints[a.next_location], a))
+			if (!computeNextState(curr->state, next->state, airport->G[*e].length, constraints[a->next_location], a))
 			{
 				return false;
 			}
 			next->depth = curr->depth + 1;
 			next->g_val = computeGValue(next->state, next->move->state, a);
-			next->h_val = h_table[next->state.loc] / a.model.v_avg;
+			next->h_val = h_table[next->state.loc] / a->model.v_avg;
 
 			it = allNodes_table.find(next);
 			if (it == allNodes_table.end())
@@ -338,7 +342,7 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 			Node* next = new Node();
 			next->parent = curr;
 			next->state.loc = e.m_target;
-			if (next->state.loc == a.start) {
+			if (next->state.loc == a->start) {
 				next->move = next;
 			}
 			else {
@@ -351,7 +355,7 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 			}
 			next->depth = curr->depth + 1;
 			next->g_val = computeGValue(next->state, next->move->state, a);
-			next->h_val = h_table[next->state.loc] / a.model.v_max;
+			next->h_val = h_table[next->state.loc] / (a->model.v_max);
 
 			it = allNodes_table.find(next);
 			if (it == allNodes_table.end())
@@ -375,53 +379,53 @@ bool Schedule::AStarSearch(Aircraft& a, const std::vector<State>& constraints)
 	return false;
 }
 
-bool compareAppearTime(const Aircraft& a, const Aircraft& b) { return (a.appear_time < b.appear_time); }
+bool compareAppearTime(const Aircraft* a, const Aircraft* b) { return (a->appear_time < b->appear_time); }
 bool Schedule::runFirstComeFirstServe(double curr_time, double time_window)
 {
-	std::sort(departures->begin(), departures->end(), compareAppearTime);
+	std::sort(departures.begin(), departures.end(), compareAppearTime);
 	vector<State> constraints(boost::num_vertices(airport->G), State(-INT_MAX, 1));
-	for (int i = 0; i < departures->size(); i++)
+	for (int i = 0; i < departures.size(); i++)
 	{
-		if ((*departures)[i].appear_time > curr_time + time_window)
+		if (departures[i]->appear_time > curr_time + time_window)
 			break;
-		else if ((*departures)[i].ready_for_runway)
+		else if (departures[i]->ready_for_runway)
 			continue;
-		else if (!AStarSearch((*departures)[i], constraints))
+		else if (!AStarSearch(departures[i], constraints, curr_time))
 			return false;
-		(*departures)[i].planned = true;
+		departures[i]->planned = true;
 		// Update constarints
-		for (auto s : (*departures)[i].path)
+		for (auto s : departures[i]->path)
 			constraints[s.loc] = s;
 	}
 	return true;
 }
 
-bool compareRunwayTime(const Aircraft& a, const Aircraft& b) { return (a.expected_runway_time < b.expected_runway_time); }
+bool compareRunwayTime(const Aircraft* a, const Aircraft* b) { return (a->expected_runway_time < b->expected_runway_time); }
 bool Schedule::runFirstLeaveFirstServe(double curr_time, double time_window)
 {
 	//std::sort(departures.begin() + 4, departures.end(), &Schedule::compareLeaveTime);
 	vector<State> constraints(boost::num_vertices(airport->G), State(-INT_MAX, 1));
-	for (int i = 0; i < departures->size(); i++)
+	for (int i = 0; i < departures.size(); i++)
 	{
-		if ((*departures)[i].appear_time > curr_time + time_window)
+		if (departures[i]->appear_time > curr_time + time_window)
 			continue;
-		else if ((*departures)[i].ready_for_runway)
+		else if (departures[i]->ready_for_runway)
 			continue;
-		else if (!AStarSearch((*departures)[i], constraints))
+		else if (!AStarSearch(departures[i], constraints, curr_time))
 			return false;
 	}
-	std::sort(departures->begin(), departures->end(), compareRunwayTime);
-	for (int i = 0; i < departures->size(); i++)
+	std::sort(departures.begin(), departures.end(), compareRunwayTime);
+	for (int i = 0; i < departures.size(); i++)
 	{
-		if ((*departures)[i].appear_time > curr_time + time_window)
+		if (departures[i]->appear_time > curr_time + time_window)
 			continue;
-		else if ((*departures)[i].ready_for_runway)
+		else if (departures[i]->ready_for_runway)
 			continue;
-		else if (!AStarSearch((*departures)[i], constraints))
+		else if (!AStarSearch(departures[i], constraints, curr_time))
 			return false;
-		(*departures)[i].planned = true;
+		departures[i]->planned = true;
 		// Update constarints
-		for (auto s : (*departures)[i].path)
+		for (auto s : departures[i]->path)
 			constraints[s.loc] = s;
 	}
 	return true;
@@ -429,16 +433,16 @@ bool Schedule::runFirstLeaveFirstServe(double curr_time, double time_window)
 
 bool Schedule::runBase(double curr_time, double time_window)
 {
-	for (int i = 0; i < departures->size(); i++)
+	for (int i = 0; i < departures.size(); i++)
 	{
-		if ((*departures)[i].appear_time > curr_time + time_window)
+		if (departures[i]->appear_time > curr_time + time_window)
 			continue;
-		else if ((*departures)[i].ready_for_runway)
+		else if (departures[i]->ready_for_runway)
 			continue;
 		vector<State> constraints(boost::num_vertices(airport->G), State(-INT_MAX, 1));
-		if (!AStarSearch((*departures)[i], constraints))
+		if (!AStarSearch(departures[i], constraints, curr_time))
 			return false;
-		(*departures)[i].planned = true;
+		departures[i]->planned = true;
 	}
 	return true;
 }
@@ -465,9 +469,9 @@ bool Schedule::run(const std::string& solver, double curr_time, double time_wind
 
 void Schedule::clearPlans()
 {
-	for (int i = 0; i < departures->size(); i++)
+	for (int i = 0; i < departures.size(); i++)
 	{
-		(*departures)[i].clearPlan();
+		departures[i]->clearPlan();
 	}
 	expanded_nodes = 0;
 	generated_nodes = 0;

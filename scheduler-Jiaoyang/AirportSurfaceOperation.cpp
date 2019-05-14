@@ -5,6 +5,8 @@
 #include <boost/tokenizer.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
+#include <fstream>
+
 
 #include "Simulation.h"
 // #include "Simulation_baseline.h"
@@ -120,18 +122,30 @@ int main(int argc, char** argv)
 			simulation.tick();
 		}
 
-    int total_wait_tick = 0;
+    int total_wait_time = 0;
     int total_travel_time = 0;
     int total_zero_velocity_tick = 0;
+    int total_stop_received = 0;
 
 		for (auto a : simulation.departures) {
 			cout << a.id << "  runway:  " << a.actual_runway_time << "  expected: " << a.expected_runway_time << endl;
-      total_wait_tick += a.wait_tick;
+      total_wait_time += a.actual_appear_time - a.appear_time;
       total_travel_time += a.actual_runway_time - a.actual_appear_time;
       total_zero_velocity_tick += a.zero_velocity_tick;
+      total_stop_received += a.stop_received;
 		}
-    cout << "avg wait tick: " << ((double)total_wait_tick) / simulation.completed_count << endl;
-    cout << "avg zero velocity tick: " << ((double)total_zero_velocity_tick) / simulation.completed_count << endl;
+    std::ofstream outfile;
+
+    outfile.open("exp_res.txt", std::ios_base::app);
+    outfile << vm["solver"].as<std::string>() << "\t" << vm["instance"].as<std::string>() << "\t"
+            << vm["config"].as<std::string>() << "\t"
+            << ((double)total_stop_received) / simulation.completed_count << "\t"
+            <<  ((double)total_travel_time) / simulation.completed_count << "\t"
+            <<  ((double)total_wait_time) / simulation.completed_count << "\t"
+            << endl;
+    cout << "avg stop received: " << ((double)total_stop_received) / simulation.completed_count << endl;
+    cout << "wait time " << ((double)total_wait_time) / simulation.completed_count << endl;
+    // cout << "avg zero velocity tick: " << ((double)total_zero_velocity_tick) / simulation.completed_count << endl;
     cout << "avg travel time: " << ((double)total_travel_time) / simulation.completed_count << endl;
 
 	}

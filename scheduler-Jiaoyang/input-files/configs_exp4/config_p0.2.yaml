@@ -8,4 +8,5 @@ config:
     runway_delay_prob: [0.8, 0.16, 0.032, 0.0064, 0.00128, 0.000256, 0.000064]
     safety_distance: 500
     tick_per_time_unit: 1
-    strict_passing_order: 0  
+    strict_passing_order: 0
+    schedule_time_window: 600
