@@ -1,0 +1,11 @@
+config:
+  - wait_cost: 0.5
+    wait_time: 5
+    safety_time: 20
+    gate_delay_time: [0, 1, 2, 3, 4]
+    gate_delay_prob: [0.9, 0.09, 0.009, 0.0009, 0.0001]
+    runway_delay_time: [0, 1, 2, 3, 4]
+    runway_delay_prob: [0.9, 0.09, 0.009, 0.0009, 0.0001]
+    safety_distance: 500
+    tick_per_time_unit: 1
+    strict_passing_order: 0  
