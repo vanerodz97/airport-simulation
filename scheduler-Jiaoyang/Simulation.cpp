@@ -204,6 +204,7 @@ void Simulation::init_simulation_setting(){
   aircraft_on_graph.clear();
   completed_count = 0;
 
+  outfile.open("schedule.txt", std::ios_base::out);
 
   for (auto &a:departures){
     a.simulation_init();
@@ -347,11 +348,11 @@ void Simulation::update_fronter(){
           break;
         }
         i += 1;
-        base_dist += a_ptr->edge_path[i].length;
-
+        if (i < a_ptr->edge_path.size())
+          base_dist += a_ptr->edge_path[i].length;
       }
 
-      }
+    }
 
 }
 
@@ -375,9 +376,8 @@ void Simulation::update_schedule(){
         auto state = a.path[i];
 
         auto vertex_name = airport.G[state.loc].name;
-
         if (checkpoint_pass_order[vertex_name].size() > 0 && checkpoint_pass_order[vertex_name].back() == a.id){
-          cout << "dup" << endl;
+          cout << "ERROR" << endl;
           continue;
         }
         checkpoint_pass_order[vertex_name].push(a.id);
@@ -392,9 +392,15 @@ void Simulation::update_schedule(){
         continue;
       }
       deque<string> mutex_kept;
+
+      /* check are intersections held by aircraft still on its path */
       for (int i = a.pos.first; i < a.edge_path.size(); i++){
         auto e_str = a.edge_path[i].name;
         auto v_str = airport.G[target(airport.eNameToE[e_str], airport.G)].name;
+        if (a.mutex_held.empty()){
+          break;
+        }
+
         if (a.mutex_held.front() != v_str){
           while (!a.mutex_held.empty()){
             auto v_str_to_del = a.mutex_held.front();
@@ -408,8 +414,6 @@ void Simulation::update_schedule(){
         mutex_kept.push_back(v_str);
 
       }
-      cout << a.id << " keep mutexes of size " << mutex_kept.size() << " after replanning." <<endl; 
-
       a.mutex_held = mutex_kept;
 
     }
@@ -438,17 +442,15 @@ void Simulation::tick(){
         a_ptr->time = simulation_time/tick_per_time_unit;
         a_ptr -> ready_to_start = true;
         ready_to_start.push_back(a_ptr);
-        //aircraft_on_graph.insert(a_ptr);
-        //traffic[a_ptr -> current_edge_name()].push_back(a_ptr);
       }
     }
   }
 
   vector <Aircraft*> new_ready_to_start;
   for (auto a_ptr: ready_to_start){
+    // check whether the taxiway is clean before putting airplane on graph
 
     bool aircraft_in_front_flag = false;
-
 
     /* check if path before airplane is clear */
     string e_name = a_ptr->edge_path[0].name;
@@ -459,27 +461,24 @@ void Simulation::tick(){
       aircraft_in_front_flag = true;
     }
 
-    string name = airport.G[a_ptr->path[0].loc].name;
+    string v_name = airport.G[a_ptr->path[0].loc].name;
 
     if (! strict_passing_order){
 
-      if (checkpoint_pass_order.find(name) == checkpoint_pass_order.end() || checkpoint_pass_order[name].size() == 0){
-        checkpoint_pass_order[name].push(a_ptr->id);
+      if (checkpoint_pass_order.find(v_name) == checkpoint_pass_order.end() || checkpoint_pass_order[v_name].size() == 0){
+        checkpoint_pass_order[v_name].push(a_ptr->id);
       }
     }
 
-    if (! aircraft_in_front_flag && checkpoint_pass_order[name].front() == a_ptr->id){
+    if (!aircraft_in_front_flag && checkpoint_pass_order[v_name].front() == a_ptr->id){
 
-      checkpoint_pass_order[name].pop();
-      // assert (!a_ptr->begin_moving);
-      if (a_ptr->begin_moving){
-        cout << "WARNING: aircraft reinserted into graph" << endl;
-      }else{
-        a_ptr->begin_moving = true;
-        aircraft_on_graph.insert(a_ptr);
-        traffic[a_ptr -> current_edge_name()].push_back(a_ptr);
-      }
+      checkpoint_pass_order[v_name].pop();
+      assert (!a_ptr->begin_moving);
+      a_ptr->begin_moving = true;
+      aircraft_on_graph.insert(a_ptr);
+      traffic[e_name].push_back(a_ptr);
     }else{
+      // airplane still needs to wait
       new_ready_to_start.push_back(a_ptr);
     }
 
@@ -487,16 +486,18 @@ void Simulation::tick(){
 
   ready_to_start = new_ready_to_start;
 
+  update_fronter();
 
   // controller
+  // If the intersections in front of aircrafts should not be passed by it
+  // Controller need to intervene.
   for (auto a:aircraft_on_graph){
-    // if
     bool deceleration_flag = false;
     string cross;
 
     vector<string> intersection_to_grab;
 
-    for (auto e_str: a->intersection_in_sight(safety_distance + 200)){
+    for (auto e_str: a->intersection_in_sight(safety_distance + 500)){
 
       auto v_to = target(airport.eNameToE[e_str], airport.G);
 
@@ -519,7 +520,6 @@ void Simulation::tick(){
           break;
         }
 
-
         cout << a->id << " grab " << v_name << endl;
 
         // intersection_to_grab.push_back(name);
@@ -527,14 +527,13 @@ void Simulation::tick(){
         a->mutex_held.push_back(v_name);
       }
 
-
-
       if (checkpoint_pass_order[v_name].front() != a->id ){
         cross = airport.G[v_to].name;
         deceleration_flag = true;
         break;
       }
     }
+
     if (deceleration_flag){
       if (checkpoint_pass_order[cross].size() == 0){
         cout << a->id << " need to slow down due to intersection " << cross << " is still open for grabbing" << endl;
@@ -544,45 +543,23 @@ void Simulation::tick(){
       a->send_command(STOP_COMMAND);
     }else{
 
-      // if (! strict_passing_order){
-      //   for (auto v_name: intersection_to_grab){
-      //     checkpoint_pass_order[v_name].push(a->id);
-      //   }
-      // }
-
       a->send_command(GO_COMMAND);
     }
 
-    // if (near_check_point(*a)){
-    //   // if next checkpoint has a in front
-    //   auto v_to = target(airport.eNameToE[a->edge_path[a->pos.first].name], airport.G);
-    //   string v_name = airport.G[v_to].name;
-
-    //   if (checkpoint_pass_order[v_name].front() == a->id){
-    //     a->send_command(GO_COMMAND);
-    //   }else{
-    //     cout << a->id << " got delay at "<< v_name <<", waiting for " << checkpoint_pass_order[v_name].front() << endl;
-    //     a->send_command(STOP_COMMAND);
-    //   }
-    // }
   }
 
-  // find fronter
-  update_fronter();
 
-
-  bool passed_flag = false;
 
   // tick aircraft
   for (auto a:aircraft_on_graph){
 
     if (a-> ready_for_runway){
+      // Aircraft that going to depart but have been delayed
       continue;
     }
 
     a->move();
     for (auto passed : a->passed_check_point){
-      passed_flag = true;
       cout << a->id << " passed " << passed << endl;
       // find coresponding node and pop.
       auto e_to = target(airport.eNameToE[passed], airport.G);
@@ -592,6 +569,10 @@ void Simulation::tick(){
       a-> time = (int) (simulation_time / tick_per_time_unit);
 
       if (airport.G[e_to].type != RUNWAY){
+
+        // checkpoint, traffic
+
+
         checkpoint_pass_order[airport.G[e_to].name].pop();
 
         if (! strict_passing_order){
@@ -668,9 +649,17 @@ void Simulation::tick(){
   }
 
   // print stat of simulation
-
-
   for (auto a:aircraft_on_graph){
+
+    // TODO may need to move this segment so we will see before departure actions
+    outfile << (double)simulation_time / (double)tick_per_time_unit << "\t" << a->id << "\t"
+            << a->current_edge_name() << "\t"
+            << a->pos.second << "\t" <<  (a->command == STOP_COMMAND) << "\t"
+            << a->ready_for_runway
+            << endl;
+
+
+
     cout << a->id << " - loc: "<< a->position_str() << endl;
     cout << "v:  " << a->velocity << " acc: "<< a->acceleration << endl;
     if (a->prev_aircraft != nullptr){

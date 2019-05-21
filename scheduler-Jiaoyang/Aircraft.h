@@ -19,7 +19,7 @@ struct AircraftModel
 	double v_avg;
 	double a_brake = 100;
 	double a_max = 70;
-	double safety_distance = 500;
+	double safety_distance = 600;
 
 	vector<double> v;
 	vector<double> prob;
@@ -32,14 +32,13 @@ private:
 	void init_expr_data();
 
 	void generate_actual_appear_time();
-	int command = NO_COMMAND;
 	int prev_command = NO_COMMAND;
 
 
 public:
+	int command = NO_COMMAND;
 
-	double brake_distance() { return 150; };
-
+	double brake_distance() { return 250; };
 
 	// Input
 	std::string id;

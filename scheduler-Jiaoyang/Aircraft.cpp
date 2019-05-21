@@ -8,32 +8,32 @@ double Aircraft::distance_to_next_point(){
 double Aircraft::get_velocity(){
   // TODO Car following model joins here
 
+  double T = 1.0/tick_per_time_unit;
   if (command == STOP_COMMAND){
 
     if (prev_command != STOP_COMMAND){
       stop_received += 1;
     }
 
-
     wait_tick += 1;
 
     acceleration = - model.a_brake;
-    return velocity + acceleration;
+    return velocity + acceleration * T;
   }
 
 
   if (prev_aircraft == nullptr){
     acceleration = model.a_max;
-    return velocity + acceleration;
+    return velocity + acceleration * T;
   }
 
   double distance = distance_to_prev;
 
 
-  if (prev_aircraft -> acceleration < 0){
-    acceleration = -model.a_brake;
-    return velocity + acceleration;
-  }
+  // if (prev_aircraft -> acceleration < 0){
+  //   acceleration = -model.a_brake;
+  //   return velocity + acceleration * T;
+  // }
 
   // Accelerating 
   double v_other = prev_aircraft->velocity;
@@ -43,17 +43,23 @@ double Aircraft::get_velocity(){
 
   double h = distance + (v_other * v_other / (2 * a_brake_other)) - model.safety_distance;
 
-  double T = 1.0/tick_per_time_unit;
 
-  double a_eq = T * T;
+  double a_eq = 2 * T * T;
   double b_eq = model.a_brake * T * T + 2 * velocity * T;
   double c_eq = velocity * velocity + 2 * model.a_brake * (velocity * T - h);
 
-  double acc =  (-b_eq + sqrt(b_eq * b_eq - 4 * a_eq * c_eq))/ (2 * a_eq);
+  double acc = 0;
+  if (b_eq * b_eq - 4 * a_eq * c_eq < 0){
+    // b2 - 4ac < 0 implies even deceleration will lead to collision
+    // TODO need check
+    acc = -model.a_brake;
+  }else{
+    acc = (-b_eq + sqrt(b_eq * b_eq - 4 * a_eq * c_eq))/ (2 * a_eq);
+  }
 
-  acceleration =  min(model.a_max, acc);
-  
-  return velocity + acceleration;
+  acceleration =  max(-model.a_brake, min(model.a_max, acc));
+
+  return velocity + acceleration * T;
 }
 
 void Aircraft::move(){
@@ -97,8 +103,6 @@ string Aircraft::position_str(){
   return edge_path[pos.first].name + string(" - ")
     + to_string(pos.second);
 }
-
-
 
 
 void Aircraft::init_expr_data(){

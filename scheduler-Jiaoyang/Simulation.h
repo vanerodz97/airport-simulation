@@ -53,6 +53,8 @@ public:
 
   void update_scheduler_params();
 
+  std::ofstream outfile;
+
 	// Parameters
 	double wait_cost = 0.1;
 	double wait_time = 10; // the time interval on waiting location
