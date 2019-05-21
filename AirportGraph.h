@@ -47,7 +47,7 @@ public:
 	void printNodes();
 	void saveGraph(const std::string& outputFile); // for visualization
 
-	position_t getPosition(const edge_t e, double distance);
+	position_t getCoordinates(const edge_t e, double distance);
 
 	AirportGraph();
 	~AirportGraph();

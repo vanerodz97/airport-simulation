@@ -556,7 +556,7 @@ void AirportGraph::computeHeuristics()
 
 }
 
-position_t AirportGraph::getPosition(const edge_t e, double distance) // distance is the distance from current location to the start endpoint of the edge e.
+position_t AirportGraph::getCoordinates(const edge_t e, double distance) // distance is the distance from current location to the start endpoint of the edge e.
 {
 	position_t from = G[e.m_source].pos;
 	double remainingDistance = distance;
