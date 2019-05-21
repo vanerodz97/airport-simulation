@@ -14,7 +14,7 @@ position_t nodeAsPos(const YAML::Node& node)
 
 double getDistance(const position_t& a, const position_t& b)
 {
-	return sqrt((a.first-b.first)*(a.first - b.first) + (a.second-b.second)*(a.second - b.second));
+	return sqrt((a.first - b.first)*(a.first - b.first) + (a.second - b.second)*(a.second - b.second));
 }
 
 bool AirportGraph::loadGraph(const std::string& fileName)
@@ -92,7 +92,7 @@ bool AirportGraph::loadGraph(const std::string& fileName)
 
 
 bool AirportGraph::GenerateAbstractGraph(const std::string& nodeFile, const std::string& linkFile,
-	const std::string& spotFile, const std::string& runwayFile, const std::string& departFile, 
+	const std::string& spotFile, const std::string& runwayFile, const std::string& departFile,
 	const std::string& outputFile)
 {
 	typedef boost::tokenizer<boost::char_separator<char> >
@@ -110,7 +110,7 @@ bool AirportGraph::GenerateAbstractGraph(const std::string& nodeFile, const std:
 	getline(myfile, line);
 	while (line != "")
 	{
-		
+
 		tokenizer tok(line, sep);
 		tokenizer::iterator beg = tok.begin();
 		beg++; // skip "Node"
@@ -127,7 +127,7 @@ bool AirportGraph::GenerateAbstractGraph(const std::string& nodeFile, const std:
 			auto v = boost::add_vertex(G);
 			G[v].name = name;
 			vNameToV[name] = v;
-			G[v].pos = pos; 
+			G[v].pos = pos;
 			vPosToV[pos] = v;
 			if (iter2 == vNameToV.end())
 				vNameToV[name] = v;
@@ -184,7 +184,7 @@ bool AirportGraph::GenerateAbstractGraph(const std::string& nodeFile, const std:
 				G[e.first].name = name;
 				eNameToE[name] = e.first;
 			}
-		}	
+		}
 		getline(myfile, line); // read the next line
 	}
 	myfile.close();
@@ -309,7 +309,7 @@ bool AirportGraph::GenerateAbstractGraph(const std::string& nodeFile, const std:
 	myfile.close();
 
 	eliminateIntermidiateNodes(); // eliminate intermidiate nodes	
-	getGraphInfo();
+	//getGraphInfo();
 	// printNodes(); 	//print all nodes
 	// saveGraph(outputFile); // output for visualization
 	computeHeuristics();
@@ -324,9 +324,9 @@ void AirportGraph::printNodes()
 	{
 		int in_degree = boost::in_degree(*vi, G);
 		int out_degree = boost::out_degree(*vi, G);
-		if (G[*vi].type == vertex_type::SPOT) 
+		if (G[*vi].type == vertex_type::SPOT)
 		{
-			std::cout << "An spot node "; 
+			std::cout << "An spot node ";
 		}
 		else if (G[*vi].type == vertex_type::RUNWAY)
 		{
@@ -385,6 +385,11 @@ void AirportGraph::eliminateIntermidiateNodes()
 			std::string name = G[vFrom].name + "->" + G[vTo].name;
 			G[e.first].name = name;
 			G[e.first].length = distance;
+			for (auto p : G[*from].points)
+				G[e.first].points.push_back(p);
+			G[e.first].points.push_back(make_pair(G[*vi].pos, G[*from].length));
+			for (auto p : G[*to].points)
+				G[e.first].points.push_back(p);
 
 			// delete the two edges
 			boost::remove_edge(*from, G);
@@ -441,10 +446,10 @@ void AirportGraph::eliminateIntermidiateNodes()
 			break;
 		}
 	}
-  auto es = edges(G);
-  for (auto eit = es.first; eit != es.second; ++eit){
-    eNameToE[G[*eit].name] = *eit;
-  }
+	auto es = edges(G);
+	for (auto eit = es.first; eit != es.second; ++eit) {
+		eNameToE[G[*eit].name] = *eit;
+	}
 
 }
 
@@ -500,64 +505,97 @@ void AirportGraph::saveGraph(const std::string& outputFile) // for visualization
 
 void AirportGraph::computeHeuristics()
 {
-	 // generate a heap that can save nodes (and a open_handle)
-	 boost::heap::fibonacci_heap< Node*, boost::heap::compare<Node::compare_node> > heap;
-	 boost::heap::fibonacci_heap< Node*, boost::heap::compare<Node::compare_node> >::handle_type open_handle;
-	 // generate hash_map (key is a node pointer, data is a node handler,
-	 //                    NodeHasher is the hash function to be used,
-	 //                    eqnode is used to break ties when hash values are equal)
-	 google::dense_hash_map<Node*, boost::heap::fibonacci_heap<Node*, boost::heap::compare<Node::compare_node> >::handle_type, Node::NodeHasher, Node::eqnode> nodes;
-	 nodes.set_empty_key(NULL);
-	 google::dense_hash_map<Node*, boost::heap::fibonacci_heap<Node*, boost::heap::compare<Node::compare_node> >::handle_type, Node::NodeHasher, Node::eqnode>::iterator it; // will be used for find()
+	// generate a heap that can save nodes (and a open_handle)
+	boost::heap::fibonacci_heap< Node*, boost::heap::compare<Node::compare_node> > heap;
+	boost::heap::fibonacci_heap< Node*, boost::heap::compare<Node::compare_node> >::handle_type open_handle;
+	// generate hash_map (key is a node pointer, data is a node handler,
+	//                    NodeHasher is the hash function to be used,
+	//                    eqnode is used to break ties when hash values are equal)
+	google::dense_hash_map<Node*, boost::heap::fibonacci_heap<Node*, boost::heap::compare<Node::compare_node> >::handle_type, Node::NodeHasher, Node::eqnode> nodes;
+	nodes.set_empty_key(NULL);
+	google::dense_hash_map<Node*, boost::heap::fibonacci_heap<Node*, boost::heap::compare<Node::compare_node> >::handle_type, Node::NodeHasher, Node::eqnode>::iterator it; // will be used for find()
 
-	 for (unsigned int i = 0; i < runways.size(); i++)
-	 {
-		 Node* root = new Node(runways[i], 0, 0, NULL);
-		 root->open_handle = heap.push(root);  // add root to heap
-		 nodes[root] = root->open_handle;       // add root to hash_table (nodes)
-		 while (!heap.empty()) {
-			 Node* curr = heap.top(); heap.pop();
-			 // cout << endl << "CURRENT node: " << curr << endl;
-			 auto neighbours = boost::in_edges(curr->state.loc, G);
-			 for (auto e : make_iterator_range(neighbours))
-			 {
-				 double next_g_val = curr->g_val + G[e].length;
-				 Node* next = new Node(e.m_source, next_g_val, 0, NULL);
-				 it = nodes.find(next);
-				 if (it == nodes.end()) {  // add the newly generated node to heap and hash table
-					 next->open_handle = heap.push(next);
-					 nodes[next] = next->open_handle;
-				 }
-				 else {  // update existing node's g_val if needed (only in the heap)
-					 delete(next);  // not needed anymore -- we already generated it before
-					 Node* existing_next = (*it).first;
-					 open_handle = (*it).second;
-					 if (existing_next->g_val > next_g_val) {
-						 existing_next->g_val = next_g_val;
-						 heap.update(open_handle);
-					 }
-				 }
-			 }
-		 }
-		 // iterate over all nodes and populate the num_of_collisionss
-		 heuristics[runways[i]].resize(boost::num_vertices(G), DBL_MAX);
-		 for (it = nodes.begin(); it != nodes.end(); it++) {
-			 Node* s = (*it).first;
-			 heuristics[runways[i]][s->state.loc] = s->g_val;
-		 }
-		 nodes.clear();
-		 heap.clear();
-	 }
- 
+	for (unsigned int i = 0; i < runways.size(); i++)
+	{
+		Node* root = new Node(runways[i], 0, 0, NULL);
+		root->open_handle = heap.push(root);  // add root to heap
+		nodes[root] = root->open_handle;       // add root to hash_table (nodes)
+		while (!heap.empty()) {
+			Node* curr = heap.top(); heap.pop();
+			// cout << endl << "CURRENT node: " << curr << endl;
+			auto neighbours = boost::in_edges(curr->state.loc, G);
+			for (auto e : make_iterator_range(neighbours))
+			{
+				double next_g_val = curr->g_val + G[e].length;
+				Node* next = new Node(e.m_source, next_g_val, 0, NULL);
+				it = nodes.find(next);
+				if (it == nodes.end()) {  // add the newly generated node to heap and hash table
+					next->open_handle = heap.push(next);
+					nodes[next] = next->open_handle;
+				}
+				else {  // update existing node's g_val if needed (only in the heap)
+					delete(next);  // not needed anymore -- we already generated it before
+					Node* existing_next = (*it).first;
+					open_handle = (*it).second;
+					if (existing_next->g_val > next_g_val) {
+						existing_next->g_val = next_g_val;
+						heap.update(open_handle);
+					}
+				}
+			}
+		}
+		// iterate over all nodes and populate the num_of_collisionss
+		heuristics[runways[i]].resize(boost::num_vertices(G), DBL_MAX);
+		for (it = nodes.begin(); it != nodes.end(); it++) {
+			Node* s = (*it).first;
+			heuristics[runways[i]][s->state.loc] = s->g_val;
+		}
+		nodes.clear();
+		heap.clear();
+	}
+
+}
+
+position_t AirportGraph::getPosition(const edge_t e, double distance) // distance is the distance from current location to the start endpoint of the edge e.
+{
+	position_t from = G[e.m_source].pos;
+	double remainingDistance = distance;
+
+	list<pair<position_t, double>>::const_iterator pt = G[e].points.begin();
+	while (pt != G[e].points.end() && remainingDistance > pt->second)
+	{
+		from = pt->first;
+		remainingDistance -= pt->second;
+		pt++;
+	}
+
+	position_t to;
+	double ratio;
+	if (pt == G[e].points.end())
+	{
+		to = G[e.m_target].pos;
+		ratio = remainingDistance / (G[e].length - (distance - remainingDistance));
+	}
+	else
+	{
+		to = pt->first;
+		ratio = remainingDistance / pt->second;
+	}
+
+	position_t rst;
+	rst.first = (1 - ratio) * from.first + ratio * to.first;
+	rst.second = (1 - ratio) * from.second + ratio * to.second;
+
+	return rst;
 }
 
 void AirportGraph::getGraphInfo()
 {
 	std::cout << "|V| = " << num_vertices(G) << " ; |E| = " << num_edges(G) << std::endl;
-	std::cout << "#Gates = " << gates.size() 
-					<< " ; #Spots = " << spots.size() 
-					<< " ; #Intersections = " << intersections.size() 
-					<< " ; #Runways = " << runways.size() << std::endl;
+	std::cout << "#Gates = " << gates.size()
+		<< " ; #Spots = " << spots.size()
+		<< " ; #Intersections = " << intersections.size()
+		<< " ; #Runways = " << runways.size() << std::endl;
 }
 
 AirportGraph::AirportGraph()
