@@ -9,19 +9,33 @@ Threr external libiaries are needed:
 
 Allowed options:
   --help                                produce help message
+  
   -g [ --graph ] arg                    input graph file
+  
   -m [ --model ] arg                    input aircraft model file
+  
   -i [ --instance ] arg                 input iternary file
+  
   -c [ --config ] arg (=../config.yaml) input config file
+  
   -o [ --output ] arg                   output schedule file
+  
   -s [ --solver ] arg                   solvers (BASE, FCFS, FLFS, ALL)
+  
   -k [ --agentNum ] arg (=0)            number of agents
+  
   --interval_min arg (=0)               interval min
+  
   --interval_max arg (=0)               interval max
+  
   --node arg                            node model
+  
   --link arg                            link model
+  
   --spot arg                            spot model
+  
   --runway arg                          runway model
+  
   --depart arg                          depart routing table
 
 # Visulization
