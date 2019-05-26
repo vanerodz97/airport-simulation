@@ -4,7 +4,7 @@
 
 std::default_random_engine generator;
 
-const int VISUALIZE_TIMESTEP = 30;
+const int VISUALIZE_TIMESTEP = 10;
 
 int sample_distribution(const vector<int>& time, const vector<double>& prob){
   const double FACTOR = 10000;

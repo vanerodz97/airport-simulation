@@ -38,3 +38,5 @@ Allowed options:
   
 # Visulization
 Output of scheduler could be visulized with batch mode of airport simulation tool. Run translate_to_json.py to transfer output of shceduler to JSON format. Use states.json for batch mode visulizatio
+
+Run exp_vis.py will automatically create and setup two sample visualizations. Once you run exp_vis.py, you could run visualization server and you will see base_sample and flfs_sample.

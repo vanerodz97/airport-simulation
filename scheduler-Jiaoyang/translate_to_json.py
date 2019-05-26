@@ -46,4 +46,4 @@ for t, data in json_data:
     f.write(json.dumps(row) + "\n")
 
 
-import pdb; pdb.set_trace()
+# import pdb; pdb.set_trace()
