@@ -36,7 +36,5 @@ Allowed options:
   
   --runway arg                          runway model
   
-  --depart arg                          depart routing table
-
 # Visulization
 Output of scheduler could be visulized with batch mode of airport simulation tool. Run translate_to_json.py to transfer output of shceduler to JSON format. Use states.json for batch mode visulizatio
