@@ -602,7 +602,6 @@ AirportGraph::AirportGraph()
 {
 }
 
-
 AirportGraph::~AirportGraph()
 {
 }

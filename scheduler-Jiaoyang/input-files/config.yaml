@@ -6,7 +6,7 @@ config:
     gate_delay_prob: [0.3, 0.5, 0.1, 0.05, 0.05]
     runway_delay_time: [0, 10]
     runway_delay_prob: [0.7, 0.3]
-    safety_distance: 500
+    safety_distance: 1000
     tick_per_time_unit: 1
     strict_passing_order: 0
     schedule_time_window: 1500

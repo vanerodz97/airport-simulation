@@ -4,6 +4,8 @@
 
 std::default_random_engine generator;
 
+const int VISUALIZE_TIMESTEP = 30;
+
 int sample_distribution(const vector<int>& time, const vector<double>& prob){
   const double FACTOR = 10000;
   vector<int> prob_int;
@@ -651,14 +653,19 @@ void Simulation::tick(){
   // print stat of simulation
   for (auto a:aircraft_on_graph){
 
-    // TODO may need to move this segment so we will see before departure actions
-    outfile << (double)simulation_time / (double)tick_per_time_unit << "\t" << a->id << "\t"
-            << a->current_edge_name() << "\t"
-            << a->pos.second << "\t" <<  (a->command == STOP_COMMAND) << "\t"
-            << a->ready_for_runway
-            << endl;
+
+    position_t pos = airport.getPosition(airport.eNameToE[a->current_edge_name()], a->pos.second);
 
 
+    if (simulation_time % tick_per_time_unit == 0 && (simulation_time/tick_per_time_unit) % VISUALIZE_TIMESTEP == 0){
+      outfile.precision(16);
+      // TODO may need to move this segment so we will see before departure actions
+      outfile << (double)simulation_time / (double)tick_per_time_unit << "\t" << a->id << "\t"
+              << a->current_edge_name() << "\t"
+              << a->pos.second << "\t" <<  (a->command == STOP_COMMAND) << "\t"
+              << a->ready_for_runway << "\t" << pos.first << "\t" << pos.second
+              << endl;
+    }
 
     cout << a->id << " - loc: "<< a->position_str() << endl;
     cout << "v:  " << a->velocity << " acc: "<< a->acceleration << endl;
