@@ -385,9 +385,13 @@ void AirportGraph::eliminateIntermidiateNodes()
 			std::string name = G[vFrom].name + "->" + G[vTo].name;
 			G[e.first].name = name;
 			G[e.first].length = distance;
+			double lengthOfLastEdge = G[*from].length;
 			for (auto p : G[*from].points)
+			{
 				G[e.first].points.push_back(p);
-			G[e.first].points.push_back(make_pair(G[*vi].pos, G[*from].length));
+				lengthOfLastEdge -= p.second;
+			}
+			G[e.first].points.push_back(make_pair(G[*vi].pos, lengthOfLastEdge));
 			for (auto p : G[*to].points)
 				G[e.first].points.push_back(p);
 
