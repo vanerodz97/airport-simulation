@@ -52,6 +52,12 @@ $ pip install -r requirements.txt
 ```
 
 ### Run
+1. From the main directory go to data/sfo-all-terminals.  
+2. Then (I have python 3.6 installed) type "python3.6 generate_scenario.py. 
+3. Then type "python3.6 generate.py"  which generates the airport model. 
+4. Then go back to main directory of code and type "python3.6 simulator.py -f plans/sfo-all-terminals.yaml" . 
+5. This should produce a complete scenario. 
+6. Then finally run "python3.6 visualization/server.py" and load the url provided into your browser.
 
 ### Quick start (use stream mode)
 ```sh

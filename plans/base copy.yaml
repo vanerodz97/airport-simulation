@@ -41,11 +41,11 @@ aircraft_model:
   # The min distance between two aircraft where brake hard should be used.
   min_distance: 500.0
   # Initial speed of aircraft
-  init_speed: 100.0
+  init_speed: 200.0
   # Maximum speed of aircraft
-  max_speed: 140.0
+  max_speed: 240.0
   # Ideal speed of aircraft
-  ideal_speed: 125.0
+  ideal_speed: 225.0
 
 
 uncertainty:
