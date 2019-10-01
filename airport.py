@@ -125,7 +125,7 @@ class Airport:
         for flight in scenario.arrivals:
             if not (now <= flight.appear_time < next_tick_time):
                 continue
-            runway, aircraft = flight.runway.start, flight.aircraft
+            runway, aircraft = flight.runway.end, flight.aircraft
             aircraft.set_location(runway, Aircraft.LOCATION_LEVEL_COARSE)
             self.add_aircraft(aircraft)
             self.logger.info(
