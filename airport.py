@@ -62,12 +62,12 @@ class Airport:
     def apply_priority(self, priority):
         self.priority = priority
 
-    def add_aircrafts(self, scenario, now, sim_time):
+    def add_aircrafts(self, scenario, now, sim_time, scheduler):
         """Adds multiple aircraft according to the given scenario and current
         time stamp.
         """
         self.__add_aircrafts_from_queue()
-        self.__add_aircrafts_from_scenario(scenario, now, sim_time)
+        self.__add_aircrafts_from_scenario(scenario, now, sim_time, scheduler)
 
     def add_aircraft(self, aircraft):
         """Adds a new aircraft onto the airport and assigns it an itinerary if
@@ -93,14 +93,13 @@ class Airport:
             aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
             self.add_aircraft(aircraft)
 
-    def __add_aircrafts_from_scenario(self, scenario, now, sim_time):
+    def __add_aircrafts_from_scenario(self, scenario, now, sim_time, scheduler):
 
         # NOTE: we will only focus on departures now
         next_tick_time = get_seconds_after(now, sim_time)
 
         # For all departure flights
         for flight in scenario.departures:
-
             # Only if the scheduled appear time is between now and next tick
             if not (now <= flight.appear_time < next_tick_time):
                 continue
@@ -115,16 +114,24 @@ class Airport:
                 self.logger.info("Adds %s into gate queue", flight)
             else:
                 # Adds the flight to the airport
+                if flight.runway is None:
+                    runway_name = next(scheduler.departure_assigner)
+                    runway = self.surface.get_link(runway_name)
+                    flight.set_runway(runway)
                 aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
                 self.add_aircraft(aircraft)
                 self.logger.info("Adds %s into the airport", flight)
 
         # Deal with the arrival flights, assume that the runway is always not
-        #  occupied because this is an arrival flight
+        # occupied because this is an arrival flight
 
         for flight in scenario.arrivals:
             if not (now <= flight.appear_time < next_tick_time):
                 continue
+            if flight.runway is None:
+                runway_name = next(scheduler.arrival_assigner)
+                runway = self.surface.get_link(runway_name)
+                flight.set_runway(runway)
             runway, aircraft = flight.runway.end, flight.aircraft
             aircraft.set_location(runway, Aircraft.LOCATION_LEVEL_COARSE)
             self.add_aircraft(aircraft)
