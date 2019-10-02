@@ -12,3 +12,5 @@ line-profiler==2.1.2
 fastkml
 Pillow
 lxml
+webdriver_manager
+selenium

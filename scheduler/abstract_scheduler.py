@@ -5,6 +5,7 @@ from copy import deepcopy
 from itinerary import Itinerary
 from flight import ArrivalFlight, DepartureFlight
 from surface import Spot
+from config import Config
 
 
 def trimmed_route(route, start):
@@ -44,6 +45,8 @@ class AbstractScheduler:
 
     def __init__(self):
         self.logger = logging.getLogger(__name__)
+        self.departure_assigner = self.assign_runway_rr("departure_runway")
+        self.arrival_assigner = self.assign_runway_rr("arrival_runway")
 
     def schedule(self, simulation):
         """Schedule the aircraft within a simulation."""
@@ -83,6 +86,15 @@ class AbstractScheduler:
             itinerary.add_uncertainty_delay(n_uncertainty_delay)
 
         return itinerary
+
+    def assign_runway_rr(self, type):
+        """ Schedule the runway in a round robin way"""
+        runway = Config.params["airport_model"][type]
+        size, index = len(runway), 0
+        while True:
+            yield runway[index % size]
+            index += 1
+
 
     def __getstate__(self):
         attrs = dict(self.__dict__)

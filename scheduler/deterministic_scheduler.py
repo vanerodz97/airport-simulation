@@ -28,6 +28,7 @@ class Scheduler(AbstractScheduler):
             # object will be used in other objects; however, be ware that the
             # object will be shared instead of being cloned in the later
             # phases.
+            flight = simulation.scenario.get_flight(aircraft)
             itinerary = self.schedule_aircraft(aircraft, simulation)
             itineraries[aircraft] = itinerary
             aircraft.set_itinerary(itinerary)
@@ -67,7 +68,7 @@ class Scheduler(AbstractScheduler):
             for i in range(tick_times):
 
                 # Adds aircraft
-                predict_simulation.pre_tick()
+                predict_simulation.pre_tick(self)
 
                 # Check if all aircraft has an itinerary, if not, assign one
                 self.__schedule_new_aircrafts(simulation, predict_simulation,

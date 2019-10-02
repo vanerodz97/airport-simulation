@@ -92,7 +92,7 @@ class Simulation:
 
             # Add aircraft
             self.airport.add_aircrafts(self.scenario, self.now,
-                                       self.clock.sim_time)
+                                       self.clock.sim_time, self.scheduler)
 
             # Inject uncertainties
             if self.uncertainty:
@@ -202,10 +202,10 @@ class ClonedSimulation:
         self.airport.set_quiet(self.logger)
         self.scenario.set_quiet(self.logger)
 
-    def pre_tick(self):
+    def pre_tick(self, scheduler):
         """Adds aircraft before a tick."""
         self.airport.add_aircrafts(self.scenario, self.now,
-                                   self.clock.sim_time)
+                                   self.clock.sim_time, scheduler)
 
     def tick(self):
         """Turn off the logger, reschedule, and analyst."""

@@ -83,10 +83,12 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
+.vscode
 .env
 .venv
 env/
 venv/
+venv1/
 ENV/
 env.bak/
 venv.bak/
@@ -117,7 +119,7 @@ states.json
 log
 .todo
 *.swp
-data/*/build
+data/**/build/*
 
 ### JetBrains template
 .idea
