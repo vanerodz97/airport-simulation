@@ -44,7 +44,6 @@ def get_departure_from_csv():
     df = pd.read_csv("./terminal2-departure.csv")
     size = len(df.index)
     airline_list = df["Airline"].tolist()
-    name_list = df["Flight"].tolist()
     gate_list = df["Gate"].tolist()
     flight_list = df["Flight"].tolist()
     estimated_list = df["Estimated"].tolist()
@@ -58,7 +57,7 @@ def get_departure_from_csv():
         else:
             new_flight["gate"] = gate_list[i]
         new_flight["model"] = flight_list[i]
-        new_flight["callsign"] = airline_list[i] + "-" + str(name_list[i])
+        new_flight["callsign"] = airline_list[i] + "-" + str(flight_list[i])
         new_flight["time"] = new_flight["appear_time"] = set_time(
             estimated_list[i])
         for k, v in spots_to_gates.items():
@@ -74,7 +73,6 @@ def get_arrival_from_csv():
     df = pd.read_csv("./terminal2-arrival.csv")
     size = len(df.index)
     airline_list = df["Airline"].tolist()
-    name_list = df["Flight"].tolist()
     gate_list = df["Gate"].tolist()
     flight_list = df["Flight"].tolist()
     estimated_list = df["Estimated"].tolist()
@@ -88,7 +86,7 @@ def get_arrival_from_csv():
         else:
             new_flight["gate"] = gate_list[i]
         new_flight["model"] = flight_list[i]
-        new_flight["callsign"] = airline_list[i] + "-" + str(name_list[i])
+        new_flight["callsign"] = airline_list[i] + "-" + str(flight_list[i])
         new_flight["time"] = new_flight["appear_time"] = set_time(
             estimated_list[i])
         for k, v in spots_to_gates.items():
