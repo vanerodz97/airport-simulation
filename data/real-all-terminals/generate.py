@@ -186,13 +186,13 @@ def generate_link_data(kml_doc, layer_type, output_filename,
 
     for p in placemarks:
 
-        # if aeroway_filter and not is_aeroway_matched(p, aeroway_filter):
-        #     continue
-        #
-        # if use_ref:
-        #     p.name = get_ref(p)
+        if aeroway_filter and not is_aeroway_matched(p, aeroway_filter):
+            continue
 
-        p.name = p.name
+        if use_ref:
+            p.name = get_ref(p)
+
+        # p.name = p.name
 
         nodes = []
         for coord in p.geometry.coords:
@@ -207,6 +207,9 @@ def generate_link_data(kml_doc, layer_type, output_filename,
 
 def is_aeroway_matched(placemark, aeroway_filter):
 
+    if placemark.extended_data is None:
+        return False
+
     for i in placemark.extended_data.elements:
         if i.name == "aeroway" and i.value == aeroway_filter:
             return True
@@ -215,6 +218,9 @@ def is_aeroway_matched(placemark, aeroway_filter):
 
 
 def get_ref(placemark):
+
+    if placemark.extended_data is None:
+        return False
 
     for i in placemark.extended_data.elements:
         if i.name == "ref" and i.value is not None and len(i.value) != 0:
