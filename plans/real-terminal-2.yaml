@@ -4,6 +4,8 @@ airport: real-terminal-2
 
 simulation:
   end_time: "23:59"
+#  time_unit: 60
+#  reschedule_cycle: 300
 
 aircraft_model:
   # Pilot's seeing distance in feet. Used to find the aircraft ahead.
@@ -18,3 +20,10 @@ aircraft_model:
   max_speed: 240.0
   # Ideal speed of aircraft
   ideal_speed: 225.0
+
+#uncertainty:
+#  enabled: false
+#  prob_hold: 0.5
+#
+#simulator:
+#  scenario_regeneration: false

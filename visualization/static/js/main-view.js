@@ -229,14 +229,16 @@ class VisualizationView {
     toggleAutoRun() {
         if (this.autoRunWorker) {
             clearInterval(this.autoRunWorker);
-            $("#control-run").removeClass("running");
+            // $("#control-run").removeClass("running");
+            $("#control-run").attr('uk-icon', "play");
             this.autoRunWorker = null;
         } else {
             this.autoRunWorker = window.setInterval(async () => {
                 const nextState = await this.dataConnector.nextState();
                 this.handleStateUpdate(nextState);
             }, AUTO_RUN_INTERVAL);
-            $("#control-run").addClass("running");
+            // $("#control-run").addClass("running");
+            $("#control-run").attr('uk-icon', "ban");
         }
     }
 }

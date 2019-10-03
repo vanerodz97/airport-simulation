@@ -266,7 +266,7 @@ class SurfaceFactory:
         "airport-metadata.json",
         "airport.jpg",
         "gates.json",
-        "spots.json",
+        # "spots.json",
         "runways.json",
         "pushback_ways.json",
         "taxiways.json"

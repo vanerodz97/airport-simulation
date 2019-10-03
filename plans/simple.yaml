@@ -1,6 +1,0 @@
-name: simple
-airport: simple
-
-uncertainty:
-  enabled: true
-  prob_hold: 0.5

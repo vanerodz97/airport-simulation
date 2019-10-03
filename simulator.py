@@ -6,7 +6,7 @@ Example:
 
     To run a single simulation, use an experimental plan under folder `plans`:
 
-        $ ./simulator.py -f plans/base.yaml
+        $ ./simulator.py -f plans/example.yaml
 
     To run a batch of simulations, use a batch experimental plan under folder
     `batch_plans`:

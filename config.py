@@ -7,7 +7,7 @@ from utils import update_dict
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-BASE_LINE_EXPERIMENT_PLAN_FILEPATH = BASE_DIR + "/plans/base.yaml"
+BASE_LINE_EXPERIMENT_PLAN_FILEPATH = BASE_DIR + "/plans/example.yaml"
 
 
 class MetaConfig(type):
