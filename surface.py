@@ -22,7 +22,6 @@ class Surface:
         self.logger = logging.getLogger(__name__)
 
         self.gates = []
-        self.spots = []
         self.runways = []
         self.taxiways = []
         self.pushback_ways = []
@@ -52,7 +51,7 @@ class Surface:
                 return
 
         # Retrieve all nodes and links
-        all_nodes = self.spots + []
+        all_nodes = []
 
         for link in self.links:
             all_nodes.append(link.start)
@@ -143,10 +142,6 @@ class Surface:
             if gate.name == name:
                 return gate
 
-        for spot in self.spots:
-            if spot.name == name:
-                return spot
-
         raise Exception("Getting an unknown node")
 
     def get_link(self, name):
@@ -176,13 +171,12 @@ class Surface:
     @property
     def nodes(self):
         """Returns all nodes."""
-        return self.gates + self.spots
+        return self.gates
 
     def print_stats(self):
         """Prints the statistics of this airport surface."""
-        self.logger.debug("%d gates, %d spots, %d runways, %d taxiways",
-                          len(self.gates), len(self.spots), len(self.runways),
-                          len(self.taxiways))
+        self.logger.debug("%d gates, %d runways, %d taxiways",
+                          len(self.gates), len(self.runways), len(self.taxiways))
 
     def __getstate__(self):
         attrs = dict(self.__dict__)
@@ -266,7 +260,6 @@ class SurfaceFactory:
         "airport-metadata.json",
         "airport.jpg",
         "gates.json",
-        # "spots.json",
         "runways.json",
         "pushback_ways.json",
         "taxiways.json"
@@ -285,9 +278,7 @@ class SurfaceFactory:
         surface = Surface(airport_raw["center"], airport_raw["corners"],
                           dir_path + "airport.jpg")
         SurfaceFactory.__load_gates(surface, dir_path)
-        SurfaceFactory.__load_spots(surface, dir_path)
         SurfaceFactory.__load_runway(surface, dir_path)
-        SurfaceFactory.__load_gates_to_spots_mapping(surface, dir_path)
         SurfaceFactory.__load_taxiway(surface, dir_path)
         SurfaceFactory.__load_pushback_way(surface, dir_path)
 
@@ -311,42 +302,6 @@ class SurfaceFactory:
         cls.logger.info("%s gates loaded", len(surface.gates))
 
     @classmethod
-    def __load_spots(cls, surface, dir_path):
-        surface.spots = SurfaceFactory.__retrieve_node("spots", dir_path)
-        cls.logger.info("%s spots loaded", len(surface.spots))
-
-    @classmethod
-    def __load_gates_to_spots_mapping(cls, surface, dir_path):
-        SurfaceFactory.gate_to_spot_mapping = \
-            SurfaceFactory.__retrieve_gate_spots("gates_spots", dir_path,
-                                                 surface)
-        cls.logger.info("gates to spots mapping loaded")
-
-    @classmethod
-    def __find_spot_node(cls, spot_name, surface):
-        for node in surface.spots:
-            if node.name == spot_name:
-                return node
-        return None
-
-    @classmethod
-    def __retrieve_gate_spots(cls, type_name, dir_path, surface):
-        gates_to_spots = {}
-        with open(dir_path + type_name + ".json") as fin:
-            spots_to_gates = json.load(fin)
-        logging.debug(spots_to_gates)
-        for spot, gates in spots_to_gates.items():
-            for gate in gates:
-                gates_to_spots[gate] = SurfaceFactory.__find_spot_node(spot,
-
-                                                                       surface)
-
-        for gate in surface.gates:
-            if gate.name in gates_to_spots:
-                gate.set_spots(gates_to_spots[gate.name])
-        return gates_to_spots
-
-    @classmethod
     def __retrieve_node(cls, type_name, dir_path):
 
         nodes = []
@@ -358,14 +313,7 @@ class SurfaceFactory:
 
             name = node_raw["name"]
 
-            if type_name == "spots":
-                nodes.append(
-                    Spot(
-                        name,
-                        {"lat": node_raw["lat"], "lng": node_raw["lng"]}
-                    )
-                )
-            elif type_name == "gates":
+            if type_name == "gates":
                 nodes.append(
                     Gate(
                         name,
