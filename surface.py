@@ -302,6 +302,41 @@ class SurfaceFactory:
         cls.logger.info("%s gates loaded", len(surface.gates))
 
     @classmethod
+    def __load_spots(cls, surface, dir_path):
+        surface.spots = SurfaceFactory.__retrieve_node("spots", dir_path)
+        cls.logger.info("%s spots loaded", len(surface.spots))
+
+    @classmethod
+    def __load_gates_to_spots_mapping(cls, surface, dir_path):
+        SurfaceFactory.gate_to_spot_mapping = \
+            SurfaceFactory.__retrieve_gate_spots("gates_spots", dir_path,
+                                                 surface)
+        cls.logger.info("gates to spots mapping loaded")
+
+    @classmethod
+    def __find_spot_node(cls, spot_name, surface):
+        for node in surface.spots:
+            if node.name == spot_name:
+                return node
+        return None
+
+    @classmethod
+    def __retrieve_gate_spots(cls, type_name, dir_path, surface):
+        gates_to_spots = {}
+        with open(dir_path + type_name + ".json") as fin:
+            spots_to_gates = json.load(fin)
+        logging.debug(spots_to_gates)
+        for spot, gates in spots_to_gates.items():
+            for gate in gates:
+                gates_to_spots[gate] = SurfaceFactory.__find_spot_node(spot,
+                                                                       surface)
+
+        for gate in surface.gates:
+            if gate.name in gates_to_spots:
+                gate.set_spots(gates_to_spots[gate.name])
+        return gates_to_spots
+
+    @classmethod
     def __retrieve_node(cls, type_name, dir_path):
 
         nodes = []

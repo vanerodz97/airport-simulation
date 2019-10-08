@@ -4,7 +4,7 @@ state.
 import enum
 import logging
 import random
-from surface import Spot, Gate
+from surface import *
 
 from link import HoldLink
 from config import Config
@@ -16,10 +16,10 @@ class State(enum.Enum):
     """
     unknown = 0
     stop = 1  # default for departure flights
-    moving = 2
+    moving = 2  # on taxiway
     hold = 3
     flying = 4  # default for arrival flights
-
+    pushback = 5  # new added, on pushback way
 
 class Aircraft:
     """`Aircraft` represents an aircraft in the airport.
@@ -47,6 +47,7 @@ class Aircraft:
 
         self.itinerary = None
         self.speed = Config.params["aircraft_model"]["init_speed"]
+        self.pushback_speed = Config.params["aircraft_model"]["pushback_speed"]
         self.fronter_info = None
         self.speed_uncertainty = 0
         self.is_reroute_necessary = True
@@ -110,6 +111,8 @@ class Aircraft:
     @:param fronter_info (target_speed, relative_distance)
     """
     def get_next_speed(self, fronter_info):
+        if self.__state is State.pushback:
+            return self.pushback_speed
         """ Calculate the speed based on following model."""
         # Drive at the ideal speed if no aircraft exists in the pilot's sight
         if fronter_info is None:
@@ -201,6 +204,7 @@ class Aircraft:
         """
 
         if self.itinerary:
+            self.__state = self.state
             new_speed = self.get_next_speed(self.fronter_info) + self.speed_uncertainty
             self.set_speed(new_speed)
             self.itinerary.tick(self.tick_distance)
@@ -228,7 +232,18 @@ class Aircraft:
                 self.itinerary.current_target is None:
             return State.stop
 
-        _, _, next_precise_location = self.itinerary.get_next_location(self.tick_distance)
+        _, _, next_precise_location = self.itinerary.get_next_location(self.tick_distance)  # why is this needed ??
+        if self.__state == State.stop:
+            #  do not update state if holdlink is added at gate
+            return State.stop if type(self.itinerary.current_target) is HoldLink else State.pushback
+        if self.__state == State.pushback:
+            if type(self.itinerary.current_target) is HoldLink:
+                #  assume no hold link will be generated in the middle of pushback
+                return State.hold
+            elif type(self.itinerary.current_target) is Taxiway:
+                return State.moving
+            else:
+                return State.pushback
         return State.hold if type(self.itinerary.current_target) is HoldLink else State.moving
 
     @property
