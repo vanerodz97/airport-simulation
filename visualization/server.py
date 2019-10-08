@@ -115,7 +115,6 @@ def get_surface_data(airport):
     taxiways = get_linknode_data(airport_data_folder, "taxiways")
     runways = get_linknode_data(airport_data_folder, "runways")
     gates = get_linknode_data(airport_data_folder, "gates")
-    spots = get_linknode_data(airport_data_folder, "spots")
 
     return {
         "airport_name": airport_name,
@@ -123,8 +122,7 @@ def get_surface_data(airport):
         "pushback_ways": pushback_ways,
         "taxiways": taxiways,
         "runways": runways,
-        "gates": gates,
-        "spots": spots
+        "gates": gates
     }
 
 

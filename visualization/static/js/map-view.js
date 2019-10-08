@@ -106,7 +106,6 @@ class MapView {
         this.taxiways = [];
         this.aircraft = new Map();
         this.gates = [];
-        this.spots = [];
 
         this.runways_endpoints = [];
 
@@ -186,7 +185,7 @@ class MapView {
 
         return {
             path: AIRCRAFT_SVG_ICON_PATH,
-            scale: 700 / ZOOM_FACTORS[this.map.getZoom()],
+            scale: 680 / ZOOM_FACTORS[this.map.getZoom()],
             rotation: rotation - 45,
             strokeColor: color,
             fillColor: color,
@@ -209,17 +208,6 @@ class MapView {
 
         const gate = this.__drawNode(lat, lng, image, null, name);
         this.gates.push(gate);
-    }
-
-    drawSpot(lat, lng, name) {
-        const image = {
-            url: "/image/spot.svg",
-            size: new google.maps.Size(18, 18),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(9, 9)
-        };
-
-        this.__drawNode(lat, lng, image, null, name);
     }
 
     updateAllAircraft(allAircraft, use_animation) {
