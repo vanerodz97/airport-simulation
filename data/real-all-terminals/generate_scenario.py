@@ -93,7 +93,7 @@ def get_departure_from_csv():
             new_flight["gate"] = gate_list[i]
 
         new_flight["model"] = flight_list[i]
-        new_flight["callsign"] = airline_list[i] + "-" + str(flight_list[i])
+        new_flight["callsign"] = airline_list[i] + "-" + str(flight_list[i]) + "-D"
         new_flight["time"] = new_flight["appear_time"] = set_time(
             estimated_list[i])
         for k, v in spots_to_gates.items():
@@ -133,7 +133,7 @@ def get_arrival_from_csv():
             new_flight["gate"] = gate_list[i]
 
         new_flight["model"] = flight_list[i]
-        new_flight["callsign"] = airline_list[i] + "-" + str(flight_list[i])
+        new_flight["callsign"] = airline_list[i] + "-" + str(flight_list[i]) + "-A"
         new_flight["time"] = new_flight["appear_time"] = set_time(
             estimated_list[i])
         for k, v in spots_to_gates.items():

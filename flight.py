@@ -29,7 +29,7 @@ class ArrivalFlight(Flight):
         self.to_gate = to_gate
         self.arrival_time = arrival_time
         self.appear_time = appear_time
-        self.runway = runway
+        # self.runway = runway
 
     def __repr__(self):
         return "<Arrival:%s time:%s appear:%s>" \
@@ -48,7 +48,7 @@ class DepartureFlight(Flight):
         self.from_gate = from_gate
         self.departure_time = departure_time
         self.appear_time = appear_time
-        self.runway = runway
+        # self.runway = runway
 
     def __repr__(self):
         return "<Departure:%s time:%s appear:%s>" % \
