@@ -4,7 +4,7 @@ airport: real-all-terminals
 
 simulation:
   end_time: "23:59"
-  reschedule_cycle: 600
+  reschedule_cycle: 240
 
 aircraft_model:
   # Pilot's seeing distance in feet. Used to find the aircraft ahead.
