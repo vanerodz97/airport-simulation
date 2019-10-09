@@ -140,7 +140,18 @@ class Surface:
 
         for gate in self.gates:
             if gate.name == name:
+                print('Same {}'.format(name))
                 return gate
+            else:
+                print('Not Gate Same {} and {}'.format(name,gate.name))
+
+
+        for spot in self.spots:
+            if spot.name == name:
+                print('Same {}'.format(name))
+                return spot
+            else:
+                print('Not Spot Same {} and {}'.format(name, spot.name))
 
         raise Exception("Getting an unknown node")
 
@@ -151,15 +162,25 @@ class Surface:
 
         for runway in self.runways:
             if runway.name == name:
+                print('Same {}'.format(name))
                 return runway
+            else:
+                print('Not Runway Same {} and {}'.format(name,runway.name))
 
         for taxiway in self.taxiways:
             if taxiway.name == name:
+                print('Same {}'.format(name))
                 return taxiway
+            else:
+                print('Not Taxiway Same {} and {}'.format(name,taxiway.name))
 
         for pushback_way in self.pushback_ways:
             if pushback_way.name == name:
+                print('Same {}'.format(name))
                 return pushback_way
+            else:
+                print('Not Pushback_way Same {} and {}'.format(name,
+                                                                pushback_way.name))
 
         raise Exception("Getting an unknown link")
 

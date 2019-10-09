@@ -58,6 +58,7 @@ class AbstractScheduler:
 
         # Retrieves the route from the routing export
         flight = simulation.scenario.get_flight(aircraft)
+        print('----------------------------------------------')
         if type(flight) == ArrivalFlight:
             src, dst = aircraft.location, flight.to_gate
         else:
