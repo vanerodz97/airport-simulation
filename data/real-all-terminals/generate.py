@@ -41,13 +41,14 @@ class NameAssigner():
 node_name_assigner = NameAssigner()
 link_name_assigner = NameAssigner()
 
-
+# following the sequence of map
 class LayerType(Enum):
     gate = 0
-    # spot = 3
-    runway_and_taxiway = 2
     pushback_way = 1
-    airport = 3
+    spot = 2
+    taxiway = 3
+    runway = 4
+    airport = 5
 
 
 def main():
@@ -69,20 +70,22 @@ def main():
     logger.debug("Gate data generated")
 
     # Generates spot position
-    # logger.debug("Generating spot position data")
-    # generate_node_data(kml_doc, LayerType.spot, "spots.json")
-    # logger.debug("Spot position data generated")
+    logger.debug("Generating spot position data")
+    generate_node_data(kml_doc, LayerType.spot, "spots.json")
+    logger.debug("Spot position data generated")
 
     # Generates runway data
     logger.debug("Genenrating runway data")
-    generate_link_data(kml_doc, LayerType.runway_and_taxiway, "runways.json",
-                       "runway", True)
+    # generate_link_data(kml_doc, LayerType.runway_and_taxiway, "runways.json",
+    #                    "runway", True)
+    generate_link_data(kml_doc, LayerType.runway, "runways.json")
     logger.debug("Runway data generated")
 
     # Generates taxiway data
     logger.debug("Genenrating taxiway data")
-    generate_link_data(kml_doc, LayerType.runway_and_taxiway, "taxiways.json",
-                       "taxiway", True)
+    # generate_link_data(kml_doc, LayerType.runway_and_taxiway, "taxiways.json",
+    #                    "taxiway", True)
+    generate_link_data(kml_doc, LayerType.taxiway, "taxiways.json")
     logger.debug("Taxiway data generated")
 
     # Generates pushback way data

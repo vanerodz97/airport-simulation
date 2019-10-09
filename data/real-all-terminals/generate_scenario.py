@@ -29,12 +29,24 @@ arrival_flight_template = {
     "runway": "1R/19L",
 }
 
-# spots = ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"]
-#
+spots = ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"]
+
 # spots_to_gates = {}
-#
-# # spots_to_gates = {"S2": ["51A", "51B", "50A", "52", "50B"],
-# #                   "S3": ["58A", "59A", "58B", "59B", "56A", "56B", "57"]}
+
+spots_to_gates = {
+    "S1": ['B18', 'B14', '43', 'B12', '41', '46', 'B9', '42', '40', '48', 'B6',
+           'B17', 'B13', '47', '45B', 'B7', 'B8', '44'],
+    "S2": ["50A", "55", "53", "52", "54A", "51A", "51B", "54B", "56B",
+           "56A",
+           "57", "59A", "58B", "58A", "59B", "50B", "45A", "59C"],
+    "S3": ['87', '71A', '73', '81', '84C', '66', '72', '75', '78', '77B', '90', '83',
+     '80', '77A', '84D', 'G97', '64', '85', '68', '62', '71B', '63', '88',
+     '61', '69', '76', '82', '74', '67', '79', '73A', '87A', '65', '86', '70',
+     '89', '84B', '60', '84A'],
+    "S4": ['G98', 'G94', 'G101B', 'A3', 'G93', 'G92', 'G99A', 'A9',
+     '75', 'A7', 'G102', 'A12', '53', 'A11', 'G97', 'A2', 'G95', 'G96', 'A4',
+     'A8', 'A10', '68', 'G101A', 'G99', '67', 'G101', 'A5', 'G100', 'G91',
+     'A6']}
 
 terminal_gates = [
     ['B18', 'B14', '43', 'B12', '41', '46', 'B9', '42', '40', '48', 'B6',
@@ -84,10 +96,10 @@ def get_departure_from_csv():
         new_flight["callsign"] = airline_list[i] + "-" + str(flight_list[i])
         new_flight["time"] = new_flight["appear_time"] = set_time(
             estimated_list[i])
-        # for k, v in spots_to_gates.items():
-        #     if new_flight["gate"] in v:
-        #         new_flight["spot"] = k
-        #         break
+        for k, v in spots_to_gates.items():
+            if new_flight["gate"] in v:
+                new_flight["spot"] = k
+                break
         departures.append(new_flight)
     return departures
 
@@ -102,7 +114,7 @@ def get_arrival_from_csv():
     flight_list = df["Flight"].tolist()
     estimated_list = df["Estimated"].tolist()
     for i in range(1, size):
-        new_flight = departure_flight_template.copy()
+        new_flight = arrival_flight_template.copy()
         if terminal_list[i] == '1':
             new_flight["terminal"] = 1
         elif terminal_list[i] == '2':
@@ -124,10 +136,10 @@ def get_arrival_from_csv():
         new_flight["callsign"] = airline_list[i] + "-" + str(flight_list[i])
         new_flight["time"] = new_flight["appear_time"] = set_time(
             estimated_list[i])
-        # for k, v in spots_to_gates.items():
-        #     if new_flight["gate"] in v:
-        #         new_flight["spot"] = k
-        #         break
+        for k, v in spots_to_gates.items():
+            if new_flight["gate"] in v:
+                new_flight["spot"] = k
+                break
         arrivals.append(new_flight)
     return arrivals
 
@@ -143,8 +155,14 @@ def set_time(str_time):
     elif str_time.startswith("下午"):
         ss = str_time.strip("下午")
         s = ss.split(':')
-        hour = int(s[0]) + 12
+        if int(s[0]) == 12:
+            hour = 0
+        else:
+            hour = int(s[0]) + 12
         minute = int(s[1])
+    if hour > 23 or hour < 0:
+        print(hour)
+        print(str_time)
     return "%02d%02d" % (hour, minute)
 
 
@@ -159,9 +177,9 @@ def main():
     create_output_folder(OUTPUT_FOLDER)
     output_filename = OUTPUT_FOLDER + "scenario.json"
     export_to_json(output_filename, scenario)
-    # logger.debug("Generating gate spots data")
-    # gate_spots_filename = OUTPUT_FOLDER + "gates_spots.json"
-    # export_to_json(gate_spots_filename, spots_to_gates)
+    logger.debug("Generating gate spots data")
+    gate_spots_filename = OUTPUT_FOLDER + "gates_spots.json"
+    export_to_json(gate_spots_filename, spots_to_gates)
     logger.debug("Done")
 
 

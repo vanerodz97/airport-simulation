@@ -23,7 +23,7 @@ class ArrivalFlight(Flight):
     """
 
     def __init__(self, callsign, model, from_airport, to_gate,
-                 spot, arrival_time, appear_time):
+                 spot, runway, arrival_time, appear_time):
 
         super().__init__(Aircraft(callsign, model, None, State.flying))
         self.from_airport = from_airport
@@ -32,6 +32,7 @@ class ArrivalFlight(Flight):
         self.arrival_time = arrival_time
         self.appear_time = appear_time
         self.passed_spot = False
+        self.runway = runway
 
     def __repr__(self):
         return "<Arrival:%s time:%s appear:%s>" \
@@ -44,13 +45,14 @@ class DepartureFlight(Flight):
     """
 
     def __init__(self, callsign, model, to_airport, from_gate,
-                 spot, departure_time, appear_time):
+                 spot, runway, departure_time, appear_time):
         super().__init__(Aircraft(callsign, model, None, State.stop))
         self.to_airport = to_airport
         self.from_gate = from_gate
         self.spot = spot
         self.departure_time = departure_time
         self.appear_time = appear_time
+        self.runway = runway
 
     def __repr__(self):
         return "<Departure:%s time:%s appear:%s>" % \
