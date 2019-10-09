@@ -108,12 +108,6 @@ class VisualizationView {
             this.mapView.drawGate(gate["lat"], gate["lng"], name);
         }
 
-        // Spot
-        for (let spot of surfaceData["spots"]) {
-            const name = "SPOT POSITION: " + spot["name"];
-            this.mapView.drawSpot(spot["lat"], spot["lng"], name);
-        }
-
         // Runway
         for (let runway of surfaceData["runways"]) {
             this.mapView.drawRunway(parseNodes(runway["nodes"]));

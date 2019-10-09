@@ -6,6 +6,7 @@ from config import Config
 from id_generator import get_new_link_id
 from node import get_middle_node
 from utils import str2sha1
+from surface import *
 
 
 class Link:
@@ -127,8 +128,8 @@ class Link:
         for i in range(marker + 1, len(self.nodes)):
             nodes_second.append(self.nodes[i])
 
-        return (Link(self.name + "-b1", nodes_first),
-                Link(self.name + "-b2", nodes_second))
+        return (type(self)(self.name + "-b1", nodes_first),
+                type(self)(self.name + "-b2", nodes_second))
 
     def get_middle_node(self, distance):
         """Get the Node with distance to the start of the link"""

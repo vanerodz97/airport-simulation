@@ -86,7 +86,6 @@ class Scenario:
                 arrival["model"],
                 arrival["airport"],
                 surface.get_node(arrival["gate"]),
-                surface.get_node(arrival["spot"]),
                 surface.get_link(arrival["runway"]),
                 str2time(arrival["time"]),
                 str2time(arrival["appear_time"])
@@ -100,7 +99,6 @@ class Scenario:
                 departure["model"],
                 departure["airport"],
                 surface.get_node(departure["gate"]),
-                surface.get_node(departure["spot"]),
                 surface.get_link(departure["runway"]),
                 str2time(departure["time"]),
                 str2time(departure["appear_time"])

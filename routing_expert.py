@@ -31,7 +31,7 @@ class RoutingExpert:
         self.links = links
         self.nodes = nodes
         self.runway_nodes = list(map(lambda l: l.start, list(filter(lambda l: type(l) == Runway, self.links))))
-        self.spot_nodes = list(filter(lambda l: type(l) == Spot, self.nodes))
+        self.gate_nodes = list(filter(lambda l: type(l) == Gate, self.nodes))
         self.logger.info("%d links and %d nodes are loaded",
                          len(self.links), len(self.nodes))
 
@@ -71,7 +71,7 @@ class RoutingExpert:
         # Step 3: Applies SPFA to get shortest routes for all node pairs
         self.logger.debug("Starts SPFA for finding shortest routes")
         self.depart_routing_table = self.__finds_shortest_route_spfa(self.runway_nodes)
-        self.arrival_routing_table = self.__finds_shortest_route_spfa(self.spot_nodes)
+        self.arrival_routing_table = self.__finds_shortest_route_spfa(self.gate_nodes)
 
         # Prints result
         self.print_depart_route(self.depart_routing_table)
@@ -180,22 +180,8 @@ class RoutingExpert:
                 return None
             return self.depart_routing_table[end][start]
 
-        if type(end) == Gate:
-            spot = end.get_spots()
-            # spot = SP1
-            gate_to_spot = self.arrival_routing_table[spot][end]
-            gate_to_spot_links = gate_to_spot.get_links()
-            spot_to_gate = Route(spot, end, [])
-            for i in range(len(gate_to_spot_links) - 1, -1, -1):
-                spot_to_gate.add_link(gate_to_spot_links[i].reverse)
-
-            if type(start) == Spot:
-                return spot_to_gate
-            node_to_spot = self.arrival_routing_table[spot][start]
-            result = Route(start, end, [])
-            result.add_links(node_to_spot.get_links())
-            result.add_links(spot_to_gate.get_links())
-            return result
+        if end in self.gate_nodes:
+            return self.arrival_routing_table[end][start]
 
         raise Exception("End node is not a runway node nor a gate node.")
 
