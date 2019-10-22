@@ -84,7 +84,7 @@ class Simulation:
             if self.__is_time_to_reschedule():
                 self.logger.info("Time to reschedule")
                 start = time.time()
-                self.__reschedule() # it will try to resolve conflict
+                self.__reschedule()  # it will try to resolve conflict
                 self.last_schedule_exec_time = time.time() - start  # seconds
                 self.last_schedule_time = self.now
                 self.logger.info("Last schedule time is updated to %s",

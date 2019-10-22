@@ -50,7 +50,7 @@ class AbstractScheduler:
 
     def schedule(self, simulation):
         """Schedule the aircraft within a simulation."""
-        raise NotImplementedError("Schedule function should be overrided.")
+        raise NotImplementedError("Schedule function should be overridden.")
 
     @classmethod
     def schedule_aircraft(cls, aircraft, simulation):
@@ -72,13 +72,13 @@ class AbstractScheduler:
             trimmed_route(route, src)
 
         # Merge the new itinerary with the part of link the aircraft is going to pass
-        new_route = deepcopy(route.links)
+        new_route = deepcopy(route.links) if route else None
         distance = 0
         if aircraft.itinerary:
             unfinished_link, unfinished_distance = \
                 aircraft.itinerary.current_target, aircraft.itinerary.current_distance
             if unfinished_link:
-                new_route = [unfinished_link] + new_route
+                new_route = [unfinished_link] + new_route if new_route else [unfinished_link]
                 distance = unfinished_distance
 
         itinerary = Itinerary(new_route, unfinished_distance=distance)
@@ -97,7 +97,6 @@ class AbstractScheduler:
         while True:
             yield runway[index % size]
             index += 1
-
 
     def __getstate__(self):
         attrs = dict(self.__dict__)
