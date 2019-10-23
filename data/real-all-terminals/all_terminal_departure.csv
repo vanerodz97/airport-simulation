@@ -146,7 +146,6 @@ Alaska Airlines,San Jose/Los Cabos,1278,上午09:30,上午09:30,On Time,2,50B
 United,Washington/Dulles,516,上午09:30,上午09:30,On Time,3,63
 United,Los Angeles,653,上午09:30,上午09:30,On Time,3,62
 Southwest,Columbus,2254,上午09:35,上午09:35,On Time,1,B17
-United,Washington/Dulles,653,上午09:30,上午09:30,On Time,3,62
 Alaska Airlines,Washington/Dulles,1090,上午09:40,上午09:40,On Time,2,58B
 United,Lihue/Kauai,1111,上午09:31,上午09:31,On Time,3,67
 Alaska Airlines,Newark,266,上午09:50,上午09:50,On Time,2,51A
@@ -476,7 +475,6 @@ Delta Air Lines,Seattle,1455,下午07:45,下午08:09,,1,48
 United,Albuquerque,5648,下午07:45,下午07:45,On Time,3,71B
 Southwest,San Diego,1357,下午07:50,下午07:50,On Time,1,B13
 American Airlines,Charlotte,707,下午07:51,下午07:51,On Time,1,45B
-American Airlines,Los Angeles,707,下午07:51,下午07:51,On Time,1,45B
 United,Denver,1629,下午07:55,下午07:55,On Time,3,87
 SWISS International Airlines,Zurich,39,下午07:55,下午07:55,On Time,Int'l,G100
 Alaska Airlines,Los Angeles,1938,下午08:00,下午08:00,On Time,2,51A

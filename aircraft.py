@@ -21,6 +21,7 @@ class State(enum.Enum):
     flying = 4  # default for arrival flights
     pushback = 5  # new added, on pushback way
 
+
 class Aircraft:
     """`Aircraft` represents an aircraft in the airport.
     """
