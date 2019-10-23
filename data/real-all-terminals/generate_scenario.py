@@ -29,9 +29,8 @@ arrival_flight_template = {
     "runway": "1R/19L",
 }
 
-spots = ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"]
-
-# spots_to_gates = {}
+spots = ["S1", "S2", "S5", "S6", "S7", "S8","S9","S10","S11","S5A","S5B",
+         "S6B","S6A","S7A","S7B"]
 
 spots_to_gates = {
     "S1": ['B18', 'B14', '43', 'B12', '41', '46', 'B9', '42', '40', '48', 'B6',

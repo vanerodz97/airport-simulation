@@ -45,10 +45,10 @@ link_name_assigner = NameAssigner()
 class LayerType(Enum):
     gate = 0
     pushback_way = 1
-    spot = 2
-    taxiway = 3
-    runway = 4
-    airport = 5
+    taxiway = 2
+    runway = 3
+    airport = 4
+    spot = 5
 
 
 def main():
