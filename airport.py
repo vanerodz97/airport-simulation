@@ -30,6 +30,9 @@ class Airport:
 
         # Queues for departure flights at gates
         self.gate_queue = {}
+        # departure queue for the aircraft
+        self.departure_queue = {}
+        self.departure_tick_time = self.__get_interval()
 
         # Itinerary cache object for future flights
         self.itinerary_cache = {}
@@ -138,24 +141,44 @@ class Airport:
             self.logger.info(
                 "Adds {} arrival flight into the airport".format(flight))
 
+    def __add_aircraft_to_departure_queue(self, aircraft,scenario):
+        flight = scenario.get_flight(aircraft)
+        if flight.runway not in self.departure_queue:
+            self.departure_queue[flight.runway] = deque()
+        self.departure_queue[flight.runway].append(aircraft)
+        for i in range(1, self.departure_tick_time):
+            self.departure_queue[flight.runway].append(None)
+
+    @classmethod
+    def __get_interval(cls):
+        sim_time = Config.params["simulation"]["time_unit"]
+        departure_interval = Config.params["simulation"]["departure_interval"]
+        return int(departure_interval / sim_time)
+
     def remove_aircrafts(self, scenario):
         """Removes departure aircraft if they've moved to the runway.
         """
-        to_remove_aircraft = []
+        to_remove_aircraft_departure = []
+        to_remove_aircraft_arrival = []
 
         for aircraft in self.aircrafts:
             flight = scenario.get_flight(aircraft)
             if type(flight) == ArrivalFlight:
                 # if it is the arrival aircraft, do not remove it.
                 if aircraft.location.is_close_to(flight.to_gate):
-                    to_remove_aircraft.append(aircraft)
+                    to_remove_aircraft_arrival.append(aircraft)
                 continue
             # Deletion shouldn't be done in the fly
             if aircraft.precise_location.is_close_to(flight.runway.start):
-                to_remove_aircraft.append(aircraft)
+                to_remove_aircraft_departure.append(aircraft)
 
-        for aircraft in to_remove_aircraft:
-            self.logger.info("Removes %s from the airport", aircraft)
+        for aircraft in to_remove_aircraft_departure:
+            self.logger.info("Removes departure %s from the airport", aircraft)
+            self.__add_aircraft_to_departure_queue(aircraft, scenario)
+            self.aircrafts.remove(aircraft)
+
+        for aircraft in to_remove_aircraft_arrival:
+            self.logger.info("Removes arrive %s from the airport", aircraft)
             self.aircrafts.remove(aircraft)
 
     @property
@@ -196,6 +219,19 @@ class Airport:
             if aircraft.precise_location.is_close_to(node):
                 return True
         return False
+
+    def control_takeoff(self):
+        """ Allow takeoff only at safe interval."""
+        for runway_queue in self.departure_queue.items():
+            try:
+                aircraft = runway_queue[1].popleft()
+                if aircraft is None:
+                    continue
+                else:
+                    aircraft.take_off = True
+                    self.logger.info("%s is ready to take off", aircraft)
+            except IndexError:
+                continue
 
     def tick(self):
         # Ground Controller should observe all the activities on the ground.

@@ -40,6 +40,7 @@ def trimmed_route(route, start):
         # route.update_link(new_links[start_idx:])
         route.links = new_links[start_idx:]
 
+
 class AbstractScheduler:
     """Parent class for different schedulers to extend."""
 

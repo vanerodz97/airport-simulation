@@ -51,6 +51,7 @@ class Aircraft:
         self.fronter_info = None
         self.speed_uncertainty = 0
         self.is_reroute_necessary = True
+        self.take_off = False
 
     def set_location(self, location, level=LOCATION_LEVEL_COARSE):
         """Sets the location of this aircraft to a given location."""

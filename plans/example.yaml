@@ -32,6 +32,8 @@ simulation:
   # End time of a day (it's okay if we don't finish scheduling all the
   # aircraft if we're not using the makespan metric)
   end_time: "9:00"
+  # The minimum interval between two departure aircraft
+  departure_interval: 120
 
 aircraft_model:
   # Pilot's seeing distance in feet. Used to find the aircraft ahead.

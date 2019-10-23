@@ -107,7 +107,7 @@ class Simulation:
 
             # Remove aircraft close to the runway
             self.airport.remove_aircrafts(self.scenario)
-
+            self.airport.control_takeoff()
             # Abort on conflict
             conflicts = self.airport.conflicts
             if conflicts:
