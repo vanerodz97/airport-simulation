@@ -29,7 +29,7 @@ arrival_flight_template = {
 spots = ["S1", "S2", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S5A", "S5B",
          "S6B", "S6A", "S7A", "S7B"]
 
-# false one
+# Todo: spots to gates
 spots_to_gates = {
     "S1": ['B18', 'B14', '43', 'B12', '41', '46', 'B9', '42', '40', '48', 'B6',
            'B17', 'B13', '47', '45B', 'B7', 'B8', '44'],
@@ -156,13 +156,16 @@ def set_time(str_time):
     if str_time.startswith("上午"):
         ss = str_time.strip("上午")
         s = ss.split(':')
-        hour = int(s[0])
+        if int(s[0]) == 12:
+            hour = 0
+        else:
+            hour = int(s[0])
         minute = int(s[1])
     elif str_time.startswith("下午"):
         ss = str_time.strip("下午")
         s = ss.split(':')
         if int(s[0]) == 12:
-            hour = 0
+            hour = 12
         else:
             hour = int(s[0]) + 12
         minute = int(s[1])
