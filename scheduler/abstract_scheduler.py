@@ -59,12 +59,14 @@ class AbstractScheduler:
         # Retrieves the route from the routing export
         flight = simulation.scenario.get_flight(aircraft)
         print('----------------------------------------------')
+        print(type(flight))
         if type(flight) == ArrivalFlight:
             src, dst = aircraft.location, flight.to_gate
         else:
             src, dst = aircraft.location, flight.runway.start
 
         route = simulation.routing_expert.get_shortest_route(src, dst)
+        print(route)
         if type(flight) is ArrivalFlight and aircraft.is_reroute_necessary is \
                 False:
             trimmed_route(route, src)
