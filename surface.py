@@ -143,8 +143,7 @@ class Surface:
                 print('Same {}'.format(name))
                 return gate
             else:
-                print('Not Gate Same {} and {}'.format(name,gate.name))
-
+                print('Not Gate Same {} and {}'.format(name, gate.name))
 
         for spot in self.spots:
             if spot.name == name:
@@ -165,14 +164,14 @@ class Surface:
                 print('Same {}'.format(name))
                 return runway
             else:
-                print('Not Runway Same {} and {}'.format(name,runway.name))
+                print('Not Runway Same {} and {}'.format(name, runway.name))
 
         for taxiway in self.taxiways:
             if taxiway.name == name:
                 print('Same {}'.format(name))
                 return taxiway
             else:
-                print('Not Taxiway Same {} and {}'.format(name,taxiway.name))
+                print('Not Taxiway Same {} and {}'.format(name, taxiway.name))
 
         for pushback_way in self.pushback_ways:
             if pushback_way.name == name:
@@ -180,7 +179,7 @@ class Surface:
                 return pushback_way
             else:
                 print('Not Pushback_way Same {} and {}'.format(name,
-                                                                pushback_way.name))
+                                                               pushback_way.name))
 
         raise Exception("Getting an unknown link")
 
@@ -197,7 +196,8 @@ class Surface:
     def print_stats(self):
         """Prints the statistics of this airport surface."""
         self.logger.debug("%d gates, %d runways, %d taxiways",
-                          len(self.gates), len(self.runways), len(self.taxiways))
+                          len(self.gates), len(self.runways),
+                          len(self.taxiways))
 
     def __getstate__(self):
         attrs = dict(self.__dict__)
