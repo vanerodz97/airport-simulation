@@ -39,6 +39,48 @@
         <styleUrl>#icon-1899-0288D1-highlight</styleUrl>
       </Pair>
     </StyleMap>
+    <Style id="icon-1899-0288D1-nodesc-normal">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1899-0288D1-nodesc-highlight">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1899-0288D1-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-0288D1-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-0288D1-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
     <Style id="icon-1899-0F9D58-normal">
       <IconStyle>
         <color>ff589d0f</color>
@@ -151,48 +193,6 @@
       <Pair>
         <key>highlight</key>
         <styleUrl>#icon-1899-9C27B0-nodesc-highlight</styleUrl>
-      </Pair>
-    </StyleMap>
-    <Style id="icon-1899-FFD600-nodesc-normal">
-      <IconStyle>
-        <color>ff00d6ff</color>
-        <scale>1</scale>
-        <Icon>
-          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
-        </Icon>
-        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
-      </IconStyle>
-      <LabelStyle>
-        <scale>0</scale>
-      </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <Style id="icon-1899-FFD600-nodesc-highlight">
-      <IconStyle>
-        <color>ff00d6ff</color>
-        <scale>1</scale>
-        <Icon>
-          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
-        </Icon>
-        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
-      </IconStyle>
-      <LabelStyle>
-        <scale>1</scale>
-      </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <StyleMap id="icon-1899-FFD600-nodesc">
-      <Pair>
-        <key>normal</key>
-        <styleUrl>#icon-1899-FFD600-nodesc-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
-        <styleUrl>#icon-1899-FFD600-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
     <Style id="line-000000-1200-nodesc-normal">
@@ -3761,81 +3761,6 @@
             -122.3818952,37.6160241,0
           </coordinates>
         </LineString>
-      </Placemark>
-    </Folder>
-    <Folder>
-      <name>Spot Position</name>
-      <Placemark>
-        <name>S1</name>
-        <styleUrl>#icon-1899-FFD600-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            -122.382261,37.613471,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>S2</name>
-        <styleUrl>#icon-1899-FFD600-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            -122.380851,37.615583,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>S3</name>
-        <styleUrl>#icon-1899-FFD600-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            -122.382414,37.6194,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>S4</name>
-        <styleUrl>#icon-1899-FFD600-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            -122.385025,37.620512,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>S5</name>
-        <styleUrl>#icon-1899-FFD600-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            -122.385571,37.620739,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>S6</name>
-        <styleUrl>#icon-1899-FFD600-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            -122.39193,37.620309,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>S7</name>
-        <styleUrl>#icon-1899-FFD600-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            -122.392284,37.619699,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>S8</name>
-        <styleUrl>#icon-1899-FFD600-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            -122.384463,37.610532,0
-          </coordinates>
-        </Point>
       </Placemark>
     </Folder>
     <Folder>
@@ -52326,7 +52251,7 @@ toilets:wheelchair:</value>
       </Placemark>
     </Folder>
     <Folder>
-      <name>Real Spots</name>
+      <name>Spot Position</name>
       <Placemark>
         <name>S1</name>
         <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
@@ -52356,7 +52281,7 @@ toilets:wheelchair:</value>
       </Placemark>
       <Placemark>
         <name>S5</name>
-        <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3809799,37.6156356,0
@@ -52365,7 +52290,7 @@ toilets:wheelchair:</value>
       </Placemark>
       <Placemark>
         <name>S5B</name>
-        <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3810899,37.6154646,0
@@ -52374,7 +52299,7 @@ toilets:wheelchair:</value>
       </Placemark>
       <Placemark>
         <name>S6B</name>
-        <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3822291,37.6192082,0
@@ -52383,7 +52308,7 @@ toilets:wheelchair:</value>
       </Placemark>
       <Placemark>
         <name>S6</name>
-        <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3824423,37.6193016,0
@@ -52392,7 +52317,7 @@ toilets:wheelchair:</value>
       </Placemark>
       <Placemark>
         <name>S6A</name>
-        <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3826555,37.6193898,0
@@ -52401,7 +52326,7 @@ toilets:wheelchair:</value>
       </Placemark>
       <Placemark>
         <name>S7A</name>
-        <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3856435,37.6206401,0
@@ -52410,7 +52335,7 @@ toilets:wheelchair:</value>
       </Placemark>
       <Placemark>
         <name>S7</name>
-        <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3853538,37.620519,0
@@ -52419,7 +52344,7 @@ toilets:wheelchair:</value>
       </Placemark>
       <Placemark>
         <name>S7B</name>
-        <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.385091,37.6204128,0
@@ -52428,7 +52353,7 @@ toilets:wheelchair:</value>
       </Placemark>
       <Placemark>
         <name>S8</name>
-        <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3916412,37.6201899,0
@@ -52437,7 +52362,7 @@ toilets:wheelchair:</value>
       </Placemark>
       <Placemark>
         <name>S9</name>
-        <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3920408,37.6195951,0
@@ -52446,7 +52371,7 @@ toilets:wheelchair:</value>
       </Placemark>
       <Placemark>
         <name>S10</name>
-        <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3928723,37.6201836,0
@@ -52455,7 +52380,7 @@ toilets:wheelchair:</value>
       </Placemark>
       <Placemark>
         <name>S11</name>
-        <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3933001,37.6204544,0

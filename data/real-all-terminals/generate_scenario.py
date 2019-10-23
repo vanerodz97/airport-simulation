@@ -1,10 +1,7 @@
 import sys
 import random
 import logging
-import numpy
-import csv
 import pandas as pd
-import numpy as np
 import math
 
 from utils import export_to_json, create_output_folder
@@ -29,40 +26,47 @@ arrival_flight_template = {
     "runway": "1R/19L",
 }
 
-spots = ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"]
+spots = ["S1", "S2", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S5A", "S5B",
+         "S6B", "S6A", "S7A", "S7B"]
 
-# spots_to_gates = {}
-
+# false one
 spots_to_gates = {
     "S1": ['B18', 'B14', '43', 'B12', '41', '46', 'B9', '42', '40', '48', 'B6',
            'B17', 'B13', '47', '45B', 'B7', 'B8', '44'],
     "S2": ["50A", "55", "53", "52", "54A", "51A", "51B", "54B", "56B",
            "56A",
-           "57", "59A", "58B", "58A", "59B", "50B", "45A", "59C"],
-    "S3": ['87', '71A', '73', '81', '84C', '66', '72', '75', '78', '77B', '90', '83',
-     '80', '77A', '84D', 'G97', '64', '85', '68', '62', '71B', '63', '88',
-     '61', '69', '76', '82', '74', '67', '79', '73A', '87A', '65', '86', '70',
-     '89', '84B', '60', '84A'],
+           "57", "59A", "58B", "59B", "50B", "45A", "59C"],
+    "S3": ['87', '71A', '73', '81', '84C', '66', '72', '75', '78', '77B', '90',
+           '83',
+           '80', '77A', '84D', 'G97', '64', '85', '68', '62', '71B', '63',
+           '88',
+           '61', '69', '76', '82', '74', '67', '79', '73A', '87A', '65', '86',
+           '70',
+           '89', '84B', '84A'],
     "S4": ['G98', 'G94', 'G101B', 'A3', 'G93', 'G92', 'G99A', 'A9',
-     '75', 'A7', 'G102', 'A12', '53', 'A11', 'G97', 'A2', 'G95', 'G96', 'A4',
-     'A8', 'A10', '68', 'G101A', 'G99', '67', 'G101', 'A5', 'G100', 'G91',
-     'A6']}
+           '75', 'A7', 'G102', 'A12', '53', 'A11', 'G97', 'A2', 'G95', 'G96',
+           'A4',
+           'A8', 'A10', '68', 'G101A', 'G99', '67', 'G101', 'A5', 'G100',
+           'G91',
+           'A6']}
 
 terminal_gates = [
     ['B18', 'B14', '43', 'B12', '41', '46', 'B9', '42', '40', '48', 'B6',
      'B17', 'B13', '47', '45B', 'B7', 'B8', '44'],
     ["50A", "55", "53", "52", "54A", "51A", "51B", "54B", "56B",
      "56A",
-     "57", "59A", "58B", "58A", "59B", "50B", "45A", "59C"],
+     "57", "59A", "58B", "59B", "50B", "45A", "59C"],
     ['87', '71A', '73', '81', '84C', '66', '72', '75', '78', '77B', '90', '83',
      '80', '77A', '84D', 'G97', '64', '85', '68', '62', '71B', '63', '88',
      '61', '69', '76', '82', '74', '67', '79', '73A', '87A', '65', '86', '70',
-     '89', '84B', '60', '84A'],
+     '89', '84B', '84A'],
     ['G98', 'G94', 'G101B', 'A3', 'G93', 'G92', 'G99A', 'A9',
      '75', 'A7', 'G102', 'A12', '53', 'A11', 'G97', 'A2', 'G95', 'G96', 'A4',
      'A8', 'A10', '68', 'G101A', 'G99', '67', 'G101', 'A5', 'G100', 'G91',
      'A6']]
 
+
+# 58A, 60
 
 def get_departure_from_csv():
     departures = []
@@ -93,7 +97,8 @@ def get_departure_from_csv():
             new_flight["gate"] = gate_list[i]
 
         new_flight["model"] = flight_list[i]
-        new_flight["callsign"] = airline_list[i] + "-" + str(flight_list[i]) + "-D"
+        new_flight["callsign"] = airline_list[i] + "-" + str(
+            flight_list[i]) + "-D"
         new_flight["time"] = new_flight["appear_time"] = set_time(
             estimated_list[i])
         for k, v in spots_to_gates.items():
@@ -133,7 +138,8 @@ def get_arrival_from_csv():
             new_flight["gate"] = gate_list[i]
 
         new_flight["model"] = flight_list[i]
-        new_flight["callsign"] = airline_list[i] + "-" + str(flight_list[i]) + "-A"
+        new_flight["callsign"] = airline_list[i] + "-" + str(
+            flight_list[i]) + "-A"
         new_flight["time"] = new_flight["appear_time"] = set_time(
             estimated_list[i])
         for k, v in spots_to_gates.items():
