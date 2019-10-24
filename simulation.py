@@ -84,7 +84,7 @@ class Simulation:
             if self.__is_time_to_reschedule():
                 self.logger.info("Time to reschedule")
                 start = time.time()
-                self.__reschedule() # it will try to resolve conflict
+                self.__reschedule()  # it will try to resolve conflict
                 self.last_schedule_exec_time = time.time() - start  # seconds
                 self.last_schedule_time = self.now
                 self.logger.info("Last schedule time is updated to %s",
@@ -107,7 +107,7 @@ class Simulation:
 
             # Remove aircraft close to the runway
             self.airport.remove_aircrafts(self.scenario)
-
+            self.airport.control_takeoff()
             # Abort on conflict
             conflicts = self.airport.conflicts
             if conflicts:
