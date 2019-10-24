@@ -111,7 +111,7 @@ def get_departure_from_csv():
 
 def get_arrival_from_csv():
     arrivals = []
-    df = pd.read_csv("./all_terminal_arrival.csv")
+    df = pd.read_csv("./updated_all_terminal_arrival.csv")
     size = len(df.index)
     airline_list = df["Airline"].tolist()
     terminal_list = df["Terminal"].tolist()
@@ -140,7 +140,7 @@ def get_arrival_from_csv():
         new_flight["model"] = flight_list[i]
         new_flight["callsign"] = airline_list[i] + "-" + str(
             flight_list[i]) + "-A"
-        new_flight["time"] = new_flight["appear_time"] = set_time(
+        new_flight["time"] = new_flight["appear_time"] = set_new_time(
             estimated_list[i])
         for k, v in spots_to_gates.items():
             if new_flight["gate"] in v:
@@ -148,6 +148,17 @@ def get_arrival_from_csv():
                 break
         arrivals.append(new_flight)
     return arrivals
+
+
+def set_new_time(new_time):
+    if ":" not in new_time:
+        minute = 0
+        hour = int(new_time)
+    else:
+        s = new_time.split(":")
+        hour = int(s[0])
+        minute = int(s[1])
+    return "%02d%02d" % (hour, minute)
 
 
 def set_time(str_time):
