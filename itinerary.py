@@ -3,6 +3,7 @@ from link import HoldLink
 from utils import str2sha1
 from copy import deepcopy
 
+
 class Itinerary:
     """Itinerary is a list of target nodes that an aircraft follows per tick.
     """
@@ -13,6 +14,8 @@ class Itinerary:
         self.targets += targets if targets else []  # links\
         self.backup = deepcopy(targets)
         self.unfinished_distance = unfinished_distance
+        # distance: the distance travelled on the link
+        # distance_left: the distance left for entire itinerary
         self.index, self.distance, self.distance_left = None, None, None
         self.reset()
 
@@ -40,7 +43,10 @@ class Itinerary:
 
     def get_next_location(self, tick_distance):
         # Return the last node in the itinerary if completed
-        completed_itinerary = self.length, 0, self.targets[-1].end
+        try:
+            completed_itinerary = self.length, 0, self.targets[-1].end
+        except Exception:
+            return (None, None, None)
 
         if self.is_completed:
             return completed_itinerary

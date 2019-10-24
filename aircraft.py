@@ -21,6 +21,7 @@ class State(enum.Enum):
     flying = 4  # default for arrival flights
     pushback = 5  # new added, on pushback way
 
+
 class Aircraft:
     """`Aircraft` represents an aircraft in the airport.
     """
@@ -51,6 +52,7 @@ class Aircraft:
         self.fronter_info = None
         self.speed_uncertainty = 0
         self.is_reroute_necessary = True
+        self.take_off = False
 
     def set_location(self, location, level=LOCATION_LEVEL_COARSE):
         """Sets the location of this aircraft to a given location."""
@@ -63,15 +65,6 @@ class Aircraft:
             self.logger.info("%s precise location changed to %s", self, location)
         else:
             raise Exception("Unrecognized location level.")
-
-    @property
-    def location(self):
-        """Same as coarse location. Keep the naming for compatibility. """
-        return self.__coarse_location
-
-    @property
-    def precise_location(self):
-        return self.__precise_location if self.__precise_location else self.__coarse_location
 
     @property
     def location(self):
