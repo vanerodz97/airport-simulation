@@ -114,17 +114,24 @@ class Aircraft:
         # calculate the new speed when it is following another aircraft
         fronter_speed = fronter_info[0]
         relative_distance = fronter_info[1]
+
+        # fronter_speed = -1, which means there is another plane entering the intersection
+        if fronter_speed < 0:
+            return self.brake_hard()
+
         # Brake hard if less than MIN_DISTANCE
         if relative_distance <= self.MIN_DISTANCE:
             return self.brake_hard()
 
         # Adjust the speed
-        if relative_distance > self.IDEAL_DISTANCE:
+        if relative_distance > self.IDEAL_DISTANCE and fronter_speed > self.speed:
             # acceleration phase
             c, l, m = 1.1, 0.1, 0.2
-        else:
+        elif relative_distance < self.IDEAL_DISTANCE or fronter_speed < self.speed:
             # deceleration phase
             c, l, m = -1.1, 1.2, 0.7
+        else:
+            c, l, m = 0, 0, 0
 
         acceleration = c * (self.speed ** m) \
                        * (abs(self.speed - fronter_speed) / (relative_distance ** l))
