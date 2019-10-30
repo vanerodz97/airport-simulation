@@ -52,9 +52,9 @@ aircraft_model:
   pushback_speed: 100.0
 
 airport_model:
-  # The departure runway
+  # The departure runway. Options are: 10R/28L, 10L/28R
   departure_runway: [10R/28L]
-  # The arrival runway
+  # The arrival runway. Options are: 1L/19R, 1R/19L
   arrival_runway: [1R/19L]
 
 uncertainty:

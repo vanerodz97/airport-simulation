@@ -82,7 +82,7 @@ class Aircraft:
         if not self.itinerary:
             return self.__coarse_location
 
-        next_index, _, next_location = self.itinerary.get_next_location(self.tick_distance)
+        next_index, _, next_location = self.itinerary.get_next_location(self.next_tick_distance)
 
         if level == Aircraft.LOCATION_LEVEL_COARSE:
             if next_index < self.itinerary.length:
@@ -105,8 +105,8 @@ class Aircraft:
     """
     @:param fronter_info (target_speed, relative_distance)
     """
-    def get_next_speed(self, fronter_info):
-        if self.__state is State.pushback:
+    def get_next_speed(self, fronter_info, state):
+        if state is State.pushback:
             return self.pushback_speed
         """ Calculate the speed based on following model."""
         # Drive at the ideal speed if no aircraft exists in the pilot's sight
@@ -171,6 +171,10 @@ class Aircraft:
         """ Get the distance the aircraft passed in this tick"""
         return self.speed * 1  # 1 is the time of a tick
 
+    @property
+    def next_tick_distance(self):
+        return self.get_next_speed(self.fronter_info, self.state) * 1
+
     def set_itinerary(self, itinerary):
         """Sets the itinerary of this aircraft."""
         self.itinerary = itinerary
@@ -208,7 +212,7 @@ class Aircraft:
         if self.itinerary:
             self.tick_count += 1
             self.__state = self.state
-            new_speed = self.get_next_speed(self.fronter_info) + self.speed_uncertainty
+            new_speed = self.get_next_speed(self.fronter_info, self.state) + self.speed_uncertainty
             self.set_speed(new_speed)
             self.itinerary.tick(self.tick_distance)
             if self.itinerary.is_completed:
@@ -235,7 +239,8 @@ class Aircraft:
                 self.itinerary.current_target is None:
             return State.stop
 
-        _, _, next_precise_location = self.itinerary.get_next_location(self.tick_distance)  # why is this needed ??
+        # current_target = self.itinerary.targets[self.itinerary.index]
+        # _, _, next_precise_location = self.itinerary.get_next_location(self.tick_distance)  # why is this needed ??
         if self.__state == State.stop:
             #  do not update state if holdlink is added at gate
             return State.stop if type(self.itinerary.current_target) is HoldLink else State.pushback
