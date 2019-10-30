@@ -235,7 +235,7 @@ class Airport:
 
     def tick(self):
         # Ground Controller should observe all the activities on the ground.
-        # self.controller.tick()
+        self.controller.tick()
 
         # Ticks on all subjects under the airport to move them into the next state
         for aircraft in self.aircrafts:
