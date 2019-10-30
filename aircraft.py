@@ -257,7 +257,21 @@ class Aircraft:
     @property
     def is_delayed(self):
         """Returns True if the aircraft is currently be delayed."""
+
         return self.itinerary.is_delayed if self.itinerary else False
+
+    @property
+    def is_predict_delayed(self):
+        """Returns True if the aircraft is predicted to be delayed."""
+        if self.itinerary:
+            return True if type(self.itinerary.targets[0]) is HoldLink else False
+
+        return False
+
+    @property
+    def link_this_tick(self):
+        """Returns the link finished in this tick."""
+        return self.itinerary.links_this_tick
 
     def set_quiet(self, logger):
         """Sets the aircraft into quiet mode where less logs are printed."""

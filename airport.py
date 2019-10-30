@@ -239,9 +239,11 @@ class Airport:
             except IndexError:
                 continue
 
-    def tick(self):
+    def tick(self, predict=False):
         # Ground Controller should observe all the activities on the ground.
-        self.controller.tick()
+        if predict is False:
+            # self.controller.tick()
+            pass
 
         # Ticks on all subjects under the airport to move them into the next state
         for aircraft in self.aircrafts:

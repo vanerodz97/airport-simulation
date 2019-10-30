@@ -210,7 +210,7 @@ class ClonedSimulation:
     def tick(self):
         """Turn off the logger, reschedule, and analyst."""
         self.logger.debug("\nPredicted Time: %s", self.now)
-        self.airport.tick()
+        self.airport.tick(True)
         try:
             self.clock.tick()
         except ClockException as error:
