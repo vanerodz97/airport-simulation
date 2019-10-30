@@ -94,7 +94,7 @@ class Controller:
 
         # TODO: UNIMPLEMENTED
         for aircraft_1, aircraft_2 in self.conflicts:
-            pass
+            aircraft_2.set_fronter_info((-1, -1))
 
     def get_closest_aircraft_ahead(self, aircraft):
         return self.aircraft_ahead_lookup.get(aircraft, None)
