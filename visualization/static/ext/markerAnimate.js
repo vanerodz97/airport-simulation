@@ -93,4 +93,10 @@ initMarkerAnimate = () => {
 
         animateStep(this, (new Date()).getTime());
     };
+
+    google.maps.Marker.prototype.infoWindow = null;
+    google.maps.Marker.prototype.updateInfoWindow = function (info) {
+        content = JSON.stringify(info);
+        this.InfoWindow.setContent(content);
+    }
 }

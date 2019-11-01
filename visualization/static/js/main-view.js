@@ -185,7 +185,9 @@ class VisualizationView {
                 lat: aircraft["location"]["lat"],
                 lng: aircraft["location"]["lng"],
                 status: stateToDisplay(aircraft),
-                name: aircraft["callsign"]
+                name: aircraft["callsign"],
+                speed: aircraft["speed"],
+                pushback_speed: aircraft["pushback_speed"]
             });
         }
 
