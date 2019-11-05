@@ -217,7 +217,16 @@ class VisualizationView {
             `;
         }
 
+        var time_to_now = new Date('1970-01-01T' + state["time"] + 'Z');
+        var minutes_to_now = Number(time_to_now) / 60000;
+        let takeoff_frequency = 0;
+        if (minutes_to_now > 0) {
+            takeoff_frequency = state['takeoff_count'] / minutes_to_now;
+        }
+
         $("#traffic-summary").text(`${allCount} aircraft on the surface. ${holdCount} on hold.`);
+        $("#performance-summary").text(`Takeoff frequency: ${takeoff_frequency.toFixed(2)} per minute.`);
+
         $("#traffic-table > tbody").html(trafficTableHtml);
 
     }
