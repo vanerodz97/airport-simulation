@@ -185,7 +185,9 @@ class VisualizationView {
                 lat: aircraft["location"]["lat"],
                 lng: aircraft["location"]["lng"],
                 status: stateToDisplay(aircraft),
-                name: aircraft["callsign"]
+                name: aircraft["callsign"],
+                speed: aircraft["speed"],
+                pushback_speed: aircraft["pushback_speed"]
             });
         }
 
@@ -215,7 +217,23 @@ class VisualizationView {
             `;
         }
 
+        var time_to_now = new Date('1970-01-01T' + state["time"] + 'Z');
+        var minutes_to_now = Number(time_to_now) / 60000;
+        let takeoff_frequency = 0;
+        if (minutes_to_now > 0) {
+            takeoff_frequency = state["takeoff_count"] / minutes_to_now;
+        }
+
+        var total_ticks_on_surface = state["total_ticks_on_surface"]
+        let avg_latency = 0;
+        if (state["takeoff_count"] > 0) {
+            avg_latency = total_ticks_on_surface * 0.5 / state["takeoff_count"];
+        }
+
         $("#traffic-summary").text(`${allCount} aircraft on the surface. ${holdCount} on hold.`);
+        $("#performance-frequency").text(`Takeoff frequency: ${takeoff_frequency.toFixed(2)} per minute.`);
+        $("#performance-latency").text(`Avg latency: ${avg_latency.toFixed(2)} minute(s).`);
+
         $("#traffic-table > tbody").html(trafficTableHtml);
 
     }

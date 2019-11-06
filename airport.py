@@ -41,6 +41,10 @@ class Airport:
         self.name = name
         self.surface = surface
 
+        # Number of flights sent to the sky. For performance evaluation use.
+        self.takeoff_count = 0
+        self.takeoff_ticks_count = 0
+
         self.priority = None
         # Ground controller
         self.controller = Controller(self)
@@ -229,6 +233,8 @@ class Airport:
                     continue
                 else:
                     aircraft.take_off = True
+                    self.takeoff_ticks_count += aircraft.tick_count
+                    self.takeoff_count += 1
                     self.logger.info("%s is ready to take off", aircraft)
             except IndexError:
                 continue
