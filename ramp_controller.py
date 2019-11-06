@@ -23,7 +23,7 @@ class RampController:
         if type(flight) == DepartureFlight:
             gate = flight.from_gate()
             # todo: get the spot from the gate name
-            spot = get_spot_from_gate(gate)
+            spot = gate.get_spots()
             if spot not in self.spot_queue:
                 self.spot_queue[spot] = deque()
             else:
