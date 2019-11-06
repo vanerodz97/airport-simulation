@@ -41,6 +41,10 @@ class Airport:
         self.name = name
         self.surface = surface
 
+        # Number of flights sent to the sky. For performance evaluation use.
+        self.takeoff_count = 0
+        self.takeoff_ticks_count = 0
+
         self.priority = None
         # Ground controller
         self.controller = Controller(self)
@@ -229,13 +233,15 @@ class Airport:
                     continue
                 else:
                     aircraft.take_off = True
+                    self.takeoff_ticks_count += aircraft.tick_count
+                    self.takeoff_count += 1
                     self.logger.info("%s is ready to take off", aircraft)
             except IndexError:
                 continue
 
     def tick(self):
         # Ground Controller should observe all the activities on the ground.
-        # self.controller.tick()
+        self.controller.tick()
 
         # Ticks on all subjects under the airport to move them into the next state
         for aircraft in self.aircrafts:

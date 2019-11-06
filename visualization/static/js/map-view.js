@@ -149,20 +149,19 @@ class MapView {
     }
 
     __drawNode(lat, lng, image, label, content) {
-        const infowindow = new google.maps.InfoWindow({
-            content: content
-        });
-
         const marker = new google.maps.Marker({
             position: {lat: lat, lng: lng},
             map: this.map,
             label: label,
             icon: image,
-            zIndex: 999
+            zIndex: 999,
+            InfoWindow: new google.maps.InfoWindow({
+                content: content
+            })
         });
 
         marker.addListener("click", function () {
-            infowindow.open(this.map, marker);
+            marker.InfoWindow.open(this.map, marker);
         });
 
         return marker;
@@ -238,7 +237,7 @@ class MapView {
                 aircraft.setOptions({
                     icon: this.__getAircraftIcon(-angle, each.status)
                 });
-
+                aircraft.updateInfoWindow(each);
 
                 if (use_animation) {
                     aircraft.animateTo(new google.maps.LatLng(each.lat, each.lng), {
