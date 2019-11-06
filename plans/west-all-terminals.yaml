@@ -1,0 +1,21 @@
+---
+name: west-all-terminals
+airport: west-all-terminals
+
+simulation:
+  end_time: "23:59"
+  reschedule_cycle: 120
+
+aircraft_model:
+  # Pilot's seeing distance in feet. Used to find the aircraft ahead.
+  pilot_vision: 350
+  # Safe distance between two aircraft
+  ideal_distance: 1000.0
+  # The min distance between two aircraft where brake hard should be used.
+  min_distance: 500.0
+  # Initial speed of aircraft
+  init_speed: 200.0
+  # Maximum speed of aircraft
+  max_speed: 240.0
+  # Ideal speed of aircraft
+  ideal_speed: 225.0
