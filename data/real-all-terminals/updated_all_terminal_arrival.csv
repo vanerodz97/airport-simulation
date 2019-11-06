@@ -1,581 +1,581 @@
-Airline,Arriving From,Flight,Scheduled,Estimated,Remarks,Terminal,Gate,Details
-Copa Airlines,Panama City,382,上午12:08,23:32,,Int'l,A4,
-Alaska Airlines,Honolulu/Oahu,710,上午12:10,00:08,,2,55,
-United,Boston,1163,上午12:10,02:30,,3,83,
-United,Chicago/O'Hare,493,上午12:11,23:40,,3,73,
-United,Los Angeles,398,上午12:15,23:48,,3,65,
-Avianca,San Salvador,560,00:15,00:15,,Int'l,A zone,
-Southwest,PAR,8526,00:30,00:30,,Int'l,,
-American Airlines,Miami,2421,上午12:32,00:03,,2,HGR,
-United,Honolulu/Oahu,2826,上午12:44,01:10,,3,80,
-Delta Air Lines,New York/JFK,2670,上午12:48,00:11,,1,40,
-American Airlines,New York/JFK,177,上午12:51,00:32,,2,57,
-United,Newark,210,上午01:03,01:51,,3,67,
-JetBlue,Boston,333,上午01:12,01:06,,1,B6,
-JetBlue,New York/JFK,1715,上午01:21,00:26,,1,B7,
-United,Honolulu/Oahu,396,上午04:53,04:57,,3,86,
-United,Kahului,1557,上午05:18,05:03,,3,88,
-United,Kona/Hawaii,1092,上午05:35,05:36,,3,89,
-United,Tel Aviv,955,上午06:00,05:17,,Int'l,G94,
-United,Taipei,872,上午06:20,06:09,,Int'l,G95,
-United,Monterey,5316,06:22,06:22,On Time,3,78,
-EVA AIR,Taipei,8,上午06:30,06:41,,Int'l,G101,
-Southwest,Los Angeles,1085,06:35,06:35,On Time,1,B9,
-United,Reno,1445,06:39,06:39,On Time,3,68,
-United,Santa Barbara,5982,06:47,06:47,On Time,3,76,
-United,Seoul,806,上午06:50,06:07,,Int'l,G98,
-United,Santa Rosa,5738,06:50,06:50,On Time,3,84C,
-United,Kahului,1580,上午06:52,07:03,,3,67,
-United,Boise,5745,06:54,06:54,On Time,3,79,
-Air India,Bengaluru,173,上午07:00,06:38,,Int'l,G97,
-United,Fresno,5287,07:02,07:02,On Time,3,77A,
-United,Sydney,870,上午07:05,07:32,,Int'l,G96,
-United,Sacramento,5562,07:06,07:06,On Time,3,71A,
-United,San Luis Obispo,5667,07:08,07:08,On Time,3,77B,
-United,Redding,5549,07:10,07:10,On Time,3,84D,
-United,Honolulu/Oahu,1575,上午07:10,07:17,,3,66,
-United,Palm Springs,5617,07:12,07:12,On Time,3,84B,
-United,Salt Lake City,5976,07:15,07:15,On Time,3,71B,
-United,Bakersfield,5219,07:16,07:16,On Time,3,70,
-Alaska Airlines,Portland,426,上午07:20,07:19,,2,54A,
-United,Medford,2068,上午07:21,07:14,,3,73,
-United,Ontario,295,07:25,07:25,On Time,3,61,
-United,Eureka,5362,07:26,07:26,On Time,3,87A,
-United,Denver,256,上午07:38,07:31,,3,88,
-United,Phoenix,2356,上午07:40,07:28,,3,85,
-Alaska Airlines,Palm Springs,3327,07:40,07:40,On Time,2,50A,
-United,Redmond,5464,07:41,07:41,On Time,3,77A,
-United,Las Vegas,728,07:44,07:44,On Time,3,67,
-United,Chengdu,8,上午07:45,07:30,,Int'l,G100,
-United,Santa Barbara,5601,07:47,07:47,On Time,3,79,
-United,Dallas-Fort Worth,1129,上午07:49,07:42,,3,74,
-United,Austin,2123,上午07:49,07:46,,3,89,
-United,Indianapolis,500,上午07:50,07:34,,3,83,
-Alaska Airlines,Dallas/Love Field,3497,07:50,07:50,On Time,2,59C,
-Alaska Airlines,San Diego,1951,上午07:55,07:48,,2,51B,
-United,San Antonio,5309,07:55,07:55,On Time,3,73A,
-American Airlines,Los Angeles,1322,07:59,07:59,On Time,2,56B,
-United,San Diego,2235,08:01,08:01,On Time,3,68,
-United,Los Angeles,471,08,08,On Time,3,62,
-Southwest,San Diego,1573,08:02,08:02,On Time,1,B9,
-Alaska Airlines,Los Angeles,1925,上午08:00,07:52,,2,59A,
-United,Omaha,5215,08:04,08:04,On Time,3,77B,
-United,Pasco,5372,08:03,08:03,On Time,3,78,
-United,Kansas City,5341,08:06,08:06,On Time,3,76,
-United,Seattle,368,08:09,08:09,On Time,3,64,
-United,PAE,5893,08:10,08:10,On Time,3,77A,
-United,Fayetteville,5550,08:11,08:11,On Time,3,71B,
-United,Atlanta,1900,上午08:13,08:05,,3,82,
-JetBlue,Long Beach,1136,08:15,08:15,On Time,1,B6,
-United,Cincinnati,357,上午08:17,07:54,,3,75,
-United,Burbank,5803,08:19,08:19,On Time,3,77B,
-United,Portland,1664,08:20,08:20,On Time,3,72,
-United,PPT,114,上午08:25,07:51,,Int'l,G99,
-Alaska Airlines,Las Vegas,1897,08:25,08:25,On Time,2,54A,
-Delta Air Lines,Los Angeles,2313,08:27,08:27,On Time,1,41,
-United,Shanghai,858,上午08:30,08:16,,Int'l,G102,
-United,Columbus,1585,上午08:30,08:23,,3,90,
-United,Orange County,1818,08:30,08:30,On Time,3,65,
-Alaska Airlines,Salt Lake City,3449,08:32,08:32,On Time,2,53,
-United,Vancouver,618,08:31,08:31,On Time,3,69,
-Southwest,Los Angeles,1896,08:35,08:35,On Time,1,B12,
-Alaska Airlines,Orange County,2028,上午08:35,11:22,,2,50B,
-Air Canada,Vancouver,560,08:36,08:36,On Time,Int'l,G93,
-United,Chicago/O'Hare,2166,上午08:39,08:34,,3,83,
-Alaska Airlines,Austin,1219,上午08:40,08:41,,2,54A,
-United,Spokane,5319,08:40,08:40,On Time,3,84D,
-American Airlines,Dallas-Fort Worth,152,08:43,08:43,On Time,2,57,
-Alaska Airlines,Seattle,762,上午08:45,08:29,,2,51A,
-United,Raleigh/Durham,1698,上午08:45,08:38,,3,70,
-United,Tucson,5945,上午08:45,11:27,,3,84B,
-United,Orlando,759,上午08:46,08:39,,3,66,
-United,Washington/Dulles,1881,08:49,08:49,On Time,3,81,
-United,Singapore,2,上午08:50,08:57,,Int'l,G100,
-Delta Air Lines,Cincinnati,2905,上午08:54,08:42,,1,40,
-United,Mexico City,820,上午08:55,08:44,,Int'l,G94,
-United,Hong Kong,862,上午08:55,08:59,,Int'l,G101,
-Southwest,Burbank,1338,08:55,08:55,On Time,1,B14,
-United,New Orleans,590,09:01,09:01,On Time,3,74,
-United,Las Vegas,2301,09:03,09:03,On Time,3,73A,
-United,Baltimore,1111,上午08:58,08:45,,3,73,
-United,Philadelphia,731,上午09:05,08:53,,3,89,
-United,Fort Lauderdale,922,上午09:10,09:05,,3,68,
-Alaska Airlines,Seattle,2958,09:10,09:10,On Time,2,52,
-United,Newark,1483,上午09:11,09:04,,3,85,
-United,Tokyo/Haneda,876,上午09:15,08:47,,Int'l,G95,
-United,Palm Springs,5997,09:18,09:18,On Time,3,78,
-Alaska Airlines,Raleigh/Durham,709,09:20,09:20,On Time,2,51B,
-Delta Air Lines,Minneapolis,1938,09:26,09:26,On Time,1,43,
-Delta Air Lines,Seattle,2490,09:27,09:27,On Time,1,42,
-China Eastern,Shanghai,589,上午09:30,08:52,,Int'l,A zone,
-Alaska Airlines,Portland,1372,09:30,09:30,On Time,2,55,
-Delta Air Lines,Salt Lake City,1390,09:32,09:32,On Time,1,48,
-United,Dallas-Fort Worth,2093,上午09:32,09:23,,3,62,
-United,Fresno,5723,09:34,09:34,On Time,3,84D,
-United,Toronto,565,上午09:34,09:29,,3,88,
-United,Denver,2362,09:36,09:36,On Time,3,63,
-Air Canada,Calgary,8579,09:38,09:38,On Time,Int'l,G102,
-United,Boston,433,上午09:35,09:28,,3,80,
-Interjet,Guadalajara,820,09:35,09:35,On Time,Int'l,A7,
-United,Orange County,209,09:37,09:37,On Time,3,67,
-United,Los Angeles,440,09:39,09:39,On Time,3,65,
-American Airlines,Los Angeles,1059,09:41,09:41,On Time,2,56A,
-United,Boise,5358,09:43,09:43,On Time,3,71A,
-Singapore Airlines,Singapore,32,上午09:40,09:21,,Int'l,G99,
-Alaska Airlines,Kansas City,3375,09:50,09:50,On Time,2,59C,
-United,Oklahoma City,5427,09:52,09:52,On Time,3,77A,
-United,Houston/Intercontinental,404,09:55,09:55,On Time,3,61,
-Southwest,San Diego,1346,09:57,09:57,On Time,1,B9,
-Alaska Airlines,Las Vegas,1905,上午09:55,09:44,,2,53,
-Southwest,Ontario,1934,09:59,09:59,On Time,1,B17,
-United,Tucson,5856,10:01,10:01,On Time,3,77B,
-Air Canada,Toronto,737,10:03,10:03,On Time,Int'l,G93,
-American Airlines,Phoenix,1821,10:05,10:05,On Time,2,45A,
-Alaska Airlines,Seattle,405,上午10:00,09:45,,2,54B,
-Delta Air Lines,Los Angeles,664,10,10,On Time,1,46,
-Alaska Airlines,Los Angeles,1935,上午10:05,10:07,,2,59A,
-JetBlue,New York/JFK,15,10:09,10:09,On Time,1,B6,
-United,Newark,1848,上午10:11,10:04,,3,86,
-Delta Air Lines,Atlanta,2049,10:12,10:12,On Time,1,41,
-American Airlines,Charlotte,785,10:14,10:14,On Time,2,56B,
-Alaska Airlines,Chicago/O'Hare,203,10:15,10:15,On Time,2,52,
-Delta Air Lines,New York/JFK,757,上午10:20,10:11,,1,40,
-United,Tokyo/Narita,838,上午10:20,09:54,,Int'l,G95,
-American Airlines,New York/JFK,76,10:23,10:23,On Time,2,57,
-Delta Air Lines,Detroit,745,10:24,10:24,On Time,1,42,
-Alaska Airlines,Newark,363,10:25,10:25,On Time,2,52,
-JetBlue,Boston,133,10:26,10:26,On Time,1,B7,
-All Nippon Airways,Tokyo/Narita,8,10:30,10:30,On Time,Int'l,G94,
-United,Reno,5899,10:36,10:36,On Time,3,84C,
-United,Chicago/O'Hare,1825,10:38,10:38,On Time,3,81,
-Korean Air,Seoul,23,上午10:40,10:17,,Int'l,A3,
-Hong Kong Airlines,Hong Kong,60,10:40,10:40,On Time,Int'l,A9,
-Alaska Airlines,San Diego,1953,10:42,10:42,On Time,2,51A,
-Alaska Airlines,PAE,2828,10:45,10:45,On Time,2,51B,
-Frontier Airlines,Denver,663,10:52,10:52,On Time,Int'l,A10,
-United,Osaka/Kansai,34,上午10:55,10:16,,Int'l,G102,
-AeroMexico,Guadalajara,662,11,11,On Time,Int'l,A6,
-Alaska Airlines,Los Angeles,1927,上午11:00,10:57,,2,55,
-Southwest,Los Angeles,3342,11:02,11:02,On Time,1,B12,
-United,San Diego,662,11:01,11:01,On Time,3,68,
-Alaska Airlines,New York/JFK,653,上午11:05,11:04,,2,54A,
-Alaska Airlines,Washington/Dulles,1067,11:05,11:05,On Time,2,50A,
-Southwest,Atlanta,1819,11:07,11:07,On Time,1,B13,
-United,Washington/Dulles,424,11:06,11:06,On Time,3,82,
-American Airlines,Dallas-Fort Worth,1260,上午11:06,11:37,,1,45B,
-United,Fresno,5876,11:08,11:08,On Time,3,77B,
-Alaska Airlines,Orange County,3413,11:10,11:10,On Time,2,53,
-Air Canada,Vancouver,8840,11:12,11:12,On Time,Int'l,G91,
-Southwest,Phoenix,1771,11:15,11:15,On Time,1,B14,
-Delta Air Lines,Boston,2488,上午11:16,11:29,,1,46,
-United,San Luis Obispo,5966,11:17,11:17,On Time,3,84D,
-United,Newark,497,11:19,11:19,On Time,3,80,
-Alaska Airlines,Philadelphia,1141,11:20,11:20,On Time,2,54B,
-United,Sacramento,5697,11:23,11:23,On Time,3,76,
-United,Washington/Dulles,1763,11:24,11:24,On Time,3,G97,
-Delta Air Lines,New York/JFK,592,11:31,11:31,On Time,1,43,
-United,Seoul,892,上午11:30,11:14,,Int'l,G96,
-United,Denver,268,11:33,11:33,On Time,3,89,
-Delta Air Lines,Seattle,2429,11:34,11:34,On Time,1,48,
-Cathay Pacific,Hong Kong,870,上午11:35,11:42,,Int'l,A zone,
-Southwest,Chicago/Midway,2315,11:35,11:35,On Time,1,B17,
-United,Santa Barbara,5446,11:39,11:39,On Time,3,84C,
-American Airlines,Philadelphia,614,11:36,11:36,On Time,2,56A,
-United,Burbank,783,11:38,11:38,On Time,3,63,
-JetBlue,Fort Lauderdale,577,11:41,11:41,On Time,1,B6,
-United,Redding,5452,11:40,11:40,On Time,3,78,
-Delta Air Lines,Minneapolis,1344,11:44,11:44,On Time,1,41,
-United,Portland,353,11:45,11:45,On Time,3,65,
-KLM Royal Dutch Airlines,Amsterdam,605,11:47,11:47,On Time,Int'l,A4,
-United,Paris/De Gaulle,984,上午11:45,11:13,,Int'l,G100,
-United,Chicago/O'Hare,769,11:46,11:46,On Time,3,88,
-Delta Air Lines,Atlanta,1680,11:49,11:49,On Time,1,40,
-United,Nashville,2167,11:51,11:51,On Time,3,72,
-Alaska Airlines,Boston,1351,11:55,11:55,On Time,2,50B,
-Alaska Airlines,Las Vegas,1907,上午11:55,11:48,,2,52,
-American Airlines,Miami,383,11:56,11:56,On Time,2,57,
-Delta Air Lines,Los Angeles,1405,12:01,12:01,On Time,1,42,
-AeroMexico,Mexico City,668,12:05,12:05,On Time,Int'l,53,
-Alaska Airlines,Seattle,1746,下午12:05,11:53,,2,51A,
-Frontier Airlines,Atlanta,807,12:09,12:09,On Time,Int'l,A10,
-Alaska Airlines,Portland,430,下午12:10,12,,2,59A,
-United,Medford,5279,12:13,12:13,On Time,3,79,
-United,Los Angeles,2186,12:14,12:14,On Time,3,61,
-Southwest,Las Vegas,1749,12:15,12:15,On Time,1,B12,
-United,Seattle,698,12:17,12:17,On Time,3,90,
-United,Salt Lake City,1495,12:19,12:19,On Time,3,75,
-United,Ontario,5416,12:21,12:21,On Time,3,84D,
-Air Canada,Montreal,761,12:18,12:18,On Time,Int'l,G91,
-Air China,Beijing,985,下午12:20,11:57,,Int'l,G zone,
-United,San Diego,1806,12:23,12:23,On Time,3,74,
-WestJet,Calgary,1508,12:24,12:24,On Time,Int'l,,
-United,Boise,5543,12:25,12:25,On Time,3,77B,
-American Airlines,Phoenix,1844,12:26,12:26,On Time,2,56B,
-United,Redmond,5537,12:28,12:28,On Time,3,84B,
-United,Orange County,1616,12:29,12:29,On Time,3,62,
-United,Cleveland,2143,12:37,12:37,On Time,3,86,
-Delta Air Lines,Salt Lake City,522,12:40,12:40,On Time,1,46,
-Air Canada,Toronto,741,12:42,12:42,On Time,Int'l,G93,
-Air France,Paris/De Gaulle,84,12:45,12:45,On Time,Int'l,A7,
-Southwest,Burbank,1335,12:47,12:47,On Time,1,B13,
-United,Chicago/O'Hare,1891,12:48,12:48,On Time,3,69,
-JetBlue,New York/JFK,415,12:49,12:49,On Time,1,B7,
-Lufthansa,Frankfurt,454,12:50,12:50,On Time,Int'l,G101,
-Alaska Airlines,New York/JFK,627,下午12:50,12:51,,2,51B,
-Southwest,San Diego,1776,12:52,12:52,On Time,1,B17,
-Southwest,Columbus,487,12:55,12:55,On Time,1,B18,
-Alaska Airlines,Orange County,2050,下午12:55,12:39,,2,53,
-United,San Luis Obispo,5657,12:57,12:57,On Time,3,84C,
-Air New Zealand,Auckland,8,下午01:00,13:15,,Int'l,A zone,
-United,Beijing,889,下午01:00,12:41,,Int'l,G92,
-American Airlines,Chicago/O'Hare,2634,13,13,On Time,2,45A,
-Alaska Airlines,Palm Springs,3461,13:02,13:02,On Time,2,50A,
-United,Boston,2294,13:03,13:03,On Time,3,88,
-United,Denver,243,13:05,13:05,On Time,3,63,
-Alaska Airlines,Los Angeles,1899,13:07,13:07,On Time,2,55,
-Delta Air Lines,New York/JFK,490,13:06,13:06,On Time,1,40,
-JetBlue,Boston,1833,13:09,13:09,On Time,1,B8,
-United,Eugene,5838,13:11,13:11,On Time,3,84D,
-United,Albuquerque,5379,13:12,13:12,On Time,3,76,
-Delta Air Lines,Atlanta,2381,13:14,13:14,On Time,1,46,
-Southwest,Charlotte,455,13:17,13:17,On Time,1,B14,
-United,Phoenix,1609,13:19,13:19,On Time,3,61,
-United,Las Vegas,1647,13:24,13:24,On Time,3,81,
-Delta Air Lines,Seattle,1470,13:28,13:28,On Time,1,48,
-Japan Airlines,Tokyo/Haneda,2,13:30,13:30,On Time,Int'l,A8,
-Alaska Airlines,San Diego,1957,13:32,13:32,On Time,2,51B,
-Frontier Airlines,Las Vegas,2079,下午01:36,13:26,,Int'l,A10,
-United,London/Heathrow,900,下午01:40,12:54,,Int'l,G98,
-Alaska Airlines,Las Vegas,1909,下午01:40,13:34,,2,59A,
-United,Portland,2348,下午01:40,13:36,,3,72,
-United,Ontario,5228,下午01:40,13:22,,3,77A,
-United,Reno,5332,下午01:42,13:38,,3,84C,
-United,Austin,391,下午01:44,13:40,,3,73,
-United,Los Angeles,447,下午01:44,13:42,,3,68,
-United,Seattle,2236,下午01:46,13:10,,3,66,
-American Airlines,Los Angeles,1851,下午01:48,14:13,,1,45B,
-Southwest,Las Vegas,442,下午01:50,13:33,,1,B9,
-Alaska Airlines,Seattle,1750,下午01:55,14:03,,2,51A,
-Delta Air Lines,Minneapolis,1817,下午01:56,13:37,,1,41,
-American Airlines,Charlotte,884,下午01:57,14:19,,2,56B,
-United,Eureka,5284,下午01:58,14:59,,3,84C,
-Qantas,Sydney,73,14,14,On Time,Int'l,A6,
-Emirates,Dubai,225,下午02:00,14:05,,Int'l,A5,
-United,Newark,840,下午02:10,14:04,,3,87,
-United,Chicago/O'Hare,499,下午02:11,14:58,,3,74,
-Delta Air Lines,Detroit,1357,下午02:12,14:09,,1,42,
-Virgin Atlantic,London/Heathrow,19,下午02:15,15:20,,Int'l,A10,
-American Airlines,Dallas-Fort Worth,139,下午02:18,14:06,,2,57,
-United,PAE,5739,下午02:23,14:16,,3,79,
-British Airways,London/Heathrow,285,14:25,14:25,Cancelled,Int'l,,
-JetBlue,Long Beach,2136,下午02:29,18:20,,1,B7,
-United,Munich,195,下午02:30,14:42,,Int'l,G95,
-JetBlue,New York/JFK,615,下午02:31,14:08,,1,B6,
-United,Vancouver,595,下午02:32,14:52,,3,62,
-KLM Royal Dutch Airlines,Amsterdam,607,14:35,14:35,On Time,Int'l,A zone,
-Alaska Airlines,Portland,1892,下午02:35,14:07,,2,52,
-Alaska Airlines,Orange County,2790,下午02:35,16:38,,2,50B,
-United,Tucson,5527,下午02:37,14:27,,3,76,
-United,Salt Lake City,5800,下午02:37,14:14,,3,71B,
-Korean Air,Seoul,25,下午02:40,14:11,,Int'l,A11,
-Delta Air Lines,Los Angeles,1327,下午02:40,14:44,,1,46,
-Southwest,San Diego,1914,下午02:40,14:45,,1,B18,
-United,Phoenix,5902,下午02:41,14:33,,3,84D,
-United,MSO,5721,下午02:43,14:51,,3,84B,
-United,Boston,477,下午02:44,14:37,,3,85,
-Scandinavian Airlines,Copenhagen,935,下午02:45,14:32,,Int'l,G102,
-Delta Air Lines,New York/JFK,430,下午02:49,14:39,,1,43,
-United,Eugene,997,下午02:49,14:26,,3,61,
-United,Houston/Intercontinental,2187,下午02:49,15:13,,3,75,
-Alaska Airlines,New York/JFK,629,下午02:50,14:46,,2,51B,
-Southwest,Ontario,441,14:55,14:55,On Time,1,B13,
-Alaska Airlines,Seattle,1758,下午02:55,15:23,,2,59A,
-WestJet,Vancouver,1774,下午02:55,14:41,,Int'l,A2,
-American Airlines,Philadelphia,594,下午02:58,14:49,,2,56A,
-United,Honolulu/Oahu,372,下午02:59,14:48,,3,86,
-Asiana,Seoul,212,下午03:00,14:57,,Int'l,G zone,
-Alaska Airlines,Dallas/Love Field,3409,下午03:00,15:12,,2,55,
-Alaska Airlines,Los Angeles,1929,下午03:05,15,,2,54A,
-United,San Diego,229,下午03:06,15:02,,3,67,
-United,Washington/Dulles,229,下午03:06,15:04,,3,67,
-United,Denver,1478,下午03:07,15:06,,3,90,
-United,Newark,2080,下午03:10,14:53,,3,81,
-Copa Airlines,Panama City,208,下午03:13,15:01,,Int'l,G96,
-United,Redmond,5265,下午03:18,15:08,,3,78,
-Singapore Airlines,Singapore,34,下午03:20,15:09,,Int'l,G94,
-United,Boise,5359,下午03:21,15:44,,3,77B,
-United,Portland,569,下午03:24,15:51,,3,63,
-United,Denver,420,下午03:25,15:18,,3,69,
-Southwest,Los Angeles,2288,15:25,15:25,On Time,1,B14,
-United,Chicago/O'Hare,810,下午03:27,16:26,,3,87,
-United,Sacramento,5559,下午03:29,15:22,,3,77A,
-United,Santa Barbara,5764,下午03:29,15:19,,3,73A,
-United,Monterey,5984,下午03:29,15:24,,3,71A,
-Air Canada,Toronto,757,下午03:30,15:29,,Int'l,G101A,
-Delta Air Lines,Seattle,2002,下午03:30,15:26,,1,48,
-United,Medford,5504,下午03:30,15:27,,3,84B,
-United,Seattle,816,下午03:31,15:21,,3,73,
-United,Washington/Dulles,2008,下午03:33,16:08,,3,74,
-United,North Bend,5535,下午03:34,15:54,,3,84A,
-Aer Lingus,Dublin,147,下午03:35,15:28,,Int'l,G98,
-United,London/Heathrow,949,下午03:35,15:10,,Int'l,G99,
-United,San Jose/Los Cabos,1687,下午03:41,15:30,,Int'l,G92,
-United,Portland,1833,下午03:42,15:33,,3,64,
-United,Calgary,2339,下午03:42,16:27,,3,89,
-Alaska Airlines,Seattle,306,下午03:50,15:35,,2,51A,
-Air Canada,Vancouver,566,下午03:57,16:03,,Int'l,G101B,
-EVA AIR,Taipei,18,下午04:00,16:01,,Int'l,A7,
-SWISS International Airlines,Zurich,38,下午04:00,15:49,,Int'l,G zone,
-Alaska Airlines,San Diego,1959,16:05,16:05,On Time,2,52,
-American Airlines,Chicago/O'Hare,363,下午04:06,16:35,,2,57,
-Delta Air Lines,Salt Lake City,1241,下午04:06,16:04,,1,40,
-United,PAE,5866,下午04:06,15:53,,3,70,
-Alaska Airlines,Orange County,3453,下午04:15,16:10,,2,53,
-Southwest,Los Angeles,123,16:20,16:20,On Time,1,B17,
-Iberia Airlines,Madrid,6175,下午04:20,15:31,,Int'l,A3,
-United,Zurich,45,下午04:25,16:06,,Int'l,G93,
-United,Vancouver,1743,下午04:25,16:16,,3,65,
-United,Houston/Intercontinental,1973,下午04:28,16:14,,3,82,
-American Airlines,Los Angeles,6040,16:28,16:28,On Time,1,45B,
-United,Frankfurt,59,下午04:30,16:12,,Int'l,G96,
-Turkish Airlines,Istanbul,79,下午04:30,15:57,,Int'l,G97,
-United,Mexico City,718,下午04:30,15:56,,Int'l,G91,
-Norwegian,London/Gatwick,7173,下午04:30,16:18,,Int'l,A6,
-United,Omaha,5298,下午04:35,16:22,,3,71A,
-Delta Air Lines,Los Angeles,2936,下午04:38,16:37,,1,42,
-United,Chicago/O'Hare,222,下午04:40,17:29,,3,81,
-United,Austin,2407,下午04:40,16:24,,3,75,
-Alaska Airlines,Albuquerque,3389,下午04:45,16:30,,2,50A,
-United,Amsterdam,969,下午04:50,20:26,,Int'l,G97,
-United,Las Vegas,1757,下午04:51,16:48,,3,66,
-Alaska Airlines,San Jose/Los Cabos,1279,16:55,16:55,On Time,Int'l,A12,
-Alaska Airlines,Las Vegas,1911,16:57,16:57,On Time,2,54B,
-Alaska Airlines,Los Angeles,1923,16:59,16:59,On Time,2,51B,
-United,Orange County,2230,下午04:56,16:50,,3,90,
-Delta Air Lines,Atlanta,2054,下午04:57,16:39,,1,41,
-Alaska Airlines,Seattle,368,17,17,On Time,2,54A,
-Alaska Airlines,Austin,1221,17:02,17:02,On Time,2,55,
-United,Spokane,5606,17:04,17:04,On Time,3,78,
-Southwest,Denver,869,17:05,17:05,On Time,1,B9,
-British Airways,London/Heathrow,287,下午05:10,16:52,,Int'l,A9,
-United,Los Angeles,460,17:10,17:10,On Time,3,61,
-Cathay Pacific,Hong Kong,892,下午05:10,16,,Int'l,A11,
-United,Newark,1978,下午05:10,17:01,,3,62,
-United,Dallas-Fort Worth,5456,下午05:11,16:53,,3,79,
-United,Albuquerque,5812,下午05:19,17:06,,3,77A,
-Finnair,Helsinki,11,下午05:20,17:12,,Int'l,A4,
-Southwest,Burbank,344,17:20,17:20,On Time,1,B18,
-Southwest,Los Angeles,1900,17:22,17:22,On Time,1,B13,
-Alaska Airlines,PAE,2830,17:24,17:24,On Time,2,53,
-United,Minneapolis,5774,下午05:23,17:03,,3,77B,
-Alaska Airlines,Portland,1814,17:25,17:25,On Time,2,52,
-Alaska Airlines,Palm Springs,3371,17:27,17:27,On Time,2,59B,
-United,Burbank,5223,17:31,17:31,On Time,3,84C,
-Southwest,San Diego,1308,17:30,17:30,On Time,1,B14,
-Delta Air Lines,Seattle,2191,下午05:30,17:42,,1,48,
-United,Denver,735,下午05:33,18:01,,3,83,
-United,Boise,5743,17:33,17:33,On Time,3,84B,
-United,Las Vegas,1800,下午05:34,17:32,,3,63,
-American Airlines,Charlotte,2061,下午05:35,19:03,,1,45B,
-Southwest,Chicago/Midway,428,下午05:50,18:22,,1,B17,
-Alaska Airlines,Seattle,1754,17:50,17:50,On Time,2,51A,
-United,Portland,2054,17:52,17:52,On Time,3,68,
-United,Madison,5780,下午05:51,17:43,,3,76,
-Delta Air Lines,Minneapolis,1558,下午05:53,17:47,,1,46,
-United,Newark,583,17:55,17:55,On Time,3,80,
-United,Orange County,1077,下午06:02,18:56,,3,75,
-Southwest,Albuquerque,795,18:05,18:05,On Time,1,B18,
-Delta Air Lines,Salt Lake City,340,18:07,18:07,On Time,1,44,
-Delta Air Lines,Detroit,1750,下午06:09,18:24,,1,41,
-United,San Diego,1896,18:11,18:11,On Time,3,73,
-United,Palm Springs,5843,18:12,18:12,On Time,3,71B,
-United,Bozeman,623,18:17,18:17,On Time,3,89,
-Air Canada,Edmonton,8743,18:19,18:19,On Time,Int'l,G91,
-Air France,Paris/De Gaulle,82,下午06:20,18:36,,Int'l,A8,
-United,Los Angeles,1657,18:25,18:25,On Time,3,65,
-Alaska Airlines,Portland,3418,18:27,18:27,On Time,2,50B,
-United,Seattle,1494,18:30,18:30,On Time,3,67,
-Alaska Airlines,Orange County,2794,下午06:30,18:21,,2,54B,
-United,Santa Barbara,5557,18:32,18:32,On Time,3,77A,
-United,Salt Lake City,5946,18:34,18:34,On Time,3,71A,
-United,Vancouver,1200,下午06:32,18:23,,3,73A,
-American Airlines,Dallas-Fort Worth,1175,18:33,18:33,On Time,2,56B,
-Philippine Airlines,Manila,114,18:35,18:35,Cancelled,Int'l,,
-Alaska Airlines,Las Vegas,1913,18:40,18:40,On Time,2,55,
-United,Chicago/O'Hare,1689,下午06:42,19:37,,3,87,
-Delta Air Lines,Los Angeles,2473,18:43,18:43,On Time,1,43,
-United,Denver,737,18:49,18:49,On Time,3,88,
-Southwest,Burbank,1140,18:50,18:50,On Time,1,B9,
-United,Houston/Intercontinental,1700,下午06:50,18:39,,3,69,
-United,Ontario,5286,18:52,18:52,On Time,3,78,
-United,Fresno,5395,18:54,18:54,On Time,3,84B,
-United,San Luis Obispo,5756,18:53,18:53,On Time,3,84D,
-Icelandair,Reykjavik,863,18:55,18:55,On Time,Int'l,G97,
-Alaska Airlines,Los Angeles,1933,18:57,18:57,On Time,2,51A,
-American Airlines,Los Angeles,1319,18:59,18:59,On Time,2,56A,
-Lufthansa,Munich,458,下午07:05,18:51,,Int'l,G101,
-Delta Air Lines,Seattle,1455,下午07:06,19:39,,1,48,
-United,Redding,5402,19:07,19:07,On Time,3,77B,
-United,Kansas City,5255,下午07:08,20:16,,3,79,
-United,New Orleans,1885,下午07:09,19:01,,3,86,
-Delta Air Lines,Atlanta,2697,下午07:09,19:05,,1,40,
-JetBlue,New York/JFK,915,下午07:10,21:05,,1,B8,
-Southwest,San Diego,1916,19:10,19:10,On Time,1,B13,
-American Airlines,Phoenix,686,19:13,19:13,On Time,2,45A,
-JetBlue,Boston,633,下午07:14,22:44,,1,,
-United,Boston,351,下午07:20,19:35,,3,83,
-Alaska Airlines,Orlando,1305,19:20,19:20,On Time,2,51B,
-United,Las Vegas,361,19:22,19:22,On Time,3,66,
-United,San Diego,1001,19:24,19:24,On Time,3,81,
-WestJet,Calgary,1520,19:26,19:26,On Time,Int'l,A2,
-United,Eureka,5700,19:28,19:28,On Time,3,84C,
-United,Seattle,587,19:27,19:27,On Time,3,61,
-Air Canada,Toronto,753,下午07:30,20:05,,Int'l,G91,
-Delta Air Lines,New York/JFK,610,下午07:34,19:53,,1,46,
-United,Reno,1084,19:41,19:41,On Time,3,69,
-United,Phoenix,1485,19:36,19:36,On Time,3,63,
-United,Medford,5811,19:43,19:43,On Time,3,84B,
-American Airlines,Chicago/O'Hare,2798,下午07:39,20:54,,1,45B,
-China Southern,Guangzhou,657,下午07:40,19:29,,Int'l,A10,
-American Airlines,Philadelphia,680,下午07:40,19:45,,2,56B,
-Alaska Airlines,Puerto Vallarta,969,下午07:40,20:18,,Int'l,A12,
-Southwest,Phoenix,1669,19:40,19:40,On Time,1,B12,
-Alaska Airlines,Seattle,1756,19:42,19:42,On Time,2,59A,
-Southwest,Los Angeles,1131,19:47,19:47,On Time,1,B14,
-Alaska Airlines,San Diego,1963,下午07:45,20:11,,2,51A,
-EVA AIR,Taipei,28,下午07:50,19:59,,Int'l,G99,
-Southwest,Ontario,1656,19:50,19:50,On Time,1,B18,
-United,Orange County,5576,19:51,19:51,On Time,3,77A,
-United,Calgary,5643,19:55,19:55,On Time,3,77B,
-United,Los Angeles,481,19:52,19:52,On Time,3,68,
-United,St. Louis,1153,19:54,19:54,On Time,3,75,
-Alaska Airlines,Portland,726,19:57,19:57,On Time,2,55,
-Alaska Airlines,Los Angeles,1943,20:01,20:01,On Time,2,54B,
-China Airlines,Taipei,4,下午08:00,20:19,,Int'l,A5,
-Philippine Airlines,Manila,104,下午08:00,19:56,,Int'l,A3,
-United,Frankfurt,927,下午08:00,20:04,,Int'l,G102,
-Delta Air Lines,Minneapolis,1505,20,20,On Time,1,42,
-American Airlines,New York/JFK,2305,下午08:02,20:07,,2,56A,
-Air Canada,Montreal,781,20:03,20:03,On Time,Int'l,G92,
-United,Redmond,5718,20:09,20:09,On Time,3,78,
-Avianca,San Salvador,564,20:13,20:13,On Time,Int'l,A4,
-Delta Air Lines,Detroit,2113,下午08:11,20:34,,1,43,
-United,Newark,1584,下午08:13,20:10,,3,82,
-United,San Diego,736,20:23,20:23,On Time,3,61,
-Alaska Airlines,Washington/Reagan,1002,20:25,20:25,On Time,2,51B,
-United,Chicago/O'Hare,340,下午08:26,20:20,,3,80,
-Delta Air Lines,Los Angeles,1701,20:29,20:29,On Time,1,47,
-Air India,Delhi,183,下午08:30,20:33,,Int'l,G95,
-United,Austin,455,20:32,20:32,On Time,3,74,
-Southwest,Denver,457,下午08:35,21:07,,1,B9,
-Alaska Airlines,Chicago/O'Hare,1213,下午08:35,22:53,,2,51A,
-Southwest,ICT,1486,20:35,20:35,On Time,1,B13,
-United,Phoenix,2423,下午08:36,21:30,,3,62,
-United,Washington/Reagan,1554,下午08:38,20:50,,3,67,
-Alaska Airlines,New York/JFK,657,20:40,20:40,On Time,2,59A,
-United,Kahului,1722,20:42,20:42,On Time,3,83,
-United,Denver,257,20:44,20:44,On Time,3,89,
-United,Kona/Hawaii,643,下午08:44,20:39,,3,81,
-United,Eugene,5872,20:46,20:46,On Time,3,71B,
-United,Houston/Intercontinental,1474,20:45,20:45,On Time,3,71A,
-United,Fort Lauderdale,380,下午08:47,20:48,,3,70,
-American Airlines,Charlotte,1659,20:47,20:47,On Time,2,45A,
-United,Chicago/O'Hare,743,下午08:49,21:50,,3,73,
-French Bee,ORY,710,下午08:50,20:30,,Int'l,G100,
-United,Shanghai,890,20:52,20:52,On Time,Int'l,G93,
-United,Las Vegas,1235,20:53,20:53,On Time,Int'l,G95,
-United,Portland,2233,20:55,20:55,On Time,3,73A,
-Alaska Airlines,Newark,375,20:57,20:57,On Time,2,52,
-Alaska Airlines,Boston,1359,下午08:55,20:58,,2,54A,
-United,Seattle,214,20:56,20:56,On Time,3,63,
-Delta Air Lines,New York/JFK,426,下午09:00,21:04,,1,42,
-Southwest,Burbank,1720,21,21,On Time,1,B17,
-United,Singapore,28,下午09:05,21:06,,Int'l,G101,
-Air Canada,Toronto,739,下午09:08,21:38,,Int'l,G102,
-Delta Air Lines,Seattle,478,21:09,21:09,On Time,1,48,
-Hawaiian Airlines,Honolulu/Oahu,12,21:10,21:10,On Time,Int'l,A10,
-United,Los Angeles,283,21:12,21:12,On Time,3,65,
-Singapore Airlines,Hong Kong,2,下午09:15,21:02,,Int'l,G96,
-Alaska Airlines,Kahului,814,21:15,21:15,On Time,2,55,
-United,Honolulu/Oahu,724,21:19,21:19,On Time,3,82,
-Air Canada,Calgary,8559,21:21,21:21,On Time,Int'l,G91,
-American Airlines,New York/JFK,2652,21:22,21:22,On Time,2,57,
-United,Newark,2006,下午09:24,21:17,,3,88,
-United,PAE,5897,21:24,21:24,On Time,3,77B,
-AeroMexico,Mexico City,664,21:25,21:25,On Time,Int'l,A2,
-United,Lihue/Kauai,1152,21:27,21:27,On Time,3,90,
-Delta Air Lines,Boston,2570,下午09:27,21:47,,1,46,
-Alaska Airlines,Seattle,1748,21:32,21:32,On Time,2,54B,
-United,Atlanta,912,下午09:34,21:29,,3,75,
-American Airlines,Miami,2688,21:34,21:34,On Time,2,56A,
-United,Detroit,472,21:35,21:35,On Time,3,72,
-Alaska Airlines,Las Vegas,1917,21:40,21:40,On Time,2,51A,
-Southwest,Albany,2440,21:42,21:42,On Time,1,B17,
-Southwest,Los Angeles,1902,21:45,21:45,On Time,1,B14,
-United,Vancouver,726,21:49,21:49,On Time,3,81,
-United,Seattle,2070,21:51,21:51,On Time,3,66,
-Alaska Airlines,Washington/Dulles,1077,21:52,21:52,On Time,2,50A,
-United,Washington/Dulles,1893,21:54,21:54,On Time,3,87,
-American Airlines,Los Angeles,6012,21:56,21:56,On Time,1,45B,
-United,Baltimore,2059,21:53,21:53,On Time,3,61,
-United,Dallas-Fort Worth,5483,21:55,21:55,On Time,3,77A,
-United,Boston,2400,下午09:54,22:02,,3,85,
-United,Ontario,5366,21:58,21:58,On Time,3,84C,
-United,Burbank,5616,22,22,On Time,3,78,
-Hawaiian Airlines,Kahului,42,21:57,21:57,On Time,Int'l,G100,
-United,Nashville,308,21:59,21:59,On Time,3,68,
-United,Tampa,1458,下午09:55,22:45,,Int'l,68,
-Alaska Airlines,Los Angeles,1947,22:01,22:01,On Time,2,52,
-United,Sacramento,5731,22:03,22:03,On Time,3,84B,
-United,Orange County,5873,22:05,22:05,On Time,3,79,
-United,Houston/Intercontinental,1844,22:04,22:04,On Time,3,64,
-Southwest,San Diego,156,22:06,22:06,On Time,1,B14,
-Alaska Airlines,Baltimore,327,下午10:00,22:56,,2,55,
-United,Toronto,459,22:08,22:08,On Time,3,69,
-Delta Air Lines,Atlanta,1047,22:10,22:10,On Time,1,43,
-United,Denver,1105,22:12,22:12,On Time,3,62,
-Frontier Airlines,Austin,1911,22:14,22:14,On Time,Int'l,A zone,
-JetBlue,Boston,833,22:07,22:07,On Time,1,B7,
-Alaska Airlines,Kona/Hawaii,870,22:09,22:09,On Time,2,50B,
-Cathay Pacific,Hong Kong,872,下午10:10,22:16,,Int'l,A7,
-United,Chicago/O'Hare,1742,22:18,22:18,On Time,3,80,
-Alaska Airlines,Palm Springs,3395,22:20,22:20,On Time,2,59B,
-Air Canada,Montreal,779,22:13,22:13,On Time,Int'l,G91,
-Southwest,Burbank,894,下午10:15,22:30,,1,B13,
-Southwest,Las Vegas,6548,22:15,22:15,On Time,1,B18,
-United,Los Angeles,2201,22:27,22:27,On Time,3,66,
-United,Chicago/O'Hare,748,下午10:28,22:17,,3,88,
-American Airlines,Dallas-Fort Worth,1535,22:29,22:29,On Time,2,56B,
-Alaska Airlines,Nashville,1101,下午10:30,22:19,,2,51B,
-Air Canada,Vancouver,568,22:37,22:37,On Time,Int'l,G94,
-Alaska Airlines,Seattle,1328,22:40,22:40,On Time,2,54A,
-American Airlines,Charlotte,1783,22:42,22:42,On Time,2,58B,
-Southwest,Phoenix,1862,22:47,22:47,On Time,1,B13,
-Delta Air Lines,New York/JFK,2885,22:49,22:49,On Time,1,42,
-JetBlue,Fort Lauderdale,277,22:51,22:51,On Time,1,B6,
-United,Kahului,1288,22:50,22:50,On Time,3,90,
-Delta Air Lines,Detroit,1644,22:52,22:52,On Time,1,46,
-Alaska Airlines,San Diego,1969,22:54,22:54,On Time,2,54B,
-Alaska Airlines,Newark,325,22:55,22:55,On Time,2,52,
-United,Honolulu/Oahu,650,下午10:55,00:13,,3,81,
-Alaska Airlines,New Orleans,1391,22:57,22:57,On Time,2,53,
-Delta Air Lines,Minneapolis,1839,22:59,22:59,On Time,1,40,
-American Airlines,Los Angeles,2517,23:02,23:02,On Time,2,56A,
-SunCountry,Minneapolis,397,23:04,23:04,On Time,Int'l,A12,
-American Airlines,Chicago/O'Hare,1253,23:08,23:08,On Time,2,45A,
-United,Newark,1257,23:10,23:10,On Time,3,62,
-Southwest,Denver,555,23:12,23:12,On Time,1,B13,
-Southwest,Los Angeles,1093,23:14,23:14,On Time,1,B13,
-Delta Air Lines,Los Angeles,2565,23:16,23:16,On Time,1,41,
-Alaska Airlines,Portland,1812,23:20,23:20,On Time,2,50B,
-Delta Air Lines,Salt Lake City,2416,下午11:30,00:01,,1,48,
-Delta Air Lines,Seattle,2621,23:30,23:30,On Time,1,46,
-Southwest,San Diego,1918,23:35,23:35,On Time,1,B13,
-Delta Air Lines,Atlanta,2777,23:36,23:36,On Time,1,42,
-Alaska Airlines,Seattle,1330,23:44,23:44,On Time,2,54A,
-JetBlue,New York/JFK,1415,23:46,23:46,On Time,1,B8,
-United,Denver,571,23:47,23:47,On Time,3,65,
-Frontier Airlines,Denver,667,23:54,23:54,On Time,Int'l,A7,
-American Airlines,Philadelphia,1742,23:56,23:56,On Time,2,56B,
-Alaska Airlines,Los Angeles,989,23:55,23:55,On Time,2,51A,
-United,Houston/Intercontinental,385,23:58,23:58,On Time,3,73,
+,Airline,Estimated,Flight,Gate,Scheduled,Terminal
+0,Copa Airlines,23:32,382,A4,23:31,Int'l
+1,Alaska Airlines,00:08,710,55,00:07,2
+2,United,02:30,1163,83,02:29,3
+3,United,23:40,493,73,23:39,3
+4,United,23:48,398,65,23:47,3
+5,Avianca,00:15,560,A zone,00:14,Int'l
+6,Southwest,00:30,8526,,00:29,Int'l
+7,American Airlines,00:03,2421,HGR,00:02,2
+8,United,01:10,2826,80,01:09,3
+9,Delta Air Lines,00:11,2670,40,00:10,1
+10,American Airlines,00:32,177,57,00:31,2
+11,United,01:51,210,67,01:50,3
+12,JetBlue,01:06,333,B6,01:05,1
+13,JetBlue,00:26,1715,B7,00:25,1
+14,United,04:57,396,86,04:56,3
+15,United,05:03,1557,88,05:02,3
+16,United,05:36,1092,89,05:35,3
+17,United,05:17,955,G94,05:16,Int'l
+18,United,06:09,872,G95,06:08,Int'l
+19,United,06:22,5316,78,06:21,3
+20,EVA AIR,06:41,8,G101,06:40,Int'l
+21,Southwest,06:35,1085,B9,06:34,1
+22,United,06:39,1445,68,06:38,3
+23,United,06:47,5982,76,06:46,3
+24,United,06:07,806,G98,06:06,Int'l
+25,United,06:50,5738,84C,06:49,3
+26,United,07:03,1580,67,07:02,3
+27,United,06:54,5745,79,06:53,3
+28,Air India,06:38,173,G97,06:37,Int'l
+29,United,07:02,5287,77A,07:01,3
+30,United,07:32,870,G96,07:31,Int'l
+31,United,07:06,5562,71A,07:05,3
+32,United,07:08,5667,77B,07:07,3
+33,United,07:10,5549,84D,07:09,3
+34,United,07:17,1575,66,07:16,3
+35,United,07:12,5617,84B,07:11,3
+36,United,07:15,5976,71B,07:14,3
+37,United,07:16,5219,70,07:15,3
+38,Alaska Airlines,07:19,426,54A,07:18,2
+39,United,07:14,2068,73,07:13,3
+40,United,07:25,295,61,07:24,3
+41,United,07:26,5362,87A,07:25,3
+42,United,07:31,256,88,07:30,3
+43,United,07:28,2356,85,07:27,3
+44,Alaska Airlines,07:40,3327,50A,07:39,2
+45,United,07:41,5464,77A,07:40,3
+46,United,07:44,728,67,07:43,3
+47,United,07:30,8,G100,07:29,Int'l
+48,United,07:47,5601,79,07:46,3
+49,United,07:42,1129,74,07:41,3
+50,United,07:46,2123,89,07:45,3
+51,United,07:34,500,83,07:33,3
+52,Alaska Airlines,07:50,3497,59C,07:49,2
+53,Alaska Airlines,07:48,1951,51B,07:47,2
+54,United,07:55,5309,73A,07:54,3
+55,American Airlines,07:59,1322,56B,07:58,2
+56,United,08:01,2235,68,08,3
+57,United,08,471,62,07:59,3
+58,Southwest,08:02,1573,B9,08:01,1
+59,Alaska Airlines,07:52,1925,59A,07:51,2
+60,United,08:04,5215,77B,08:03,3
+61,United,08:03,5372,78,08:02,3
+62,United,08:06,5341,76,08:05,3
+63,United,08:09,368,64,08:08,3
+64,United,08:10,5893,77A,08:09,3
+65,United,08:11,5550,71B,08:10,3
+66,United,08:05,1900,82,08:04,3
+67,JetBlue,08:15,1136,B6,08:14,1
+68,United,07:54,357,75,07:53,3
+69,United,08:19,5803,77B,08:18,3
+70,United,08:20,1664,72,08:19,3
+71,United,07:51,114,G99,07:50,Int'l
+72,Alaska Airlines,08:25,1897,54A,08:24,2
+73,Delta Air Lines,08:27,2313,41,08:26,1
+74,United,08:16,858,G102,08:15,Int'l
+75,United,08:23,1585,90,08:22,3
+76,United,08:30,1818,65,08:29,3
+77,Alaska Airlines,08:32,3449,53,08:31,2
+78,United,08:31,618,69,08:30,3
+79,Southwest,08:35,1896,B12,08:34,1
+80,Alaska Airlines,11:22,2028,50B,11:21,2
+81,Air Canada,08:36,560,G93,08:35,Int'l
+82,United,08:34,2166,83,08:33,3
+83,Alaska Airlines,08:41,1219,54A,08:40,2
+84,United,08:40,5319,84D,08:39,3
+85,American Airlines,08:43,152,57,08:42,2
+86,Alaska Airlines,08:29,762,51A,08:28,2
+87,United,08:38,1698,70,08:37,3
+88,United,11:27,5945,84B,11:26,3
+89,United,08:39,759,66,08:38,3
+90,United,08:49,1881,81,08:48,3
+91,United,08:57,2,G100,08:56,Int'l
+92,Delta Air Lines,08:42,2905,40,08:41,1
+93,United,08:44,820,G94,08:43,Int'l
+94,United,08:59,862,G101,08:58,Int'l
+95,Southwest,08:55,1338,B14,08:54,1
+96,United,09:01,590,74,09,3
+97,United,09:03,2301,73A,09:02,3
+98,United,08:45,1111,73,08:44,3
+99,United,08:53,731,89,08:52,3
+100,United,09:05,922,68,09:04,3
+101,Alaska Airlines,09:10,2958,52,09:09,2
+102,United,09:04,1483,85,09:03,3
+103,United,08:47,876,G95,08:46,Int'l
+104,United,09:18,5997,78,09:17,3
+105,Alaska Airlines,09:20,709,51B,09:19,2
+106,Delta Air Lines,09:26,1938,43,09:25,1
+107,Delta Air Lines,09:27,2490,42,09:26,1
+108,China Eastern,08:52,589,A zone,08:51,Int'l
+109,Alaska Airlines,09:30,1372,55,09:29,2
+110,Delta Air Lines,09:32,1390,48,09:31,1
+111,United,09:23,2093,62,09:22,3
+112,United,09:34,5723,84D,09:33,3
+113,United,09:29,565,88,09:28,3
+114,United,09:36,2362,63,09:35,3
+115,Air Canada,09:38,8579,G102,09:37,Int'l
+116,United,09:28,433,80,09:27,3
+117,Interjet,09:35,820,A7,09:34,Int'l
+118,United,09:37,209,67,09:36,3
+119,United,09:39,440,65,09:38,3
+120,American Airlines,09:41,1059,56A,09:40,2
+121,United,09:43,5358,71A,09:42,3
+122,Singapore Airlines,09:21,32,G99,09:20,Int'l
+123,Alaska Airlines,09:50,3375,59C,09:49,2
+124,United,09:52,5427,77A,09:51,3
+125,United,09:55,404,61,09:54,3
+126,Southwest,09:57,1346,B9,09:56,1
+127,Alaska Airlines,09:44,1905,53,09:43,2
+128,Southwest,09:59,1934,B17,09:58,1
+129,United,10:01,5856,77B,10,3
+130,Air Canada,10:03,737,G93,10:02,Int'l
+131,American Airlines,10:05,1821,45A,10:04,2
+132,Alaska Airlines,09:45,405,54B,09:44,2
+133,Delta Air Lines,10,664,46,09:59,1
+134,Alaska Airlines,10:07,1935,59A,10:06,2
+135,JetBlue,10:09,15,B6,10:08,1
+136,United,10:04,1848,86,10:03,3
+137,Delta Air Lines,10:12,2049,41,10:11,1
+138,American Airlines,10:14,785,56B,10:13,2
+139,Alaska Airlines,10:15,203,52,10:14,2
+140,Delta Air Lines,10:11,757,40,10:10,1
+141,United,09:54,838,G95,09:53,Int'l
+142,American Airlines,10:23,76,57,10:22,2
+143,Delta Air Lines,10:24,745,42,10:23,1
+144,Alaska Airlines,10:25,363,52,10:24,2
+145,JetBlue,10:26,133,B7,10:25,1
+146,All Nippon Airways,10:30,8,G94,10:29,Int'l
+147,United,10:36,5899,84C,10:35,3
+148,United,10:38,1825,81,10:37,3
+149,Korean Air,10:17,23,A3,10:16,Int'l
+150,Hong Kong Airlines,10:40,60,A9,10:39,Int'l
+151,Alaska Airlines,10:42,1953,51A,10:41,2
+152,Alaska Airlines,10:45,2828,51B,10:44,2
+153,Frontier Airlines,10:52,663,A10,10:51,Int'l
+154,United,10:16,34,G102,10:15,Int'l
+155,AeroMexico,11,662,A6,10:59,Int'l
+156,Alaska Airlines,10:57,1927,55,10:56,2
+157,Southwest,11:02,3342,B12,11:01,1
+158,United,11:01,662,68,11,3
+159,Alaska Airlines,11:04,653,54A,11:03,2
+160,Alaska Airlines,11:05,1067,50A,11:04,2
+161,Southwest,11:07,1819,B13,11:06,1
+162,United,11:06,424,82,11:05,3
+163,American Airlines,11:37,1260,45B,11:36,1
+164,United,11:08,5876,77B,11:07,3
+165,Alaska Airlines,11:10,3413,53,11:09,2
+166,Air Canada,11:12,8840,G91,11:11,Int'l
+167,Southwest,11:15,1771,B14,11:14,1
+168,Delta Air Lines,11:29,2488,46,11:28,1
+169,United,11:17,5966,84D,11:16,3
+170,United,11:19,497,80,11:18,3
+171,Alaska Airlines,11:20,1141,54B,11:19,2
+172,United,11:23,5697,76,11:22,3
+173,United,11:24,1763,G97,11:23,3
+174,Delta Air Lines,11:31,592,43,11:30,1
+175,United,11:14,892,G96,11:13,Int'l
+176,United,11:33,268,89,11:32,3
+177,Delta Air Lines,11:34,2429,48,11:33,1
+178,Cathay Pacific,11:42,870,A zone,11:41,Int'l
+179,Southwest,11:35,2315,B17,11:34,1
+180,United,11:39,5446,84C,11:38,3
+181,American Airlines,11:36,614,56A,11:35,2
+182,United,11:38,783,63,11:37,3
+183,JetBlue,11:41,577,B6,11:40,1
+184,United,11:40,5452,78,11:39,3
+185,Delta Air Lines,11:44,1344,41,11:43,1
+186,United,11:45,353,65,11:44,3
+187,KLM Royal Dutch Airlines,11:47,605,A4,11:46,Int'l
+188,United,11:13,984,G100,11:12,Int'l
+189,United,11:46,769,88,11:45,3
+190,Delta Air Lines,11:49,1680,40,11:48,1
+191,United,11:51,2167,72,11:50,3
+192,Alaska Airlines,11:55,1351,50B,11:54,2
+193,Alaska Airlines,11:48,1907,52,11:47,2
+194,American Airlines,11:56,383,57,11:55,2
+195,Delta Air Lines,12:01,1405,42,12,1
+196,AeroMexico,12:05,668,53,12:04,Int'l
+197,Alaska Airlines,11:53,1746,51A,11:52,2
+198,Frontier Airlines,12:09,807,A10,12:08,Int'l
+199,Alaska Airlines,12,430,59A,11:59,2
+200,United,12:13,5279,79,12:12,3
+201,United,12:14,2186,61,12:13,3
+202,Southwest,12:15,1749,B12,12:14,1
+203,United,12:17,698,90,12:16,3
+204,United,12:19,1495,75,12:18,3
+205,United,12:21,5416,84D,12:20,3
+206,Air Canada,12:18,761,G91,12:17,Int'l
+207,Air China,11:57,985,G zone,11:56,Int'l
+208,United,12:23,1806,74,12:22,3
+209,WestJet,12:24,1508,,12:23,Int'l
+210,United,12:25,5543,77B,12:24,3
+211,American Airlines,12:26,1844,56B,12:25,2
+212,United,12:28,5537,84B,12:27,3
+213,United,12:29,1616,62,12:28,3
+214,United,12:37,2143,86,12:36,3
+215,Delta Air Lines,12:40,522,46,12:39,1
+216,Air Canada,12:42,741,G93,12:41,Int'l
+217,Air France,12:45,84,A7,12:44,Int'l
+218,Southwest,12:47,1335,B13,12:46,1
+219,United,12:48,1891,69,12:47,3
+220,JetBlue,12:49,415,B7,12:48,1
+221,Lufthansa,12:50,454,G101,12:49,Int'l
+222,Alaska Airlines,12:51,627,51B,12:50,2
+223,Southwest,12:52,1776,B17,12:51,1
+224,Southwest,12:55,487,B18,12:54,1
+225,Alaska Airlines,12:39,2050,53,12:38,2
+226,United,12:57,5657,84C,12:56,3
+227,Air New Zealand,13:15,8,A zone,13:14,Int'l
+228,United,12:41,889,G92,12:40,Int'l
+229,American Airlines,13,2634,45A,12:59,2
+230,Alaska Airlines,13:02,3461,50A,13:01,2
+231,United,13:03,2294,88,13:02,3
+232,United,13:05,243,63,13:04,3
+233,Alaska Airlines,13:07,1899,55,13:06,2
+234,Delta Air Lines,13:06,490,40,13:05,1
+235,JetBlue,13:09,1833,B8,13:08,1
+236,United,13:11,5838,84D,13:10,3
+237,United,13:12,5379,76,13:11,3
+238,Delta Air Lines,13:14,2381,46,13:13,1
+239,Southwest,13:17,455,B14,13:16,1
+240,United,13:19,1609,61,13:18,3
+241,United,13:24,1647,81,13:23,3
+242,Delta Air Lines,13:28,1470,48,13:27,1
+243,Japan Airlines,13:30,2,A8,13:29,Int'l
+244,Alaska Airlines,13:32,1957,51B,13:31,2
+245,Frontier Airlines,13:26,2079,A10,13:25,Int'l
+246,United,12:54,900,G98,12:53,Int'l
+247,Alaska Airlines,13:34,1909,59A,13:33,2
+248,United,13:36,2348,72,13:35,3
+249,United,13:22,5228,77A,13:21,3
+250,United,13:38,5332,84C,13:37,3
+251,United,13:40,391,73,13:39,3
+252,United,13:42,447,68,13:41,3
+253,United,13:10,2236,66,13:09,3
+254,American Airlines,14:13,1851,45B,14:12,1
+255,Southwest,13:33,442,B9,13:32,1
+256,Alaska Airlines,14:03,1750,51A,14:02,2
+257,Delta Air Lines,13:37,1817,41,13:36,1
+258,American Airlines,14:19,884,56B,14:18,2
+259,United,14:59,5284,84C,14:58,3
+260,Qantas,14,73,A6,13:59,Int'l
+261,Emirates,14:05,225,A5,14:04,Int'l
+262,United,14:04,840,87,14:03,3
+263,United,14:58,499,74,14:57,3
+264,Delta Air Lines,14:09,1357,42,14:08,1
+265,Virgin Atlantic,15:20,19,A10,15:19,Int'l
+266,American Airlines,14:06,139,57,14:05,2
+267,United,14:16,5739,79,14:15,3
+268,British Airways,14:25,285,,14:24,Int'l
+269,JetBlue,18:20,2136,B7,18:19,1
+270,United,14:42,195,G95,14:41,Int'l
+271,JetBlue,14:08,615,B6,14:07,1
+272,United,14:52,595,62,14:51,3
+273,KLM Royal Dutch Airlines,14:35,607,A zone,14:34,Int'l
+274,Alaska Airlines,14:07,1892,52,14:06,2
+275,Alaska Airlines,16:38,2790,50B,16:37,2
+276,United,14:27,5527,76,14:26,3
+277,United,14:14,5800,71B,14:13,3
+278,Korean Air,14:11,25,A11,14:10,Int'l
+279,Delta Air Lines,14:44,1327,46,14:43,1
+280,Southwest,14:45,1914,B18,14:44,1
+281,United,14:33,5902,84D,14:32,3
+282,United,14:51,5721,84B,14:50,3
+283,United,14:37,477,85,14:36,3
+284,Scandinavian Airlines,14:32,935,G102,14:31,Int'l
+285,Delta Air Lines,14:39,430,43,14:38,1
+286,United,14:26,997,61,14:25,3
+287,United,15:13,2187,75,15:12,3
+288,Alaska Airlines,14:46,629,51B,14:45,2
+289,Southwest,14:55,441,B13,14:54,1
+290,Alaska Airlines,15:23,1758,59A,15:22,2
+291,WestJet,14:41,1774,A2,14:40,Int'l
+292,American Airlines,14:49,594,56A,14:48,2
+293,United,14:48,372,86,14:47,3
+294,Asiana,14:57,212,G zone,14:56,Int'l
+295,Alaska Airlines,15:12,3409,55,15:11,2
+296,Alaska Airlines,15,1929,54A,14:59,2
+297,United,15:02,229,67,15:01,3
+298,United,15:04,229,67,15:03,3
+299,United,15:06,1478,90,15:05,3
+300,United,14:53,2080,81,14:52,3
+301,Copa Airlines,15:01,208,G96,15,Int'l
+302,United,15:08,5265,78,15:07,3
+303,Singapore Airlines,15:09,34,G94,15:08,Int'l
+304,United,15:44,5359,77B,15:43,3
+305,United,15:51,569,63,15:50,3
+306,United,15:18,420,69,15:17,3
+307,Southwest,15:25,2288,B14,15:24,1
+308,United,16:26,810,87,16:25,3
+309,United,15:22,5559,77A,15:21,3
+310,United,15:19,5764,73A,15:18,3
+311,United,15:24,5984,71A,15:23,3
+312,Air Canada,15:29,757,G101A,15:28,Int'l
+313,Delta Air Lines,15:26,2002,48,15:25,1
+314,United,15:27,5504,84B,15:26,3
+315,United,15:21,816,73,15:20,3
+316,United,16:08,2008,74,16:07,3
+317,United,15:54,5535,84A,15:53,3
+318,Aer Lingus,15:28,147,G98,15:27,Int'l
+319,United,15:10,949,G99,15:09,Int'l
+320,United,15:30,1687,G92,15:29,Int'l
+321,United,15:33,1833,64,15:32,3
+322,United,16:27,2339,89,16:26,3
+323,Alaska Airlines,15:35,306,51A,15:34,2
+324,Air Canada,16:03,566,G101B,16:02,Int'l
+325,EVA AIR,16:01,18,A7,16,Int'l
+326,SWISS International Airlines,15:49,38,G zone,15:48,Int'l
+327,Alaska Airlines,16:05,1959,52,16:04,2
+328,American Airlines,16:35,363,57,16:34,2
+329,Delta Air Lines,16:04,1241,40,16:03,1
+330,United,15:53,5866,70,15:52,3
+331,Alaska Airlines,16:10,3453,53,16:09,2
+332,Southwest,16:20,123,B17,16:19,1
+333,Iberia Airlines,15:31,6175,A3,15:30,Int'l
+334,United,16:06,45,G93,16:05,Int'l
+335,United,16:16,1743,65,16:15,3
+336,United,16:14,1973,82,16:13,3
+337,American Airlines,16:28,6040,45B,16:27,1
+338,United,16:12,59,G96,16:11,Int'l
+339,Turkish Airlines,15:57,79,G97,15:56,Int'l
+340,United,15:56,718,G91,15:55,Int'l
+341,Norwegian,16:18,7173,A6,16:17,Int'l
+342,United,16:22,5298,71A,16:21,3
+343,Delta Air Lines,16:37,2936,42,16:36,1
+344,United,17:29,222,81,17:28,3
+345,United,16:24,2407,75,16:23,3
+346,Alaska Airlines,16:30,3389,50A,16:29,2
+347,United,20:26,969,G97,20:25,Int'l
+348,United,16:48,1757,66,16:47,3
+349,Alaska Airlines,16:55,1279,A12,16:54,Int'l
+350,Alaska Airlines,16:57,1911,54B,16:56,2
+351,Alaska Airlines,16:59,1923,51B,16:58,2
+352,United,16:50,2230,90,16:49,3
+353,Delta Air Lines,16:39,2054,41,16:38,1
+354,Alaska Airlines,17,368,54A,16:59,2
+355,Alaska Airlines,17:02,1221,55,17:01,2
+356,United,17:04,5606,78,17:03,3
+357,Southwest,17:05,869,B9,17:04,1
+358,British Airways,16:52,287,A9,16:51,Int'l
+359,United,17:10,460,61,17:09,3
+360,Cathay Pacific,16,892,A11,15:59,Int'l
+361,United,17:01,1978,62,17,3
+362,United,16:53,5456,79,16:52,3
+363,United,17:06,5812,77A,17:05,3
+364,Finnair,17:12,11,A4,17:11,Int'l
+365,Southwest,17:20,344,B18,17:19,1
+366,Southwest,17:22,1900,B13,17:21,1
+367,Alaska Airlines,17:24,2830,53,17:23,2
+368,United,17:03,5774,77B,17:02,3
+369,Alaska Airlines,17:25,1814,52,17:24,2
+370,Alaska Airlines,17:27,3371,59B,17:26,2
+371,United,17:31,5223,84C,17:30,3
+372,Southwest,17:30,1308,B14,17:29,1
+373,Delta Air Lines,17:42,2191,48,17:41,1
+374,United,18:01,735,83,18,3
+375,United,17:33,5743,84B,17:32,3
+376,United,17:32,1800,63,17:31,3
+377,American Airlines,19:03,2061,45B,19:02,1
+378,Southwest,18:22,428,B17,18:21,1
+379,Alaska Airlines,17:50,1754,51A,17:49,2
+380,United,17:52,2054,68,17:51,3
+381,United,17:43,5780,76,17:42,3
+382,Delta Air Lines,17:47,1558,46,17:46,1
+383,United,17:55,583,80,17:54,3
+384,United,18:56,1077,75,18:55,3
+385,Southwest,18:05,795,B18,18:04,1
+386,Delta Air Lines,18:07,340,44,18:06,1
+387,Delta Air Lines,18:24,1750,41,18:23,1
+388,United,18:11,1896,73,18:10,3
+389,United,18:12,5843,71B,18:11,3
+390,United,18:17,623,89,18:16,3
+391,Air Canada,18:19,8743,G91,18:18,Int'l
+392,Air France,18:36,82,A8,18:35,Int'l
+393,United,18:25,1657,65,18:24,3
+394,Alaska Airlines,18:27,3418,50B,18:26,2
+395,United,18:30,1494,67,18:29,3
+396,Alaska Airlines,18:21,2794,54B,18:20,2
+397,United,18:32,5557,77A,18:31,3
+398,United,18:34,5946,71A,18:33,3
+399,United,18:23,1200,73A,18:22,3
+400,American Airlines,18:33,1175,56B,18:32,2
+401,Philippine Airlines,18:35,114,,18:34,Int'l
+402,Alaska Airlines,18:40,1913,55,18:39,2
+403,United,19:37,1689,87,19:36,3
+404,Delta Air Lines,18:43,2473,43,18:42,1
+405,United,18:49,737,88,18:48,3
+406,Southwest,18:50,1140,B9,18:49,1
+407,United,18:39,1700,69,18:38,3
+408,United,18:52,5286,78,18:51,3
+409,United,18:54,5395,84B,18:53,3
+410,United,18:53,5756,84D,18:52,3
+411,Icelandair,18:55,863,G97,18:54,Int'l
+412,Alaska Airlines,18:57,1933,51A,18:56,2
+413,American Airlines,18:59,1319,56A,18:58,2
+414,Lufthansa,18:51,458,G101,18:50,Int'l
+415,Delta Air Lines,19:39,1455,48,19:38,1
+416,United,19:07,5402,77B,19:06,3
+417,United,20:16,5255,79,20:15,3
+418,United,19:01,1885,86,19,3
+419,Delta Air Lines,19:05,2697,40,19:04,1
+420,JetBlue,21:05,915,B8,21:04,1
+421,Southwest,19:10,1916,B13,19:09,1
+422,American Airlines,19:13,686,45A,19:12,2
+423,JetBlue,22:44,633,,22:43,1
+424,United,19:35,351,83,19:34,3
+425,Alaska Airlines,19:20,1305,51B,19:19,2
+426,United,19:22,361,66,19:21,3
+427,United,19:24,1001,81,19:23,3
+428,WestJet,19:26,1520,A2,19:25,Int'l
+429,United,19:28,5700,84C,19:27,3
+430,United,19:27,587,61,19:26,3
+431,Air Canada,20:05,753,G91,20:04,Int'l
+432,Delta Air Lines,19:53,610,46,19:52,1
+433,United,19:41,1084,69,19:40,3
+434,United,19:36,1485,63,19:35,3
+435,United,19:43,5811,84B,19:42,3
+436,American Airlines,20:54,2798,45B,20:53,1
+437,China Southern,19:29,657,A10,19:28,Int'l
+438,American Airlines,19:45,680,56B,19:44,2
+439,Alaska Airlines,20:18,969,A12,20:17,Int'l
+440,Southwest,19:40,1669,B12,19:39,1
+441,Alaska Airlines,19:42,1756,59A,19:41,2
+442,Southwest,19:47,1131,B14,19:46,1
+443,Alaska Airlines,20:11,1963,51A,20:10,2
+444,EVA AIR,19:59,28,G99,19:58,Int'l
+445,Southwest,19:50,1656,B18,19:49,1
+446,United,19:51,5576,77A,19:50,3
+447,United,19:55,5643,77B,19:54,3
+448,United,19:52,481,68,19:51,3
+449,United,19:54,1153,75,19:53,3
+450,Alaska Airlines,19:57,726,55,19:56,2
+451,Alaska Airlines,20:01,1943,54B,20,2
+452,China Airlines,20:19,4,A5,20:18,Int'l
+453,Philippine Airlines,19:56,104,A3,19:55,Int'l
+454,United,20:04,927,G102,20:03,Int'l
+455,Delta Air Lines,20,1505,42,19:59,1
+456,American Airlines,20:07,2305,56A,20:06,2
+457,Air Canada,20:03,781,G92,20:02,Int'l
+458,United,20:09,5718,78,20:08,3
+459,Avianca,20:13,564,A4,20:12,Int'l
+460,Delta Air Lines,20:34,2113,43,20:33,1
+461,United,20:10,1584,82,20:09,3
+462,United,20:23,736,61,20:22,3
+463,Alaska Airlines,20:25,1002,51B,20:24,2
+464,United,20:20,340,80,20:19,3
+465,Delta Air Lines,20:29,1701,47,20:28,1
+466,Air India,20:33,183,G95,20:32,Int'l
+467,United,20:32,455,74,20:31,3
+468,Southwest,21:07,457,B9,21:06,1
+469,Alaska Airlines,22:53,1213,51A,22:52,2
+470,Southwest,20:35,1486,B13,20:34,1
+471,United,21:30,2423,62,21:29,3
+472,United,20:50,1554,67,20:49,3
+473,Alaska Airlines,20:40,657,59A,20:39,2
+474,United,20:42,1722,83,20:41,3
+475,United,20:44,257,89,20:43,3
+476,United,20:39,643,81,20:38,3
+477,United,20:46,5872,71B,20:45,3
+478,United,20:45,1474,71A,20:44,3
+479,United,20:48,380,70,20:47,3
+480,American Airlines,20:47,1659,45A,20:46,2
+481,United,21:50,743,73,21:49,3
+482,French Bee,20:30,710,G100,20:29,Int'l
+483,United,20:52,890,G93,20:51,Int'l
+484,United,20:53,1235,G95,20:52,Int'l
+485,United,20:55,2233,73A,20:54,3
+486,Alaska Airlines,20:57,375,52,20:56,2
+487,Alaska Airlines,20:58,1359,54A,20:57,2
+488,United,20:56,214,63,20:55,3
+489,Delta Air Lines,21:04,426,42,21:03,1
+490,Southwest,21,1720,B17,20:59,1
+491,United,21:06,28,G101,21:05,Int'l
+492,Air Canada,21:38,739,G102,21:37,Int'l
+493,Delta Air Lines,21:09,478,48,21:08,1
+494,Hawaiian Airlines,21:10,12,A10,21:09,Int'l
+495,United,21:12,283,65,21:11,3
+496,Singapore Airlines,21:02,2,G96,21:01,Int'l
+497,Alaska Airlines,21:15,814,55,21:14,2
+498,United,21:19,724,82,21:18,3
+499,Air Canada,21:21,8559,G91,21:20,Int'l
+500,American Airlines,21:22,2652,57,21:21,2
+501,United,21:17,2006,88,21:16,3
+502,United,21:24,5897,77B,21:23,3
+503,AeroMexico,21:25,664,A2,21:24,Int'l
+504,United,21:27,1152,90,21:26,3
+505,Delta Air Lines,21:47,2570,46,21:46,1
+506,Alaska Airlines,21:32,1748,54B,21:31,2
+507,United,21:29,912,75,21:28,3
+508,American Airlines,21:34,2688,56A,21:33,2
+509,United,21:35,472,72,21:34,3
+510,Alaska Airlines,21:40,1917,51A,21:39,2
+511,Southwest,21:42,2440,B17,21:41,1
+512,Southwest,21:45,1902,B14,21:44,1
+513,United,21:49,726,81,21:48,3
+514,United,21:51,2070,66,21:50,3
+515,Alaska Airlines,21:52,1077,50A,21:51,2
+516,United,21:54,1893,87,21:53,3
+517,American Airlines,21:56,6012,45B,21:55,1
+518,United,21:53,2059,61,21:52,3
+519,United,21:55,5483,77A,21:54,3
+520,United,22:02,2400,85,22:01,3
+521,United,21:58,5366,84C,21:57,3
+522,United,22,5616,78,21:59,3
+523,Hawaiian Airlines,21:57,42,G100,21:56,Int'l
+524,United,21:59,308,68,21:58,3
+525,United,22:45,1458,68,22:44,Int'l
+526,Alaska Airlines,22:01,1947,52,22,2
+527,United,22:03,5731,84B,22:02,3
+528,United,22:05,5873,79,22:04,3
+529,United,22:04,1844,64,22:03,3
+530,Southwest,22:06,156,B14,22:05,1
+531,Alaska Airlines,22:56,327,55,22:55,2
+532,United,22:08,459,69,22:07,3
+533,Delta Air Lines,22:10,1047,43,22:09,1
+534,United,22:12,1105,62,22:11,3
+535,Frontier Airlines,22:14,1911,A zone,22:13,Int'l
+536,JetBlue,22:07,833,B7,22:06,1
+537,Alaska Airlines,22:09,870,50B,22:08,2
+538,Cathay Pacific,22:16,872,A7,22:15,Int'l
+539,United,22:18,1742,80,22:17,3
+540,Alaska Airlines,22:20,3395,59B,22:19,2
+541,Air Canada,22:13,779,G91,22:12,Int'l
+542,Southwest,22:30,894,B13,22:29,1
+543,Southwest,22:15,6548,B18,22:14,1
+544,United,22:27,2201,66,22:26,3
+545,United,22:17,748,88,22:16,3
+546,American Airlines,22:29,1535,56B,22:28,2
+547,Alaska Airlines,22:19,1101,51B,22:18,2
+548,Air Canada,22:37,568,G94,22:36,Int'l
+549,Alaska Airlines,22:40,1328,54A,22:39,2
+550,American Airlines,22:42,1783,58B,22:41,2
+551,Southwest,22:47,1862,B13,22:46,1
+552,Delta Air Lines,22:49,2885,42,22:48,1
+553,JetBlue,22:51,277,B6,22:50,1
+554,United,22:50,1288,90,22:49,3
+555,Delta Air Lines,22:52,1644,46,22:51,1
+556,Alaska Airlines,22:54,1969,54B,22:53,2
+557,Alaska Airlines,22:55,325,52,22:54,2
+558,United,00:13,650,81,00:12,3
+559,Alaska Airlines,22:57,1391,53,22:56,2
+560,Delta Air Lines,22:59,1839,40,22:58,1
+561,American Airlines,23:02,2517,56A,23:01,2
+562,SunCountry,23:04,397,A12,23:03,Int'l
+563,American Airlines,23:08,1253,45A,23:07,2
+564,United,23:10,1257,62,23:09,3
+565,Southwest,23:12,555,B13,23:11,1
+566,Southwest,23:14,1093,B13,23:13,1
+567,Delta Air Lines,23:16,2565,41,23:15,1
+568,Alaska Airlines,23:20,1812,50B,23:19,2
+569,Delta Air Lines,00:01,2416,48,00,1
+570,Delta Air Lines,23:30,2621,46,23:29,1
+571,Southwest,23:35,1918,B13,23:34,1
+572,Delta Air Lines,23:36,2777,42,23:35,1
+573,Alaska Airlines,23:44,1330,54A,23:43,2
+574,JetBlue,23:46,1415,B8,23:45,1
+575,United,23:47,571,65,23:46,3
+576,Frontier Airlines,23:54,667,A7,23:53,Int'l
+577,American Airlines,23:56,1742,56B,23:55,2
+578,Alaska Airlines,23:55,989,51A,23:54,2
+579,United,23:58,385,73,23:57,3

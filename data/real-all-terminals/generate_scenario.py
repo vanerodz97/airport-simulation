@@ -97,7 +97,8 @@ def get_departure_from_csv():
             new_flight["gate"] = gate_list[i]
 
         new_flight["model"] = flight_list[i]
-        new_flight["callsign"] = airline_list[i] + "-" + str(
+        new_flight["callsign"] = airline_list[i].replace(" Airlines","") + "-"\
+                                 + str(
             flight_list[i]) + "-D"
         new_flight["time"] = new_flight["appear_time"] = set_time(
             estimated_list[i])
@@ -118,6 +119,7 @@ def get_arrival_from_csv():
     gate_list = df["Gate"].tolist()
     flight_list = df["Flight"].tolist()
     estimated_list = df["Estimated"].tolist()
+    scheduled_list = df["Scheduled"].tolist()
     for i in range(1, size):
         new_flight = arrival_flight_template.copy()
         if terminal_list[i] == '1':
@@ -138,10 +140,12 @@ def get_arrival_from_csv():
             new_flight["gate"] = gate_list[i]
 
         new_flight["model"] = flight_list[i]
-        new_flight["callsign"] = airline_list[i] + "-" + str(
+        new_flight["callsign"] = airline_list[i].replace(" Airlines","") + "-" + str(
             flight_list[i]) + "-A"
-        new_flight["time"] = new_flight["appear_time"] = set_new_time(
+        new_flight["time"] = set_new_time(
             estimated_list[i])
+        new_flight["appear_time"] = set_new_time(
+            scheduled_list[i])
         for k, v in spots_to_gates.items():
             if new_flight["gate"] in v:
                 new_flight["spot"] = k
