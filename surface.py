@@ -316,6 +316,7 @@ class SurfaceFactory:
         SurfaceFactory.__load_gates(surface, dir_path)
         SurfaceFactory.__load_spots(surface, dir_path)
         SurfaceFactory.__load_gates_to_spots_mapping(surface, dir_path)
+        SurfaceFactory.__load_intersections(surface, dir_path)
         SurfaceFactory.__load_runway(surface, dir_path)
         SurfaceFactory.__load_taxiway(surface, dir_path)
         SurfaceFactory.__load_pushback_way(surface, dir_path)
@@ -401,6 +402,13 @@ class SurfaceFactory:
             elif type_name == "spots":
                 nodes.append(
                     Spot(
+                        name,
+                        {"lat": node_raw["lat"], "lng": node_raw["lng"]},
+                    )
+                )
+            elif type_name == "inters":
+                nodes.append(
+                    Intersection(
                         name,
                         {"lat": node_raw["lat"], "lng": node_raw["lng"]},
                     )
