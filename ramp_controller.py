@@ -26,8 +26,7 @@ class RampController:
             spot = gate.get_spots()
             if spot not in self.spot_queue:
                 self.spot_queue[spot] = deque()
-            else:
-                self.spot_queue[spot].append(aircraft)
+            self.spot_queue[spot].append(aircraft)
 
     def check_conflict_at_spot(self):
         aircraft_list = self.ground.aircrafts
