@@ -54,6 +54,8 @@ class Aircraft:
         self.is_reroute_necessary = True
         self.take_off = False
 
+        self.tick_count = 0
+
     def set_location(self, location, level=LOCATION_LEVEL_COARSE):
         """Sets the location of this aircraft to a given location."""
         if level == Aircraft.LOCATION_LEVEL_COARSE:
@@ -204,6 +206,7 @@ class Aircraft:
         """
 
         if self.itinerary:
+            self.tick_count += 1
             self.__state = self.state
             new_speed = self.get_next_speed(self.fronter_info) + self.speed_uncertainty
             self.set_speed(new_speed)
