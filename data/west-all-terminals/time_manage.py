@@ -39,10 +39,10 @@ if __name__ == "__main__":
         iso = datetimeToString(d)
 
         if iso in se:
-            d = d + dt.timedelta(minutes=2)
+            d = d + dt.timedelta(minutes=4)
             iso = datetimeToString(d)
             while iso in se:
-                d = d + dt.timedelta(minutes=2)
+                d = d + dt.timedelta(minutes=4)
                 iso = datetimeToString(d)
             se.add(iso)
         else:

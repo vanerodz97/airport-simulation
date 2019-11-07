@@ -19,3 +19,9 @@ aircraft_model:
   max_speed: 240.0
   # Ideal speed of aircraft
   ideal_speed: 225.0
+
+airport_model:
+  # The departure runway. Options are: 10R/28L, 10L/28R
+  departure_runway: [1R/19L, 1L/19R]
+  # The arrival runway. Options are: 1L/19R, 1R/19L
+  arrival_runway: [10R/28L, 10L/28R]
