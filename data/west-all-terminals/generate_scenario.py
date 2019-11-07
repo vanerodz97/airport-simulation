@@ -18,7 +18,7 @@ logger.setLevel(logging.DEBUG)
 
 departure_flight_template = {
     "airport": "SJC",
-    "runway": "1R/19L",
+    "runway": "1L/19R",
 }
 
 arrival_flight_template = {
