@@ -101,13 +101,14 @@ class Simulation:
             # Tick
             self.airport.tick()
             state = None
+            aircrafts = self.airport.control_takeoff()
             if not Config.params["simulator"]["test_mode"]:
                 state = self.state_logger.log_on_tick(self)
             self.clock.tick()
 
             # Remove aircraft close to the runway
             self.airport.remove_aircrafts(self.scenario)
-            self.airport.control_takeoff()
+            self.airport.remove_departure_aircrafts(aircrafts)
             # Abort on conflict
             conflicts = self.airport.conflicts
             if conflicts:
@@ -210,7 +211,7 @@ class ClonedSimulation:
     def tick(self):
         """Turn off the logger, reschedule, and analyst."""
         self.logger.debug("\nPredicted Time: %s", self.now)
-        self.airport.tick()
+        self.airport.tick(True)
         try:
             self.clock.tick()
         except ClockException as error:

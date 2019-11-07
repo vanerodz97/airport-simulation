@@ -32,11 +32,17 @@ class StateLogger:
             for aircraft in simulation.airport.aircrafts
         ]
 
+        takeoff = [
+            self.__parse_aircraft(aircraft)
+            for aircraft in simulation.airport.departure_info
+        ]
+
         state = {
             "time": self.__parse_time(simulation.now),
             "aircrafts": aircrafts,
             'takeoff_count': simulation.airport.takeoff_count,
-            'total_ticks_on_surface': simulation.airport.takeoff_ticks_count
+            'total_ticks_on_surface': simulation.airport.takeoff_ticks_count,
+            'takeoff': takeoff,
         }
 
         with open(self.output_filename, "a") as fout:
@@ -63,7 +69,8 @@ class StateLogger:
             "itinerary": itinerary,
             "itinerary_index": itinerary_index,
             "uncertainty_delayed_index": uc_delayed_index,
-            "scheduler_delayed_index": sc_delayed_index
+            "scheduler_delayed_index": sc_delayed_index,
+            "takeoff": aircraft.take_off
         }
 
     @classmethod

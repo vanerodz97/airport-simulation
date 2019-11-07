@@ -88,13 +88,14 @@ class RoutingExpert:
 
     def __link_close_nodes(self):
         counter = 0
-
+        close_node = []
         for start in self.nodes:
             for end in self.nodes:
                 if start != end and start.is_close_to(end):
                     link = Link("CLOSE_NODE_LINK", [start, end])
                     self.adjacency_map[start][end] = link
                     self.logger.debug("%s and %s are close node", start, end)
+                    close_node.append(link)
                     counter += 1
 
         self.logger.debug("Adds %d links for close nodes", counter)

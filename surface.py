@@ -25,6 +25,7 @@ class Surface:
         self.runways = []
         self.taxiways = []
         self.pushback_ways = []
+        self.gate_to_spot_mapping = {}
 
         self.center = center
         self.corners = corners
@@ -329,7 +330,7 @@ class SurfaceFactory:
 
     @classmethod
     def __load_gates_to_spots_mapping(cls, surface, dir_path):
-        SurfaceFactory.gate_to_spot_mapping = \
+        surface.gate_to_spot_mapping = \
             SurfaceFactory.__retrieve_gate_spots("gates_spots", dir_path,
                                                  surface)
         cls.logger.info("gates to spots mapping loaded")

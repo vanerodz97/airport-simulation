@@ -22,6 +22,7 @@ class Itinerary:
         self.hash = str2sha1("#".join(str(self.targets)))
         self.uncertainty_delayed_index = []
         self.scheduler_delayed_index = []
+        self.links_this_tick = []
 
     def tick(self, tick_distance):
         """Ticks this itinerary for moving to the next state."""
@@ -43,10 +44,9 @@ class Itinerary:
 
     def get_next_location(self, tick_distance):
         # Return the last node in the itinerary if completed
-        try:
-            completed_itinerary = self.length, 0, self.targets[-1].end
-        except Exception:
-            return (None, None, None)
+        self.links_this_tick = []
+
+        completed_itinerary = self.length, 0, self.targets[-1].end
 
         if self.is_completed:
             return completed_itinerary
@@ -60,6 +60,7 @@ class Itinerary:
         # Find the link which the next location is on
         while tick_distance >= self.targets[index].length - distance:
             tick_distance -= self.targets[index].length - distance
+            self.links_this_tick.append(self.targets[index])
             index += 1
             distance = 0
             # Return the last node in the itinerary if completed

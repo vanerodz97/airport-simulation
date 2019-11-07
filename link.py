@@ -27,11 +27,15 @@ class Link:
         self.segment_lengths = [nodes[i].get_distance_to(nodes[i + 1]) for i in range(len(nodes) - 1)]
         self.boundary = self.__calculate_boundary(nodes)
         self.hash = str2sha1("%s#%s" % (self.name, self.nodes))
+        self.occupied = False
 
     @property
     def length(self):
         """Returns the physical length of this link in feet."""
         return sum(self.segment_lengths)
+
+    def refresh(self):
+        self.occupied = False
 
     @property
     def start(self):

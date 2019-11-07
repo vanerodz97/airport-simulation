@@ -30,8 +30,10 @@ class Airport:
 
         # Queues for departure flights at gates
         self.gate_queue = {}
-        # departure queue for the aircraft
+
+        # departure control for the aircraft
         self.departure_queue = {}
+        self.departure_info = []
         self.departure_tick_time = self.__get_interval()
 
         # Itinerary cache object for future flights
@@ -179,11 +181,16 @@ class Airport:
         for aircraft in to_remove_aircraft_departure:
             self.logger.info("Removes departure %s from the airport", aircraft)
             self.__add_aircraft_to_departure_queue(aircraft, scenario)
+            self.departure_info.append(aircraft)
             self.aircrafts.remove(aircraft)
 
         for aircraft in to_remove_aircraft_arrival:
             self.logger.info("Removes arrive %s from the airport", aircraft)
             self.aircrafts.remove(aircraft)
+
+    def remove_departure_aircrafts(self, aircrafts):
+        for aircraft in aircrafts:
+            self.departure_info.remove(aircraft)
 
     @property
     def conflicts(self):
@@ -226,22 +233,27 @@ class Airport:
 
     def control_takeoff(self):
         """ Allow takeoff only at safe interval."""
+        aircrafts = []
         for runway_queue in self.departure_queue.items():
             try:
                 aircraft = runway_queue[1].popleft()
                 if aircraft is None:
                     continue
                 else:
+                    aircrafts.append(aircraft)
                     aircraft.take_off = True
                     self.takeoff_ticks_count += aircraft.tick_count
                     self.takeoff_count += 1
                     self.logger.info("%s is ready to take off", aircraft)
             except IndexError:
                 continue
+        return aircrafts
 
-    def tick(self):
+    def tick(self, predict=False):
         # Ground Controller should observe all the activities on the ground.
-        self.controller.tick()
+        if predict is False:
+            # self.controller.tick()
+            pass
 
         # Ticks on all subjects under the airport to move them into the next state
         for aircraft in self.aircrafts:
