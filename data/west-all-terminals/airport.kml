@@ -2484,22 +2484,22 @@
       </Placemark>
       <Placemark>
         <name>B17</name>
-        <description><![CDATA[index: <br>lat: 37.6112294<br>lng: -122.3853756]]></description>
+        <description><![CDATA[index: <br>lat: 37.6113293<br>lng: -122.3855043]]></description>
         <styleUrl>#icon-1899-0288D1</styleUrl>
         <ExtendedData>
           <Data name="index">
             <value/>
           </Data>
           <Data name="lat">
-            <value>37.6112294</value>
+            <value>37.6113293</value>
           </Data>
           <Data name="lng">
-            <value>-122.3853756</value>
+            <value>-122.3855043</value>
           </Data>
         </ExtendedData>
         <Point>
           <coordinates>
-            -122.3853756,37.6112294,0
+            -122.3855043,37.6113293,0
           </coordinates>
         </Point>
       </Placemark>
@@ -2673,22 +2673,22 @@
       </Placemark>
       <Placemark>
         <name>B18</name>
-        <description><![CDATA[index: <br>lat: 37.6114104<br>lng: -122.3859102]]></description>
+        <description><![CDATA[index: <br>lat: 37.6114699<br>lng: -122.3859236]]></description>
         <styleUrl>#icon-1899-0288D1</styleUrl>
         <ExtendedData>
           <Data name="index">
             <value/>
           </Data>
           <Data name="lat">
-            <value>37.6114104</value>
+            <value>37.6114699</value>
           </Data>
           <Data name="lng">
-            <value>-122.3859102</value>
+            <value>-122.3859236</value>
           </Data>
         </ExtendedData>
         <Point>
           <coordinates>
-            -122.3859102,37.6114104,0
+            -122.3859236,37.6114699,0
           </coordinates>
         </Point>
       </Placemark>
@@ -2879,7 +2879,7 @@
           <coordinates>
             -122.3807296,37.6177626,0
             -122.3802388,37.6171475,0
-            -122.3805741,37.6154956,0
+            -122.380582,37.6154607,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -2901,7 +2901,7 @@
           <tessellate>1</tessellate>
           <coordinates>
             -122.3812554,37.6181939,0
-            -122.3827326,37.6188805,0
+            -122.3827567,37.6188932,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -3598,7 +3598,7 @@
           <tessellate>1</tessellate>
           <coordinates>
             -122.3890589,37.613863,0
-            -122.3908627,37.6134125,0
+            -122.3908868,37.613404,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -3762,7 +3762,7 @@
         <LineString>
           <tessellate>1</tessellate>
           <coordinates>
-            -122.3853756,37.6112294,0
+            -122.3855043,37.6113293,0
             -122.3859206,37.6111095,0
           </coordinates>
         </LineString>
@@ -3785,7 +3785,7 @@
           <tessellate>1</tessellate>
           <coordinates>
             -122.3849538,37.6118409,0
-            -122.3848784,37.6107454,0
+            -122.3848757,37.6107273,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -3796,7 +3796,7 @@
           <tessellate>1</tessellate>
           <coordinates>
             -122.3847681,37.6121366,0
-            -122.3845786,37.6106261,0
+            -122.3845773,37.6106123,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -3807,7 +3807,7 @@
           <tessellate>1</tessellate>
           <coordinates>
             -122.3845804,37.6124851,0
-            -122.3842203,37.6105026,0
+            -122.3842176,37.6104803,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -3818,7 +3818,7 @@
           <tessellate>1</tessellate>
           <coordinates>
             -122.3843179,37.6128804,0
-            -122.3825133,37.6135423,0
+            -122.3824704,37.6135635,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -14685,7 +14685,7 @@ toilets:wheelchair:</value>
         <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3841603,37.6104798,0
+            -122.3841174,37.6104288,0
           </coordinates>
         </Point>
       </Placemark>
@@ -14770,7 +14770,7 @@ toilets:wheelchair:</value>
         <styleUrl>#icon-1899-097138-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3818379,37.6132627,0
+            -122.3818728,37.6132861,0
           </coordinates>
         </Point>
       </Placemark>
@@ -14779,7 +14779,7 @@ toilets:wheelchair:</value>
         <styleUrl>#icon-1899-097138-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3804354,37.6153993,0
+            -122.3804488,37.6154312,0
           </coordinates>
         </Point>
       </Placemark>
