@@ -206,6 +206,7 @@ def generate_link_data(kml_doc, layer_type, output_filename,
         nodes = []
         for coord in p.geometry.coords:
             nodes.append(coord[0:2])
+
         links.append({
             "name": link_name_assigner.rename(p.name),
             "nodes": nodes
