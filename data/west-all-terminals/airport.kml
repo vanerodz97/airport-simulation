@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>1030 west plan</name>
-    <description/>
+    <name>West Plan</name>
+    <description>1030 southeast to west</description>
     <Style id="icon-1899-0288D1-normal">
       <IconStyle>
         <color>ffd18802</color>
@@ -2336,27 +2336,6 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>B14</name>
-        <description><![CDATA[index: <br>lat: 37.6115775<br>lng: -122.3851637]]></description>
-        <styleUrl>#icon-1899-0288D1</styleUrl>
-        <ExtendedData>
-          <Data name="index">
-            <value/>
-          </Data>
-          <Data name="lat">
-            <value>37.6115775</value>
-          </Data>
-          <Data name="lng">
-            <value>-122.3851637</value>
-          </Data>
-        </ExtendedData>
-        <Point>
-          <coordinates>
-            -122.3851637,37.6115775,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
         <name>B12</name>
         <description><![CDATA[index: <br>lat: 37.6121366<br>lng: -122.3847681]]></description>
         <styleUrl>#icon-1899-0288D1</styleUrl>
@@ -2484,14 +2463,14 @@
       </Placemark>
       <Placemark>
         <name>B17</name>
-        <description><![CDATA[index: <br>lat: 37.6113293<br>lng: -122.3855043]]></description>
+        <description><![CDATA[index: <br>lat: 37.611325<br>lng: -122.3855043]]></description>
         <styleUrl>#icon-1899-0288D1</styleUrl>
         <ExtendedData>
           <Data name="index">
             <value/>
           </Data>
           <Data name="lat">
-            <value>37.6113293</value>
+            <value>37.611325</value>
           </Data>
           <Data name="lng">
             <value>-122.3855043</value>
@@ -2499,7 +2478,7 @@
         </ExtendedData>
         <Point>
           <coordinates>
-            -122.3855043,37.6113293,0
+            -122.3855043,37.611325,0
           </coordinates>
         </Point>
       </Placemark>
@@ -3752,7 +3731,7 @@
           <tessellate>1</tessellate>
           <coordinates>
             -122.3859209,37.6114699,0
-            -122.386303,37.611304,0
+            -122.3863432,37.611287,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -3763,18 +3742,7 @@
           <tessellate>1</tessellate>
           <coordinates>
             -122.3855043,37.6113293,0
-            -122.3859206,37.6111095,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>PB14</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -122.3851637,37.6115775,0
-            -122.3852539,37.610873,0
+            -122.3858991,37.6111159,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -4078,7 +4046,7 @@ toilets:wheelchair:</value>
         </LineString>
       </Placemark>
       <Placemark>
-        <name/>
+        <name>P220</name>
         <description><![CDATA[说明: description: <br>@id: way/94452402<br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: 2017-05-06T23:29:38Z<br>@version: 14<br>@changeset: 48463635<br>@user: invliD<br>@uid: 174995<br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: M<br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: <br>toilets:wheelchair:<br>description: <br>@id: way/94452402<br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: 2017-05-06T23:29:38Z<br>@version: 14<br>@changeset: 48463635<br>@user: invliD<br>@uid: 174995<br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: M<br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: ]]></description>
         <styleUrl>#line-F9A825-1200</styleUrl>
         <ExtendedData>
@@ -8990,7 +8958,7 @@ toilets:wheelchair:</value>
           <tessellate>1</tessellate>
           <coordinates>
             -122.3879504,37.6118949,0
-            -122.3830989,37.6100522,0
+            -122.3830841,37.610048,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -9496,7 +9464,7 @@ toilets:wheelchair:</value>
         </LineString>
       </Placemark>
       <Placemark>
-        <name>A</name>
+        <name>PA</name>
         <description><![CDATA[说明: description: <br>@id: way/414284297<br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: 2016-04-29T01:16:18Z<br>@version: 2<br>@changeset: 38970577<br>@user: BigD65<br>@uid: 2262733<br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: A<br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: <br>toilets:wheelchair:<br>description: <br>@id: way/414284297<br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: 2016-04-29T01:16:18Z<br>@version: 2<br>@changeset: 38970577<br>@user: BigD65<br>@uid: 2262733<br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: A<br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: ]]></description>
         <styleUrl>#line-F9A825-1200</styleUrl>
         <ExtendedData>
@@ -14190,14 +14158,16 @@ toilets:wheelchair:</value>
                 -122.386438,37.611977,0
                 -122.38638,37.611952,0
                 -122.386443,37.611826,0
-                -122.385717,37.611561,0
-                -122.385115,37.611801,0
-                -122.385197,37.611924,0
-                -122.385112,37.611958,0
-                -122.385008,37.612368,0
+                -122.3862463,37.6114938,0
+                -122.3857706,37.6112975,0
+                -122.3854047,37.6112996,0
+                -122.385197,37.6112866,0
+                -122.3849082,37.6112781,0
+                -122.3845574,37.6111866,0
                 -122.383946,37.611822,0
-                -122.384704,37.612994,0
-                -122.384938,37.61294,0
+                -122.3834774,37.6132579,0
+                -122.3836204,37.6134444,0
+                -122.3841333,37.6140363,0
                 -122.385411,37.61404,0
                 -122.38599,37.613904,0
               </coordinates>
@@ -14761,7 +14731,7 @@ toilets:wheelchair:</value>
         <styleUrl>#icon-1899-097138</styleUrl>
         <Point>
           <coordinates>
-            -122.3839024,37.610354,0
+            -122.3838595,37.610337,0
           </coordinates>
         </Point>
       </Placemark>
