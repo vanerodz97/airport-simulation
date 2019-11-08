@@ -207,6 +207,12 @@ def generate_link_data(kml_doc, layer_type, output_filename,
         for coord in p.geometry.coords:
             nodes.append(coord[0:2])
 
+        # the map was intended for southeast plan
+        # a temporary solution to avoid re-draw the runways for west plan
+        # be careful when copying this code to other plans
+        if "runways" in output_filename:
+            nodes.reverse()
+
         links.append({
             "name": link_name_assigner.rename(p.name),
             "nodes": nodes
