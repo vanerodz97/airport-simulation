@@ -79,6 +79,7 @@ class Scheduler(AbstractScheduler):
                     predict_simulation.airport.next_conflicts,
                     unsolvable_conflicts
                 )
+                predict_simulation.airport.intersection_control.resolve_conflict(itineraries)
 
                 # If a conflict is found, tries to resolve it
                 if conflict is not None:
