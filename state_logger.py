@@ -29,20 +29,14 @@ class StateLogger:
 
         aircrafts = [
             self.__parse_aircraft(aircraft)
-            for aircraft in simulation.airport.aircrafts
-        ]
-
-        takeoff = [
-            self.__parse_aircraft(aircraft)
-            for aircraft in simulation.airport.departure_info
+            for aircraft in simulation.airport.aircrafts + simulation.airport.departure_info
         ]
 
         state = {
             "time": self.__parse_time(simulation.now),
             "aircrafts": aircrafts,
             'takeoff_count': simulation.airport.takeoff_count,
-            'total_ticks_on_surface': simulation.airport.takeoff_ticks_count,
-            'takeoff': takeoff,
+            'total_ticks_on_surface': simulation.airport.takeoff_ticks_count
         }
 
         with open(self.output_filename, "a") as fout:
