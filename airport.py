@@ -13,6 +13,7 @@ from controller import Controller
 from surface import SurfaceFactory
 from utils import get_seconds_after
 from flight import ArrivalFlight
+from ramp_controller import InterSectionController
 
 
 class Airport:
@@ -50,6 +51,7 @@ class Airport:
         self.priority = None
         # Ground controller
         self.controller = Controller(self)
+        self.intersection_control = InterSectionController(self)
 
     def apply_schedule(self, schedule):
         """Applies a schedule onto the active aircraft in the airport."""
@@ -203,6 +205,7 @@ class Airport:
         """Retrieve a list of conflicts will observed in the next airport
         state.
         """
+        self.intersection_control.check_conflict_at_intersection()
         return self.__get_conflicts(is_next=True)
 
     def __get_conflicts(self, is_next=False):
@@ -254,7 +257,6 @@ class Airport:
         if predict is False:
             # self.controller.tick()
             pass
-
         # Ticks on all subjects under the airport to move them into the next state
         for aircraft in self.aircrafts:
             aircraft.tick()
