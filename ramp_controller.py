@@ -55,3 +55,8 @@ class RampController:
                     aircraft.itinerary.add_scheduler_delay()
 
 
+class IntersectionController:
+    def __init__(self):
+
+
+

@@ -264,6 +264,7 @@ class Aircraft:
         self.speed_uncertainty = speed_bias
 
     """ original """
+
     def add_uncertainty_delay(self):
         """Adds an uncertainty delay on this aircraft."""
         if not self.itinerary:
@@ -298,8 +299,7 @@ class Aircraft:
             is_arrival_aircraft = type(last_target.end) is Gate
 
             if is_arrival_aircraft and self.itinerary.current_target is not None \
-                    and type(self.itinerary.current_target.end) \
-                    is Spot:
+                    and type(self.itinerary.current_target.end) is Spot:
                 self.is_reroute_necessary = False
             self.set_location(self.itinerary.current_coarse_location, Aircraft.LOCATION_LEVEL_COARSE)
             self.set_location(self.itinerary.current_precise_location, Aircraft.LOCATION_LEVEL_PRECISE)
