@@ -140,7 +140,7 @@ class VisualizationView {
         $("#control-prev").click(async e => {
             e.preventDefault();
             const state = await this.dataConnector.prevState();
-            this.handleStateUpdate(state);
+            this.handleStateUpdate(state, false);
             return false;
         });
 
@@ -170,7 +170,9 @@ class VisualizationView {
         $("#current-time").text(state["time"]);
 
         const stateToDisplay = aircraft => {
-            if (aircraft["state"] === "stop") {
+            if (aircraft["takeoff"]) {
+                return "TakingOff";
+            } else if (aircraft["state"] === "stop") {
                 return "Stopped";
             } else if (aircraft["is_delayed"]) {
                 return "Hold";
