@@ -219,7 +219,9 @@ class Aircraft:
                 self.logger.debug("%s: %s completed.", self, self.itinerary)
             last_target = self.itinerary.backup[-1]
             is_arrival_aircraft = type(last_target.end) is Gate
-            if is_arrival_aircraft and type(self.itinerary.current_target.end) \
+
+            if is_arrival_aircraft and self.itinerary.current_target is not None\
+                    and type(self.itinerary.current_target.end) \
                     is Spot:
                 self.is_reroute_necessary = False
             self.set_location(self.itinerary.current_coarse_location, Aircraft.LOCATION_LEVEL_COARSE)
