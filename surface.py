@@ -145,6 +145,7 @@ class Surface:
                 return gate
             else:
                 # print('Not Gate Same {} and {}'.format(name, gate.name))
+                continue
 
         for spot in self.spots:
             if spot.name == name:
