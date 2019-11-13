@@ -6811,268 +6811,6 @@ toilets:</value>
         </LineString>
       </Placemark>
       <Placemark>
-        <name/>
-        <description><![CDATA[说明: 说明: description: <br>@id: way/249005227<br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: 2013-11-29T13:56:28Z<br>@version: 1<br>@changeset: 19178571<br>@user: Gijsrooy<br>@uid: 143643<br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: <br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: <br>toilets:wheelchair:<br>description: <br>@id: way/249005227<br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: 2013-11-29T13:56:28Z<br>@version: 1<br>@changeset: 19178571<br>@user: Gijsrooy<br>@uid: 143643<br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: <br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets:<br>description: <br>@id: way/249005227<br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: 2013-11-29T13:56:28Z<br>@version: 1<br>@changeset: 19178571<br>@user: Gijsrooy<br>@uid: 143643<br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: <br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: ]]></description>
-        <styleUrl>#line-F9A825-2000</styleUrl>
-        <ExtendedData>
-          <Data name="说明">
-            <value>说明: description: 
-@id: way/249005227
-addr:state: 
-aeroway: taxiway
-building: 
-ele: 
-gnis:county_name: 
-gnis:feature_id: 
-gnis:import_uuid: 
-source: 
-woe:id: 
-@timestamp: 2013-11-29T13:56:28Z
-@version: 1
-@changeset: 19178571
-@user: Gijsrooy
-@uid: 143643
-addr:city: 
-addr:housenumber: 
-addr:postcode: 
-addr:street: 
-aerodrome: 
-aerodrome:type: 
-city_served: 
-gnis:created: 
-gnis:feature_type: 
-iata: 
-icao: 
-internet_access: 
-internet_access:fee: 
-internet_access:ssid: 
-is_in: 
-is_in:iso_3166_2: 
-name:de: 
-name:el: 
-name:en: 
-name:ja: 
-owner: 
-passengers: 
-ref: 
-short_name: 
-source_ref: 
-website: 
-wikidata: 
-wikipedia: 
-layer: 
-aed: 
-drinking_water: 
-toilets: 
-toilets:wheelchair:
-description: 
-@id: way/249005227
-addr:state: 
-aeroway: taxiway
-building: 
-ele: 
-gnis:county_name: 
-gnis:feature_id: 
-gnis:import_uuid: 
-source: 
-woe:id: 
-@timestamp: 2013-11-29T13:56:28Z
-@version: 1
-@changeset: 19178571
-@user: Gijsrooy
-@uid: 143643
-addr:city: 
-addr:housenumber: 
-addr:postcode: 
-addr:street: 
-aerodrome: 
-aerodrome:type: 
-city_served: 
-gnis:created: 
-gnis:feature_type: 
-iata: 
-icao: 
-internet_access: 
-internet_access:fee: 
-internet_access:ssid: 
-is_in: 
-is_in:iso_3166_2: 
-name:de: 
-name:el: 
-name:en: 
-name:ja: 
-owner: 
-passengers: 
-ref: 
-short_name: 
-source_ref: 
-website: 
-wikidata: 
-wikipedia: 
-layer: 
-aed: 
-drinking_water: 
-toilets:</value>
-          </Data>
-          <Data name="description">
-            <value/>
-          </Data>
-          <Data name="@id">
-            <value>way/249005227</value>
-          </Data>
-          <Data name="addr:state">
-            <value/>
-          </Data>
-          <Data name="aeroway">
-            <value>taxiway</value>
-          </Data>
-          <Data name="building">
-            <value/>
-          </Data>
-          <Data name="ele">
-            <value/>
-          </Data>
-          <Data name="gnis:county_name">
-            <value/>
-          </Data>
-          <Data name="gnis:feature_id">
-            <value/>
-          </Data>
-          <Data name="gnis:import_uuid">
-            <value/>
-          </Data>
-          <Data name="source">
-            <value/>
-          </Data>
-          <Data name="woe:id">
-            <value/>
-          </Data>
-          <Data name="@timestamp">
-            <value>2013-11-29T13:56:28Z</value>
-          </Data>
-          <Data name="@version">
-            <value>1</value>
-          </Data>
-          <Data name="@changeset">
-            <value>19178571</value>
-          </Data>
-          <Data name="@user">
-            <value>Gijsrooy</value>
-          </Data>
-          <Data name="@uid">
-            <value>143643</value>
-          </Data>
-          <Data name="addr:city">
-            <value/>
-          </Data>
-          <Data name="addr:housenumber">
-            <value/>
-          </Data>
-          <Data name="addr:postcode">
-            <value/>
-          </Data>
-          <Data name="addr:street">
-            <value/>
-          </Data>
-          <Data name="aerodrome">
-            <value/>
-          </Data>
-          <Data name="aerodrome:type">
-            <value/>
-          </Data>
-          <Data name="city_served">
-            <value/>
-          </Data>
-          <Data name="gnis:created">
-            <value/>
-          </Data>
-          <Data name="gnis:feature_type">
-            <value/>
-          </Data>
-          <Data name="iata">
-            <value/>
-          </Data>
-          <Data name="icao">
-            <value/>
-          </Data>
-          <Data name="internet_access">
-            <value/>
-          </Data>
-          <Data name="internet_access:fee">
-            <value/>
-          </Data>
-          <Data name="internet_access:ssid">
-            <value/>
-          </Data>
-          <Data name="is_in">
-            <value/>
-          </Data>
-          <Data name="is_in:iso_3166_2">
-            <value/>
-          </Data>
-          <Data name="name:de">
-            <value/>
-          </Data>
-          <Data name="name:el">
-            <value/>
-          </Data>
-          <Data name="name:en">
-            <value/>
-          </Data>
-          <Data name="name:ja">
-            <value/>
-          </Data>
-          <Data name="owner">
-            <value/>
-          </Data>
-          <Data name="passengers">
-            <value/>
-          </Data>
-          <Data name="ref">
-            <value/>
-          </Data>
-          <Data name="short_name">
-            <value/>
-          </Data>
-          <Data name="source_ref">
-            <value/>
-          </Data>
-          <Data name="website">
-            <value/>
-          </Data>
-          <Data name="wikidata">
-            <value/>
-          </Data>
-          <Data name="wikipedia">
-            <value/>
-          </Data>
-          <Data name="layer">
-            <value/>
-          </Data>
-          <Data name="aed">
-            <value/>
-          </Data>
-          <Data name="drinking_water">
-            <value/>
-          </Data>
-          <Data name="toilets">
-            <value/>
-          </Data>
-        </ExtendedData>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -122.389771,37.623648,0
-            -122.389609,37.623408,0
-            -122.389662,37.62315,0
-            -122.389886,37.622815,0
-            -122.390056,37.62256,0
-            -122.390112,37.622509,0
-            -122.390189,37.622463,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
         <name>South Line</name>
         <description><![CDATA[说明: 说明: description: <br>@id: way/335768460<br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: 2015-07-18T04:05:15Z<br>@version: 2<br>@changeset: 32711473<br>@user: jorge_o<br>@uid: 203688<br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: <br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: <br>toilets:wheelchair:<br>description: <br>@id: way/335768460<br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: 2015-07-18T04:05:15Z<br>@version: 2<br>@changeset: 32711473<br>@user: jorge_o<br>@uid: 203688<br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: <br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets:<br>description: <br>@id: way/335768460<br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: 2015-07-18T04:05:15Z<br>@version: 2<br>@changeset: 32711473<br>@user: jorge_o<br>@uid: 203688<br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: <br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: ]]></description>
         <styleUrl>#line-F9A825-2000</styleUrl>
@@ -10295,215 +10033,6 @@ toilets:</value>
         </LineString>
       </Placemark>
       <Placemark>
-        <name>P32</name>
-        <description><![CDATA[说明: 说明: <br>description: <br>@id: <br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: <br>@version: <br>@changeset: <br>@user: <br>@uid: <br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: <br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets:<br>description: <br>@id: <br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: <br>@version: <br>@changeset: <br>@user: <br>@uid: <br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: <br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: ]]></description>
-        <styleUrl>#line-F9A825-2000</styleUrl>
-        <ExtendedData>
-          <Data name="说明">
-            <value>说明: 
-description: 
-@id: 
-addr:state: 
-aeroway: taxiway
-building: 
-ele: 
-gnis:county_name: 
-gnis:feature_id: 
-gnis:import_uuid: 
-source: 
-woe:id: 
-@timestamp: 
-@version: 
-@changeset: 
-@user: 
-@uid: 
-addr:city: 
-addr:housenumber: 
-addr:postcode: 
-addr:street: 
-aerodrome: 
-aerodrome:type: 
-city_served: 
-gnis:created: 
-gnis:feature_type: 
-iata: 
-icao: 
-internet_access: 
-internet_access:fee: 
-internet_access:ssid: 
-is_in: 
-is_in:iso_3166_2: 
-name:de: 
-name:el: 
-name:en: 
-name:ja: 
-owner: 
-passengers: 
-ref: 
-short_name: 
-source_ref: 
-website: 
-wikidata: 
-wikipedia: 
-layer: 
-aed: 
-drinking_water: 
-toilets:</value>
-          </Data>
-          <Data name="description">
-            <value/>
-          </Data>
-          <Data name="@id">
-            <value/>
-          </Data>
-          <Data name="addr:state">
-            <value/>
-          </Data>
-          <Data name="aeroway">
-            <value>taxiway</value>
-          </Data>
-          <Data name="building">
-            <value/>
-          </Data>
-          <Data name="ele">
-            <value/>
-          </Data>
-          <Data name="gnis:county_name">
-            <value/>
-          </Data>
-          <Data name="gnis:feature_id">
-            <value/>
-          </Data>
-          <Data name="gnis:import_uuid">
-            <value/>
-          </Data>
-          <Data name="source">
-            <value/>
-          </Data>
-          <Data name="woe:id">
-            <value/>
-          </Data>
-          <Data name="@timestamp">
-            <value/>
-          </Data>
-          <Data name="@version">
-            <value/>
-          </Data>
-          <Data name="@changeset">
-            <value/>
-          </Data>
-          <Data name="@user">
-            <value/>
-          </Data>
-          <Data name="@uid">
-            <value/>
-          </Data>
-          <Data name="addr:city">
-            <value/>
-          </Data>
-          <Data name="addr:housenumber">
-            <value/>
-          </Data>
-          <Data name="addr:postcode">
-            <value/>
-          </Data>
-          <Data name="addr:street">
-            <value/>
-          </Data>
-          <Data name="aerodrome">
-            <value/>
-          </Data>
-          <Data name="aerodrome:type">
-            <value/>
-          </Data>
-          <Data name="city_served">
-            <value/>
-          </Data>
-          <Data name="gnis:created">
-            <value/>
-          </Data>
-          <Data name="gnis:feature_type">
-            <value/>
-          </Data>
-          <Data name="iata">
-            <value/>
-          </Data>
-          <Data name="icao">
-            <value/>
-          </Data>
-          <Data name="internet_access">
-            <value/>
-          </Data>
-          <Data name="internet_access:fee">
-            <value/>
-          </Data>
-          <Data name="internet_access:ssid">
-            <value/>
-          </Data>
-          <Data name="is_in">
-            <value/>
-          </Data>
-          <Data name="is_in:iso_3166_2">
-            <value/>
-          </Data>
-          <Data name="name:de">
-            <value/>
-          </Data>
-          <Data name="name:el">
-            <value/>
-          </Data>
-          <Data name="name:en">
-            <value/>
-          </Data>
-          <Data name="name:ja">
-            <value/>
-          </Data>
-          <Data name="owner">
-            <value/>
-          </Data>
-          <Data name="passengers">
-            <value/>
-          </Data>
-          <Data name="ref">
-            <value/>
-          </Data>
-          <Data name="short_name">
-            <value/>
-          </Data>
-          <Data name="source_ref">
-            <value/>
-          </Data>
-          <Data name="website">
-            <value/>
-          </Data>
-          <Data name="wikidata">
-            <value/>
-          </Data>
-          <Data name="wikipedia">
-            <value/>
-          </Data>
-          <Data name="layer">
-            <value/>
-          </Data>
-          <Data name="aed">
-            <value/>
-          </Data>
-          <Data name="drinking_water">
-            <value/>
-          </Data>
-          <Data name="toilets">
-            <value/>
-          </Data>
-        </ExtendedData>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -122.390905,37.623116,0
-            -122.389886,37.622815,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
         <name>P29</name>
         <description><![CDATA[说明: <br>description: <br>@id: <br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: <br>@version: <br>@changeset: <br>@user: <br>@uid: <br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: <br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: ]]></description>
         <styleUrl>#line-F9A825-2744</styleUrl>
@@ -10822,6 +10351,7 @@ toilets:</value>
           <tessellate>1</tessellate>
           <coordinates>
             -122.3900339,37.6274013,0
+            -122.3908045,37.6264907,0
             -122.3913605,37.6255122,0
           </coordinates>
         </LineString>
@@ -10985,6 +10515,167 @@ toilets:</value>
             -122.3913605,37.6255122,0
             -122.3915632,37.6248821,0
             -122.391208,37.624252,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>P33</name>
+        <description><![CDATA[说明: <br>description: <br>@id: <br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: <br>@version: <br>@changeset: <br>@user: <br>@uid: <br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: <br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: ]]></description>
+        <styleUrl>#line-000000-1200</styleUrl>
+        <ExtendedData>
+          <Data name="说明">
+            <value/>
+          </Data>
+          <Data name="description">
+            <value/>
+          </Data>
+          <Data name="@id">
+            <value/>
+          </Data>
+          <Data name="addr:state">
+            <value/>
+          </Data>
+          <Data name="aeroway">
+            <value>taxiway</value>
+          </Data>
+          <Data name="building">
+            <value/>
+          </Data>
+          <Data name="ele">
+            <value/>
+          </Data>
+          <Data name="gnis:county_name">
+            <value/>
+          </Data>
+          <Data name="gnis:feature_id">
+            <value/>
+          </Data>
+          <Data name="gnis:import_uuid">
+            <value/>
+          </Data>
+          <Data name="source">
+            <value/>
+          </Data>
+          <Data name="woe:id">
+            <value/>
+          </Data>
+          <Data name="@timestamp">
+            <value/>
+          </Data>
+          <Data name="@version">
+            <value/>
+          </Data>
+          <Data name="@changeset">
+            <value/>
+          </Data>
+          <Data name="@user">
+            <value/>
+          </Data>
+          <Data name="@uid">
+            <value/>
+          </Data>
+          <Data name="addr:city">
+            <value/>
+          </Data>
+          <Data name="addr:housenumber">
+            <value/>
+          </Data>
+          <Data name="addr:postcode">
+            <value/>
+          </Data>
+          <Data name="addr:street">
+            <value/>
+          </Data>
+          <Data name="aerodrome">
+            <value/>
+          </Data>
+          <Data name="aerodrome:type">
+            <value/>
+          </Data>
+          <Data name="city_served">
+            <value/>
+          </Data>
+          <Data name="gnis:created">
+            <value/>
+          </Data>
+          <Data name="gnis:feature_type">
+            <value/>
+          </Data>
+          <Data name="iata">
+            <value/>
+          </Data>
+          <Data name="icao">
+            <value/>
+          </Data>
+          <Data name="internet_access">
+            <value/>
+          </Data>
+          <Data name="internet_access:fee">
+            <value/>
+          </Data>
+          <Data name="internet_access:ssid">
+            <value/>
+          </Data>
+          <Data name="is_in">
+            <value/>
+          </Data>
+          <Data name="is_in:iso_3166_2">
+            <value/>
+          </Data>
+          <Data name="name:de">
+            <value/>
+          </Data>
+          <Data name="name:el">
+            <value/>
+          </Data>
+          <Data name="name:en">
+            <value/>
+          </Data>
+          <Data name="name:ja">
+            <value/>
+          </Data>
+          <Data name="owner">
+            <value/>
+          </Data>
+          <Data name="passengers">
+            <value/>
+          </Data>
+          <Data name="ref">
+            <value/>
+          </Data>
+          <Data name="short_name">
+            <value/>
+          </Data>
+          <Data name="source_ref">
+            <value/>
+          </Data>
+          <Data name="website">
+            <value/>
+          </Data>
+          <Data name="wikidata">
+            <value/>
+          </Data>
+          <Data name="wikipedia">
+            <value/>
+          </Data>
+          <Data name="layer">
+            <value/>
+          </Data>
+          <Data name="aed">
+            <value/>
+          </Data>
+          <Data name="drinking_water">
+            <value/>
+          </Data>
+          <Data name="toilets">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -122.3930341,37.6207821,0
+            -122.392242,37.620453,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -16818,16 +16509,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFD600-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.389899,37.62282,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>I10</name>
-        <styleUrl>#icon-1899-FFD600-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            -122.390905,37.623116,0
+            -122.3930747,37.6207975,0
           </coordinates>
         </Point>
       </Placemark>

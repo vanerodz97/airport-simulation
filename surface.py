@@ -141,17 +141,18 @@ class Surface:
 
         for gate in self.gates:
             if gate.name == name:
-                print('Same {}'.format(name))
+                # print('Same {}'.format(name))
                 return gate
             else:
-                print('Not Gate Same {} and {}'.format(name, gate.name))
+                # print('Not Gate Same {} and {}'.format(name, gate.name))
 
         for spot in self.spots:
             if spot.name == name:
-                print('Same {}'.format(name))
+                # print('Same {}'.format(name))
                 return spot
             else:
-                print('Not Spot Same {} and {}'.format(name, spot.name))
+                # print('Not Spot Same {} and {}'.format(name, spot.name))
+                continue
 
         raise Exception("Getting an unknown node")
 
