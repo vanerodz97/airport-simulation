@@ -9,17 +9,18 @@ simulation:
 
 aircraft_model:
   # Pilot's seeing distance in feet. Used to find the aircraft ahead.
-  pilot_vision: 500
+  pilot_vision: 600
   # Safe distance between two aircraft
-  ideal_distance: 2000.0
+  ideal_distance: 800.0
   # The min distance between two aircraft where brake hard should be used.
-  min_distance: 1000.0
+  min_distance: 500.0
   # Initial speed of aircraft
-  init_speed: 800.0
+  init_speed: 300.0
   # Maximum speed of aircraft
-  max_speed: 1000.0
+  max_speed: 500.0
   # Ideal speed of aircraft
-  ideal_speed: 900.0
+  ideal_speed: 400.0
+  pushback_speed: 100.0
 
 airport_model:
   # The departure runway. Options are: 10R/28L, 10L/28R
