@@ -1,6 +1,6 @@
 ---
 name: base
-airport: real-terminal-2
+airport: sfo-old-real-terminal-2
 batch: null
 
 simulator:

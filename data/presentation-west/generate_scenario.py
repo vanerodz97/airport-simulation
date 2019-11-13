@@ -1,3 +1,4 @@
+import os
 import sys
 import random
 import logging
@@ -6,7 +7,10 @@ import math
 
 from utils import export_to_json, create_output_folder
 
-OUTPUT_FOLDER = "./build/"
+dir_path = os.path.dirname(os.path.realpath(__file__))
+REAL_DEPARTURE_PATH = dir_path + "/all_terminal_departure.csv"
+REAL_ARRIVAL_PATH = dir_path + "/updated_all_terminal_arrival.csv"
+OUTPUT_FOLDER = dir_path + "/build/"
 
 # Setups logger
 logger = logging.getLogger(__name__)
@@ -68,7 +72,7 @@ terminal_gates = [
 
 def get_departure_from_csv():
     departures = []
-    df = pd.read_csv("./all_terminal_departure.csv")
+    df = pd.read_csv(REAL_DEPARTURE_PATH)
     size = len(df.index)
     airline_list = df["Airline"].tolist()
     terminal_list = df["Terminal"].tolist()
@@ -110,7 +114,7 @@ def get_departure_from_csv():
 
 def get_arrival_from_csv():
     arrivals = []
-    df = pd.read_csv("./updated_all_terminal_arrival.csv")
+    df = pd.read_csv(REAL_ARRIVAL_PATH)
     size = len(df.index)
     airline_list = df["Airline"].tolist()
     terminal_list = df["Terminal"].tolist()
@@ -207,4 +211,5 @@ def main():
 
 
 if __name__ == "__main__":
+    airport_data_folder = sys.argv[0] + "/"
     main()

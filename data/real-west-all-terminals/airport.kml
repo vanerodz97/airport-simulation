@@ -39,6 +39,48 @@
         <styleUrl>#icon-1899-0288D1-highlight</styleUrl>
       </Pair>
     </StyleMap>
+    <Style id="icon-1899-0288D1-nodesc-normal">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1899-0288D1-nodesc-highlight">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1899-0288D1-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-0288D1-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-0288D1-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
     <Style id="icon-1899-097138-normal">
       <IconStyle>
         <color>ff387109</color>
@@ -157,48 +199,6 @@
       <Pair>
         <key>highlight</key>
         <styleUrl>#icon-1899-9C27B0-nodesc-highlight</styleUrl>
-      </Pair>
-    </StyleMap>
-    <Style id="icon-1899-C2185B-nodesc-normal">
-      <IconStyle>
-        <color>ff5b18c2</color>
-        <scale>1</scale>
-        <Icon>
-          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
-        </Icon>
-        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
-      </IconStyle>
-      <LabelStyle>
-        <scale>0</scale>
-      </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <Style id="icon-1899-C2185B-nodesc-highlight">
-      <IconStyle>
-        <color>ff5b18c2</color>
-        <scale>1</scale>
-        <Icon>
-          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
-        </Icon>
-        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
-      </IconStyle>
-      <LabelStyle>
-        <scale>1</scale>
-      </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <StyleMap id="icon-1899-C2185B-nodesc">
-      <Pair>
-        <key>normal</key>
-        <styleUrl>#icon-1899-C2185B-nodesc-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
-        <styleUrl>#icon-1899-C2185B-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
     <Style id="icon-1899-FF5252-nodesc-normal">
@@ -7598,12 +7598,12 @@ toilets:</value>
             -122.378764,37.618175,0
             -122.378821,37.618295,0
             -122.378962,37.618553,0
-            -122.379284,37.618532,0
-            -122.37963,37.618532,0
-            -122.380018,37.618642,0
-            -122.379979,37.61902,0
-            -122.37999,37.619272,0
-            -122.379995,37.619405,0
+            -122.3789729,37.6186765,0
+            -122.3790721,37.6188039,0
+            -122.3793314,37.6190499,0
+            -122.3796464,37.6192579,0
+            -122.3797862,37.619391,0
+            -122.379877,37.619456,0
             -122.379979,37.619512,0
             -122.380269,37.619669,0
             -122.382926,37.620763,0
@@ -10676,6 +10676,330 @@ toilets:</value>
           <coordinates>
             -122.3930341,37.6207821,0
             -122.392242,37.620453,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>P34</name>
+        <description><![CDATA[说明: <br>description: <br>@id: <br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: <br>@version: <br>@changeset: <br>@user: <br>@uid: <br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: <br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: ]]></description>
+        <styleUrl>#line-000000-1200</styleUrl>
+        <ExtendedData>
+          <Data name="说明">
+            <value/>
+          </Data>
+          <Data name="description">
+            <value/>
+          </Data>
+          <Data name="@id">
+            <value/>
+          </Data>
+          <Data name="addr:state">
+            <value/>
+          </Data>
+          <Data name="aeroway">
+            <value>taxiway</value>
+          </Data>
+          <Data name="building">
+            <value/>
+          </Data>
+          <Data name="ele">
+            <value/>
+          </Data>
+          <Data name="gnis:county_name">
+            <value/>
+          </Data>
+          <Data name="gnis:feature_id">
+            <value/>
+          </Data>
+          <Data name="gnis:import_uuid">
+            <value/>
+          </Data>
+          <Data name="source">
+            <value/>
+          </Data>
+          <Data name="woe:id">
+            <value/>
+          </Data>
+          <Data name="@timestamp">
+            <value/>
+          </Data>
+          <Data name="@version">
+            <value/>
+          </Data>
+          <Data name="@changeset">
+            <value/>
+          </Data>
+          <Data name="@user">
+            <value/>
+          </Data>
+          <Data name="@uid">
+            <value/>
+          </Data>
+          <Data name="addr:city">
+            <value/>
+          </Data>
+          <Data name="addr:housenumber">
+            <value/>
+          </Data>
+          <Data name="addr:postcode">
+            <value/>
+          </Data>
+          <Data name="addr:street">
+            <value/>
+          </Data>
+          <Data name="aerodrome">
+            <value/>
+          </Data>
+          <Data name="aerodrome:type">
+            <value/>
+          </Data>
+          <Data name="city_served">
+            <value/>
+          </Data>
+          <Data name="gnis:created">
+            <value/>
+          </Data>
+          <Data name="gnis:feature_type">
+            <value/>
+          </Data>
+          <Data name="iata">
+            <value/>
+          </Data>
+          <Data name="icao">
+            <value/>
+          </Data>
+          <Data name="internet_access">
+            <value/>
+          </Data>
+          <Data name="internet_access:fee">
+            <value/>
+          </Data>
+          <Data name="internet_access:ssid">
+            <value/>
+          </Data>
+          <Data name="is_in">
+            <value/>
+          </Data>
+          <Data name="is_in:iso_3166_2">
+            <value/>
+          </Data>
+          <Data name="name:de">
+            <value/>
+          </Data>
+          <Data name="name:el">
+            <value/>
+          </Data>
+          <Data name="name:en">
+            <value/>
+          </Data>
+          <Data name="name:ja">
+            <value/>
+          </Data>
+          <Data name="owner">
+            <value/>
+          </Data>
+          <Data name="passengers">
+            <value/>
+          </Data>
+          <Data name="ref">
+            <value/>
+          </Data>
+          <Data name="short_name">
+            <value/>
+          </Data>
+          <Data name="source_ref">
+            <value/>
+          </Data>
+          <Data name="website">
+            <value/>
+          </Data>
+          <Data name="wikidata">
+            <value/>
+          </Data>
+          <Data name="wikipedia">
+            <value/>
+          </Data>
+          <Data name="layer">
+            <value/>
+          </Data>
+          <Data name="aed">
+            <value/>
+          </Data>
+          <Data name="drinking_water">
+            <value/>
+          </Data>
+          <Data name="toilets">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -122.380147,37.619607,0
+            -122.3796649,37.6189035,0
+            -122.379612,37.618183,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>P36</name>
+        <description><![CDATA[说明: <br>description: <br>@id: <br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: <br>@version: <br>@changeset: <br>@user: <br>@uid: <br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: <br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: ]]></description>
+        <styleUrl>#line-000000-1200</styleUrl>
+        <ExtendedData>
+          <Data name="说明">
+            <value/>
+          </Data>
+          <Data name="description">
+            <value/>
+          </Data>
+          <Data name="@id">
+            <value/>
+          </Data>
+          <Data name="addr:state">
+            <value/>
+          </Data>
+          <Data name="aeroway">
+            <value>taxiway</value>
+          </Data>
+          <Data name="building">
+            <value/>
+          </Data>
+          <Data name="ele">
+            <value/>
+          </Data>
+          <Data name="gnis:county_name">
+            <value/>
+          </Data>
+          <Data name="gnis:feature_id">
+            <value/>
+          </Data>
+          <Data name="gnis:import_uuid">
+            <value/>
+          </Data>
+          <Data name="source">
+            <value/>
+          </Data>
+          <Data name="woe:id">
+            <value/>
+          </Data>
+          <Data name="@timestamp">
+            <value/>
+          </Data>
+          <Data name="@version">
+            <value/>
+          </Data>
+          <Data name="@changeset">
+            <value/>
+          </Data>
+          <Data name="@user">
+            <value/>
+          </Data>
+          <Data name="@uid">
+            <value/>
+          </Data>
+          <Data name="addr:city">
+            <value/>
+          </Data>
+          <Data name="addr:housenumber">
+            <value/>
+          </Data>
+          <Data name="addr:postcode">
+            <value/>
+          </Data>
+          <Data name="addr:street">
+            <value/>
+          </Data>
+          <Data name="aerodrome">
+            <value/>
+          </Data>
+          <Data name="aerodrome:type">
+            <value/>
+          </Data>
+          <Data name="city_served">
+            <value/>
+          </Data>
+          <Data name="gnis:created">
+            <value/>
+          </Data>
+          <Data name="gnis:feature_type">
+            <value/>
+          </Data>
+          <Data name="iata">
+            <value/>
+          </Data>
+          <Data name="icao">
+            <value/>
+          </Data>
+          <Data name="internet_access">
+            <value/>
+          </Data>
+          <Data name="internet_access:fee">
+            <value/>
+          </Data>
+          <Data name="internet_access:ssid">
+            <value/>
+          </Data>
+          <Data name="is_in">
+            <value/>
+          </Data>
+          <Data name="is_in:iso_3166_2">
+            <value/>
+          </Data>
+          <Data name="name:de">
+            <value/>
+          </Data>
+          <Data name="name:el">
+            <value/>
+          </Data>
+          <Data name="name:en">
+            <value/>
+          </Data>
+          <Data name="name:ja">
+            <value/>
+          </Data>
+          <Data name="owner">
+            <value/>
+          </Data>
+          <Data name="passengers">
+            <value/>
+          </Data>
+          <Data name="ref">
+            <value/>
+          </Data>
+          <Data name="short_name">
+            <value/>
+          </Data>
+          <Data name="source_ref">
+            <value/>
+          </Data>
+          <Data name="website">
+            <value/>
+          </Data>
+          <Data name="wikidata">
+            <value/>
+          </Data>
+          <Data name="wikipedia">
+            <value/>
+          </Data>
+          <Data name="layer">
+            <value/>
+          </Data>
+          <Data name="aed">
+            <value/>
+          </Data>
+          <Data name="drinking_water">
+            <value/>
+          </Data>
+          <Data name="toilets">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -122.379612,37.618183,0
+            -122.3791633,37.6174545,0
+            -122.3786502,37.6171339,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -16523,11 +16847,20 @@ toilets:</value>
         </Point>
       </Placemark>
       <Placemark>
-        <name>I12</name>
-        <styleUrl>#icon-1899-C2185B-nodesc</styleUrl>
+        <name>I10</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.380002,37.618638,0
+            -122.379612,37.618183,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>I12</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.3786502,37.6171339,0
           </coordinates>
         </Point>
       </Placemark>

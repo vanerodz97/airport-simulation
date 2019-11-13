@@ -5,11 +5,15 @@ import numpy
 import csv
 import pandas as pd
 import numpy as np
+import os
 import math
 
 from utils import export_to_json, create_output_folder
 
-OUTPUT_FOLDER = "./build/"
+dir_path = os.path.dirname(os.path.realpath(__file__))
+REAL_DEPARTURE_PATH = dir_path + "/all_terminal_departure.csv"
+REAL_ARRIVAL_PATH = dir_path + "/updated_all_terminal_arrival.csv"
+OUTPUT_FOLDER = dir_path + "/build/"
 
 # Setups logger
 logger = logging.getLogger(__name__)
@@ -49,7 +53,7 @@ def get_departure_from_csv():
     estimated_list = df["Estimated"].tolist()
     for i in range(1, size):
         new_flight = departure_flight_template.copy()
-        if type(gate_list[i]) is not str and  math.isnan(gate_list[i]):
+        if type(gate_list[i]) is not str and math.isnan(gate_list[i]):
             new_flight["gate"] = random.choice(gates)
         # 45A 45B
         elif gate_list[i] not in gates:
@@ -78,7 +82,7 @@ def get_arrival_from_csv():
     estimated_list = df["Estimated"].tolist()
     for i in range(1, size):
         new_flight = arrival_flight_template.copy()
-        if type(gate_list[i]) is not str and  math.isnan(gate_list[i]):
+        if type(gate_list[i]) is not str and math.isnan(gate_list[i]):
             new_flight["gate"] = random.choice(gates)
         # 45A 45B
         elif gate_list[i] not in gates:
@@ -113,7 +117,6 @@ def set_time(str_time):
 
 
 def main():
-
     departures = get_departure_from_csv()
     arrivals = get_arrival_from_csv()
     print(len(departures))
@@ -131,4 +134,5 @@ def main():
 
 
 if __name__ == "__main__":
+    airport_data_folder = sys.argv[0] + "/"
     main()

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import sys
 import logging
 from enum import Enum
@@ -6,8 +7,9 @@ from fastkml import kml
 
 from utils import export_to_json, create_output_folder
 
-OUTPUT_FOLDER = "./build/"
-INPUT_KML = "./airport.kml"
+dir_path = os.path.dirname(os.path.realpath(__file__))
+OUTPUT_FOLDER = dir_path + "/build/"
+INPUT_KML = dir_path + "/airport.kml"
 BACKGROUND_IMAGE_SIZE = 960
 
 # Setups logger
@@ -20,13 +22,13 @@ logger.setLevel(logging.DEBUG)
 
 
 class NameAssigner():
-
     name_pool = {}
 
     """
     We don't allow two objects with same name, so we rename the second or later
     occurrences.
     """
+
     def rename(self, name):
         if not name:
             name = "NULL"
@@ -41,6 +43,7 @@ class NameAssigner():
 node_name_assigner = NameAssigner()
 link_name_assigner = NameAssigner()
 
+
 # following the sequence of map
 class LayerType(Enum):
     gate = 0
@@ -53,7 +56,6 @@ class LayerType(Enum):
 
 
 def main():
-
     # Creates the output folder
     create_output_folder(OUTPUT_FOLDER)
 
@@ -104,7 +106,6 @@ def main():
 
 
 def get_kml_document():
-
     k = kml.KML()
     with open(INPUT_KML, "rb") as f:
         k.from_string(f.read())
@@ -117,13 +118,11 @@ def get_layer(kml_doc, layer_type):
 
 
 def generate_airport_data(kml_doc):
-
     generate_airport_metadata(kml_doc)
     generate_airport_background_image()
 
 
 def generate_airport_metadata(kml_doc):
-
     layer = get_layer(kml_doc, LayerType.airport)
     placemark = list(layer.features())[0]
     bounds = placemark.geometry.bounds
@@ -158,7 +157,6 @@ def generate_airport_metadata(kml_doc):
 
 
 def generate_airport_background_image():
-
     # Generates the background image (plain white)
     filename = OUTPUT_FOLDER + "airport.jpg"
 
@@ -169,7 +167,6 @@ def generate_airport_background_image():
 
 
 def generate_node_data(kml_doc, layer_type, output_filename):
-
     nodes = []
 
     layer = get_layer(kml_doc, layer_type)
@@ -187,7 +184,6 @@ def generate_node_data(kml_doc, layer_type, output_filename):
 
 def generate_link_data(kml_doc, layer_type, output_filename,
                        aeroway_filter=None, use_ref=False):
-
     links = []
 
     layer = get_layer(kml_doc, layer_type)
@@ -222,7 +218,6 @@ def generate_link_data(kml_doc, layer_type, output_filename,
 
 
 def is_aeroway_matched(placemark, aeroway_filter):
-
     if placemark.extended_data is None:
         return False
 
@@ -234,7 +229,6 @@ def is_aeroway_matched(placemark, aeroway_filter):
 
 
 def get_ref(placemark):
-
     if placemark.extended_data is None:
         return False
 
@@ -246,4 +240,5 @@ def get_ref(placemark):
 
 
 if __name__ == "__main__":
+    airport_data_folder = sys.argv[0] + "/"
     main()

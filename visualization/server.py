@@ -50,6 +50,8 @@ def api_batch_data():
         if plan is None:
             abort(400, description="Invalid parameter")
 
+        get_data_build(airport)
+
         return json.dumps({
             "surface": get_surface_data(airport),
             "state": get_state_data(plan)
@@ -76,6 +78,8 @@ def api_streaming_data():
 
             simulator_id = int(round(time.time() * 1000))
             simulators[simulator_id] = simulator
+
+            get_data_build(airport)
 
             return json.dumps({
                 "surface": get_surface_data(airport),
@@ -159,6 +163,13 @@ def get_state_data(plan):
     with open(filename) as f:
         content = [json.loads(j) for j in f.read().split("\n") if j]
     return content
+
+
+def get_data_build(airport):
+    airport_data_folder = "../data/" + airport + "/"
+
+    os.system("python3 {}generate.py {}".format(airport_data_folder,airport))
+    os.system("python3 {}generate_scenario.py {}".format(airport_data_folder,airport))
 
 
 if __name__ == "__main__":

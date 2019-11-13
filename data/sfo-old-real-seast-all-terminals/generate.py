@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 import sys
+import os
 import logging
 from enum import Enum
 from fastkml import kml
 
 from utils import export_to_json, create_output_folder
 
-OUTPUT_FOLDER = "./build/"
-INPUT_KML = "./new_terminal_2.kml"
+dir_path = os.path.dirname(os.path.realpath(__file__))
+OUTPUT_FOLDER = dir_path + "/build/"
+INPUT_KML = dir_path + "/airport.kml"
 BACKGROUND_IMAGE_SIZE = 960
 
 # Setups logger
@@ -41,13 +43,14 @@ class NameAssigner():
 node_name_assigner = NameAssigner()
 link_name_assigner = NameAssigner()
 
-
+# following the sequence of map
 class LayerType(Enum):
     gate = 0
-    spot = 1
-    runway_and_taxiway = 2
-    pushback_way = 3
+    pushback_way = 1
+    taxiway = 2
+    runway = 3
     airport = 4
+    spot = 5
 
 
 def main():
@@ -75,14 +78,16 @@ def main():
 
     # Generates runway data
     logger.debug("Genenrating runway data")
-    generate_link_data(kml_doc, LayerType.runway_and_taxiway, "runways.json",
-                       "runway", True)
+    # generate_link_data(kml_doc, LayerType.runway_and_taxiway, "runways.json",
+    #                    "runway", True)
+    generate_link_data(kml_doc, LayerType.runway, "runways.json")
     logger.debug("Runway data generated")
 
     # Generates taxiway data
     logger.debug("Genenrating taxiway data")
-    generate_link_data(kml_doc, LayerType.runway_and_taxiway, "taxiways.json",
-                       "taxiway", True)
+    # generate_link_data(kml_doc, LayerType.runway_and_taxiway, "taxiways.json",
+    #                    "taxiway", True)
+    generate_link_data(kml_doc, LayerType.taxiway, "taxiways.json")
     logger.debug("Taxiway data generated")
 
     # Generates pushback way data
@@ -192,6 +197,8 @@ def generate_link_data(kml_doc, layer_type, output_filename,
         if use_ref:
             p.name = get_ref(p)
 
+        # p.name = p.name
+
         nodes = []
         for coord in p.geometry.coords:
             nodes.append(coord[0:2])
@@ -205,6 +212,9 @@ def generate_link_data(kml_doc, layer_type, output_filename,
 
 def is_aeroway_matched(placemark, aeroway_filter):
 
+    if placemark.extended_data is None:
+        return False
+
     for i in placemark.extended_data.elements:
         if i.name == "aeroway" and i.value == aeroway_filter:
             return True
@@ -214,6 +224,9 @@ def is_aeroway_matched(placemark, aeroway_filter):
 
 def get_ref(placemark):
 
+    if placemark.extended_data is None:
+        return False
+
     for i in placemark.extended_data.elements:
         if i.name == "ref" and i.value is not None and len(i.value) != 0:
             return i.value
@@ -222,4 +235,5 @@ def get_ref(placemark):
 
 
 if __name__ == "__main__":
+    airport_data_folder = sys.argv[0] + "/"
     main()
