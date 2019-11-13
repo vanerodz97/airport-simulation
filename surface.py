@@ -10,6 +10,7 @@ import cache
 from node import Node
 from link import Link
 from config import Config
+from copy import deepcopy
 
 
 class Surface:
@@ -22,9 +23,11 @@ class Surface:
         self.logger = logging.getLogger(__name__)
 
         self.gates = []
+        self.spots = []
         self.runways = []
         self.taxiways = []
         self.pushback_ways = []
+        self.intersections = []
         self.gate_to_spot_mapping = {}
 
         self.center = center
@@ -52,7 +55,7 @@ class Surface:
                 return
 
         # Retrieve all nodes and links
-        all_nodes = []
+        all_nodes = deepcopy(self.intersections)
 
         for link in self.links:
             all_nodes.append(link.start)
@@ -239,6 +242,12 @@ class Spot(Node):
         Node.__init__(self, name, geo_pos)
 
 
+class Intersection(Node):
+    """Extends `Node` class to represent a intersection position."""
+    def __init__(self, name, geo_pos):
+        Node.__init__(self, name, geo_pos)
+
+
 class RunwayNode(Node):
     """Extends `Node` class to represent a runway node."""
 
@@ -305,6 +314,9 @@ class SurfaceFactory:
         surface = Surface(airport_raw["center"], airport_raw["corners"],
                           dir_path + "airport.jpg")
         SurfaceFactory.__load_gates(surface, dir_path)
+        SurfaceFactory.__load_spots(surface, dir_path)
+        SurfaceFactory.__load_gates_to_spots_mapping(surface, dir_path)
+        SurfaceFactory.__load_intersections(surface, dir_path)
         SurfaceFactory.__load_runway(surface, dir_path)
         SurfaceFactory.__load_taxiway(surface, dir_path)
         SurfaceFactory.__load_pushback_way(surface, dir_path)
@@ -332,6 +344,11 @@ class SurfaceFactory:
     def __load_spots(cls, surface, dir_path):
         surface.spots = SurfaceFactory.__retrieve_node("spots", dir_path)
         cls.logger.info("%s spots loaded", len(surface.spots))
+
+    @classmethod
+    def __load_intersections(cls, surface, dir_path):
+        surface.intersections = SurfaceFactory.__retrieve_node("inters", dir_path)
+        cls.logger.info("%s intersections loaded", len(surface.intersections))
 
     @classmethod
     def __load_gates_to_spots_mapping(cls, surface, dir_path):
@@ -378,6 +395,20 @@ class SurfaceFactory:
             if type_name == "gates":
                 nodes.append(
                     Gate(
+                        name,
+                        {"lat": node_raw["lat"], "lng": node_raw["lng"]},
+                    )
+                )
+            elif type_name == "spots":
+                nodes.append(
+                    Spot(
+                        name,
+                        {"lat": node_raw["lat"], "lng": node_raw["lng"]},
+                    )
+                )
+            elif type_name == "inters":
+                nodes.append(
+                    Intersection(
                         name,
                         {"lat": node_raw["lat"], "lng": node_raw["lng"]},
                     )
