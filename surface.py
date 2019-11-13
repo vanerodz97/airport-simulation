@@ -164,25 +164,28 @@ class Surface:
 
         for runway in self.runways:
             if runway.name == name:
-                print('Same {}'.format(name))
+                # print('Same {}'.format(name))
                 return runway
             else:
-                print('Not Runway Same {} and {}'.format(name, runway.name))
+                # print('Not Runway Same {} and {}'.format(name, runway.name))
+                continue
 
         for taxiway in self.taxiways:
             if taxiway.name == name:
-                print('Same {}'.format(name))
+                # print('Same {}'.format(name))
                 return taxiway
             else:
-                print('Not Taxiway Same {} and {}'.format(name, taxiway.name))
+                # print('Not Taxiway Same {} and {}'.format(name, taxiway.name))
+                continue
 
         for pushback_way in self.pushback_ways:
             if pushback_way.name == name:
-                print('Same {}'.format(name))
+                # print('Same {}'.format(name))
                 return pushback_way
             else:
-                print('Not Pushback_way Same {} and {}'.format(name,
-                                                               pushback_way.name))
+                # print('Not Pushback_way Same {} and {}'.format(name,
+                #                                                pushback_way.name))
+                continue
 
         raise Exception("Getting an unknown link")
 

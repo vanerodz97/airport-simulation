@@ -1,0 +1,572 @@
+Airline,Departing to,Flight,Scheduled,Estimated,Remarks,Terminal,Gate
+Delta Air Lines,Minneapolis,463,上午12:15,上午12:15,,1,43
+Cathay Pacific,Hong Kong,873,上午12:25,上午12:25,,Int'l,A7
+American Airlines,Dallas-Fort Worth,1004,上午12:35,上午12:35,,2,58B
+Cathay Pacific,Hong Kong,851,上午12:50,上午12:50,,Int'l,A4
+United,Chicago/O'Hare,995,上午12:51,上午12:51,,3,63
+Frontier Airlines,Denver,662,上午12:59,上午12:59,,Int'l,A11
+United,Houston/Intercontinental,2377,上午01:00,上午01:00,,3,70
+EVA AIR,Taipei,17,上午01:00,上午01:00,On Time,Int'l,G101
+China Airlines,Taipei,3,上午01:05,上午01:05,,Int'l,A5
+Singapore Airlines,Hong Kong,1,上午01:15,上午01:15,On Time,Int'l,G94
+EVA AIR,Taipei,27,上午01:20,上午01:20,On Time,Int'l,G102
+Air China,Beijing,786,上午01:30,上午01:30,On Time,Int'l,G98
+Avianca,San Salvador,561,上午01:30,上午01:15,,Int'l,A2
+Copa Airlines,Panama City,383,上午01:35,上午01:35,On Time,Int'l,A4
+United,Denver,756,上午05:00,上午05:00,On Time,3,73
+American Airlines,Los Angeles,2528,上午05:00,上午05:00,On Time,2,56A
+Southwest,Los Angeles,1895,上午05:00,上午05:00,On Time,1,B18
+American Airlines,Charlotte,776,上午05:29,上午05:29,On Time,2,56B
+Alaska Airlines,Seattle,939,上午05:30,上午05:30,On Time,2,55
+American Airlines,Phoenix,2042,上午05:38,上午05:38,On Time,2,58B
+Delta Air Lines,Atlanta,1210,上午06:00,上午06:00,On Time,1,43
+American Airlines,Dallas-Fort Worth,1198,上午06:00,上午06:30,,2,59A
+Southwest,Denver,2270,上午06:00,上午06:00,On Time,1,B12
+Alaska Airlines,Los Angeles,994,上午06:00,上午06:00,On Time,2,51B
+Delta Air Lines,Los Angeles,2007,上午06:00,上午06:00,On Time,1,41
+Alaska Airlines,Portland,1321,上午06:00,上午06:00,On Time,2,51A
+Delta Air Lines,Salt Lake City,2401,上午06:00,上午06:00,On Time,1,46
+Southwest,San Diego,1911,上午06:00,上午06:00,On Time,1,B9
+Alaska Airlines,San Diego,1970,上午06:05,上午06:05,On Time,2,54B
+United,San Diego,284,上午06:10,上午06:10,On Time,3,68
+Alaska Airlines,Seattle,1741,上午06:10,上午06:10,On Time,2,53
+Air Canada,Vancouver,561,上午06:10,上午06:10,On Time,Int'l,G94
+Delta Air Lines,Minneapolis,1847,上午06:15,上午06:15,On Time,1,42
+United,Cincinnati,452,上午06:20,上午06:20,On Time,3,66
+Delta Air Lines,New York/JFK,868,上午06:20,上午06:20,On Time,1,40
+Delta Air Lines,Seattle,2703,上午06:20,上午06:20,On Time,1,48
+United,Houston/Intercontinental,687,上午06:25,上午06:25,On Time,3,83
+JetBlue,New York/JFK,16,上午06:25,上午06:25,On Time,1,B6
+Southwest,Chicago/Midway,5513,上午06:30,上午06:30,On Time,1,B17
+United,Chicago/O'Hare,616,上午06:30,上午06:30,On Time,3,88
+United,Seattle,780,上午06:35,上午06:35,On Time,3,89
+Southwest,Dallas/Love Field,4457,上午06:40,上午06:40,On Time,1,B13
+Air Canada,Montreal,780,上午06:40,上午06:40,On Time,Int'l,G91
+Southwest,Burbank,1879,上午06:45,上午06:45,On Time,1,B18
+Avianca,San Salvador,565,上午06:45,上午06:45,On Time,Int'l,A6
+American Airlines,New York/JFK,234,上午06:54,上午06:54,On Time,2,57
+Delta Air Lines,Detroit,854,上午06:55,上午06:55,On Time,1,43
+Alaska Airlines,Kahului,821,上午07:00,上午07:00,On Time,2,55
+Alaska Airlines,Los Angeles,1922,上午07:00,上午07:00,On Time,2,50A
+Alaska Airlines,Orange County,3370,上午07:00,上午07:00,On Time,2,59B
+Alaska Airlines,Orlando,1302,上午07:00,上午07:00,On Time,2,50B
+Alaska Airlines,Seattle,303,上午07:00,上午07:00,On Time,2,54A
+American Airlines,Miami,343,上午07:10,上午07:10,On Time,2,45A
+American Airlines,Philadelphia,700,上午07:14,上午07:14,On Time,2,56A
+Southwest,Los Angeles,1086,上午07:15,上午07:15,On Time,1,B9
+United,Newark,577,上午07:15,上午07:15,On Time,3,85
+Alaska Airlines,Boston,1352,上午07:20,上午07:20,On Time,2,51B
+United,Houston/Intercontinental,540,上午07:20,上午07:20,On Time,3,61
+United,Santa Barbara,5579,上午07:25,上午07:25,On Time,3,78
+Air Canada,Toronto,758,上午07:25,上午07:25,On Time,Int'l,G93
+United,Sacramento,291,上午07:30,上午07:30,On Time,3,86
+Alaska Airlines,Las Vegas,1902,上午07:35,上午07:35,On Time,2,54B
+United,Fresno,5299,上午07:36,上午07:36,On Time,3,79
+United,Austin,258,上午07:40,上午07:40,On Time,3,64
+United,Reno,5900,上午07:41,上午07:41,On Time,3,77A
+Delta Air Lines,Los Angeles,397,上午07:47,上午07:47,On Time,1,47
+American Airlines,Chicago/O'Hare,2614,上午07:49,上午07:49,On Time,2,56B
+United,Houston/Intercontinental,1106,上午07:49,上午07:49,On Time,3,74
+Alaska Airlines,Newark,340,上午07:50,上午07:50,On Time,2,51A
+American Airlines,Los Angeles,6034,上午07:55,上午07:55,On Time,1,45B
+United,MSO,5825,上午07:55,上午07:55,On Time,3,77B
+JetBlue,Boston,434,上午08:00,上午08:00,On Time,1,B7
+United,Chicago/O'Hare,269,上午08:00,上午08:00,On Time,3,68
+United,Chicago/O'Hare,555,上午08:00,上午08:00,On Time,3,62
+American Airlines,Dallas-Fort Worth,390,上午08:00,上午08:00,On Time,2,45A
+Delta Air Lines,Minneapolis,3008,上午08:00,上午08:00,On Time,1,41
+United,Omaha,5404,上午08:00,上午08:00,On Time,3,76
+Alaska Airlines,Seattle,1745,上午08:00,上午08:00,On Time,2,53
+Alaska Airlines,Washington/Reagan,1001,上午08:00,上午08:00,On Time,2,58B
+United,Burbank,1177,上午08:05,上午08:05,On Time,3,75
+United,Calgary,1445,上午08:10,上午08:10,On Time,3,73A
+Delta Air Lines,Atlanta,1530,上午08:15,上午08:15,On Time,1,46
+Southwest,Burbank,5503,上午08:15,上午08:15,On Time,1,B12
+United,Nashville,295,上午08:15,上午08:15,On Time,3,82
+United,Chicago/O'Hare,365,上午08:15,上午08:15,On Time,3,72
+Delta Air Lines,Seattle,2893,上午08:15,上午08:15,On Time,1,40
+American Airlines,New York/JFK,164,上午08:19,上午08:19,On Time,2,57
+Alaska Airlines,Dallas/Love Field,3404,上午08:20,上午08:20,On Time,2,50A
+Hawaiian Airlines,Honolulu/Oahu,11,上午08:20,上午08:20,On Time,Int'l,A10
+Air Canada,Vancouver,8839,上午08:20,上午08:20,On Time,Int'l,G92
+United,Minneapolis,5686,上午08:23,上午08:23,On Time,3,71B
+Alaska Airlines,Portland,383,上午08:25,上午08:25,On Time,2,54A
+United,Chicago/O'Hare,639,上午08:30,上午08:30,On Time,3,87
+United,Boston,768,上午08:30,上午08:30,On Time,3,81
+United,Portland,1178,上午08:30,上午08:30,On Time,3,85
+United,Washington/Reagan,1672,上午08:30,上午08:30,On Time,3,65
+United,San Jose/Los Cabos,1761,上午08:30,上午08:30,On Time,3,63
+United,Orange County,2096,上午08:30,上午08:30,On Time,3,83
+United,Sacramento,5445,上午08:30,上午08:30,On Time,3,84D
+Alaska Airlines,San Diego,1966,上午08:30,上午08:30,On Time,2,52
+United,San Luis Obispo,5696,上午08:30,上午08:30,On Time,3,84B
+United,Redmond,5879,上午08:30,上午08:30,On Time,3,84C
+United,Madison,5914,上午08:30,上午08:30,On Time,3,77B
+United,Denver,948,上午08:32,上午08:32,On Time,3,90
+United,Los Angeles,234,上午08:33,上午08:33,On Time,3,69
+United,Medford,5575,上午08:35,上午08:35,On Time,3,76
+Delta Air Lines,New York/JFK,1859,上午08:35,上午08:35,On Time,1,43
+United,Tucson,5802,上午08:37,上午08:37,On Time,3,78
+United,Kona/Hawaii,1721,上午08:40,上午08:40,On Time,3,66
+United,Ontario,5249,上午08:40,上午08:40,On Time,3,87A
+Alaska Airlines,Portland,3417,上午08:40,上午08:40,On Time,2,59C
+United,Seattle,1835,上午08:42,上午08:42,On Time,3,73
+United,Honolulu/Oahu,1175,上午08:45,上午08:45,On Time,3,80
+Alaska Airlines,Austin,1218,上午08:50,上午08:50,On Time,2,51B
+Alaska Airlines,New York/JFK,1022,上午08:50,上午08:50,On Time,2,55
+United,Dallas-Fort Worth,5682,上午08:46,上午08:46,On Time,3,70
+Southwest,San Diego,1775,上午08:50,上午08:50,On Time,1,B9
+United,Vancouver,784,上午08:50,上午08:50,On Time,3,74
+United,Pittsburgh,2229,上午08:50,上午08:50,On Time,3,89
+United,Palm Springs,5933,上午08:52,上午08:52,On Time,3,73A
+American Airlines,Chicago/O'Hare,2691,上午08:58,上午08:58,On Time,2,56A
+WestJet,Calgary,1521,上午09:00,上午09:00,On Time,Int'l,A2
+United,Redding,5766,上午08:54,上午08:54,On Time,3,71A
+JetBlue,Long Beach,1235,上午09:00,上午09:00,On Time,1,B6
+American Airlines,Los Angeles,1322,上午09:00,上午09:00,On Time,2,45A
+Alaska Airlines,Los Angeles,1946,上午09:00,上午09:00,On Time,2,59A
+Delta Air Lines,Detroit,546,上午09:10,上午09:10,On Time,1,42
+Delta Air Lines,Los Angeles,2313,上午09:10,上午09:10,On Time,1,41
+Alaska Airlines,Palm Springs,3458,上午09:10,上午09:10,On Time,2,53
+American Airlines,Phoenix,1868,上午09:10,上午09:10,On Time,1,45B
+United,Las Vegas,1144,上午09:00,上午09:00,On Time,3,68
+United,Kahului,1725,上午09:11,上午09:11,On Time,3,88
+United,Eugene,5632,上午09:15,上午09:15,On Time,3,84D
+United,Boise,5449,上午09:16,上午09:16,On Time,3,84C
+United,Salt Lake City,5539,上午09:25,上午09:25,On Time,3,77B
+Alaska Airlines,Baltimore,322,上午09:30,上午09:30,On Time,2,54B
+United,Phoenix,5987,上午09:27,上午09:27,On Time,3,77A
+JetBlue,Fort Lauderdale,578,上午09:30,上午09:30,On Time,1,B8
+United,Dallas-Fort Worth/DFW,482,上午09:30,上午09:30,On Time,3,86
+Air Canada,Montreal,760,上午09:30,上午09:30,On Time,Int'l,G93
+Alaska Airlines,San Jose/Los Cabos,1278,上午09:30,上午09:30,On Time,2,50B
+United,Washington/Dulles,516,上午09:30,上午09:30,On Time,3,63
+United,Los Angeles,653,上午09:30,上午09:30,On Time,3,62
+Southwest,Columbus,2254,上午09:35,上午09:35,On Time,1,B17
+Alaska Airlines,Washington/Dulles,1090,上午09:40,上午09:40,On Time,2,58B
+United,Lihue/Kauai,1111,上午09:31,上午09:31,On Time,3,67
+Alaska Airlines,Newark,266,上午09:50,上午09:50,On Time,2,51A
+Alaska Airlines,Seattle,2953,上午09:50,上午09:50,On Time,2,52
+American Airlines,Dallas-Fort Worth,152,上午09:51,上午09:51,On Time,2,57
+Delta Air Lines,Atlanta,3004,上午09:55,上午09:55,On Time,1,40
+Southwest,Los Angeles,1098,上午09:55,上午09:55,On Time,1,B13
+Hawaiian Airlines,Kahului,41,上午10:00,上午10:00,On Time,Int'l,A12
+American Airlines,Chicago/O'Hare,345,上午10:01,上午10:01,On Time,2,56B
+Alaska Airlines,Orange County,2119,上午10:05,上午11:27,,2,50B
+Delta Air Lines,Seattle,2490,上午10:07,上午10:07,On Time,1,42
+Air Canada,Edmonton,8744,上午10:15,上午10:15,On Time,Int'l,G102
+United,Baltimore,2063,上午09:50,上午09:50,On Time,3,61
+United,Ontario,5371,上午10:04,上午10:04,On Time,3,78
+Delta Air Lines,Salt Lake City,1390,上午10:20,上午10:20,On Time,1,48
+Alaska Airlines,Chicago/O'Hare,1208,上午10:25,上午10:25,On Time,2,54A
+Alaska Airlines,Seattle,381,上午10:25,上午10:25,On Time,2,51B
+United,Newark,753,上午10:15,上午10:15,On Time,3,85
+Southwest,Burbank,1935,上午10:30,上午10:30,On Time,1,B17
+Alaska Airlines,Albuquerque,3388,上午10:35,上午10:35,On Time,2,59C
+Southwest,San Diego,1913,上午10:35,上午10:35,On Time,1,B12
+United,Tampa,1991,上午10:15,上午10:15,On Time,3,65
+United,Toronto,608,上午10:25,上午10:25,On Time,3,69
+United,Atlanta,575,上午10:40,上午10:40,On Time,3,89
+United,Vancouver,685,上午10:40,上午10:40,On Time,3,68
+United,Seoul,893,上午10:40,上午10:40,On Time,Int'l,G92
+United,Dallas-Fort Worth,1216,上午10:40,上午10:40,On Time,3,73
+United,Eugene,1513,上午10:40,上午10:40,On Time,3,63
+United,Cleveland,2262,上午10:40,上午10:40,On Time,3,81
+United,Kansas City,5256,上午10:40,上午10:40,On Time,3,79
+United,San Antonio,5334,上午10:40,上午10:40,On Time,3,76
+United,Albuquerque,5448,上午10:40,上午10:40,On Time,3,77B
+United,Eureka,5759,上午10:40,上午10:40,On Time,3,84D
+United,St. Louis,1477,上午10:42,上午10:42,On Time,3,82
+United,Redmond,5541,上午10:42,上午10:42,On Time,3,71A
+United,Tokyo/Haneda,875,上午10:45,上午10:45,On Time,Int'l,G91
+Interjet,Guadalajara,821,上午10:45,上午10:45,On Time,Int'l,
+Delta Air Lines,Los Angeles,664,上午10:45,上午10:45,On Time,1,46
+Delta Air Lines,Minneapolis,1938,上午10:45,上午10:45,On Time,1,43
+United,Beijing,888,上午10:45,上午10:45,On Time,Int'l,G98
+United,Boston,1865,上午10:45,上午10:45,On Time,3,80
+United,Portland,2166,上午10:45,上午10:45,On Time,3,67
+United,Denver,223,上午10:50,上午10:50,On Time,3,87
+American Airlines,Charlotte,2183,上午10:50,上午10:50,On Time,2,56A
+United,Austin,701,上午10:50,上午10:50,On Time,3,75
+United,Chicago/O'Hare,1900,上午10:50,上午10:50,On Time,3,70
+Alaska Airlines,Las Vegas,1904,上午10:50,上午10:50,On Time,2,53
+United,Chicago/O'Hare,277,上午10:55,上午10:55,On Time,3,64
+United,Honolulu/Oahu,1122,上午10:55,上午10:55,On Time,3,83
+Alaska Airlines,Los Angeles,1972,上午11:00,上午11:00,On Time,2,59A
+United,Los Angeles,256,上午11:00,上午11:00,On Time,3,61
+United,Washington/Dulles,309,上午11:00,上午11:00,On Time,3,66
+United,Kahului,1273,上午11:01,上午11:01,On Time,3,85
+United,PAE,5871,上午11:01,上午11:01,On Time,3,77A
+Southwest,Las Vegas,1893,上午11:05,上午11:05,On Time,1,B18
+United,Osaka/Kansai,35,上午11:05,上午11:05,On Time,Int'l,G96
+United,Salt Lake City,5333,上午11:06,上午11:06,On Time,3,71B
+United,Singapore,29,上午11:10,上午11:10,On Time,Int'l,G100
+United,Indianapolis,317,上午11:10,上午11:10,On Time,3,72
+Alaska Airlines,Puerto Vallarta,972,上午11:10,上午11:10,On Time,2,54B
+United,Orange County,631,上午11:10,上午11:10,On Time,3,74
+United,Reno,5911,上午11:11,上午11:11,On Time,3,84C
+United,Newark,535,上午11:15,上午11:15,On Time,3,86
+Delta Air Lines,New York/JFK,757,上午11:15,上午11:15,On Time,1,40
+United,Nashville,1830,上午11:15,上午11:15,On Time,3,88
+American Airlines,Philadelphia,651,上午11:15,上午11:15,On Time,2,45A
+JetBlue,New York/JFK,416,上午11:17,上午11:17,On Time,1,B6
+Delta Air Lines,Atlanta,2049,上午11:20,上午11:20,On Time,1,41
+American Airlines,New York/JFK,16,上午11:24,上午11:24,On Time,2,57
+United,Houston/Intercontinental,507,上午11:25,上午11:25,On Time,3,62
+Air India,Bangalore,174,上午11:30,上午11:30,On Time,Int'l,
+United,Denver,267,上午11:30,上午11:30,On Time,3,65
+Alaska Airlines,Portland,427,上午11:30,上午11:30,On Time,2,52
+Singapore Airlines,Singapore,31,上午11:30,上午11:30,On Time,Int'l,
+United,Tokyo/Narita,837,上午11:30,上午11:30,On Time,Int'l,G101
+Delta Air Lines,Detroit,745,上午11:35,上午11:35,On Time,1,42
+Alaska Airlines,San Diego,1952,上午11:35,上午11:35,On Time,2,51A
+JetBlue,Boston,334,上午11:36,上午11:36,On Time,1,B7
+Frontier Airlines,Atlanta,806,上午11:39,上午11:39,On Time,Int'l,A10
+Southwest,Los Angeles,3781,上午11:40,上午11:40,On Time,1,B12
+United,Spokane,5243,上午11:43,上午11:43,On Time,3,77B
+United,North Bend,5685,上午11:44,上午11:44,On Time,3,84D
+Alaska Airlines,Orange County,3488,上午11:50,上午11:50,On Time,2,53
+United,Phoenix,1664,上午11:51,上午11:51,On Time,3,81
+Air Canada,Calgary,8578,上午11:55,上午11:55,On Time,Int'l,G91
+United,Medford,5455,上午11:55,上午11:55,On Time,3,84B
+Southwest,St. Louis,1819,上午11:55,上午11:55,On Time,1,B13
+American Airlines,Dallas-Fort Worth,1260,上午11:57,上午11:57,On Time,2,56B
+United,Burbank,2128,上午11:58,上午11:58,On Time,3,73A
+Alaska Airlines,Los Angeles,1926,下午12:00,下午12:00,On Time,2,55
+China Eastern,Shanghai,590,下午12:00,下午12:00,On Time,Int'l,A8
+United,Oklahoma City,5585,下午12:05,下午12:05,On Time,3,76
+Alaska Airlines,PAE,2827,下午12:05,下午12:05,On Time,2,51B
+Alaska Airlines,Honolulu/Oahu,743,下午12:10,下午12:10,On Time,2,52
+Southwest,Phoenix,2315,下午12:10,下午12:10,On Time,1,B17
+Air Canada,Toronto,738,下午12:10,下午12:10,On Time,Int'l,G93
+Delta Air Lines,Seattle,2429,下午12:14,下午12:14,On Time,1,48
+Delta Air Lines,Boston,2488,下午12:15,下午12:15,On Time,1,46
+United,Newark,2319,下午12:15,下午12:15,On Time,3,86
+United,Santa Barbara,5325,下午12:15,下午12:15,On Time,3,84C
+All Nippon Airways,Tokyo/Narita,7,下午12:15,下午12:15,On Time,Int'l,G94
+Alaska Airlines,Seattle,1751,下午12:20,下午12:20,On Time,2,54B
+American Airlines,Phoenix,1880,下午12:24,下午12:24,On Time,1,45B
+Hong Kong Airlines,Hong Kong,61,下午12:25,下午12:25,On Time,Int'l,
+United,London/Heathrow,901,下午12:25,下午12:25,On Time,Int'l,G98
+Alaska Airlines,Nashville,1100,下午12:25,下午12:25,On Time,2,50A
+AeroMexico,Guadalajara,663,下午12:30,下午12:30,On Time,Int'l,A6
+United,Los Angeles,433,下午12:30,下午12:30,On Time,3,68
+United,Boise,5328,下午12:40,下午12:40,On Time,3,78
+Korean Air,Seoul,24,下午12:40,下午12:40,On Time,Int'l,
+United,Las Vegas,358,下午12:43,下午12:43,On Time,3,88
+Alaska Airlines,Kona/Hawaii,869,下午12:45,下午12:45,On Time,2,54A
+American Airlines,Miami,383,下午12:45,下午12:45,On Time,2,56A
+Delta Air Lines,Minneapolis,1344,下午12:45,下午12:45,On Time,1,41
+Delta Air Lines,Atlanta,1680,下午12:47,下午12:47,On Time,1,40
+JetBlue,New York/JFK,516,下午12:47,下午12:47,On Time,1,B6
+Delta Air Lines,Los Angeles,1405,下午12:50,下午12:50,On Time,1,46
+Alaska Airlines,New Orleans,1394,下午12:50,下午12:50,On Time,2,50B
+United,Denver,1135,下午12:52,下午12:52,On Time,3,80
+United,Bozeman,1489,下午12:52,下午12:52,On Time,3,63
+United,Chicago/O'Hare,1961,下午12:52,下午12:52,On Time,3,89
+United,Sacramento,5482,下午12:54,下午12:54,On Time,3,84D
+Delta Air Lines,New York/JFK,592,下午12:55,下午12:55,On Time,1,43
+United,Houston/Intercontinental,1615,下午12:56,下午12:56,On Time,3,64
+United,Dallas-Fort Worth,797,下午01:00,下午01:00,On Time,3,72
+Alaska Airlines,Portland,1801,下午01:00,下午01:00,On Time,2,52
+EVA AIR,Taipei,7,下午01:00,下午01:00,On Time,Int'l,A11
+United,Washington/Dulles,1400,下午01:00,下午01:00,On Time,3,87
+United,PAE,5880,下午01:02,下午01:02,On Time,3,76
+United,Monterey,5201,下午01:03,下午01:03,On Time,3,84B
+Southwest,Denver,1373,下午01:05,下午01:05,On Time,1,B12
+Air Canada,Vancouver,569,下午01:05,下午01:05,,Int'l,G91
+Frontier Airlines,Denver,668,下午01:06,下午01:06,,Int'l,A10
+United,Calgary,5469,下午01:07,下午01:07,,3,79
+United,Boston,242,下午01:10,下午01:10,,3,83
+American Airlines,Charlotte,1956,下午01:10,下午01:10,,2,57
+Southwest,Denver,2408,下午01:10,下午01:10,,1,B12
+United,Mexico City,821,下午01:10,下午01:10,,Int'l,75
+Alaska Airlines,New York/JFK,1024,下午01:10,下午01:32,,2,53
+United,Shanghai,857,下午01:10,下午01:10,,Int'l,G102
+Cathay Pacific,Hong Kong,879,下午01:15,下午01:15,On Time,Int'l,
+Alaska Airlines,Las Vegas,712,下午01:15,下午01:15,,2,54A
+United,Portland,2055,下午01:15,下午01:15,,3,62
+United,Newark,2239,下午01:15,下午01:35,,3,85
+Southwest,Burbank,1336,下午01:20,下午01:20,,1,B13
+United,Hong Kong,869,下午01:20,下午01:20,,Int'l,G95
+Delta Air Lines,Salt Lake City,522,下午01:26,下午01:26,On Time,1,48
+United,Denver,492,下午01:28,下午01:28,On Time,3,90
+United,Washington/Dulles,727,下午01:30,下午01:30,,3,74
+WestJet,Calgary,1509,下午01:30,下午01:30,,Int'l,A2
+Southwest,San Diego,1777,下午01:30,下午01:30,On Time,1,B17
+Air Canada,Toronto,756,下午01:30,下午01:30,On Time,Int'l,G93
+United,Palm Springs,5468,下午01:45,下午01:45,On Time,3,84D
+Southwest,Los Angeles,1899,下午01:35,下午01:35,On Time,1,B9
+AeroMexico,Mexico City,669,下午01:35,下午01:35,On Time,Int'l,A12
+Alaska Airlines,Palm Springs,3368,下午01:40,下午01:43,,2,50A
+American Airlines,Dallas-Fort Worth,2248,下午01:41,下午01:41,On Time,2,45A
+Southwest,Chicago/Midway,488,下午01:45,下午01:45,On Time,1,B18
+United,Tucson,5787,下午01:49,下午01:49,On Time,3,84B
+United,Frankfurt,58,下午01:50,下午02:10,,Int'l,G94
+United,Salt Lake City,5687,下午01:54,下午01:54,On Time,3,77B
+United,Munich,194,下午01:55,下午01:55,On Time,Int'l,G96
+KLM Royal Dutch Airlines,Amsterdam,606,下午01:55,下午02:39,,Int'l,A4
+United,Chicago/O'Hare,698,下午01:55,下午02:45,,3,65
+United,Los Angeles,1248,下午02:00,下午02:11,,3,81
+Alaska Airlines,Los Angeles,1928,下午02:00,下午02:00,On Time,2,55
+United,Seattle,1082,下午02:04,下午02:04,On Time,3,61
+JetBlue,Boston,534,下午02:03,下午02:03,On Time,1,B7
+United,Taipei,871,下午02:05,下午02:05,On Time,Int'l,G100
+Delta Air Lines,New York/JFK,490,下午02:05,下午02:05,On Time,1,40
+Alaska Airlines,Orange County,2897,下午02:05,下午02:05,On Time,2,50B
+United,Honolulu/Oahu,300,下午02:10,下午02:10,On Time,3,86
+Delta Air Lines,Seattle,1470,下午02:08,下午03:03,,1,48
+American Airlines,Chicago/O'Hare,2634,下午02:10,下午02:10,On Time,2,56A
+United,Boise,5708,下午02:17,下午02:17,On Time,3,77A
+Delta Air Lines,Detroit,2773,下午02:12,下午02:12,On Time,1,46
+United,Zurich,44,下午02:20,下午02:20,On Time,Int'l,G97
+United,Denver,720,下午02:20,下午02:20,On Time,3,67
+United,Fresno,5452,下午02:25,下午02:25,On Time,3,84C
+United,Las Vegas,943,下午02:39,下午02:39,On Time,3,63
+Alaska Airlines,Seattle,1747,下午02:25,下午02:25,On Time,2,51B
+Frontier Airlines,Las Vegas,2080,下午02:33,下午02:33,On Time,Int'l,A10
+Alaska Airlines,Las Vegas,1910,下午02:35,下午02:35,On Time,2,59A
+American Airlines,Los Angeles,1851,下午02:38,下午02:55,,2,45A
+United,Phoenix,1591,下午02:39,下午02:39,On Time,3,73A
+United,Paris/De Gaulle,990,下午02:50,下午02:50,On Time,Int'l,G92
+Alaska Airlines,San Diego,1948,下午02:45,下午02:45,On Time,2,51A
+Air China,Beijing,986,下午02:50,下午02:50,On Time,Int'l,G99
+United,Houston/Intercontinental,1735,下午02:50,下午02:50,On Time,3,68
+United,Burbank,5717,下午02:50,下午03:10,,3,84C
+United,Raleigh/Durham,1925,下午03:00,下午03:00,On Time,3,66
+Lufthansa,San Francisco,455,下午02:55,下午02:55,On Time,Int'l,G99A
+United,Chicago/O'Hare,390,下午03:10,下午03:44,,3,74
+American Airlines,Dallas-Fort Worth,139,下午03:08,下午03:08,On Time,2,57
+JetBlue,Long Beach,1635,下午03:09,下午06:55,,1,B7
+United,San Diego,671,下午03:10,下午03:10,On Time,3,73
+United,Amsterdam,968,下午03:10,下午03:10,On Time,Int'l,G91
+United,Newark,2044,下午03:15,下午03:15,On Time,3,87
+Delta Air Lines,Atlanta,619,下午03:11,下午03:11,On Time,1,42
+Alaska Airlines,New York/JFK,326,下午03:15,下午03:15,On Time,2,54B
+United,Ontario,5422,下午03:18,下午03:18,On Time,3,84B
+Air France,Paris/De Gaulle,83,下午03:20,下午03:20,On Time,Int'l,A7
+Southwest,San Diego,1915,下午03:20,下午03:20,On Time,1,B18
+United,Santa Barbara,5505,下午03:23,下午03:23,On Time,3,84D
+United,Los Angeles,215,下午03:33,下午03:33,On Time,3,62
+Delta Air Lines,Los Angeles,1327,下午03:25,下午03:25,On Time,1,46
+United,Houston/Intercontinental,810,下午04:04,下午04:04,On Time,3,75
+Alaska Airlines,Orange County,2564,下午03:35,下午05:17,,2,50B
+Southwest,Burbank,1154,下午03:40,下午03:40,On Time,1,B13
+Delta Air Lines,Minneapolis,1411,下午03:40,下午03:40,On Time,1,41
+JetBlue,New York/JFK,616,下午03:41,下午03:41,On Time,1,B6
+American Airlines,Dallas-Fort Worth,1671,下午03:43,下午03:43,On Time,2,56B
+Southwest,Phoenix,2031,下午03:45,下午03:45,On Time,1,B9
+WestJet,Vancouver,1775,下午03:50,下午03:50,On Time,Int'l,A2
+Alaska Airlines,Washington/Dulles,1088,下午03:50,下午03:50,On Time,2,52
+Alaska Airlines,Los Angeles,1932,下午04:00,下午04:00,On Time,2,54A
+United,Orange County,5457,下午04:04,下午04:04,On Time,3,71B
+United,San Luis Obispo,5701,下午04:04,下午04:04,On Time,3,78
+United,Redmond,5782,下午04:05,下午04:05,On Time,3,73A
+United,Medford,5993,下午04:05,下午04:05,On Time,3,71A
+American Airlines,Phoenix,1825,下午04:05,下午04:05,On Time,2,56A
+United,Denver,2242,下午04:06,下午04:06,On Time,3,90
+Japan Airlines,Tokyo/Haneda,1,下午04:05,下午04:05,On Time,Int'l,A8
+United,Boston,444,下午04:10,下午04:10,On Time,3,88
+United,Vancouver,1542,下午04:10,下午04:10,On Time,3,67
+United,Eureka,5555,下午04:10,下午04:10,On Time,3,84B
+Alaska Airlines,Kansas City,3426,下午04:10,下午04:10,On Time,2,55
+Alaska Airlines,Seattle,357,下午04:10,下午04:10,On Time,2,51B
+Delta Air Lines,Seattle,2002,下午04:10,下午04:25,,1,48
+United,Newark,213,下午04:15,下午04:15,On Time,3,81
+Delta Air Lines,New York/JFK,430,下午04:15,下午04:15,On Time,1,43
+United,PAE,5898,下午04:15,下午04:15,On Time,3,76
+United,Sacramento,5473,下午04:20,下午04:20,On Time,3,79
+United,Redding,5753,下午04:20,下午04:20,On Time,3,77A
+United,San Diego,750,下午04:21,下午04:21,On Time,3,63
+Air Canada,Toronto,750,下午04:20,下午04:20,On Time,Int'l,G101A
+United,Reno,1716,下午04:25,下午04:25,On Time,3,61
+United,Washington/Dulles,517,下午04:30,下午04:30,On Time,3,74
+KLM Royal Dutch Airlines,Amsterdam,608,下午04:30,下午04:30,On Time,Int'l,
+British Airways,London/Heathrow,284,下午04:30,下午04:30,On Time,Int'l,A4
+United,Shanghai,891,下午04:30,下午04:30,On Time,Int'l,G95
+United,Portland,612,下午04:32,下午04:32,On Time,3,64
+United,Honolulu/Oahu,1509,下午04:35,下午04:35,On Time,3,86
+United,Chicago/O'Hare,2224,下午04:45,下午04:45,On Time,Int'l,G92
+United,Austin,5465,下午04:45,下午04:45,On Time,3,70
+Emirates,Dubai,226,下午04:45,下午04:45,On Time,Int'l,
+United,Eugene,5832,下午04:48,下午04:48,On Time,3,79
+Delta Air Lines,Salt Lake City,1241,下午04:46,下午04:46,On Time,1,40
+United,Los Angeles,229,下午05:00,下午05:00,On Time,3,73
+Air Canada,Vancouver,571,下午04:50,下午04:50,On Time,Int'l,G101B
+Alaska Airlines,Dallas/Love Field,3348,下午04:55,下午04:55,On Time,2,53
+Southwest,Kansas City,1842,下午04:55,下午04:55,On Time,1,B17
+Alaska Airlines,Portland,359,下午04:55,下午04:55,On Time,2,51A
+American Airlines,Chicago/O'Hare,363,下午05:00,下午05:20,,2,57
+Alaska Airlines,Las Vegas,1930,下午05:00,下午05:00,On Time,2,59A
+American Airlines,Los Angeles,6045,下午05:00,下午05:00,On Time,1,45B
+United,New Orleans,376,下午05:00,下午05:00,On Time,3,89
+United,Newark,2160,下午05:15,下午05:15,On Time,3,85
+Alaska Airlines,Seattle,1755,下午05:00,下午05:00,On Time,2,52
+Alaska Airlines,Palm Springs,3444,下午05:25,下午05:25,On Time,2,50A
+United,Chicago/O'Hare,1187,下午05:22,下午05:22,On Time,3,65
+United,Kahului,1749,下午05:30,下午05:30,On Time,3,87
+Delta Air Lines,Los Angeles,2936,下午05:30,下午05:30,On Time,1,42
+Scandinavian Airlines,Copenhagen,936,下午05:35,下午05:35,On Time,Int'l,
+United,Boise,5327,下午05:30,下午05:30,On Time,3,71A
+Aer Lingus,Dublin,146,下午05:40,下午05:40,On Time,Int'l,
+United,San Luis Obispo,5865,下午05:35,下午05:35,On Time,3,84A
+United,San Diego,1798,下午05:40,下午05:40,On Time,3,75
+Alaska Airlines,Austin,1222,下午05:55,下午05:55,On Time,2,51B
+Southwest,Las Vegas,345,下午05:55,下午05:55,On Time,1,B18
+United,Denver,2031,下午05:50,下午05:50,On Time,3,81
+United,Kona/Hawaii,1723,下午05:58,下午05:58,On Time,3,82
+Virgin Atlantic,London/Heathrow,20,下午06:00,下午06:00,On Time,Int'l,A10
+Alaska Airlines,Los Angeles,1936,下午06:00,下午06:00,On Time,2,54B
+United,Fayetteville,5289,下午05:59,下午05:59,On Time,3,77B
+Alaska Airlines,Salt Lake City,3450,下午06:05,下午06:05,On Time,2,59B
+Alaska Airlines,Seattle,1673,下午06:05,下午06:05,On Time,2,55
+Alaska Airlines,Chicago/O'Hare,220,下午06:10,下午06:10,On Time,2,54A
+United,Orange County,5728,下午06:01,下午06:01,On Time,3,77A
+United,Dallas-Fort Worth,1018,下午06:10,下午06:10,On Time,3,66
+Turkish Airlines,Istanbul,80,下午06:10,下午06:10,On Time,Int'l,
+Southwest,Los Angeles,3774,下午06:10,下午06:10,On Time,1,B13
+Alaska Airlines,PAE,2829,下午06:10,下午06:10,On Time,2,53
+Delta Air Lines,Seattle,2191,下午06:10,下午06:10,On Time,1,48
+United,Honolulu/Oahu,1670,下午06:10,下午06:10,On Time,3,61
+United,Chicago/O'Hare,1800,下午06:15,下午06:15,On Time,3,69
+Southwest,Las Vegas,6695,下午06:15,下午06:15,On Time,1,B9
+Iberia Airlines,Madrid,6174,下午06:15,下午06:15,On Time,Int'l,A3
+United,Burbank,5233,下午06:15,下午06:15,On Time,3,78
+Alaska Airlines,Portland,1809,下午06:20,下午06:20,On Time,2,52
+United,Ontario,5425,下午06:15,下午06:15,On Time,3,84B
+Norwegian,London/Gatwick,7174,下午06:30,下午06:30,On Time,Int'l,A6
+United,Seattle,1262,下午06:20,下午06:20,On Time,3,68
+United,Los Angeles,2263,下午06:30,下午06:30,On Time,3,74
+Southwest,Los Angeles,796,下午06:40,下午06:40,On Time,1,B18
+United,Omaha,5216,下午06:33,下午06:33,On Time,3,79
+Alaska Airlines,San Diego,1962,下午06:45,下午06:45,On Time,2,53
+Delta Air Lines,Salt Lake City,340,下午06:47,下午06:47,On Time,1,44
+Southwest,Burbank,1138,下午06:50,下午07:05,,1,B17
+Air Canada,Calgary,8590,下午06:55,下午06:55,On Time,Int'l,G91
+United,Denver,1968,下午06:45,下午06:45,On Time,3,83
+Alaska Airlines,Palm Springs,3398,下午07:05,下午07:05,On Time,2,50B
+Alaska Airlines,Seattle,1759,下午07:05,下午07:05,On Time,2,51B
+United,Kansas City,798,下午07:05,下午07:05,On Time,3,75
+Finnair,Helsinki,12,下午07:10,下午07:10,On Time,Int'l,A4
+United,Las Vegas,394,下午07:08,下午07:08,On Time,3,63
+United,Eureka,5912,下午07:12,下午07:12,On Time,3,84C
+Alaska Airlines,Orange County,2161,下午07:15,下午07:15,On Time,2,54B
+United,Frankfurt,926,下午07:15,下午07:15,On Time,Int'l,G99
+United,Tucson,5396,下午07:17,下午07:17,On Time,3,76
+Delta Air Lines,Los Angeles,2473,下午07:28,下午07:28,On Time,1,43
+United,Vancouver,460,下午07:21,下午07:21,On Time,3,73
+Southwest,Los Angeles,6665,下午07:30,下午07:30,On Time,1,B9
+United,Sacramento,5524,下午07:29,下午07:29,On Time,3,84B
+United,Phoenix,2339,下午07:30,下午07:30,On Time,3,89
+Alaska Airlines,Las Vegas,1942,下午07:35,下午07:35,On Time,2,55
+British Airways,London/Heathrow,286,下午07:35,下午07:35,On Time,Int'l,A9
+United,Fresno,5373,下午07:38,下午07:38,On Time,3,78
+United,London/Heathrow,930,下午07:40,下午07:40,On Time,Int'l,G92
+United,Spokane,5649,下午07:44,下午07:44,On Time,3,77B
+United,Tel Aviv,954,下午07:45,下午07:45,On Time,Int'l,G96
+United,Palm Springs,5383,下午07:45,下午07:45,On Time,3,84D
+Delta Air Lines,Seattle,1455,下午07:45,下午08:09,,1,48
+United,Albuquerque,5648,下午07:45,下午07:45,On Time,3,71B
+Southwest,San Diego,1357,下午07:50,下午07:50,On Time,1,B13
+American Airlines,Charlotte,707,下午07:51,下午07:51,On Time,1,45B
+United,Denver,1629,下午07:55,下午07:55,On Time,3,87
+SWISS International Airlines,Zurich,39,下午07:55,下午07:55,On Time,Int'l,G100
+Alaska Airlines,Los Angeles,1938,下午08:00,下午08:00,On Time,2,51A
+United,Los Angeles,1200,下午08:00,下午08:00,On Time,3,67
+United,Salt Lake City,5374,下午08:05,下午08:05,On Time,3,71A
+United,Boise,5466,下午08:12,下午08:12,On Time,3,79
+United,Pasco,5515,下午08:15,下午08:15,On Time,3,84C
+Alaska Airlines,Seattle,1325,下午08:15,下午08:15,On Time,2,52
+Southwest,Denver,1656,下午08:25,下午08:25,On Time,1,B18
+Air France,Paris/De Gaulle,85,下午08:25,下午08:25,On Time,Int'l,A8
+JetBlue,Boston,834,下午08:26,下午08:26,On Time,1,B8
+United,Eugene,2162,下午08:30,下午08:30,On Time,3,73A
+United,San Diego,361,下午08:33,下午08:33,On Time,3,81
+United,Boston,1896,下午08:35,下午08:35,On Time,3,85
+United,Burbank,5637,下午08:35,下午08:35,On Time,3,84B
+JetBlue,New York/JFK,916,下午08:35,下午08:35,On Time,1,B6
+United,Las Vegas,681,下午08:36,下午08:36,On Time,3,88
+United,Santa Rosa,5709,下午08:45,下午08:45,On Time,3,78
+United,San Luis Obispo,5714,下午08:45,下午08:45,On Time,3,84D
+United,Orange County,1931,下午08:47,下午08:47,On Time,3,90
+American Airlines,Philadelphia,547,下午08:47,下午08:47,On Time,2,45A
+Air New Zealand,Auckland,7,下午08:50,下午08:50,On Time,Int'l,G98
+Copa Airlines,Panama City,209,下午08:50,下午08:50,On Time,Int'l,G93
+Alaska Airlines,San Diego,1964,下午08:50,下午08:50,On Time,2,54B
+United,Santa Barbara,5647,下午08:51,下午08:51,On Time,3,77B
+United,Seattle,1084,下午08:53,下午08:53,On Time,3,65
+Lufthansa,Munich,459,下午08:55,下午08:55,On Time,Int'l,G101
+Alaska Airlines,Los Angeles,1940,下午09:00,下午09:00,On Time,2,51A
+Delta Air Lines,New York/JFK,610,下午09:00,下午09:00,On Time,1,46
+Alaska Airlines,Portland,365,下午09:00,下午09:00,On Time,2,55
+Southwest,San Diego,1903,下午09:10,下午09:10,On Time,1,B13
+United,Medford,1051,下午09:11,下午09:11,On Time,3,75
+United,Newark,349,下午09:15,下午09:15,On Time,3,62
+Alaska Airlines,Raleigh/Durham,734,下午09:15,下午09:15,On Time,2,50B
+United,Fort Lauderdale,623,下午09:30,下午09:30,On Time,3,74
+United,Los Angeles,1294,下午09:30,下午09:30,On Time,3,64
+United,Vancouver,1259,下午09:33,下午09:33,On Time,3,68
+Delta Air Lines,Cincinnati,1894,下午09:35,下午09:35,On Time,1,43
+United,San Diego,1485,下午09:35,下午09:35,On Time,3,61
+United,PAE,5883,下午09:38,下午09:38,On Time,3,71B
+United,Cincinnati,2311,下午09:40,下午09:40,On Time,3,66
+Alaska Airlines,Newark,592,下午09:45,下午09:45,On Time,2,52
+United,Orlando,2237,下午09:50,下午09:50,On Time,3,69
+United,Phoenix,1469,下午09:57,下午09:57,On Time,3,73
+JetBlue,Boston,134,下午10:00,下午11:44,,1,B8
+Singapore Airlines,Singapore,33,下午10:05,下午10:05,On Time,Int'l,G94
+Alaska Airlines,Las Vegas,916,下午10:10,下午10:10,On Time,2,55
+American Airlines,Charlotte,1659,下午10:13,下午10:13,On Time,2,56B
+Delta Air Lines,New York/JFK,426,下午10:15,下午10:15,On Time,1,42
+Delta Air Lines,Atlanta,1446,下午10:25,下午10:25,On Time,1,40
+Alaska Airlines,Boston,1358,下午10:25,下午10:25,On Time,2,54B
+Qantas,Sydney,74,下午10:25,下午10:25,On Time,Int'l,A6
+United,Newark,726,下午10:30,下午10:30,On Time,3,86
+Delta Air Lines,Boston,2570,下午10:30,下午10:30,On Time,1,46
+United,Baltimore,1061,下午10:30,下午10:30,On Time,3,70
+Air Canada,Toronto,754,下午10:30,下午11:00,,Int'l,G102
+United,Ontario,1852,下午10:33,下午10:33,On Time,3,90
+United,Monterey,5850,下午10:34,下午10:34,On Time,3,84B
+United,Fresno,5627,下午10:35,下午10:35,On Time,3,78
+Alaska Airlines,Philadelphia,1138,下午10:35,下午10:35,On Time,2,51A
+United,Redmond,5700,下午10:35,下午10:35,On Time,3,77B
+United,Redding,5769,下午10:35,下午10:35,On Time,3,84C
+United,Santa Barbara,5878,下午10:35,下午10:35,On Time,3,77A
+United,Singapore,1,下午10:40,下午10:40,On Time,Int'l,G97
+United,Columbus,1626,下午10:40,下午10:40,On Time,3,73A
+United,Bakersfield,5260,下午10:40,下午10:40,On Time,3,79
+United,Mexico City,412,下午10:45,下午10:45,On Time,Int'l,G95
+United,Cancun,1145,下午10:46,下午10:46,On Time,Int'l,67
+United,Atlanta,1554,下午10:46,下午10:46,On Time,3,65
+United,Reno,724,下午10:48,下午10:48,On Time,3,71A
+Delta Air Lines,Detroit,2559,下午10:50,下午10:50,On Time,1,41
+United,Las Vegas,2366,下午10:50,下午10:50,On Time,3,81
+AeroMexico,Mexico City,665,下午10:55,下午10:55,On Time,Int'l,A2
+Air Canada,Montreal,776,下午10:55,下午10:55,On Time,Int'l,G92
+United,Sydney,863,下午10:55,下午10:55,On Time,Int'l,G93
+United,Toronto,1164,下午11:00,下午11:00,On Time,3,87
+United,Chicago/O'Hare,1264,下午11:00,下午11:00,On Time,3,82
+American Airlines,Miami,1713,下午11:01,下午11:01,On Time,2,56A
+United,Portland,481,下午11:01,下午11:01,On Time,3,69
+United,Seattle,351,下午11:05,下午11:05,On Time,3,61
+American Airlines,Philadelphia,1103,下午11:05,下午11:05,On Time,2,45A
+United,Nashville,2060,下午11:05,下午11:05,On Time,3,68
+Frontier Airlines,Austin,1910,下午11:14,下午11:14,On Time,Int'l,A11
+JetBlue,Fort Lauderdale,278,下午11:14,下午11:14,On Time,1,B7
+Alaska Airlines,New York/JFK,254,下午11:15,下午11:15,On Time,2,59A
+American Airlines,New York/JFK,276,下午11:16,下午11:16,On Time,2,57
+French Bee,PPT,710,下午11:20,下午11:20,On Time,Int'l,G100
+United,Chicago/O'Hare,1140,下午11:30,下午11:30,On Time,3,83
+United,Newark,1796,下午11:30,下午11:30,On Time,3,89
+Asiana,Seoul,211,下午11:30,下午11:30,On Time,Int'l,G95
+United,Washington/Dulles,2114,下午11:30,下午11:30,On Time,3,88
+Philippine Airlines,Manila,115,下午11:40,下午11:40,Cancelled,Int'l,
+United,Boston,235,下午11:45,下午11:45,On Time,3,85
+Philippine Airlines,Manila,105,下午11:45,下午11:45,On Time,Int'l,A3
+Korean Air,Seoul,26,下午11:50,下午11:50,On Time,Int'l,A8
+United,Houston/Intercontinental,505,下午11:55,下午11:55,On Time,3,64
+China Southern,Guangzhou,658,下午11:55,下午11:55,On Time,Int'l,A10
+United,Austin,1471,下午11:55,下午11:55,On Time,3,73A
+American Airlines,Chicago/O'Hare,1253,下午11:58,下午11:58,On Time,2,45A
+SunCountry,Minneapolis,398,下午11:59,下午11:59,On Time,Int'l,A6
+JetBlue,New York/JFK,1516,下午11:59,下午11:59,On Time,1,B7
