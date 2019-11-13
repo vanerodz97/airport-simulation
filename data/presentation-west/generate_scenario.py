@@ -79,7 +79,7 @@ def get_departure_from_csv():
     gate_list = df["Gate"].tolist()
     flight_list = df["Flight"].tolist()
     estimated_list = df["Estimated"].tolist()
-    for i in range(1, size, 4):
+    for i in range(1, size, 3):
         new_flight = departure_flight_template.copy()
         if terminal_list[i] == '1':
             new_flight["terminal"] = 1
@@ -122,7 +122,7 @@ def get_arrival_from_csv():
     flight_list = df["Flight"].tolist()
     estimated_list = df["Estimated"].tolist()
     scheduled_list = df["Scheduled"].tolist()
-    for i in range(1, size, 4):
+    for i in range(1, size, 3):
         new_flight = arrival_flight_template.copy()
         if terminal_list[i] == '1':
             new_flight["terminal"] = 1
