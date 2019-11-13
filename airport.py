@@ -206,7 +206,7 @@ class Airport:
         """Retrieve a list of conflicts will observed in the next airport
         state.
         """
-        self.intersection_control.check_conflict_at_intersection()
+        self.intersection_control.set_aircraft_at_intersection()
         return self.__get_conflicts(is_next=True)
 
     def __get_conflicts(self, is_next=False):

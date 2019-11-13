@@ -5,9 +5,11 @@ from queue import PriorityQueue as PQ
 
 
 class InterSection:
-    def __init__(self, node):
+    def __init__(self, node, links):
         self.node = node
-        self.aircrafts = None
+        self.links = {}
+        for link in links:
+            self.links[link] = None
 
 
 class RampController:
@@ -33,10 +35,10 @@ class InterSectionController:
     def __init__(self, ground):
         self.ground = ground
         self.intersection = []
-        for node in ground.surface.intersections:
-            self.intersection.append(InterSection(node))
+        for node, links in ground.surface.intersections_to_link_mapping.items():
+            self.intersection.append(InterSection(node, links))
 
-    def check_conflict_at_intersection(self):
+    def set_aircraft_at_intersection(self):
         """ Check whether there is conflict in the intersection"""
         aircraft_list = self.ground.aircrafts
         for aircraft in aircraft_list:
@@ -45,26 +47,35 @@ class InterSectionController:
 
     def set_intersection(self, link, aircraft):
         """ Set the intersection as occupied and identify the aircraft in the conflict node"""
-        for inter in self.intersection:
-            node = inter.node
-            if link.contains_node(node):
+        for spot in self.intersection:
+            node = spot.node
+            if link in spot.links:
                 distance = node.get_distance_to(aircraft.precise_location)
-                if inter.aircrafts is None:
-                    inter.aircrafts = PQ()
-                inter.aircrafts.put((distance, aircraft))
+                if spot.links[link] is None:
+                    spot.links[link] = PQ()
+                spot.links[link].put((distance, aircraft, link))
+
+    def __check_conflict(self, spot, itineraries):
+        count_occupied = 0
+        for q in spot.links.values():
+            if q is None or q.qsize() == 0:
+                continue
+            count_occupied += 1
+            # if count_occupied > 1:
+            #     while q.qsize() != 0:
+            #         aircraft = q.get()[1]
+            #         aircraft.itinerary.add_scheduler_delay()
+            #         itineraries[aircraft] = aircraft.itinerary
+        return True if count_occupied > 1 else False
 
     def resolve_conflict(self, itineraries):
         """ Decide which aircraft to add the halt"""
         for spot in self.intersection:
-            chosen = False
-            while spot.aircrafts and spot.aircrafts.qsize() != 0:
-                aircraft = spot.aircrafts.get()[1]
-                if chosen:
-                    aircraft.itinerary.add_scheduler_delay()
-                    itineraries[aircraft] = aircraft.itinerary
-                    # print("%s is hold at intersection %s", aircraft, spot)
-                chosen = True
-
+            """ conflict will happen at the intersection"""
+            occupied = self.__check_conflict(spot, itineraries)
+            if occupied:
+                print("conflict")
+            """how to choose the link to pass: longest queue, if same: shortest distance"""
 
 
 

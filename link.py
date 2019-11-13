@@ -89,6 +89,11 @@ class Link:
             return False
         return self.contains_node_at(node) is not None
 
+    def contain_node(self, node):
+        if self.start.is_close_to(node) or self.end.is_close_to(node):
+            return True
+        return False
+
     def contains_node_at(self, node):
         """Returns the index of the given node in this link."""
 

@@ -29,6 +29,7 @@ class Surface:
         self.pushback_ways = []
         self.intersections = []
         self.gate_to_spot_mapping = {}
+        self.intersections_to_link_mapping = {}
 
         self.center = center
         self.corners = corners
@@ -320,9 +321,22 @@ class SurfaceFactory:
         SurfaceFactory.__load_runway(surface, dir_path)
         SurfaceFactory.__load_taxiway(surface, dir_path)
         SurfaceFactory.__load_pushback_way(surface, dir_path)
-
         surface.break_links()
+        SurfaceFactory.__find_link_around_intersection(surface)
         return surface
+
+    @classmethod
+    def __find_link_around_intersection(cls, surface):
+        for intersection in surface.intersections:
+            for link in surface.links:
+                if link.contain_node(intersection):
+                    if intersection not in surface.intersections_to_link_mapping:
+                        surface.intersections_to_link_mapping[intersection] = []
+                    if link.start.is_close_to(intersection):
+                        """ we need the intersection to be at the end of each link, i.e. direct link """
+                        surface.intersections_to_link_mapping[intersection].append(link.reverse)
+                    else:
+                        surface.intersections_to_link_mapping[intersection].append(link)
 
     @classmethod
     def __is_data_ready(cls, dir_path):
