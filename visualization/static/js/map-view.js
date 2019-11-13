@@ -193,7 +193,7 @@ class MapView {
 
         return {
             path: AIRCRAFT_SVG_ICON_PATH,
-            scale: 680 / ZOOM_FACTORS[this.map.getZoom()],
+            scale: 600 / ZOOM_FACTORS[this.map.getZoom()],
             rotation: rotation - 45,
             strokeColor: color,
             fillColor: color,
@@ -255,7 +255,7 @@ class MapView {
                             // take-off animation
                             aircraft.animateTo(new google.maps.LatLng(runway[1]["lat"], runway[1]["lng"]), {
                                 easing: "easeInCirc",
-                                duration: 1000
+                                duration: 750
                             });
                         }
                     } else {
@@ -300,7 +300,7 @@ class MapView {
                         });
                         aircraft.animateTo(new google.maps.LatLng(each.lat, each.lng), {
                             easing: "easeOutCirc",
-                            duration: 1000
+                            duration: 750
                         });
                     } else {
                         // departing aircrafts (appear at the gate)
@@ -339,7 +339,7 @@ class MapView {
             if (!newAircraftSet.has(name)) {
                 setTimeout(() => {
                     aircraft.setMap(null);
-                }, 950);
+                }, 750);
             }
         }
         this.aircraft = newAircraftSet;
