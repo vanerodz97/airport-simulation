@@ -168,18 +168,27 @@ class MapView {
     }
 
     __getAircraftIcon(rotation, state) {
-        let color;
-        switch (state) {
-            case "Stopped":
-                color = "#64b5f6";
-                break;
-            case "Hold":
-                color = "#f9a825";
-                break;
-            default:
-                // moving
-                color = "#1565c0";
-                break;
+        let color = null;
+        if (state.startsWith("#")) {
+            // for __zoomChangeHandler()
+            rotation += 45;
+            color = state;
+        } else {
+            switch (state) {
+                case "TakingOff":
+                    color = "#72f542";
+                    break;
+                case "Stopped":
+                    color = "#64b5f6";
+                    break;
+                case "Hold":
+                    color = "#f9a825";
+                    break;
+                default:
+                    // moving
+                    color = "#1565c0";
+                    break;
+            }
         }
 
         return {
@@ -213,63 +222,73 @@ class MapView {
         let newAircraftSet = new Map();
 
         for (let each of allAircraft) {
-            if (this.aircraft.has(each.name)) {
-                // Existing aircraft
-                const aircraft = this.aircraft.get(each.name);
-                let angle;
-
-                if (this.__isCloseNode(
-                    aircraft.getPosition().lat(),
-                    aircraft.getPosition().lng(),
-                    each.lat,
-                    each.lng)
-                ) {
-                    angle = -aircraft.getIcon().rotation - 45;
-                } else {
-                    angle = this.__calcAngle(
-                        aircraft.getPosition().lat(),
-                        aircraft.getPosition().lng(),
-                        each.lat,
-                        each.lng
-                    );
-                }
-
-                aircraft.setOptions({
-                    icon: this.__getAircraftIcon(-angle, each.status)
-                });
-                aircraft.updateInfoWindow(each);
-
-                if (use_animation) {
-                    aircraft.animateTo(new google.maps.LatLng(each.lat, each.lng), {
-                        easing: "linear",
-                        duration: 500
+            let aircraft = null;
+            let runway = null;
+            if (use_animation) {
+                // simulator playing forward: take-off/landing/taxing animation
+                if (this.aircraft.has(each.name)) {
+                    // Existing aircraft
+                    aircraft = this.aircraft.get(each.name);
+                    this.runways_endpoints.forEach(each_runway => {
+                        if (this.__isCloseNode(
+                            each.lat,
+                            each.lng,
+                            each_runway[0]["lat"],
+                            each_runway[0]["lng"])) {
+                            runway = each_runway;
+                        }
                     });
-                } else {
-                    aircraft.setOptions({
-                        position: new google.maps.LatLng(each.lat, each.lng)
-                    })
-                }
 
-                newAircraftSet.set(each.name, aircraft);
-                this.aircraft.delete(each.name);
-            } else {
-                // New aircraft
-                // Filter out arriving aircrafts for landing animation
-                let runway = null;
-                this.runways_endpoints.forEach(each_runway => {
-                    if (this.__isCloseNodeDist(
-                        each.lat,
-                        each.lng,
-                        each_runway[1]["lat"],
-                        each_runway[1]["lng"])) {
-                        runway = each_runway;
+                    if (runway) {
+                        // enqueue for take-off at or before current tick
+                        const angle = this.__calcAngle(
+                            each.lat,
+                            each.lng,
+                            runway[1]["lat"],
+                            runway[1]["lng"]
+                        );
+                        aircraft.setOptions({
+                            icon: this.__getAircraftIcon(-angle, each.status),
+                            position: new google.maps.LatLng(each.lat, each.lng)
+                        });
+                        if (each.status === "TakingOff") {
+                            // take-off animation
+                            aircraft.animateTo(new google.maps.LatLng(runway[1]["lat"], runway[1]["lng"]), {
+                                easing: "easeInCirc",
+                                duration: 1000
+                            });
+                        }
+                    } else {
+                        // taxing on taxiway
+                        const angle = this.__calcAngle(
+                            aircraft.getPosition().lat(),
+                            aircraft.getPosition().lng(),
+                            each.lat,
+                            each.lng
+                        );
+                        aircraft.setOptions({
+                            icon: this.__getAircraftIcon(-angle, each.status)
+                        });
+                        aircraft.animateTo(new google.maps.LatLng(each.lat, each.lng), {
+                            easing: "linear",
+                            duration: 500
+                        });
                     }
-                });
+                } else {
+                    // New aircraft
+                    this.runways_endpoints.forEach(each_runway => {
+                        if (this.__isCloseNode(
+                            each.lat,
+                            each.lng,
+                            each_runway[1]["lat"],
+                            each_runway[1]["lng"])) {
+                            runway = each_runway;
+                        }
+                    });
 
-                if (use_animation && runway) { // arriving
-                    const aircraft = this.drawAircraft(runway[0]["lat"], runway[0]["lng"], each.state, each.name, "");
-                    newAircraftSet.set(each.name, aircraft);
-                    if (use_animation) {
+                    if (runway) {
+                        // landing animation (appear at the runway)
+                        aircraft = this.drawAircraft(runway[0]["lat"], runway[0]["lng"], each.status, each.name, "");
                         const angle = this.__calcAngle(
                             aircraft.getPosition().lat(),
                             aircraft.getPosition().lng(),
@@ -284,57 +303,45 @@ class MapView {
                             duration: 1000
                         });
                     } else {
-                        aircraft.setOptions({
-                            position: new google.maps.LatLng(each.lat, each.lng)
-                        })
+                        // departing aircrafts (appear at the gate)
+                        aircraft = this.drawAircraft(each.lat, each.lng, each.status, each.name, "");
                     }
-                } else { // departing (or arriving without animation)
-                    const aircraft = this.drawAircraft(each.lat, each.lng, each.state, each.name, "");
-                    newAircraftSet.set(each.name, aircraft);
+                }
+                aircraft.updateInfoWindow(each);
+                newAircraftSet.set(each.name, aircraft);
+            } else {
+                // simulator playing backward: set to right position
+                if (this.aircraft.has(each.name)) {
+                    // Existing aircraft
+                    aircraft = this.aircraft.get(each.name);
+                    const angle = this.__calcAngle(
+                        each.lat,
+                        each.lng,
+                        aircraft.getPosition().lat(),
+                        aircraft.getPosition().lng(),
+                    );
+                    aircraft.setOptions({
+                        icon: this.__getAircraftIcon(-angle, each.status),
+                        position: new google.maps.LatLng(each.lat, each.lng)
+                    });
+                } else {
+                    // New aircraft
+                    aircraft = this.drawAircraft(each.lat, each.lng, each.status, each.name, "");
                 }
             }
+            aircraft.updateInfoWindow(each);
+            newAircraftSet.set(each.name, aircraft);
         }
 
-        // Aircraft to remove
-        this.aircraft.forEach(aircraft => {
-            // Get the runway to take off
-
-            let runway = null;
-            this.runways_endpoints.forEach(each_runway => {
-                if (this.__isCloseNodeDist(
-                    aircraft.getPosition().lat(),
-                    aircraft.getPosition().lng(),
-                    each_runway[0]["lat"],
-                    each_runway[0]["lng"])) {
-                    runway = each_runway;
-                }
-            });
-
-            // Filter out departing aircrafts for take-off animation
-            if (use_animation && runway && !newAircraftSet.has(aircraft.label)) {
-                const angle = this.__calcAngle(
-                    aircraft.getPosition().lat(),
-                    aircraft.getPosition().lng(),
-                    runway[1]["lat"],
-                    runway[1]["lng"]
-                );
-
-                aircraft.setOptions({
-                    icon: this.__getAircraftIcon(-angle, "Stopped")
-                });
-
-                aircraft.animateTo(new google.maps.LatLng(runway[1]["lat"], runway[1]["lng"]), {
-                    easing: "easeInCirc",
-                    duration: 1000
-                });
+        // aircrafts to be removed from airport
+        // for (let name in this.aircraft) {}
+        for (let [name, aircraft] of this.aircraft) {
+            if (!newAircraftSet.has(name)) {
                 setTimeout(() => {
                     aircraft.setMap(null);
-                }, 1000);
-            } else {
-                aircraft.setMap(null);
+                }, 950);
             }
-        });
-
+        }
         this.aircraft = newAircraftSet;
     }
 
@@ -357,7 +364,7 @@ class MapView {
         for (let [name, aircraft] of this.aircraft) {
             let oldIcon = aircraft.getIcon();
             aircraft.setOptions({
-                icon: this.__getAircraftIcon(oldIcon.rotation + 45, oldIcon.state)
+                icon: this.__getAircraftIcon(oldIcon.rotation, oldIcon.fillColor)
             });
         }
     }
@@ -381,21 +388,15 @@ class MapView {
         var a = 
           Math.sin(dLat/2) * Math.sin(dLat/2) +
           Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-          Math.sin(dLon/2) * Math.sin(dLon/2)
-          ; 
+          Math.sin(dLon/2) * Math.sin(dLon/2);
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
         var d = R * c; // Distance in km
         return d;
     }
     
-    __isCloseNodeDist(lat1, lng1, lat2, lng2) {
-        const THRESHOLD = 0.1;
-        return this.__calcDist(lat1, lng1, lat2, lng2) < THRESHOLD;
-    }
-
     __isCloseNode(lat1, lng1, lat2, lng2) {
-        const THRESHOLD = 0.00005;
-        return Math.abs(lat1 - lat2) < THRESHOLD && Math.abs(lng1 - lng2) < THRESHOLD;
+        const THRESHOLD = 0.05;
+        return this.__calcDist(lat1, lng1, lat2, lng2) < THRESHOLD;
     }
 }
 
