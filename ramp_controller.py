@@ -55,24 +55,24 @@ class InterSectionController:
                     spot.links[link] = PQ()
                 spot.links[link].put((distance, aircraft, link))
 
-    def __check_conflict(self, spot, itineraries):
+    def __resolve_conflict(self, spot, itineraries):
         count_occupied = 0
         for q in spot.links.values():
             if q is None or q.qsize() == 0:
                 continue
             count_occupied += 1
-            # if count_occupied > 1:
-            #     while q.qsize() != 0:
-            #         aircraft = q.get()[1]
-            #         aircraft.itinerary.add_scheduler_delay()
-            #         itineraries[aircraft] = aircraft.itinerary
+            while q.qsize() != 0:
+                aircraft = q.get()[1]
+                if count_occupied > 1:
+                    aircraft.itinerary.add_scheduler_delay()
+                    itineraries[aircraft] = aircraft.itinerary
         return True if count_occupied > 1 else False
 
     def resolve_conflict(self, itineraries):
         """ Decide which aircraft to add the halt"""
         for spot in self.intersection:
             """ conflict will happen at the intersection"""
-            occupied = self.__check_conflict(spot, itineraries)
+            occupied = self.__resolve_conflict(spot, itineraries)
             if occupied:
                 print("conflict")
             """how to choose the link to pass: longest queue, if same: shortest distance"""

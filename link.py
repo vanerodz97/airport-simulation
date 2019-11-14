@@ -51,7 +51,6 @@ class Link:
     def reverse(self):
         """Reverses the node orders, which means the start and end are switched.
         """
-        # return Link(self.name, self.nodes[::-1])
         return type(self)(self.name, self.nodes[::-1])
 
     def __calculate_boundary(self, nodes):
