@@ -1,3 +1,4 @@
+import os
 import sys
 import random
 import logging
@@ -6,7 +7,10 @@ import math
 
 from utils import export_to_json, create_output_folder
 
-OUTPUT_FOLDER = "./build/"
+dir_path = os.path.dirname(os.path.realpath(__file__))
+REAL_DEPARTURE_PATH = dir_path + "/updated_all_terminal_departure.csv"
+REAL_ARRIVAL_PATH = dir_path + "/updated_all_terminal_arrival.csv"
+OUTPUT_FOLDER = dir_path + "/build/"
 
 # Setups logger
 logger = logging.getLogger(__name__)
@@ -46,7 +50,7 @@ spots_to_gates = {
 }
 
 inters = ["I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9", "I10",
-          "I11","I12"]
+          "I11", "I12"]
 
 terminal_gates = [
     ['B18', '43', 'B12', '41', '46', 'B9', '42', '40', '48', 'B6',
@@ -68,14 +72,15 @@ terminal_gates = [
 
 def get_departure_from_csv():
     departures = []
-    df = pd.read_csv("./all_terminal_departure.csv")
+    df = pd.read_csv(REAL_DEPARTURE_PATH)
     size = len(df.index)
     airline_list = df["Airline"].tolist()
     terminal_list = df["Terminal"].tolist()
     gate_list = df["Gate"].tolist()
     flight_list = df["Flight"].tolist()
     estimated_list = df["Estimated"].tolist()
-    for i in range(1, size):
+    scheduled_list = df["Scheduled"].tolist()
+    for i in range(1, size, 3):
         new_flight = departure_flight_template.copy()
         if terminal_list[i] == '1':
             new_flight["terminal"] = 1
@@ -98,8 +103,10 @@ def get_departure_from_csv():
         new_flight["callsign"] = airline_list[i].replace(" Airlines", "") + "-" \
                                  + str(
             flight_list[i]) + "-D"
-        new_flight["time"] = new_flight["appear_time"] = set_time(
+        new_flight["time"] = set_new_time(
             estimated_list[i])
+        new_flight["appear_time"] = set_new_time(
+            scheduled_list[i])
         for k, v in spots_to_gates.items():
             if new_flight["gate"] in v:
                 new_flight["spot"] = k
@@ -110,7 +117,7 @@ def get_departure_from_csv():
 
 def get_arrival_from_csv():
     arrivals = []
-    df = pd.read_csv("./updated_all_terminal_arrival.csv")
+    df = pd.read_csv(REAL_ARRIVAL_PATH)
     size = len(df.index)
     airline_list = df["Airline"].tolist()
     terminal_list = df["Terminal"].tolist()
@@ -118,7 +125,7 @@ def get_arrival_from_csv():
     flight_list = df["Flight"].tolist()
     estimated_list = df["Estimated"].tolist()
     scheduled_list = df["Scheduled"].tolist()
-    for i in range(1, size):
+    for i in range(1, size, 3):
         new_flight = arrival_flight_template.copy()
         if terminal_list[i] == '1':
             new_flight["terminal"] = 1
@@ -207,4 +214,5 @@ def main():
 
 
 if __name__ == "__main__":
+    airport_data_folder = sys.argv[0] + "/"
     main()

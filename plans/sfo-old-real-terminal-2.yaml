@@ -1,6 +1,6 @@
 ---
-name: real-terminal-2
-airport: real-terminal-2
+name: sfo-old-real-terminal-2
+airport: sfo-old-real-terminal-2
 
 simulation:
   end_time: "23:59"

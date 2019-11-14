@@ -234,7 +234,7 @@ class VisualizationView {
 
         $("#traffic-summary").text(`${allCount} aircraft on the surface. ${holdCount} on hold.`);
         $("#performance-frequency").text(`Takeoff frequency: ${takeoff_frequency.toFixed(2)} per minute.`);
-        $("#performance-latency").text(`Avg latency: ${avg_latency.toFixed(2)} minute(s).`);
+        $("#performance-latency").text(`Slide time: ${avg_latency.toFixed(2)} minute(s).`);
 
         $("#traffic-table > tbody").html(trafficTableHtml);
 

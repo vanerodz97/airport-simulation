@@ -3,16 +3,23 @@ from datetime import datetime
 import datetime as dt
 import time
 
+OLDARRIVALPATH = "./all_terminal_arrival.csv"
+NEWARRIVALPATH = "./updated_all_terminal_arrival.csv"
+
+OLDDEPARTUREPATH = "./all_terminal_departure.csv"
+NEWDEPARTUREPATH = "./updated_all_terminal_departure.csv"
+
 
 def datetimeToString(d):
     iso = str(d)
+    # deleting two 23:59 departure aircraft
     iso2 = iso.split("1900-01-01 ")[1]
     iso3 = iso2.split(":00")[0]
     return iso3
 
 
-if __name__ == "__main__":
-    df = pd.read_csv("./all_terminal_arrival.csv")
+def main(OLDPATH, NEWPATH):
+    df = pd.read_csv(OLDPATH)
     estimated_list = df["Estimated"].tolist()
     scheduled_list = df["Scheduled"].tolist()
     airline_list = df["Airline"].tolist()
@@ -22,27 +29,24 @@ if __name__ == "__main__":
 
     final_estimated_list = []
     final_scheduled_list = []
-    timetup = time.gmtime()
 
     se = set()
     for e in estimated_list:
         if e.startswith("上午"):
             ss = e.strip("上午")
             e = ss + " am"
-            flag = 1
         else:
             ss = e.strip("下午")
             e = ss + " pm"
-            flag = 0
 
         d = datetime.strptime(e, "%I:%M %p")
         iso = datetimeToString(d)
 
         if iso in se:
-            d = d + dt.timedelta(minutes=4)
+            d = d + dt.timedelta(minutes=2)
             iso = datetimeToString(d)
             while iso in se:
-                d = d + dt.timedelta(minutes=4)
+                d = d + dt.timedelta(minutes=2)
                 iso = datetimeToString(d)
             se.add(iso)
         else:
@@ -59,18 +63,12 @@ if __name__ == "__main__":
     print(len(se))
     print(len(df.index))
 
-    # count = -1
-    # fr = open("./all_terminal_arrival.csv", "r")
-    # rw = open("./updated_all_terminal_arrival.csv", "w")
-    # for eachline in fr:
-    #     print(eachline.strip())
-    #     new_line = eachline.replace(estimated_list[count],
-    #                                 final_estimated_list[count]).replace(
-    #         scheduled_list[count], final_scheduled_list[count])
-    #     count += 1
-    #     rw.write(new_line)
-
     df = pd.DataFrame({'Scheduled': final_scheduled_list, 'Estimated':
         final_estimated_list, 'Airline': airline_list, 'Flight': flight,
-                       'Gate': gate,'Terminal':terminal})
-    df.to_csv('./updated_all_terminal_arrival.csv', encoding='gbk')
+                       'Gate': gate, 'Terminal': terminal})
+    df.to_csv(NEWPATH, encoding='gbk')
+
+
+if __name__ == "__main__":
+    main(OLDARRIVALPATH, NEWARRIVALPATH)
+    main(OLDDEPARTUREPATH,NEWDEPARTUREPATH)

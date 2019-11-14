@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 import sys
+import os
 import logging
 from enum import Enum
 from fastkml import kml
 
 from utils import export_to_json, create_output_folder
 
-OUTPUT_FOLDER = "./build/"
-INPUT_KML = "./airport.kml"
+dir_path = os.path.dirname(os.path.realpath(__file__))
+OUTPUT_FOLDER = dir_path + "/build/"
+INPUT_KML = dir_path + "/airport.kml"
 BACKGROUND_IMAGE_SIZE = 960
 
 # Setups logger
@@ -246,4 +248,5 @@ def get_ref(placemark):
 
 
 if __name__ == "__main__":
+    airport_data_folder = sys.argv[0] + "/"
     main()
