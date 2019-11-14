@@ -203,7 +203,13 @@ class MapView {
     }
 
     drawAircraft(lat, lng, state, name, content) {
-        return this.__drawNode(lat, lng, this.__getAircraftIcon(0, state), name, content);
+        // TODO: maybe put the name back
+        const label = {
+            text: name,
+            color: 'black',
+            fontSize: "7px"
+        }
+        return this.__drawNode(lat, lng, this.__getAircraftIcon(0, state), label, content);
     }
 
     drawGate(lat, lng, name) {
@@ -216,6 +222,26 @@ class MapView {
 
         const gate = this.__drawNode(lat, lng, image, null, name);
         this.gates.push(gate);
+    }
+
+    drawSpot(lat, lng, name) {
+        const image = {
+            url: "/image/spot.svg",
+            size: new google.maps.Size(18, 18),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(9, 9)
+        };
+        this.__drawNode(lat, lng, image, null, name);
+    }
+
+    drawIntersection(lat, lng, name) {
+        const image = {
+            url: "/image/intersection.svg",
+            size: new google.maps.Size(24, 24),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(9, 9)
+        };
+        this.__drawNode(lat, lng, image, null, name);
     }
 
     updateAllAircraft(allAircraft, use_animation) {
@@ -255,7 +281,7 @@ class MapView {
                             // take-off animation
                             aircraft.animateTo(new google.maps.LatLng(runway[1]["lat"], runway[1]["lng"]), {
                                 easing: "easeInCirc",
-                                duration: 750
+                                duration: 500
                             });
                         }
                     } else {
@@ -300,7 +326,7 @@ class MapView {
                         });
                         aircraft.animateTo(new google.maps.LatLng(each.lat, each.lng), {
                             easing: "easeOutCirc",
-                            duration: 750
+                            duration: 500
                         });
                     } else {
                         // departing aircrafts (appear at the gate)
@@ -339,7 +365,7 @@ class MapView {
             if (!newAircraftSet.has(name)) {
                 setTimeout(() => {
                     aircraft.setMap(null);
-                }, 750);
+                }, 500);
             }
         }
         this.aircraft = newAircraftSet;
@@ -395,7 +421,7 @@ class MapView {
     }
     
     __isCloseNode(lat1, lng1, lat2, lng2) {
-        const THRESHOLD = 0.05;
+        const THRESHOLD = 0.03;
         return this.__calcDist(lat1, lng1, lat2, lng2) < THRESHOLD;
     }
 }

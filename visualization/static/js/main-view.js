@@ -21,7 +21,7 @@ function startVisualization() {
     new VisualizationView(getModeAndPlan());
 }
 
-const AUTO_RUN_INTERVAL = 500;
+const AUTO_RUN_INTERVAL = 550;
 const FAST_FORWARD_STEP_SIZE = 120;
 
 class VisualizationView {
@@ -121,6 +121,18 @@ class VisualizationView {
         // Taxiway
         for (let taxiway of surfaceData["taxiways"]) {
             this.mapView.drawTaxiway(parseNodes(taxiway["nodes"]));
+        }
+
+        // Spots
+        for (let spot of surfaceData["spots"]) {
+            const name = "SPOT: " + spot["name"];
+            this.mapView.drawSpot(spot["lat"], spot["lng"], name);
+        }
+
+        // Intersections
+        for (let inter of surfaceData["inters"]) {
+            const name = "INTERSECTION: " + inter["name"];
+            this.mapView.drawIntersection(inter["lat"], inter["lng"], name);
         }
 
         const initState = this.dataConnector.currentState();
