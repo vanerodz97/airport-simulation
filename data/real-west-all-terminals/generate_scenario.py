@@ -8,7 +8,7 @@ import math
 from utils import export_to_json, create_output_folder
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
-REAL_DEPARTURE_PATH = dir_path + "/all_terminal_departure.csv"
+REAL_DEPARTURE_PATH = dir_path + "/updated_all_terminal_departure.csv"
 REAL_ARRIVAL_PATH = dir_path + "/updated_all_terminal_arrival.csv"
 OUTPUT_FOLDER = dir_path + "/build/"
 
@@ -80,6 +80,7 @@ def get_departure_from_csv():
     gate_list = df["Gate"].tolist()
     flight_list = df["Flight"].tolist()
     estimated_list = df["Estimated"].tolist()
+    scheduled_list = df["Scheduled"].tolist()
     for i in range(1, size):
         new_flight = departure_flight_template.copy()
         if terminal_list[i] == '1':
@@ -103,8 +104,10 @@ def get_departure_from_csv():
         new_flight["callsign"] = airline_list[i].replace(" Airlines", "") + "-" \
                                  + str(
             flight_list[i]) + "-D"
-        new_flight["time"] = new_flight["appear_time"] = set_time(
+        new_flight["time"] = set_new_time(
             estimated_list[i])
+        new_flight["appear_time"] = set_new_time(
+            scheduled_list[i])
         for k, v in spots_to_gates.items():
             if new_flight["gate"] in v:
                 new_flight["spot"] = k

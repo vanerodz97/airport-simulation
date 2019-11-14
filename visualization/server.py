@@ -36,7 +36,8 @@ def api_batch_plans():
 @app.route("/plans/streaming")
 def api_streaming_plans():
     plans = [f for f in next(os.walk(PLAN_INPUT_FOLDER))[2]]
-    plans = map(lambda p: p.split(".")[0], list(filter(lambda p: "yaml" in p, plans)))
+    plans = map(lambda p: p.split(".")[0],
+                list(filter(lambda p: "yaml" in p, plans)))
     return json.dumps(sorted(plans))
 
 
@@ -168,8 +169,9 @@ def get_state_data(plan):
 def get_data_build(airport):
     airport_data_folder = "../data/" + airport + "/"
 
-    os.system("python3 {}generate.py {}".format(airport_data_folder,airport))
-    os.system("python3 {}generate_scenario.py {}".format(airport_data_folder,airport))
+    os.system("python3 {}generate.py {}".format(airport_data_folder, airport))
+    os.system("python3 {}generate_scenario.py {}".format(airport_data_folder,
+                                                         airport))
 
 
 if __name__ == "__main__":

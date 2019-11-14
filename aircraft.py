@@ -27,10 +27,6 @@ class Aircraft:
     """
     LOCATION_LEVEL_COARSE = 0
     LOCATION_LEVEL_PRECISE = 1
-    IDEAL_DISTANCE = Config.params["aircraft_model"]["ideal_distance"]
-    MIN_DISTANCE = Config.params["aircraft_model"]["min_distance"]
-    MAX_SPEED = Config.params["aircraft_model"]["max_speed"]
-    IDEAL_SPEED = Config.params["aircraft_model"]["ideal_speed"]
 
     def __init__(self, callsign, model, location, state):
 
@@ -49,6 +45,10 @@ class Aircraft:
         self.itinerary = None
         self.speed = Config.params["aircraft_model"]["init_speed"]
         self.pushback_speed = Config.params["aircraft_model"]["pushback_speed"]
+        self.IDEAL_DISTANCE = Config.params["aircraft_model"]["ideal_distance"]
+        self.MIN_DISTANCE = Config.params["aircraft_model"]["min_distance"]
+        self.MAX_SPEED = Config.params["aircraft_model"]["max_speed"]
+        self.IDEAL_SPEED = Config.params["aircraft_model"]["ideal_speed"]
         self.fronter_info = None
         self.speed_uncertainty = 0
         self.is_reroute_necessary = True
@@ -219,9 +219,7 @@ class Aircraft:
                 self.logger.debug("%s: %s completed.", self, self.itinerary)
             last_target = self.itinerary.backup[-1]
             is_arrival_aircraft = type(last_target.end) is Gate
-
-            if is_arrival_aircraft and self.itinerary.current_target is not None\
-                    and type(self.itinerary.current_target.end) \
+            if is_arrival_aircraft and self.itinerary.current_target and type(self.itinerary.current_target.end) \
                     is Spot:
                 self.is_reroute_necessary = False
             self.set_location(self.itinerary.current_coarse_location, Aircraft.LOCATION_LEVEL_COARSE)
