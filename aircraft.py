@@ -9,6 +9,70 @@ from surface import *
 from link import HoldLink
 from config import Config
 from controller import Controller
+import re
+
+AIRLINES_TO_CODE = {
+    'Aer Lingus': "EI",
+    'AeroMexico': "AM",
+    'Air Canada': "AC",
+    'Air China': "CA",
+    'Air France': "AF",
+    'Air India': "AI",
+    'Air New Zealand': "NZ",
+    'Alaska Airlines': "AS",
+    'Alaska': "AS",
+    'All Nippon Airways': "NH",
+    'American Airlines': "AA",
+    'American': "AA",
+    'Asiana': "OZ",
+    'Avianca': "AV",
+    'British Airways': "BA",
+    'Cathay Pacific': "CX",
+    'China Airlines': "CI",
+    'China': "CI",
+    'China Eastern': "MU",
+    'China Southern': "CZ",
+    'Copa Airlines': "CM",
+    'Copa': "CM",
+    'Delta Air Lines': "DL",
+    'EVA AIR': "BR",
+    'Emirates': "EK",
+    'Finnair': "AY",
+    'French Bee': "BE",
+    'Frontier Airlines': "F9",
+    'Frontier': "F9",
+    'Hawaiian Airlines': "HA",
+    'Hawaiian': "HA",
+    'Hong Kong Airlines': "HX",
+    'Hong Kong': "HX",
+    'Iberia Airlines': "IB",
+    'Iberia': "IB",
+    'Interjet': "4O",
+    'Japan Airlines': "JL",
+    'Japan': "JL",
+    'JetBlue': "B6",
+    'KLM Royal Dutch Airlines': "KL",
+    'KLM Royal Dutch': "KL",
+    'Korean Air': "KE",
+    'Lufthansa': "LH",
+    'Norwegian': "DY",
+    'Philippine Airlines': "PR",
+    'Philippine': "PR",
+    'Qantas': "QF",
+    'SWISS International Airlines': "LX",
+    'SWISS International': "LX",
+    'Scandinavian Airlines': "SK",
+    'Scandinavian': "SK",
+    'Singapore Airlines': "SQ",
+    'Singapore': "SQ",
+    'Southwest': "WN",
+    'SunCountry': "SY",
+    'Turkish Airlines': "TK",
+    'Turkish': "TK",
+    'United': "UA",
+    'Virgin Atlantic': "VS",
+    'WestJet': "WS"
+}
 
 
 class State(enum.Enum):
@@ -32,11 +96,11 @@ class Aircraft:
     MAX_SPEED = Config.params["aircraft_model"]["max_speed"]
     IDEAL_SPEED = Config.params["aircraft_model"]["ideal_speed"]
 
-    def __init__(self, callsign, model, location, state):
+    def __init__(self, fullname, model, location, state):
 
         self.logger = logging.getLogger(__name__)
 
-        self.callsign = callsign
+        self.callsign = self.fullname2callsign(fullname)
         self.model = model
 
         # Aircraft's location as a vertex in on the node-link graph
@@ -55,6 +119,18 @@ class Aircraft:
         self.take_off = False
 
         self.tick_count = 0
+
+    # @staticmethod
+    def fullname2callsign(self, fullname):
+        flight_number = re.search('[0-9]+', fullname).group()
+        airline = re.search("[a-zA-Z ]+", fullname).group()
+        self.logger.info(flight_number)
+        self.logger.info(airline)
+
+        if airline in AIRLINES_TO_CODE:
+            return AIRLINES_TO_CODE[airline] + flight_number
+        else:
+            return 'N ' + flight_number
 
     def set_location(self, location, level=LOCATION_LEVEL_COARSE):
         """Sets the location of this aircraft to a given location."""
@@ -98,6 +174,7 @@ class Aircraft:
     """
     @:param fronter_info (target_speed, relative_distance)
     """
+
     def set_fronter_info(self, fronter_info):
         """ Set the information of the preceding aircraft. """
         self.fronter_info = fronter_info
@@ -105,6 +182,7 @@ class Aircraft:
     """
     @:param fronter_info (target_speed, relative_distance)
     """
+
     def get_next_speed(self, fronter_info, state):
         if state is State.pushback:
             return self.pushback_speed
@@ -162,7 +240,7 @@ class Aircraft:
         """ Brake hard to avoid potential crash"""
         # TODO: revise the model
         new_speed = self.speed / 1.5
-        #self.set_speed(new_speed)
+        # self.set_speed(new_speed)
         self.logger.info("%s with speed %f brakes hard", self, self.speed)
         return new_speed
 
@@ -187,6 +265,7 @@ class Aircraft:
         self.speed_uncertainty = speed_bias
 
     """ original """
+
     def add_uncertainty_delay(self):
         """Adds an uncertainty delay on this aircraft."""
         if not self.itinerary:
@@ -220,7 +299,7 @@ class Aircraft:
             last_target = self.itinerary.backup[-1]
             is_arrival_aircraft = type(last_target.end) is Gate
 
-            if is_arrival_aircraft and self.itinerary.current_target is not None\
+            if is_arrival_aircraft and self.itinerary.current_target is not None \
                     and type(self.itinerary.current_target.end) \
                     is Spot:
                 self.is_reroute_necessary = False
