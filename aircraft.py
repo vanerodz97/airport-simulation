@@ -265,7 +265,6 @@ class Aircraft:
         self.speed_uncertainty = speed_bias
 
     """ original """
-
     def add_uncertainty_delay(self):
         """Adds an uncertainty delay on this aircraft."""
         if not self.itinerary:
