@@ -83,6 +83,6 @@ scheduler:
 
 logger:
   # Options are: critical, error, warning, info, debug, notset
-  level: debug
+  level: error
   # Enable logging into a file instead of stdout/stderr
   file: false

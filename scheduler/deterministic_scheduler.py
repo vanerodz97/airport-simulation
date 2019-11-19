@@ -6,6 +6,7 @@ from config import Config
 from aircraft import State
 from scheduler.abstract_scheduler import AbstractScheduler
 from flight import ArrivalFlight, DepartureFlight
+import time
 
 
 class Scheduler(AbstractScheduler):
@@ -19,6 +20,7 @@ class Scheduler(AbstractScheduler):
     def schedule(self, simulation):
 
         self.logger.info("Scheduling start")
+        start = time.time()
         itineraries = {}
         priority_list = {}
 
@@ -43,6 +45,7 @@ class Scheduler(AbstractScheduler):
                                                       priority_list)
 
         self.logger.info("Scheduling end")
+        print(time.time() - start)
         return schedule, priority
 
     def __resolve_conflicts(self, itineraries, simulation, priority_list):
