@@ -1,7 +1,6 @@
 import pandas as pd
 from datetime import datetime
 import datetime as dt
-import time
 
 OLDARRIVALPATH = "./all_terminal_arrival.csv"
 NEWARRIVALPATH = "./updated_all_terminal_arrival.csv"
@@ -18,7 +17,7 @@ def datetimeToString(d):
     return iso3
 
 
-def main(OLDPATH, NEWPATH):
+def main(OLDPATH, NEWPATH, interval):
     df = pd.read_csv(OLDPATH)
     estimated_list = df["Estimated"].tolist()
     scheduled_list = df["Scheduled"].tolist()
@@ -43,10 +42,10 @@ def main(OLDPATH, NEWPATH):
         iso = datetimeToString(d)
 
         if iso in se:
-            d = d + dt.timedelta(minutes=2)
+            d = d + dt.timedelta(minutes=interval)
             iso = datetimeToString(d)
             while iso in se:
-                d = d + dt.timedelta(minutes=2)
+                d = d + dt.timedelta(minutes=interval)
                 iso = datetimeToString(d)
             se.add(iso)
         else:
@@ -70,5 +69,5 @@ def main(OLDPATH, NEWPATH):
 
 
 if __name__ == "__main__":
-    main(OLDARRIVALPATH, NEWARRIVALPATH)
-    main(OLDDEPARTUREPATH,NEWDEPARTUREPATH)
+    main(OLDARRIVALPATH, NEWARRIVALPATH, 2)
+    main(OLDDEPARTUREPATH, NEWDEPARTUREPATH, 1)
