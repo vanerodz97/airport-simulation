@@ -120,6 +120,8 @@ def get_surface_data(airport):
     taxiways = get_linknode_data(airport_data_folder, "taxiways")
     runways = get_linknode_data(airport_data_folder, "runways")
     gates = get_linknode_data(airport_data_folder, "gates")
+    spots = get_linknode_data(airport_data_folder, "spots")
+    inters = get_linknode_data(airport_data_folder, "inters")
 
     return {
         "airport_name": airport_name,
@@ -127,7 +129,9 @@ def get_surface_data(airport):
         "pushback_ways": pushback_ways,
         "taxiways": taxiways,
         "runways": runways,
-        "gates": gates
+        "gates": gates,
+        "spots": spots,
+        "inters": inters
     }
 
 
@@ -167,11 +171,10 @@ def get_state_data(plan):
 
 
 def get_data_build(airport):
-    airport_data_folder = "../data/" + airport + "/"
+    airport_data_folder = AIRPORT_DATA_FOLDER + airport + "/"
 
     os.system("python3 {}generate.py {}".format(airport_data_folder, airport))
-    os.system("python3 {}generate_scenario.py {}".format(airport_data_folder,
-                                                         airport))
+    os.system("python3 {}generate_scenario.py {}".format(airport_data_folder, airport))
 
 
 if __name__ == "__main__":
