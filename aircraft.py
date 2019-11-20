@@ -120,12 +120,11 @@ class Aircraft:
 
         self.tick_count = 0
 
-    # @staticmethod
-    def fullname2callsign(self, fullname):
+    @staticmethod
+    def fullname2callsign(fullname):
         flight_number = re.search('[0-9]+', fullname).group()
         airline = re.search("[a-zA-Z ]+", fullname).group()
-        self.logger.info(flight_number)
-        self.logger.info(airline)
+        flight_number += fullname[-2:]
 
         if airline in AIRLINES_TO_CODE:
             return AIRLINES_TO_CODE[airline] + flight_number
