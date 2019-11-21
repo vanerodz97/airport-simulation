@@ -104,8 +104,7 @@ class VisualizationView {
 
         // Gate
         for (let gate of surfaceData["gates"]) {
-            const name = "GATE: " + gate["name"];
-            this.mapView.drawGate(gate["lat"], gate["lng"], name);
+            this.mapView.drawGate(gate["lat"], gate["lng"], gate["name"]);
         }
 
         // Runway
@@ -125,14 +124,12 @@ class VisualizationView {
 
         // Spots
         for (let spot of surfaceData["spots"]) {
-            const name = "SPOT: " + spot["name"];
-            this.mapView.drawSpot(spot["lat"], spot["lng"], name);
+            this.mapView.drawSpot(spot["lat"], spot["lng"], spot["name"]);
         }
 
         // Intersections
         for (let inter of surfaceData["inters"]) {
-            const name = "INTERSECTION: " + inter["name"];
-            this.mapView.drawIntersection(inter["lat"], inter["lng"], name);
+            this.mapView.drawIntersection(inter["lat"], inter["lng"], inter["name"]);
         }
 
         const initState = this.dataConnector.currentState();
@@ -175,6 +172,12 @@ class VisualizationView {
             const state = await this.dataConnector.nextState(FAST_FORWARD_STEP_SIZE);
             this.handleStateUpdate(state, false);
             return false;
+        });
+
+        $("#control-mark").click(() => {
+            const lat = parseFloat(document.getElementById("lat").value);
+            const lng = parseFloat(document.getElementById("lng").value);
+            this.mapView.drawCenter(lat, lng);
         });
     }
 
