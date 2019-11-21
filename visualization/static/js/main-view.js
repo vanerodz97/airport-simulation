@@ -238,7 +238,7 @@ class VisualizationView {
             takeoff_frequency = state["takeoff_count"] / minutes_to_now;
         }
 
-        var total_ticks_on_surface = state["total_ticks_on_surface"]
+        var total_ticks_on_surface = state["total_ticks_on_surface"];
         let avg_latency = 0;
         if (state["takeoff_count"] > 0) {
             avg_latency = total_ticks_on_surface * 0.5 / state["takeoff_count"];
