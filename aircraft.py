@@ -104,7 +104,6 @@ class Aircraft:
         self.__coarse_location = location
         # aircraft's location as some point on a link
         self.__precise_location = None
-        self.__state = state
 
         self.itinerary = None
         self.speed = Config.params["aircraft_model"]["init_speed"]
@@ -183,6 +182,8 @@ class Aircraft:
     """
 
     def get_next_speed(self, fronter_info, state):
+        # if self.is_delayed:
+        #     return 0
         if state is State.pushback:
             return self.pushback_speed
         """ Calculate the speed based on following model."""
@@ -288,7 +289,6 @@ class Aircraft:
 
         if self.itinerary:
             self.tick_count += 1
-            self.__state = self.state
             new_speed = self.get_next_speed(self.fronter_info, self.state) + self.speed_uncertainty
             self.set_speed(new_speed)
             self.itinerary.tick(self.tick_distance)
@@ -310,32 +310,25 @@ class Aircraft:
 
     @property
     def state(self):
-        """Returns the state of the current aircraft."""
-        if self.itinerary is None or self.itinerary.is_completed:
-            return State.stop
-        if self.itinerary.next_target is None or \
-                self.itinerary.current_target is None:
-            return State.stop
+        """Identify whether the aircraft is on pushbackway or taxiway"""
+        # if self.itinerary is None or self.itinerary.is_completed:
+        #     return State.stop
+        # if self.itinerary.next_target is None or \
+        #         self.itinerary.current_target is None:
+        #     return State.stop
 
         # current_target = self.itinerary.targets[self.itinerary.index]
         # _, _, next_precise_location = self.itinerary.get_next_location(self.tick_distance)  # why is this needed ??
-        if self.__state == State.stop:
+        if self.itinerary.current_target is not None and type(self.itinerary.current_target.start) is Gate:
             #  do not update state if holdlink is added at gate
-            return State.stop if type(self.itinerary.current_target) is HoldLink else State.pushback
-        if self.__state == State.pushback:
-            if type(self.itinerary.current_target) is HoldLink:
-                #  assume no hold link will be generated in the middle of pushback
-                return State.hold
-            elif type(self.itinerary.current_target) is Taxiway:
-                return State.moving
-            else:
-                return State.pushback
-        return State.hold if type(self.itinerary.current_target) is HoldLink else State.moving
+            return State.pushback
+        elif type(self.itinerary.current_target) is PushbackWay:
+            return State.pushback
+        return State.moving
 
     @property
     def is_delayed(self):
         """Returns True if the aircraft is currently be delayed."""
-
         return self.itinerary.is_delayed if self.itinerary else False
 
     @property
