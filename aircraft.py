@@ -92,7 +92,7 @@ class Aircraft:
     LOCATION_LEVEL_COARSE = 0
     LOCATION_LEVEL_PRECISE = 1
 
-    def __init__(self, fullname, model, location, state):
+    def __init__(self, fullname, model, location, is_departure):
 
         self.logger = logging.getLogger(__name__)
 
@@ -106,6 +106,7 @@ class Aircraft:
         self.__precise_location = None
 
         self.itinerary = None
+        self.is_departure = is_departure
         self.speed = Config.params["aircraft_model"]["init_speed"]
         self.pushback_speed = Config.params["aircraft_model"]["pushback_speed"]
         self.IDEAL_DISTANCE = Config.params["aircraft_model"]["ideal_distance"]
@@ -311,20 +312,18 @@ class Aircraft:
 
     @property
     def state(self):
-        # """Identify whether the aircraft is on pushbackway or taxiway"""
-        # if self.itinerary is None or self.itinerary.is_completed:
-        #     return State.stop
-        # if self.itinerary.next_target is None or \
-        #         self.itinerary.current_target is None:
-        #     return State.stop
-
-        # current_target = self.itinerary.targets[self.itinerary.index]
-        # _, _, next_precise_location = self.itinerary.get_next_location(self.tick_distance)  # why is this needed ??
-        if self.itinerary.current_target is not None and type(self.itinerary.current_target.start) is Gate:
-            #  do not update state if holdlink is added at gate
-            return State.pushback
-        elif type(self.itinerary.current_target) is PushbackWay:
-            return State.pushback
+        """Identify whether the aircraft is on pushbackway or taxiway"""
+        if self.itinerary is None or self.itinerary.is_completed:
+            return State.stop
+        if self.itinerary.next_target is None or \
+                self.itinerary.current_target is None:
+            return State.stop
+        if self.is_departure is True:
+            if type(self.itinerary.current_target.start) is Gate:
+                #  do not update state if holdlink is added at gate
+                return State.pushback
+            elif type(self.itinerary.current_target) is PushbackWay:
+                return State.pushback
         return State.moving
 
     @property
