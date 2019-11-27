@@ -24,7 +24,7 @@ class ArrivalFlight(Flight):
 
     def __init__(self, callsign, model, from_airport, to_gate,
                  runway, arrival_time, appear_time):
-        super().__init__(Aircraft(callsign, model, None, State.flying))
+        super().__init__(Aircraft(callsign, model, None, False))
         self.from_airport = from_airport
         self.to_gate = to_gate
         self.arrival_time = arrival_time
@@ -43,7 +43,7 @@ class DepartureFlight(Flight):
 
     def __init__(self, callsign, model, to_airport, from_gate,
                  runway, departure_time, appear_time):
-        super().__init__(Aircraft(callsign, model, None, State.stop))
+        super().__init__(Aircraft(callsign, model, None, True))
         self.to_airport = to_airport
         self.from_gate = from_gate
         self.departure_time = departure_time
