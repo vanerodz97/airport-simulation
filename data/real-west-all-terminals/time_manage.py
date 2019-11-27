@@ -1,7 +1,6 @@
 import pandas as pd
 from datetime import datetime
 import datetime as dt
-import time
 
 OLDARRIVALPATH = "./all_terminal_arrival.csv"
 NEWARRIVALPATH = "./updated_all_terminal_arrival.csv"

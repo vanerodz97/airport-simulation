@@ -129,7 +129,8 @@ class Airport:
                     flight.set_runway(runway)
                 aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
                 self.add_aircraft(aircraft)
-                self.logger.info("Adds %s into the airport", flight)
+                self.logger.info("Adds %s into the airport, runway %s",
+                                 flight,flight.runway)
 
         # Deal with the arrival flights, assume that the runway is always not
         # occupied because this is an arrival flight

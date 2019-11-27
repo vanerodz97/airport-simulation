@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>1112 West</name>
+    <name>1120 West</name>
     <description/>
     <Style id="icon-1899-0288D1-normal">
       <IconStyle>
@@ -313,6 +313,28 @@
       <Pair>
         <key>highlight</key>
         <styleUrl>#line-C2185B-5000-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-F9A825-1200-normal">
+      <LineStyle>
+        <color>ff25a8f9</color>
+        <width>1.2</width>
+      </LineStyle>
+    </Style>
+    <Style id="line-F9A825-1200-highlight">
+      <LineStyle>
+        <color>ff25a8f9</color>
+        <width>1.8</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="line-F9A825-1200">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-F9A825-1200-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-F9A825-1200-highlight</styleUrl>
       </Pair>
     </StyleMap>
     <Style id="line-F9A825-2000-normal">
@@ -3646,8 +3668,8 @@ lng: -122.3859236</value>
           <tessellate>1</tessellate>
           <coordinates>
             -122.389831,37.621225,0
-            -122.390225,37.621574,0
-            -122.391161,37.622085,0
+            -122.3896349,37.6215825,0
+            -122.3893032,37.6222265,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -3658,8 +3680,8 @@ lng: -122.3859236</value>
           <tessellate>1</tessellate>
           <coordinates>
             -122.390166,37.621229,0
-            -122.390679,37.621449,0
-            -122.391364,37.621783,0
+            -122.389928,37.6217549,0
+            -122.3896153,37.622441,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -3670,7 +3692,7 @@ lng: -122.3859236</value>
           <tessellate>1</tessellate>
           <coordinates>
             -122.390327,37.621101,0
-            -122.3915888,37.6214092,0
+            -122.3918999,37.6203215,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -3681,7 +3703,7 @@ lng: -122.3859236</value>
           <tessellate>1</tessellate>
           <coordinates>
             -122.390359,37.620906,0
-            -122.3918253,37.621083,0
+            -122.3914927,37.6201397,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -4536,7 +4558,7 @@ toilets:</value>
         <LineString>
           <tessellate>1</tessellate>
           <coordinates>
-            -122.383658,37.609194,0
+            -122.3835936,37.609279,0
             -122.387647,37.610989,0
             -122.387964,37.611121,0
             -122.388154,37.611134,0
@@ -4838,7 +4860,7 @@ toilets:</value>
             -122.381985,37.61334,0
             -122.381795,37.613267,0
             -122.3814455,37.613145,0
-            -122.381107,37.613031,0
+            -122.3811606,37.6129375,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -5098,7 +5120,7 @@ toilets:</value>
             -122.380851,37.615583,0
             -122.380582,37.615461,0
             -122.3801018,37.615271,0
-            -122.379709,37.61514,0
+            -122.3797626,37.6150635,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -5355,7 +5377,11 @@ toilets:</value>
           <tessellate>1</tessellate>
           <coordinates>
             -122.390935,37.624138,0
-            -122.3915313,37.623078,0
+            -122.3906877,37.6239503,0
+            -122.3905047,37.6237455,0
+            -122.390568,37.6233701,0
+            -122.3909745,37.6231391,0
+            -122.3914669,37.62301,0
             -122.391676,37.622798,0
             -122.391858,37.622607,0
             -122.392183,37.622116,0
@@ -5635,7 +5661,8 @@ toilets:</value>
           <coordinates>
             -122.385678,37.619193,0
             -122.3848641,37.6204463,0
-            -122.3842748,37.6213327,0
+            -122.3844461,37.6210722,0
+            -122.3841568,37.6212732,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -5891,7 +5918,9 @@ toilets:</value>
         <LineString>
           <tessellate>1</tessellate>
           <coordinates>
-            -122.3849353,37.6216271,0
+            -122.3848602,37.6215761,0
+            -122.3851318,37.6213753,0
+            -122.3852639,37.6211915,0
             -122.385571,37.620739,0
             -122.386338,37.6196,0
           </coordinates>
@@ -6150,7 +6179,7 @@ toilets:</value>
           <tessellate>1</tessellate>
           <coordinates>
             -122.3834217,37.6179303,0
-            -122.3818422,37.6203123,0
+            -122.3817403,37.6202741,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -7227,7 +7256,6 @@ toilets:</value>
             -122.389862,37.623684,0
             -122.3908,37.624081,0
             -122.390935,37.624138,0
-            -122.39098,37.624156,0
             -122.3915565,37.6248341,0
             -122.3913605,37.6255122,0
             -122.390924,37.6263726,0
@@ -8896,7 +8924,7 @@ toilets:</value>
           <tessellate>1</tessellate>
           <coordinates>
             -122.38795,37.611895,0
-            -122.383084,37.610048,0
+            -122.3832557,37.6098355,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -9363,8 +9391,8 @@ toilets:</value>
         <LineString>
           <tessellate>1</tessellate>
           <coordinates>
-            -122.384527,37.609589,0
-            -122.384125,37.610055,0
+            -122.3843017,37.6095805,0
+            -122.3840392,37.610021,0
             -122.383528,37.610744,0
             -122.383098,37.611425,0
             -122.38146,37.613895,0
@@ -9383,19 +9411,7 @@ toilets:</value>
             -122.380298,37.618863,0
             -122.380737,37.619127,0
             -122.381719,37.619539,0
-            -122.382612,37.619913,0
-            -122.383263,37.620186,0
-            -122.384006,37.620498,0
-            -122.384414,37.620668,0
-            -122.384955,37.620895,0
-            -122.385216,37.621004,0
-            -122.385772,37.621236,0
-            -122.386144,37.621392,0
-            -122.3865,37.621541,0
-            -122.386873,37.621698,0
-            -122.387947,37.622152,0
-            -122.388734,37.622476,0
-            -122.38914,37.622647,0
+            -122.3892151,37.6226045,0
             -122.3902105,37.622582,0
             -122.390508,37.622521,0
             -122.390833,37.622422,0
@@ -9581,7 +9597,7 @@ toilets:</value>
       <Placemark>
         <name>P33</name>
         <description><![CDATA[说明: <br>description: <br>@id: <br>addr:state: <br>aeroway: taxiway<br>building: <br>ele: <br>gnis:county_name: <br>gnis:feature_id: <br>gnis:import_uuid: <br>source: <br>woe:id: <br>@timestamp: <br>@version: <br>@changeset: <br>@user: <br>@uid: <br>addr:city: <br>addr:housenumber: <br>addr:postcode: <br>addr:street: <br>aerodrome: <br>aerodrome:type: <br>city_served: <br>gnis:created: <br>gnis:feature_type: <br>iata: <br>icao: <br>internet_access: <br>internet_access:fee: <br>internet_access:ssid: <br>is_in: <br>is_in:iso_3166_2: <br>name:de: <br>name:el: <br>name:en: <br>name:ja: <br>owner: <br>passengers: <br>ref: <br>short_name: <br>source_ref: <br>website: <br>wikidata: <br>wikipedia: <br>layer: <br>aed: <br>drinking_water: <br>toilets: ]]></description>
-        <styleUrl>#line-000000-1200</styleUrl>
+        <styleUrl>#line-F9A825-1200</styleUrl>
         <ExtendedData>
           <Data name="说明">
             <value/>
@@ -10271,9 +10287,12 @@ toilets:</value>
             -122.388039,37.62174,0
             -122.388896,37.622074,0
             -122.38903,37.622124,0
-            -122.389035,37.622235,0
-            -122.3887472,37.622698,0
-            -122.3885148,37.6231045,0
+            -122.3893032,37.6222265,0
+            -122.3896153,37.622441,0
+            -122.389745,37.6226215,0
+            -122.3896234,37.6230075,0
+            -122.3894553,37.6232344,0
+            -122.3892014,37.6233934,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -16035,7 +16054,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFEA00</styleUrl>
         <Point>
           <coordinates>
-            -122.38386,37.610337,0
+            -122.383978,37.6101585,0
           </coordinates>
         </Point>
       </Placemark>
@@ -16071,7 +16090,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.384532,37.609585,0
+            -122.3843067,37.6095765,0
           </coordinates>
         </Point>
       </Placemark>
@@ -16080,7 +16099,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFD600-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3821884,37.6197609,0
+            -122.3821562,37.6197099,0
           </coordinates>
         </Point>
       </Placemark>
@@ -16098,7 +16117,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFD600-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3853585,37.6210603,0
+            -122.3853907,37.6210348,0
           </coordinates>
         </Point>
       </Placemark>
@@ -16116,7 +16135,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3888723,37.6225322,0
+            -122.3897306,37.6225832,0
           </coordinates>
         </Point>
       </Placemark>
@@ -16152,7 +16171,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3885148,37.6231045,0
+            -122.38918,37.6234019,0
           </coordinates>
         </Point>
       </Placemark>
@@ -16161,7 +16180,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3849353,37.6216271,0
+            -122.3848495,37.6215676,0
           </coordinates>
         </Point>
       </Placemark>
@@ -16170,7 +16189,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3842748,37.6213327,0
+            -122.3841675,37.6212647,0
           </coordinates>
         </Point>
       </Placemark>
@@ -16179,7 +16198,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3818422,37.6203123,0
+            -122.381751,37.6202826,0
           </coordinates>
         </Point>
       </Placemark>
@@ -16188,7 +16207,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.379709,37.61514,0
+            -122.3797626,37.6150465,0
           </coordinates>
         </Point>
       </Placemark>
@@ -16197,7 +16216,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.381107,37.613031,0
+            -122.3811928,37.612946,0
           </coordinates>
         </Point>
       </Placemark>
@@ -16206,7 +16225,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.383084,37.610048,0
+            -122.3832557,37.609827,0
           </coordinates>
         </Point>
       </Placemark>
@@ -16215,7 +16234,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.383658,37.609194,0
+            -122.3836151,37.6092875,0
           </coordinates>
         </Point>
       </Placemark>

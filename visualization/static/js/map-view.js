@@ -106,6 +106,7 @@ class MapView {
         this.taxiways = [];
         this.aircraft = new Map();
         this.gates = [];
+        this.center = null;
 
         this.runways_endpoints = [];
 
@@ -148,7 +149,7 @@ class MapView {
         this.pushbackways.push(link);
     }
 
-    __drawNode(lat, lng, image, label, content) {
+    __drawNode(lat, lng, image, label) {
         const marker = new google.maps.Marker({
             position: {lat: lat, lng: lng},
             map: this.map,
@@ -156,7 +157,7 @@ class MapView {
             icon: image,
             zIndex: 999,
             InfoWindow: new google.maps.InfoWindow({
-                content: content
+                content: null
             })
         });
 
@@ -202,46 +203,64 @@ class MapView {
         };
     }
 
-    drawAircraft(lat, lng, state, name, content) {
-        // TODO: maybe put the name back
+    drawAircraft(lat, lng, state, name) {
         const label = {
             text: name,
             color: 'black',
             fontSize: "7px"
         }
-        return this.__drawNode(lat, lng, this.__getAircraftIcon(0, state), label, content);
+        return this.__drawNode(lat, lng, this.__getAircraftIcon(0, state), label);
+    }
+
+    drawCenter(lat, lng) {
+        const image = {
+            url: "/image/location.svg",
+            scaledSize: new google.maps.Size(18, 18),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(9, 9)
+        };
+
+        if (this.center) {
+            this.center.setMap(null);
+        }
+        this.map.setCenter({lat: lat, lng: lng});
+        this.center = this.__drawNode(lat, lng, image, null);
+        this.center.updateInfoWindow({center: 1, lat: lat, lng: lng});
     }
 
     drawGate(lat, lng, name) {
         const image = {
             url: "/image/gate.svg",
-            size: new google.maps.Size(18, 18),
+            scaledSize: new google.maps.Size(18, 18),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(9, 9)
         };
 
-        const gate = this.__drawNode(lat, lng, image, null, name);
+        const gate = this.__drawNode(lat, lng, image, null);
+        gate.updateInfoWindow({gate: name, lat: lat, lng: lng});
         this.gates.push(gate);
     }
 
     drawSpot(lat, lng, name) {
         const image = {
             url: "/image/spot.svg",
-            size: new google.maps.Size(18, 18),
+            scaledSize: new google.maps.Size(18, 18),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(9, 9)
         };
-        this.__drawNode(lat, lng, image, null, name);
+        const spot = this.__drawNode(lat, lng, image, null);
+        spot.updateInfoWindow({spot: name, lat: lat, lng: lng})
     }
 
     drawIntersection(lat, lng, name) {
         const image = {
             url: "/image/intersection.svg",
-            size: new google.maps.Size(24, 24),
+            scaledSize: new google.maps.Size(18, 18),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(9, 9)
-        };
-        this.__drawNode(lat, lng, image, null, name);
+        };        
+        const inter = this.__drawNode(lat, lng, image, null);
+        inter.updateInfoWindow({intersection: name, lat: lat, lng: lng});
     }
 
     updateAllAircraft(allAircraft, use_animation) {
@@ -314,7 +333,7 @@ class MapView {
 
                     if (runway) {
                         // landing animation (appear at the runway)
-                        aircraft = this.drawAircraft(runway[0]["lat"], runway[0]["lng"], each.status, each.name, "");
+                        aircraft = this.drawAircraft(runway[0]["lat"], runway[0]["lng"], each.status, each.name);
                         const angle = this.__calcAngle(
                             aircraft.getPosition().lat(),
                             aircraft.getPosition().lng(),
@@ -330,7 +349,7 @@ class MapView {
                         });
                     } else {
                         // departing aircrafts (appear at the gate)
-                        aircraft = this.drawAircraft(each.lat, each.lng, each.status, each.name, "");
+                        aircraft = this.drawAircraft(each.lat, each.lng, each.status, each.name);
                     }
                 }
                 aircraft.updateInfoWindow(each);
@@ -352,7 +371,7 @@ class MapView {
                     });
                 } else {
                     // New aircraft
-                    aircraft = this.drawAircraft(each.lat, each.lng, each.status, each.name, "");
+                    aircraft = this.drawAircraft(each.lat, each.lng, each.status, each.name);
                 }
             }
             aircraft.updateInfoWindow(each);
