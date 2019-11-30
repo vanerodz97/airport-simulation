@@ -28,6 +28,7 @@ class Surface:
         self.taxiways = []
         self.pushback_ways = []
         self.intersections = []
+        self.break_node = []
         self.gate_to_spot_mapping = {}
         self.intersections_to_link_mapping = {}
 
@@ -56,7 +57,7 @@ class Surface:
                 return
 
         # Retrieve all nodes and links
-        all_nodes = deepcopy(self.intersections)
+        all_nodes = deepcopy(self.break_node)
 
         for link in self.links:
             all_nodes.append(link.start)
@@ -299,7 +300,9 @@ class SurfaceFactory:
         "gates.json",
         "runways.json",
         "pushback_ways.json",
-        "taxiways.json"
+        "taxiways.json",
+        "debug.json",
+        "inters.json"
     ]
 
     gate_to_spot_mapping = None
@@ -318,6 +321,7 @@ class SurfaceFactory:
         SurfaceFactory.__load_spots(surface, dir_path)
         SurfaceFactory.__load_gates_to_spots_mapping(surface, dir_path)
         SurfaceFactory.__load_intersections(surface, dir_path)
+        SurfaceFactory.__load_break(surface, dir_path)
         SurfaceFactory.__load_runway(surface, dir_path)
         SurfaceFactory.__load_taxiway(surface, dir_path)
         SurfaceFactory.__load_pushback_way(surface, dir_path)
@@ -361,8 +365,13 @@ class SurfaceFactory:
 
     @classmethod
     def __load_intersections(cls, surface, dir_path):
-        surface.intersections = SurfaceFactory.__retrieve_node("inters", dir_path)
+        surface.intersections = SurfaceFactory.__retrieve_node("debug", dir_path)
         cls.logger.info("%s intersections loaded", len(surface.intersections))
+
+    @classmethod
+    def __load_break(cls, surface, dir_path):
+        surface.break_node = SurfaceFactory.__retrieve_node("inters", dir_path)
+        cls.logger.info("%s break node loaded", len(surface.break_node))
 
     @classmethod
     def __load_gates_to_spots_mapping(cls, surface, dir_path):
@@ -420,9 +429,16 @@ class SurfaceFactory:
                         {"lat": node_raw["lat"], "lng": node_raw["lng"]},
                     )
                 )
-            elif type_name == "inters":
+            elif type_name == "debug":
                 nodes.append(
                     Intersection(
+                        name,
+                        {"lat": node_raw["lat"], "lng": node_raw["lng"]},
+                    )
+                )
+            elif type_name == "inters":
+                nodes.append(
+                    Node(
                         name,
                         {"lat": node_raw["lat"], "lng": node_raw["lng"]},
                     )

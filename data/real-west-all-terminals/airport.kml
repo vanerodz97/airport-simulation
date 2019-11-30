@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>1120 West</name>
+    <name>1127 West</name>
     <description/>
     <Style id="icon-1899-0288D1-normal">
       <IconStyle>
@@ -16065,7 +16065,7 @@ toilets:</value>
         <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.381873,37.613286,0
+            -122.3818837,37.613286,0
           </coordinates>
         </Point>
       </Placemark>
@@ -16080,7 +16080,7 @@ toilets:</value>
       </Placemark>
       <Placemark>
         <name>I4</name>
-        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.392242,37.620453,0
@@ -16134,7 +16134,7 @@ toilets:</value>
       </Placemark>
       <Placemark>
         <name>I11</name>
-        <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3897306,37.6225832,0
@@ -16161,7 +16161,7 @@ toilets:</value>
       </Placemark>
       <Placemark>
         <name>I13</name>
-        <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3913605,37.6255122,0
@@ -16170,7 +16170,7 @@ toilets:</value>
       </Placemark>
       <Placemark>
         <name>I14</name>
-        <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.38918,37.6234019,0
@@ -16179,7 +16179,7 @@ toilets:</value>
       </Placemark>
       <Placemark>
         <name>I15</name>
-        <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3848495,37.6215676,0
@@ -16188,7 +16188,7 @@ toilets:</value>
       </Placemark>
       <Placemark>
         <name>I16</name>
-        <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3841675,37.6212647,0
@@ -16197,7 +16197,7 @@ toilets:</value>
       </Placemark>
       <Placemark>
         <name>I17</name>
-        <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.381751,37.6202826,0
@@ -16206,7 +16206,7 @@ toilets:</value>
       </Placemark>
       <Placemark>
         <name>I18</name>
-        <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3797626,37.6150465,0
@@ -16215,7 +16215,7 @@ toilets:</value>
       </Placemark>
       <Placemark>
         <name>I19</name>
-        <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3811928,37.612946,0
@@ -16224,7 +16224,7 @@ toilets:</value>
       </Placemark>
       <Placemark>
         <name>I20</name>
-        <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3832557,37.609827,0
@@ -16233,7 +16233,7 @@ toilets:</value>
       </Placemark>
       <Placemark>
         <name>I21</name>
-        <styleUrl>#icon-1899-FFEA00-nodesc</styleUrl>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
         <Point>
           <coordinates>
             -122.3836151,37.6092875,0
@@ -16246,6 +16246,126 @@ toilets:</value>
         <Point>
           <coordinates>
             -122.3863574,37.62142,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Debug</name>
+      <Placemark>
+        <name>I11</name>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.389731,37.622583,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>I10</name>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.379612,37.618183,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>I12</name>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.37865,37.617134,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>I13</name>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.39136,37.625512,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>I14</name>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.38918,37.623402,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>I15</name>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.38485,37.621568,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>I16</name>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.384168,37.621265,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>I17</name>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.381751,37.620283,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>I18</name>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.379763,37.615046,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>I19</name>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.381193,37.612946,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>I20</name>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.383256,37.609827,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>I21</name>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.383615,37.609288,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>I22</name>
+        <styleUrl>#icon-1899-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.386357,37.62142,0
           </coordinates>
         </Point>
       </Placemark>

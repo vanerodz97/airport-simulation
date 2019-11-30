@@ -207,7 +207,7 @@ class Airport:
         state.
         """
         self.intersection_control.set_aircraft_at_intersection()
-        return self.__get_conflicts(is_next=True)
+        return self.__get_next_conflict()
 
     def __get_conflicts(self, is_next=False):
         # Remove departed aircraft or
@@ -225,6 +225,19 @@ class Airport:
             if not loc1 or not loc2 or not loc1.is_close_to(loc2):
                 continue
 
+            __conflicts.append(Conflict((loc1, loc2), pair))
+        return __conflicts
+
+    def __get_next_conflict(self):
+        __conflicts = []
+        aircraft_pairs = list(itertools.combinations(self.aircrafts, 2))
+        for pair in aircraft_pairs:
+            if pair[0] == pair[1]:
+                continue
+            loc1, loc2 = pair[0].get_next_location(Aircraft.LOCATION_LEVEL_PRECISE), \
+                         pair[1].get_next_location(Aircraft.LOCATION_LEVEL_PRECISE)
+            if not loc1 or not loc2 or not loc1.is_close_to_plan(loc2):
+                continue
             __conflicts.append(Conflict((loc1, loc2), pair))
         return __conflicts
 

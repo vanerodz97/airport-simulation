@@ -41,6 +41,14 @@ class Node:
         threshold = Config.params["simulation"]["close_node_threshold"]
         return distance_feet < threshold
 
+    def is_close_to_plan(self, node):
+        """If the node is in CLOSE_NODE_THRESHOLD_FEET feet from the current
+        node, we take them as the same node.
+        """
+        distance_feet = self.get_distance_to(node)
+        threshold = Config.params["scheduler"]["conflict_threshold"]
+        return distance_feet < threshold
+
     def __hash__(self):
         return self.hash
 

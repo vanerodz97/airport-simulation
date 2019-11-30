@@ -69,13 +69,15 @@ class InterSectionController:
         return True if count_occupied > 1 else False
 
     def resolve_conflict(self, itineraries):
+        flag = False
         """ Decide which aircraft to add the halt"""
         for spot in self.intersection:
             """ conflict will happen at the intersection"""
             occupied = self.__resolve_conflict(spot, itineraries)
             if occupied:
-                print("conflict")
+                print("resolve conflict")
+                flag = True
             """how to choose the link to pass: longest queue, if same: shortest distance"""
-
+        return flag
 
 
