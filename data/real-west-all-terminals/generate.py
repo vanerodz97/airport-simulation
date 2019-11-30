@@ -52,6 +52,7 @@ class LayerType(Enum):
     airport = 4
     spot = 5
     inter = 6
+    debug = 7
 
 
 def main():
@@ -81,6 +82,11 @@ def main():
     logger.debug("Generating inter position data")
     generate_node_data(kml_doc, LayerType.inter, "inters.json")
     logger.debug("Inter position data generated")
+
+    # Generates inter position for sijia
+    logger.debug("Generating debug position data")
+    generate_node_data(kml_doc, LayerType.debug, "debug.json")
+    logger.debug("Debug position data generated")
 
     # Generates runway data
     logger.debug("Genenrating runway data")
