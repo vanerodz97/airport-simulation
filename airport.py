@@ -12,7 +12,7 @@ from conflict import Conflict
 from controller import Controller
 from surface import SurfaceFactory
 from utils import get_seconds_after
-from flight import ArrivalFlight
+from flight import ArrivalFlight, Flight
 from ramp_controller import InterSectionController
 
 
@@ -108,13 +108,10 @@ class Airport:
 
         # NOTE: we will only focus on departures now
         next_tick_time = get_seconds_after(now, sim_time)
-
+        # Only if the scheduled appear time is between now and next tick
+        current_tick_flight = scenario.departures.irange(Flight(None, now), Flight(None, next_tick_time), (True, False))
         # For all departure flights
-        for flight in scenario.departures:
-            # Only if the scheduled appear time is between now and next tick
-            if not (now <= flight.appear_time < next_tick_time):
-                continue
-
+        for flight in list(current_tick_flight):
             gate, aircraft = flight.from_gate, flight.aircraft
 
             if self.is_occupied_at(gate):
@@ -136,10 +133,8 @@ class Airport:
 
         # Deal with the arrival flights, assume that the runway is always not
         # occupied because this is an arrival flight
-
-        for flight in scenario.arrivals:
-            if not (now <= flight.appear_time < next_tick_time):
-                continue
+        current_tick_flight = scenario.arrivals.irange(Flight(None, now), Flight(None, next_tick_time), (True, False))
+        for flight in list(current_tick_flight):
             if flight.runway is None:
                 runway_name = next(scheduler.arrival_assigner)
                 runway = self.surface.get_link(runway_name)

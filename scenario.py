@@ -6,6 +6,7 @@ import logging
 from utils import str2time
 from flight import ArrivalFlight, DepartureFlight
 from config import Config
+from sortedcontainers import SortedList
 
 
 class Scenario:
@@ -79,27 +80,25 @@ class Scenario:
             scenario_raw = json.load(fin)
 
         # Parse arrival flights into the array
-        arrivals = []
+        arrivals = SortedList()
         for arrival in scenario_raw["arrivals"]:
-            arrivals.append(ArrivalFlight(
+            arrivals.add(ArrivalFlight(
                 arrival["callsign"],
                 arrival["model"],
                 arrival["airport"],
                 surface.get_node(arrival["gate"]),
-                surface.get_link(arrival["runway"]),
                 str2time(arrival["time"]),
                 str2time(arrival["appear_time"])
             ))
 
         # Parse departure flights into the array
-        departures = []
+        departures = SortedList()
         for departure in scenario_raw["departures"]:
-            departures.append(DepartureFlight(
+            departures.add(DepartureFlight(
                 departure["callsign"],
                 departure["model"],
                 departure["airport"],
                 surface.get_node(departure["gate"]),
-                surface.get_link(departure["runway"]),
                 str2time(departure["time"]),
                 str2time(departure["appear_time"])
             ))
