@@ -38,13 +38,13 @@ class Itinerary:
         self.distance = distance
 
     """
+    Get the next location, update the link the aircraft finished as well
     @return index, distance, Node
     Return (None, None, None) if completed.
     """
-
     def get_next_location(self, tick_distance):
         # Return the last node in the itinerary if completed
-        self.links_this_tick = []
+        self.links_this_tick = []  # reset the link list at beginning
 
         completed_itinerary = self.length, 0, self.targets[-1].end
 
@@ -60,7 +60,7 @@ class Itinerary:
         # Find the link which the next location is on
         while tick_distance >= self.targets[index].length - distance:
             tick_distance -= self.targets[index].length - distance
-            self.links_this_tick.append(self.targets[index])
+            self.links_this_tick.append(self.targets[index])  # append the link the aircraft will go through
             index += 1
             distance = 0
             # Return the last node in the itinerary if completed
