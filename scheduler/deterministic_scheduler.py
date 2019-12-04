@@ -78,12 +78,12 @@ class Scheduler(AbstractScheduler):
                 predict_simulation.airport.apply_priority(priority_list)
 
                 # Gets conflict in current state
-                if predict_simulation.airport.intersection_control.resolve_conflict(itineraries):
-                    break
                 conflict = self.__get_conflict_to_solve(
                     predict_simulation.airport.next_conflicts,
                     unsolvable_conflicts
                 )
+                if predict_simulation.airport.intersection_control.resolve_conflict(itineraries):
+                    break
 
                 # If a conflict is found, tries to resolve it
                 if conflict is not None:

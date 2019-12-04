@@ -83,6 +83,12 @@ scheduler:
   # Maximum number of attempts on trying to resolve a conflict
   max_resolve_conflict_attempt: 10
 
+controller:
+  # The priority for airplanes to pass the intersection.
+  # distance: the closest airplane is going to pass the intersection
+  # qsize: the longest queue waiting for passing intersection
+  intersection: distance
+
 logger:
   # Options are: critical, error, warning, info, debug, notset
   level: error
