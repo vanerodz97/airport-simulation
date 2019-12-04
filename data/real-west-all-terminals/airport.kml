@@ -1421,7 +1421,7 @@ lng: -122.3877627</value>
         </ExtendedData>
         <Point>
           <coordinates>
-            -122.387763,37.62029,0
+            -122.388101,37.6204557,0
           </coordinates>
         </Point>
       </Placemark>
@@ -1447,7 +1447,7 @@ lng: -122.3870921</value>
         </ExtendedData>
         <Point>
           <coordinates>
-            -122.387092,37.620774,0
+            -122.3873227,37.620655,0
           </coordinates>
         </Point>
       </Placemark>
@@ -3535,8 +3535,8 @@ lng: -122.3859236</value>
         <LineString>
           <tessellate>1</tessellate>
           <coordinates>
-            -122.387092,37.620774,0
-            -122.3871735,37.6214388,0
+            -122.387328,37.6206933,0
+            -122.3871842,37.6213708,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -3546,8 +3546,8 @@ lng: -122.3859236</value>
         <LineString>
           <tessellate>1</tessellate>
           <coordinates>
-            -122.387763,37.62029,0
-            -122.3874548,37.6215263,0
+            -122.388101,37.6204557,0
+            -122.3874709,37.6214965,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -3558,7 +3558,7 @@ lng: -122.3859236</value>
           <tessellate>1</tessellate>
           <coordinates>
             -122.388465,37.620579,0
-            -122.3877645,37.621663,0
+            -122.387786,37.621629,0
           </coordinates>
         </LineString>
       </Placemark>
@@ -10195,7 +10195,7 @@ toilets:</value>
         <LineString>
           <tessellate>1</tessellate>
           <coordinates>
-            -122.3869407,37.621359,0
+            -122.3868925,37.6212443,0
             -122.388039,37.62174,0
             -122.388896,37.622074,0
             -122.38903,37.622124,0
