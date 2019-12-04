@@ -108,7 +108,7 @@ def main():
     logger.debug("Pushback way data generated")
 
     # Warning: Generates scenario
-    logger.debug("Please generate scenario using generate_scenario.py")
+    logger.debug("Generate scenario using generate_scenario.py")
 
 
 def get_kml_document():
