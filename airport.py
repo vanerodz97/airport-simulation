@@ -53,6 +53,8 @@ class Airport:
         self.controller = Controller(self)
         self.intersection_control = InterSectionController(self)
 
+        self.max_airpcrafts_running = Config.params["scheduler"]["max_airpcrafts_running"]
+
     def apply_schedule(self, schedule):
         """Applies a schedule onto the active aircraft in the airport."""
         all_itineraries = {**self.itinerary_cache, **schedule.itineraries}
@@ -93,6 +95,9 @@ class Airport:
                               itinerary, aircraft)
 
     def __add_aircrafts_from_queue(self):
+        # limit the maximum number of airplanes that running in the airport at the same time
+        if self.num_aircrafts_running >= self.max_airpcrafts_running:
+            return
 
         for gate, queue in self.gate_queue.items():
 
@@ -113,8 +118,13 @@ class Airport:
         # For all departure flights
         for flight in list(current_tick_flight):
             gate, aircraft = flight.from_gate, flight.aircraft
+            
+            if flight.runway is None:
+                runway_name = next(scheduler.departure_assigner)
+                runway = self.surface.get_link(runway_name)
+                flight.set_runway(runway)
 
-            if self.is_occupied_at(gate):
+            if self.is_occupied_at(gate) or self.num_aircrafts_running >= self.max_airpcrafts_running:
                 # Adds the flight to queue
                 queue = self.gate_queue.get(gate, deque())
                 queue.append(aircraft)
@@ -122,10 +132,6 @@ class Airport:
                 self.logger.info("Adds %s into gate queue", flight)
             else:
                 # Adds the flight to the airport
-                if flight.runway is None:
-                    runway_name = next(scheduler.departure_assigner)
-                    runway = self.surface.get_link(runway_name)
-                    flight.set_runway(runway)
                 aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
                 self.add_aircraft(aircraft)
                 self.logger.info("Adds %s into the airport, runway %s",
@@ -309,3 +315,7 @@ class Airport:
 
         surface = SurfaceFactory.create(dir_path)
         return Airport(name, surface)
+    
+    @property
+    def num_aircrafts_running(self):
+        return len(self.aircrafts)
