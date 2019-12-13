@@ -2,8 +2,9 @@
 
 [![Build Status](https://travis-ci.com/nasa-airport/airport-simulation.svg?branch=master)](https://travis-ci.com/nasa-airport/airport-simulation)
 
-![image](https://user-images.githubusercontent.com/7262715/47834212-f95a3080-dd5b-11e8-97dd-a059fdf9f074.png)
+![image](visualization/static/image/readme/1576215400409.jpg)
 
+## Be careful: the latest version has conflicts, you can try '798aa10615d217dcdf843dda8d0c5cc251e65dc8' on Dec 3, 2019.
 
 ## About
 
@@ -56,6 +57,11 @@ https://drive.google.com/open?id=1wUbdfLDRcGiitjo_h5ar-xlAO7OmdVOg&usp=sharing
 
 If you need to change it, export one kml file and change codes at 'data/*/build/generate.py', especially 'class LayerType(Enum)'
 
+We design the taxiways on the map that let all airlines share the same
+ and fixed taxiway. (shortest path algorithm)
+ 
+![image](visualization/static/image/readme/1576215381737.jpg)
+
 ### Prepare Airline Data
 
 We use the web crawler to get real sfo data from www.flysfo.com.
@@ -80,6 +86,8 @@ Besides that, you can also use batch mode according to the following.
 $ python simulator.py -f plans/base.yaml
 $ python simulator.py -f batch_plans/simple-uc.yaml # Batch Run
 ```
+batch mode is used to run cached data. You may need it because our system
+ will be slow after running two hours.
 
 ### Visualization
 ```sh
