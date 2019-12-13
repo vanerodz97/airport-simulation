@@ -4,7 +4,7 @@
 
 ![image](visualization/static/image/readme/1576215400409.jpg)
 
-## Be careful: the latest version has conflicts, you can try '798aa10615d217dcdf843dda8d0c5cc251e65dc8' on Dec 3, 2019.
+##### Be careful: the latest version has conflicts, you can try '798aa10615d217dcdf843dda8d0c5cc251e65dc8' on Dec 3, 2019.
 
 ## About
 
@@ -57,8 +57,10 @@ https://drive.google.com/open?id=1wUbdfLDRcGiitjo_h5ar-xlAO7OmdVOg&usp=sharing
 
 If you need to change it, export one kml file and change codes at 'data/*/build/generate.py', especially 'class LayerType(Enum)'
 
-We design the taxiways on the map that let all airlines share the same
- and fixed taxiway. (shortest path algorithm)
+We design taxiways in the map following west plan that let all departure
+ airlines share same
+ and fixed taxiways and all arrival airlines share the same and fixed
+  taxiways. (shortest path algorithm)
  
 ![image](visualization/static/image/readme/1576215381737.jpg)
 
