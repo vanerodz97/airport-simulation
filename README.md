@@ -16,11 +16,7 @@ ASSET2 is a generic airport simulation tool for research purpose. It is designed
 
 > **Please note that the code runs in Python 3.** 
 >
-> **Please avoid Python>=3.7.0** because it breaks the legacy Cython, which one of the dependencies line-profiler depends on. The issue has not been [fixed](https://github.com/rkern/line_profiler/issues) at the moment. Try to install a lower version instead.
-
-### Prepare Airport Data
-
-Place airport related data under `data` folder like `data/sfo-terminal-2/build/` (use IATA airport code).
+> **Please avoid Python>=3.7.0** because it breaks the legacy Cython, which one of the dependencies line-profiler (test package) depends on. The issue has not been [fixed](https://github.com/rkern/line_profiler/issues) at the moment. Try to install a lower version instead.
 
 ### First-Time Installation
 **If you're on Ubuntu:**
@@ -51,13 +47,26 @@ $ echo "backend : Agg" >> ~/.config/matplotlib/matplotlibrc
 $ pip install -r requirements.txt
 ```
 
+### Prepare Airport Map
+
+Place airport related data (kml file) under `data` folder like `data/sfo-terminal-2/build/` (use IATA airport code).
+
+Now we build the whole sfo map on Google map:
+https://drive.google.com/open?id=1wUbdfLDRcGiitjo_h5ar-xlAO7OmdVOg&usp=sharing
+
+If you need to change it, export one kml file and change codes at 'data/*/build/generate.py', especially 'class LayerType(Enum)'
+
+### Prepare Airline Data
+
+We use the web crawler to get real sfo data from www.flysfo.com.
+
+'data/*/build/generate_scenario.py' and 'data/*/build/time_manage.py' are both used to handle real data.
+
 ### Run
-1. From the main directory go to data/sfo-all-terminals.  
-2. Then (I have python 3.6 installed) type "python3.6 generate_scenario.py. 
-3. Then type "python3.6 generate.py"  which generates the airport model. 
-4. Then go back to main directory of code and type "python3.6 simulator.py -f plans/sfo-all-terminals.yaml" . 
-5. This should produce a complete scenario. 
-6. Then finally run "python3.6 visualization/server.py" and load the url provided into your browser.
+1. import the kml file to 'data/*/build/'
+2. create one ymal file for it under 'plans/*.yaml'
+3. run "python3.6 visualization/server.py"
+4. after opening the link, all yaml files under 'plans/' will be shown on the menu. You can choose one. Maybe it needs several minutes to show new data unless you already have cache.
 
 ### Quick start (use stream mode)
 ```sh
