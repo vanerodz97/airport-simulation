@@ -66,7 +66,7 @@ We design taxiways in the map following west plan that let all departure
 
 ### Prepare Airline Data
 
-We use the web crawler to get real sfo data from www.flysfo.com.
+We use the web crawler to get real sfo data from www.flysfo.com, please refer to data/sfo/crawl_scenario.py for more infomation.
 
 'data/*/build/generate_scenario.py' and 'data/*/build/time_manage.py' are both used to handle real data.
 
@@ -114,6 +114,12 @@ $ pydoc <python-file-name-without-.py>
 ```
 
 ## Developer Guidelines
+
+### Collision Detection
+Currently, we try to detect the collision . All these detection methods are integrated at scheluder. 
+1. Rear end collision, which is resolved by Class deterministic_scheduler.
+2. Intersection merge collision, which is resolved by Class intersection_controller.
+3. (On-going) Face-to-Face collision at spot, which will be resolved by Class spot_controller.
 
 ### Sequential Diagram
 
@@ -202,3 +208,9 @@ each line within the function.
 
     $ kernprof -l ./simulator -f <your_plan>.yaml
     $ python3 -m line_profiler simulator.py.lprof
+    
+### Future Plan
+1. Add queue slot at departure runway on the map so that the aircraft waiting at runway can form as a queue when visualization. 
+2. Currently, the scheduler uses "unfinished_distance" as the criteria as which airplane has the higher priority to move forward. This situation may not be necessary true. Try to change the link-node model so that the rear end collision detector can distinguish which airplane is ahead. 
+3. Introduce uncertainty to the simulation. 
+
