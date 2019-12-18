@@ -13,7 +13,7 @@ from controller import Controller
 from surface import SurfaceFactory
 from utils import get_seconds_after
 from flight import ArrivalFlight
-from ramp_controller import InterSectionController
+from ramp_controller import InterSectionController, RampController
 
 
 class Airport:
@@ -31,6 +31,7 @@ class Airport:
 
         # Queues for departure flights at gates
         self.gate_queue = {}
+        self.spot_gate_queue = {}
 
         # departure control for the aircraft
         self.departure_queue = {}
@@ -52,6 +53,7 @@ class Airport:
         # Ground controller
         self.controller = Controller(self)
         self.intersection_control = InterSectionController(self)
+        self.ramp_control = RampController(self)
 
     def apply_schedule(self, schedule):
         """Applies a schedule onto the active aircraft in the airport."""
@@ -78,6 +80,7 @@ class Airport:
         time stamp.
         """
         self.__add_aircrafts_from_queue()
+        self.__add_aircrafts_from_spot_queue()
         self.__add_aircrafts_from_scenario(scenario, now, sim_time, scheduler)
 
     def add_aircraft(self, aircraft):
@@ -104,6 +107,16 @@ class Airport:
             aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
             self.add_aircraft(aircraft)
 
+    def __add_aircrafts_from_spot_queue(self):
+        for spot, queue in self.ramp_control.spot_queue.items():
+            if self.ramp_control.spot_occupied(spot):
+                continue
+
+            aircraft = queue.popleft()
+            gate = self.ramp_control.spot_gate_queue[spot].popleft()
+            aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
+            self.add_aircraft(aircraft)
+
     def __add_aircrafts_from_scenario(self, scenario, now, sim_time, scheduler):
 
         # NOTE: we will only focus on departures now
@@ -116,13 +129,24 @@ class Airport:
                 continue
 
             gate, aircraft = flight.from_gate, flight.aircraft
+            spot = gate.get_spots()
+
+            # self.ramp_control.add_aircraft_to_spot_queue(spot, aircraft)
 
             if self.is_occupied_at(gate):
                 # Adds the flight to queue
                 queue = self.gate_queue.get(gate, deque())
                 queue.append(aircraft)
+
+                # Add to gate
                 self.gate_queue[gate] = queue
                 self.logger.info("Adds %s into gate queue", flight)
+
+            elif self.ramp_control.spot_occupied(spot):
+                # Add the flight to spot queue
+                self.ramp_control.add_aircraft_to_spot_queue(spot, gate, aircraft)
+                self.logger.info("Adds %s into spot queue", flight)
+
             else:
                 # Adds the flight to the airport
                 if flight.runway is None:
@@ -140,6 +164,12 @@ class Airport:
         for flight in scenario.arrivals:
             if not (now <= flight.appear_time < next_tick_time):
                 continue
+
+            gate, aircraft = flight.to_gate, flight.aircraft
+            spot = gate.get_spots()
+
+            # self.ramp_control.add_aircraft_to_spot_queue(spot, aircraft)
+
             if flight.runway is None:
                 runway_name = next(scheduler.arrival_assigner)
                 runway = self.surface.get_link(runway_name)

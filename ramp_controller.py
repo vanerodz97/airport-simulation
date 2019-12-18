@@ -1,4 +1,3 @@
-from surface import Spot
 from collections import deque
 from flight import ArrivalFlight, DepartureFlight
 from queue import PriorityQueue as PQ
@@ -16,19 +15,41 @@ class RampController:
     """ The class decide the priority of departure aircraft """
     def __init__(self, ground):
         self.ground = ground
-        self.spot_queue = {}  # departure queue?
-        self.intersection = []  # put all intersections, spot+intersection?
+        self.spot_queue = {}
+        self.spot_gate_queue = {}
+        self.spots = ground.surface.spots
 
-    def add_aircraft_to_spot_queue(self, aircraft, scenario):
-        """ Keep a priority queue for """
-        # todo: sort the priority by appear time? cell(tick)
-        flight = scenario.get_flight(aircraft)
-        if type(flight) == DepartureFlight:
-            gate = flight.from_gate()
-            spot = gate.get_spots()
-            if spot not in self.spot_queue:
-                self.spot_queue[spot] = deque()
-            self.spot_queue[spot].append(aircraft)
+    def add_aircraft_to_spot_queue(self, spot, gate, aircraft):
+        """ Keep a spot queue for aircraft"""
+        if spot not in self.spot_queue:
+            self.spot_queue[spot] = deque()
+            self.spot_gate_queue[spot] = deque()
+        self.spot_queue[spot].append(aircraft)
+        self.spot_gate_queue[spot].append(gate)
+
+    def spot_occupied(self, spot):
+        print(self.spot_queue.get(spot, None))
+        if not self.spot_queue.get(spot, None):
+            return False
+        return True
+
+    def __resolve_conflict(self, spot, itineraries):
+        if self.spot_queue.get(spot, None):
+            for aircraft in self.spot_queue[spot]:
+                aircraft.itinerary.add_scheduler_delay()
+                itineraries[aircraft] = aircraft.itinerary
+            return True
+        return False
+
+    def resolve_conflict(self, itineraries):
+        flag = False
+
+        for spot in self.spots:
+            occupied = self.__resolve_conflict(spot, itineraries)
+            if occupied:
+                flag = True
+        return flag
+
 
 
 class InterSectionController:

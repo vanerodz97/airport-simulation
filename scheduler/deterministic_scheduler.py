@@ -80,6 +80,9 @@ class Scheduler(AbstractScheduler):
                 # Gets conflict in current state
                 if predict_simulation.airport.intersection_control.resolve_conflict(itineraries):
                     break
+                # if predict_simulation.airport.ramp_control.resolve_conflict(itineraries):
+                #     break
+
                 conflict = self.__get_conflict_to_solve(
                     predict_simulation.airport.next_conflicts,
                     unsolvable_conflicts
