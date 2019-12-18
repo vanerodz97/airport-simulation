@@ -2,8 +2,9 @@
 
 [![Build Status](https://travis-ci.com/nasa-airport/airport-simulation.svg?branch=master)](https://travis-ci.com/nasa-airport/airport-simulation)
 
-![image](https://user-images.githubusercontent.com/7262715/47834212-f95a3080-dd5b-11e8-97dd-a059fdf9f074.png)
+![image](visualization/static/image/readme/1576215400409.jpg)
 
+##### Be careful: the latest version has conflicts, you can try '798aa10615d217dcdf843dda8d0c5cc251e65dc8' on Dec 3, 2019.
 
 ## About
 
@@ -16,11 +17,7 @@ ASSET2 is a generic airport simulation tool for research purpose. It is designed
 
 > **Please note that the code runs in Python 3.** 
 >
-> **Please avoid Python>=3.7.0** because it breaks the legacy Cython, which one of the dependencies line-profiler depends on. The issue has not been [fixed](https://github.com/rkern/line_profiler/issues) at the moment. Try to install a lower version instead.
-
-### Prepare Airport Data
-
-Place airport related data under `data` folder like `data/sfo-terminal-2/build/` (use IATA airport code).
+> **Please avoid Python>=3.7.0** because it breaks the legacy Cython, which one of the dependencies line-profiler (test package) depends on. The issue has not been [fixed](https://github.com/rkern/line_profiler/issues) at the moment. Try to install a lower version instead.
 
 ### First-Time Installation
 **If you're on Ubuntu:**
@@ -51,13 +48,33 @@ $ echo "backend : Agg" >> ~/.config/matplotlib/matplotlibrc
 $ pip install -r requirements.txt
 ```
 
+### Prepare Airport Map
+
+Place airport related data (kml file) under `data` folder like `data/sfo-terminal-2/build/` (use IATA airport code).
+
+Now we build the whole sfo map on Google map:
+https://drive.google.com/open?id=1wUbdfLDRcGiitjo_h5ar-xlAO7OmdVOg&usp=sharing
+
+If you need to change it, export one kml file and change codes at 'data/*/build/generate.py', especially 'class LayerType(Enum)'
+
+We design taxiways in the map following west plan that let all departure
+ airlines share same
+ and fixed taxiways and all arrival airlines share the same and fixed
+  taxiways. (shortest path algorithm)
+ 
+![image](visualization/static/image/readme/1576215381737.jpg)
+
+### Prepare Airline Data
+
+We use the web crawler to get real sfo data from www.flysfo.com, please refer to data/sfo/crawl_scenario.py for more infomation.
+
+'data/*/build/generate_scenario.py' and 'data/*/build/time_manage.py' are both used to handle real data.
+
 ### Run
-1. From the main directory go to data/sfo-all-terminals.  
-2. Then (I have python 3.6 installed) type "python3.6 generate_scenario.py. 
-3. Then type "python3.6 generate.py"  which generates the airport model. 
-4. Then go back to main directory of code and type "python3.6 simulator.py -f plans/sfo-all-terminals.yaml" . 
-5. This should produce a complete scenario. 
-6. Then finally run "python3.6 visualization/server.py" and load the url provided into your browser.
+1. import the kml file to 'data/*/build/'
+2. create one ymal file for it under 'plans/*.yaml'
+3. run "python3.6 visualization/server.py"
+4. after opening the link, all yaml files under 'plans/' will be shown on the menu. You can choose one. Maybe it needs several minutes to show new data unless you already have cache.
 
 ### Quick start (use stream mode)
 ```sh
@@ -71,6 +88,8 @@ Besides that, you can also use batch mode according to the following.
 $ python simulator.py -f plans/base.yaml
 $ python simulator.py -f batch_plans/simple-uc.yaml # Batch Run
 ```
+batch mode is used to run cached data. You may need it because our system
+ will be slow after running two hours.
 
 ### Visualization
 ```sh
@@ -95,6 +114,12 @@ $ pydoc <python-file-name-without-.py>
 ```
 
 ## Developer Guidelines
+
+### Collision Detection
+Currently, we try to detect the collision . All these detection methods are integrated at scheluder. 
+1. Rear end collision, which is resolved by Class deterministic_scheduler.
+2. Intersection merge collision, which is resolved by Class intersection_controller.
+3. (On-going) Face-to-Face collision at spot, which will be resolved by Class spot_controller.
 
 ### Sequential Diagram
 
@@ -183,3 +208,9 @@ each line within the function.
 
     $ kernprof -l ./simulator -f <your_plan>.yaml
     $ python3 -m line_profiler simulator.py.lprof
+    
+### Future Plan
+1. Add queue slot at departure runway on the map so that the aircraft waiting at runway can form as a queue when visualization. 
+2. Currently, the scheduler uses "unfinished_distance" as the criteria as which airplane has the higher priority to move forward. This situation may not be necessary true. Try to change the link-node model so that the rear end collision detector can distinguish which airplane is ahead. 
+3. Introduce uncertainty to the simulation. 
+

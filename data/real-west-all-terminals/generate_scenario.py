@@ -200,10 +200,10 @@ def set_time(str_time):
 def main():
     departures = get_departure_from_csv()
     arrivals = get_arrival_from_csv()
-    print(len(departures))
-    print(len(arrivals))
+    logger.debug("Number of departures" + str(len(departures)))
+    logger.debug("Number of arrivals" + str(len(arrivals)))
     scenario = {"arrivals": arrivals, "departures": departures}
-    print(scenario)
+    # print(scenario)
 
     create_output_folder(OUTPUT_FOLDER)
     output_filename = OUTPUT_FOLDER + "scenario.json"

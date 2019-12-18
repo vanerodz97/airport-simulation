@@ -9,12 +9,16 @@ class Flight:
     `DepartureFlight`.
     """
 
-    def __init__(self, aircraft):
+    def __init__(self, aircraft, appear_time):
         self.aircraft = aircraft
         self.runway = None
+        self.appear_time = appear_time
 
     def set_runway(self, runway):
         self.runway = runway
+
+    def __gt__(self, other):
+        return self.appear_time > other.appear_time
 
 
 class ArrivalFlight(Flight):
@@ -23,13 +27,11 @@ class ArrivalFlight(Flight):
     """
 
     def __init__(self, callsign, model, from_airport, to_gate,
-                 runway, arrival_time, appear_time):
-        super().__init__(Aircraft(callsign, model, None, False))
+                 arrival_time, appear_time):
+        super().__init__(Aircraft(callsign, model, None, False), appear_time)
         self.from_airport = from_airport
         self.to_gate = to_gate
         self.arrival_time = arrival_time
-        self.appear_time = appear_time
-        # self.runway = runway
 
     def __repr__(self):
         return "<Arrival:%s time:%s appear:%s>" \
@@ -42,14 +44,13 @@ class DepartureFlight(Flight):
     """
 
     def __init__(self, callsign, model, to_airport, from_gate,
-                 runway, departure_time, appear_time):
-        super().__init__(Aircraft(callsign, model, None, True))
+                 departure_time, appear_time):
+        super().__init__(Aircraft(callsign, model, None, True), appear_time)
         self.to_airport = to_airport
         self.from_gate = from_gate
         self.departure_time = departure_time
-        self.appear_time = appear_time
-        # self.runway = runway
 
     def __repr__(self):
         return "<Departure:%s time:%s appear:%s>" % \
                (self.aircraft.callsign, self.departure_time, self.appear_time)
+

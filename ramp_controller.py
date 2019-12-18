@@ -1,6 +1,7 @@
 from collections import deque
 from flight import ArrivalFlight, DepartureFlight
 from queue import PriorityQueue as PQ
+from config import Config
 
 
 class InterSection:
@@ -8,6 +9,10 @@ class InterSection:
         self.node = node
         self.links = {}
         for link in links:
+            self.links[link] = None
+
+    def reset(self):
+        for link in self.links:
             self.links[link] = None
 
 
@@ -42,6 +47,7 @@ class RampController:
         return False
 
     def resolve_conflict(self, itineraries):
+        # TODO: need to solve conflict between arrival and departure flights
         flag = False
 
         for spot in self.spots:
@@ -55,6 +61,7 @@ class RampController:
 class InterSectionController:
     def __init__(self, ground):
         self.ground = ground
+        self.method = Config.params["controller"]["intersection"]
         self.intersection = []
         for node, links in ground.surface.intersections_to_link_mapping.items():
             self.intersection.append(InterSection(node, links))
@@ -76,28 +83,41 @@ class InterSectionController:
                     spot.links[link] = PQ()
                 spot.links[link].put((distance, aircraft, link))
 
-    def __resolve_conflict(self, spot, itineraries):
+    @staticmethod
+    def __get_conflict(spot, itineraries, method):
+        """apply priority based on the distance to the intersection"""
         count_occupied = 0
+        to_resolve = PQ()
         for q in spot.links.values():
             if q is None or q.qsize() == 0:
                 continue
+            priority = None
             count_occupied += 1
-            while q.qsize() != 0:
-                aircraft = q.get()[1]
-                if count_occupied > 1:
-                    aircraft.itinerary.add_scheduler_delay()
-                    itineraries[aircraft] = aircraft.itinerary
-        return True if count_occupied > 1 else False
+            if method == "qsize":
+                priority = -q.qsize()
+            elif method == "distance":
+                priority = q.queue[0][0]
+            else:
+                raise Exception("Unimplemented intersection control method")
+            to_resolve.put((priority, q.queue))
+        return to_resolve if to_resolve.qsize() > 1 else None
 
     def resolve_conflict(self, itineraries):
         flag = False
         """ Decide which aircraft to add the halt"""
         for spot in self.intersection:
             """ conflict will happen at the intersection"""
-            occupied = self.__resolve_conflict(spot, itineraries)
-            if occupied:
+            to_resolve = self.__get_conflict(spot, itineraries, self.method)
+            if to_resolve:
                 print("resolve conflict")
+                to_resolve.get()  # skip the first one
+                while to_resolve.qsize() != 0:
+                    queue = to_resolve.get()[1]
+                    for _, aircraft, _ in queue:
+                        aircraft.itinerary.add_scheduler_delay()
+                        itineraries[aircraft] = aircraft.itinerary
                 flag = True
+            spot.reset()
             """how to choose the link to pass: longest queue, if same: shortest distance"""
         return flag
 

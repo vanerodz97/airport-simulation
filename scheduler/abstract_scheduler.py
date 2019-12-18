@@ -62,6 +62,7 @@ class AbstractScheduler:
         if type(flight) == ArrivalFlight:
             src, dst = aircraft.location, flight.to_gate
         else:
+            print(flight)
             src, dst = aircraft.location, flight.runway.start
 
         route = simulation.routing_expert.get_shortest_route(src, dst)
