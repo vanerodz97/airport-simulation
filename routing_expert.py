@@ -7,6 +7,10 @@ from route import Route
 from surface import Runway, Spot, Gate, RunwayNode
 
 
+import matplotlib.pyplot as plt
+
+SAVE_GRAPH = False
+
 class RoutingExpert:
     """`RoutingExpert` contains the knownledge of providing routes between any
     two nodes in the airport surfact. It provides `get_shortest_route`
@@ -40,6 +44,8 @@ class RoutingExpert:
             self.__build_or_load_routes()
         else:
             self.__build_routes()
+        if SAVE_GRAPH:
+            save_graph(nodes, links)
 
     def __build_or_load_routes(self):
 
@@ -249,3 +255,37 @@ class CandidateNeighbors:
                 self.head.prev = None
 
             self.push(front)
+
+
+def save_graph(nodes, links):
+        x = []
+        y = []
+        for node in nodes:
+            print(node)
+            x.append(node.geo_pos["lat"])
+            y.append(node.geo_pos["lng"])
+        plt.scatter(y, x, s=5)
+        plt.savefig("./draw_taxiway/" + "nodes_only.jpg", dpi=300)
+        plt.clf()
+        cnt = 0
+
+        for link in links:
+            print(type(link))
+            link_x = []
+            link_y = []
+            pre, nxt = None, link.nodes[0]
+            for i in range(1, len(link.nodes)):
+                pre = nxt
+                nxt = link.nodes[i]
+                link_x.append(pre.geo_pos["lat"])
+                link_y.append(pre.geo_pos["lng"])
+                link_x.append(nxt.geo_pos["lat"])
+                link_y.append(nxt.geo_pos["lng"])
+            plt.scatter(y, x, s=5)
+            plt.plot(link_y, link_x, "r", linewidth=1)
+            plt.title(label=link.name + "\tdistance:%.2f" % link.length)
+            plt.savefig("./draw_taxiway/" + link.name.replace("/", "-") + ".jpg", dpi=300)
+            plt.clf()
+            cnt += 1
+
+        # plt.savefig("./draw_taxiway/nodes_taxiway.jpg", dpi=1200)

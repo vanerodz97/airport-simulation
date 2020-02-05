@@ -45,10 +45,11 @@ class Controller:
             if aircraft.itinerary.is_completed:
                 continue
             try:
-                target_speed, relative_distance = self.__find_aircraft_ahead(aircraft)
+                target_speed, relative_distance, fronter_aircraft = self.__find_aircraft_ahead(aircraft)
                 self.aircraft_ahead_lookup[aircraft] = (target_speed, relative_distance)
                 # TODO: discuss with zy & what if none
                 aircraft.set_fronter_info((target_speed, relative_distance))
+                aircraft.set_fronter_aircraft(fronter_aircraft)
             except NoCloseAircraftFoundError:
                 # TODO: discuss with zy & what if none
                 aircraft.set_fronter_info(None)
@@ -78,7 +79,7 @@ class Controller:
                     # Too far that the pilot can't see the aircraft
                     raise NoCloseAircraftFoundError
                 else:
-                    return item_aircraft.speed, relative_distance
+                    return item_aircraft.speed, relative_distance, item_aircraft
 
             relative_distance += link.length
 

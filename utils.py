@@ -1,4 +1,5 @@
 """A collection of global helper functions."""
+import matplotlib.pyplot as plt
 
 
 def str2time(time_str):

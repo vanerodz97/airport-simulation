@@ -82,8 +82,8 @@ class Scheduler(AbstractScheduler):
                     predict_simulation.airport.next_conflicts,
                     unsolvable_conflicts
                 )
-                if predict_simulation.airport.intersection_control.resolve_conflict(itineraries):
-                    break
+                # if predict_simulation.airport.intersection_control.resolve_conflict(itineraries):
+                #     break
                 # if predict_simulation.airport.ramp_control.resolve_conflict(itineraries):
                 #     break
 

@@ -8,7 +8,6 @@ from surface import *
 
 from link import HoldLink
 from config import Config
-from controller import Controller
 import re
 
 AIRLINES_TO_CODE = {
@@ -114,11 +113,13 @@ class Aircraft:
         self.MAX_SPEED = Config.params["aircraft_model"]["max_speed"]
         self.IDEAL_SPEED = Config.params["aircraft_model"]["ideal_speed"]
         self.fronter_info = None
+        self.fronter_aircraft = None
         self.speed_uncertainty = 0
         self.is_reroute_necessary = True
         self.take_off = False
 
         self.tick_count = 0
+        
 
     @staticmethod
     def fullname2callsign(fullname):
@@ -178,6 +179,9 @@ class Aircraft:
         """ Set the information of the preceding aircraft. """
         self.fronter_info = fronter_info
 
+    def set_fronter_aircraft(self, aircraft):
+        self.fronter_aircraft = aircraft
+
     """
     @:param fronter_info (target_speed, relative_distance)
     """
@@ -197,7 +201,7 @@ class Aircraft:
         relative_distance = fronter_info[1]
 
         # fronter_speed = -1, which means there is another plane entering the intersection
-        if fronter_speed < 0:
+        if fronter_speed <= 0:
             return self.brake_hard()
 
         # Brake hard if less than MIN_DISTANCE
@@ -267,15 +271,6 @@ class Aircraft:
 
     """ original """
 
-    def add_uncertainty_delay(self):
-        """Adds an uncertainty delay on this aircraft."""
-        if not self.itinerary:
-            # self.logger.debug("%s: No itinerary to add delay", self)
-            return
-        delay_added_at = self.itinerary.add_uncertainty_delay()
-        # self.logger.debug("%s: Delay added at %s by uncertainty",
-        #                   self, delay_added_at)
-
     def add_scheduler_delay(self):
         """Adds a scheduler delay on this aircraft."""
         if not self.itinerary:
@@ -288,12 +283,12 @@ class Aircraft:
     def tick(self):
         """Ticks on this aircraft and its subobjects to move to the next state.
         """
-
+        passed_links = None
         if self.itinerary:
             self.tick_count += 1
             new_speed = self.get_next_speed(self.fronter_info, self.state) + self.speed_uncertainty
             self.set_speed(new_speed)
-            self.itinerary.tick(self.tick_distance)
+            passed_links = self.itinerary.tick(self.tick_distance)
             if self.itinerary.is_completed:
                 self.logger.debug("%s: %s completed.", self, self.itinerary)
             last_target = self.itinerary.backup[-1]
@@ -309,6 +304,7 @@ class Aircraft:
             pass
 
         self.logger.info("%s at %s", self, self.__coarse_location)
+        return passed_links
 
     @property
     def state(self):
@@ -344,6 +340,16 @@ class Aircraft:
         """Returns the link finished in this tick."""
         return self.itinerary.links_this_tick
 
+    @property
+    def current_target(self):
+        """return the current exact link"""
+        return self.itinerary.current_target
+    
+    def get_ahead_intersections_and_link(self):
+        """get the intersections and future links with certain distance"""
+        ahead_distance = 200.0
+        return self.itinerary.get_ahead_intersections_and_link(ahead_distance)
+
     def set_quiet(self, logger):
         """Sets the aircraft into quiet mode where less logs are printed."""
         self.logger = logger
@@ -358,7 +364,16 @@ class Aircraft:
         return not self == other
 
     def __repr__(self):
-        return "<Aircraft: %s %s>" % (self.callsign, self.state)
+        if self.fronter_info == None:
+            fronter_speed = -999
+            relative_dist = -999
+        else:
+            fronter_speed, relative_dist = self.fronter_info
+        if self.fronter_aircraft is None:
+            fronter_callsign = None
+        else:
+            fronter_callsign = self.fronter_aircraft.callsign
+        return "<Aircraft: %s %s %.2f fronter: %s fronter_speed: %d relative_dist: %d>" % (self.callsign, self.state, self.speed, fronter_callsign, fronter_speed, relative_dist)
 
     def __getstate__(self):
         attrs = dict(self.__dict__)

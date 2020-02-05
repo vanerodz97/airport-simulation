@@ -29,13 +29,16 @@ class Itinerary:
         if self.is_completed:
             return
 
-        if type(self.current_target) is not HoldLink:
+        cur_index = self.index
+        if type(self.targets[cur_index]) is not HoldLink:
             self.distance_left = max(0, self.distance_left - tick_distance)
         # Change current link if passing the last ones
-        index, distance, _ = self.get_next_location(tick_distance)
+        next_index, distance, _ = self.get_next_location(tick_distance)
 
-        self.index = index
+        self.index = next_index
         self.distance = distance
+        # return the link that it has passes
+        return self.targets[cur_index:next_index]
 
     """
     Get the next location, update the link the aircraft finished as well
@@ -79,6 +82,25 @@ class Itinerary:
         if n >= self.length:
             return None
         return self.targets[n]
+    
+    def get_ahead_intersections_and_link(self, ahead_distance):
+        """get the intersections and future links with certain distance"""
+        ahead_intersections = []
+        ahead_links = []
+        index, distance = self.index, self.distance
+        while ahead_distance >= self.targets[index].length - distance:
+            if type(self.targets[index]) is HoldLink:
+                index += 1
+                continue
+            ahead_distance -= self.targets[index].length - distance
+            ahead_intersections.append(self.targets[index].end)
+            ahead_links.append(self.targets[index])
+            index += 1
+            distance = 0
+            if index >= self.length:
+                break
+        return ahead_intersections, ahead_links
+    
 
     def __add_delay(self):
         if self.is_completed:
@@ -244,3 +266,11 @@ class Itinerary:
 
     def __ne__(self, other):
         return not self == other
+
+    def distance_to_intersection(self):
+        # get the distance to the next intersection (the end of current link)
+        current_target = self.targets[self.index]
+        if type(current_target) is HoldLink:
+            return 0
+        else:
+            return current_target.length - self.distance
