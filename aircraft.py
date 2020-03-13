@@ -200,7 +200,6 @@ class Aircraft:
         fronter_speed = fronter_info[0]
         relative_distance = fronter_info[1]
 
-        # fronter_speed = -1, which means there is another plane entering the intersection
         if fronter_speed <= 0:
             return self.brake_hard()
 
@@ -209,12 +208,14 @@ class Aircraft:
             return self.brake_hard()
 
         # Adjust the speed
-        if relative_distance > self.IDEAL_DISTANCE and fronter_speed > self.speed:
+        acc_flag = False
+        if relative_distance > self.IDEAL_DISTANCE:
             # acceleration phase
             c, l, m = 1.1, 0.1, 0.2
+            acc_flag = True
         elif relative_distance < self.IDEAL_DISTANCE or fronter_speed < self.speed:
             # deceleration phase
-            c, l, m = -1.1, 1.2, 0.7
+            c, l, m = -2, 1.2, 0.7
         else:
             c, l, m = 0, 0, 0
 
@@ -224,6 +225,8 @@ class Aircraft:
         new_speed = self.speed + acceleration
         if new_speed < 0:
             new_speed = 0
+        if acc_flag:
+            new_speed = max(10, new_speed)
         # TODO: consider different speed limits for different type of roads
         if new_speed > self.MAX_SPEED:
             new_speed = self.MAX_SPEED
@@ -244,7 +247,9 @@ class Aircraft:
     def brake_hard(self):
         """ Brake hard to avoid potential crash"""
         # TODO: revise the model
-        new_speed = self.speed / 1.5
+        # new_speed = self.speed / 1.5
+        new_speed = self.speed / 3
+        # new_speed = 5
         # self.set_speed(new_speed)
         self.logger.info("%s with speed %f brakes hard", self, self.speed)
         return new_speed

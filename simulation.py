@@ -80,19 +80,20 @@ class Simulation:
 
         try:
 
-            # Reschedule happens before the tick. It will resolve conflict here
-            if self.__is_time_to_reschedule():
-                self.logger.info("Time to reschedule")
-                start = time.time()
-                self.__reschedule()  # it will try to resolve conflict
-                self.last_schedule_exec_time = time.time() - start  # seconds
-                self.last_schedule_time = self.now
-                self.logger.info("Last schedule time is updated to %s",
-                                 self.last_schedule_time)
+            # # Reschedule happens before the tick. It will resolve conflict here
+            # if self.__is_time_to_reschedule():
+            #     self.logger.info("Time to reschedule")
+            #     start = time.time()
+            #     self.__reschedule()  # it will try to resolve conflict
+            #     self.last_schedule_exec_time = time.time() - start  # seconds
+            #     self.last_schedule_time = self.now
+            #     self.logger.info("Last schedule time is updated to %s",
+            #                      self.last_schedule_time)
 
             # Add aircraft
             self.airport.add_aircrafts(self.scenario, self.now,
                                        self.clock.sim_time, self.scheduler)
+            self.__reschedule()
 
             # # Inject uncertainties
             # if self.uncertainty:

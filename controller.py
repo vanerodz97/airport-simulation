@@ -53,6 +53,8 @@ class Controller:
             except NoCloseAircraftFoundError:
                 # TODO: discuss with zy & what if none
                 aircraft.set_fronter_info(None)
+                # TODO: currently just assume the front is moving
+                # aircraft.set_fronter_info((200, 100))
                 pass
 
     def __find_aircraft_ahead(self, aircraft):
