@@ -69,6 +69,7 @@ class IntersectionController:
         # map intersection to links
         self.intersection_link_map = self._init_intersection_links_map(self.intersection_list, airport.surface.links)
         self.intersection_available_link_map = {}
+        self.intersection_lock_queue = {}
         self.intersections_status = {}
         for intersection in self.intersection_list:
             # available for pass
@@ -119,30 +120,69 @@ class IntersectionController:
                 plt.clf()
                 cnt += 1
 
+    # def lock_intersections(self, aircraft):
+    #     pass_flag = True
+    #     ahead_intersections, ahead_links = aircraft.get_ahead_intersections_and_link()
+    #     for ahead_intersection in ahead_intersections:
+    #         actual_intersection = self.node_map[ahead_intersection]
+    #         # if self.intersections_status[actual_intersection] == False and self.intersection_available_link_map[actual_intersection] != aircraft.current_target:
+    #         if self.intersections_status[actual_intersection] == False and self.intersection_available_link_map[actual_intersection] != aircraft:
+    #             # intersection occupied,
+    #             pass_flag = False
+    #             return pass_flag
+    #     # now the aircraft can pass, lock intersections
+    #     pass_flag = True
+    #     for idx, ahead_intersection in enumerate(ahead_intersections):
+    #         actual_intersection = self.node_map[ahead_intersection]
+    #         self.intersections_status[actual_intersection] = False
+    #         # self.intersection_available_link_map[actual_intersection] = ahead_links[idx]
+    #         self.intersection_available_link_map[actual_intersection] = aircraft
+    #     return pass_flag
+
     def lock_intersections(self, aircraft):
-        pass_flag = True
-        ahead_intersections, ahead_links = aircraft.get_ahead_intersections_and_link()
-        for ahead_intersection in ahead_intersections:
-            actual_intersection = self.node_map[ahead_intersection]
-            # if self.intersections_status[actual_intersection] == False and self.intersection_available_link_map[actual_intersection] != aircraft.current_target:
-            if self.intersections_status[actual_intersection] == False and self.intersection_available_link_map[actual_intersection] != aircraft:
-                # intersection occupied,
-                pass_flag = False
-                return pass_flag
+        ahead_intersections, distances_to_intersections = aircraft.get_ahead_intersections_and_link()
         # now the aircraft can pass, lock intersections
-        pass_flag = True
         for idx, ahead_intersection in enumerate(ahead_intersections):
             actual_intersection = self.node_map[ahead_intersection]
             self.intersections_status[actual_intersection] = False
-            # self.intersection_available_link_map[actual_intersection] = ahead_links[idx]
-            self.intersection_available_link_map[actual_intersection] = aircraft
-        return pass_flag
+            ahead_distance = distances_to_intersections[idx]
+            if actual_intersection not in self.intersection_lock_queue:
+                self.intersection_lock_queue[actual_intersection] = []
+            self.intersection_lock_queue[actual_intersection].append((ahead_distance, aircraft))
+    
+    def is_lock_by(self, aircraft):
+        ahead_intersections, _ = aircraft.get_ahead_intersections_and_link()
+        if len(ahead_intersections) == 0:
+            return True
+        ahead_intersection = ahead_intersections[0]
+        for _, ahead_intersection in enumerate(ahead_intersections):
+            actual_intersection = self.node_map[ahead_intersection]
+            sorted_queue = sorted(self.intersection_lock_queue[actual_intersection], key=lambda t : t[0])
+            lock_by_aircraft = sorted_queue[0][1]
+            if aircraft != lock_by_aircraft:
+                print("LOCK INFO: ", aircraft, " has no lock")
+                print("lock by", lock_by_aircraft)
+                return False
+        return True
+
     
     def unlock_intersections(self, passed_intersections):
         for intersection in passed_intersections:
             actual_intersection = self.node_map[intersection]
             self.intersections_status[actual_intersection] = True
             self.intersection_available_link_map[actual_intersection] = None
+            self.intersection_lock_queue[actual_intersection] = []
+
+    def unblock_intersections_lock_by_aircraft(self, aircraft):
+        remove_intersections = []
+        for actual_intersection, lock_queue in self.intersection_lock_queue.items():
+            if len(lock_queue) == 0:
+                continue
+            sorted_queue = sorted(lock_queue, key=lambda t : t[0])
+            lock_by_aircraft = sorted_queue[0][1]
+            if aircraft == lock_by_aircraft:
+                remove_intersections.append(actual_intersection)
+        self.unlock_intersections(remove_intersections)
 
     
     """

@@ -210,12 +210,14 @@ class Airport:
 
         for aircraft in to_remove_aircraft_departure:
             self.logger.info("Removes departure %s from the airport", aircraft)
+            self.intersection_control.unblock_intersections_lock_by_aircraft(aircraft)
             self.__add_aircraft_to_departure_queue(aircraft, scenario)
             self.departure_info.append(aircraft)
             self.aircrafts.remove(aircraft)
 
         for aircraft in to_remove_aircraft_arrival:
             self.logger.info("Removes arrive %s from the airport", aircraft)
+            # self.intersection_control.unblock_intersections_lock_by_aircraft(aircraft)
             self.aircrafts.remove(aircraft)
 
     def remove_departure_aircrafts(self, aircrafts):
@@ -277,7 +279,7 @@ class Airport:
     def is_occupied_at(self, node):
         """Check if an aircraft is occupied at the given node."""
         for aircraft in self.aircrafts:
-            if aircraft.precise_location.is_close_to(node):
+            if aircraft.precise_location.is_close_to_gate(node):
                 return True
         return False
 
@@ -309,7 +311,10 @@ class Airport:
         # self.intersection_control.set_aircraft_at_intersection()
         passed = []
         for aircraft in self.aircrafts:
-            if self.intersection_control.lock_intersections(aircraft) is True:
+            self.intersection_control.lock_intersections(aircraft)
+        
+        for aircraft in self.aircrafts:
+            if self.intersection_control.is_lock_by(aircraft) is True:
                 passed_links = aircraft.tick()
                 passed.append(passed_links)
         

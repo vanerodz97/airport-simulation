@@ -83,23 +83,43 @@ class Itinerary:
             return None
         return self.targets[n]
     
+    # def get_ahead_intersections_and_link(self, ahead_distance):
+    #     """get the intersections and future links with certain distance"""
+    #     ahead_intersections = []
+    #     ahead_links = []
+    #     index, distance = self.index, self.distance
+    #     while ahead_distance >= self.targets[index].length - distance:
+    #         if type(self.targets[index]) is HoldLink:
+    #             index += 1
+    #             continue
+    #         ahead_distance -= self.targets[index].length - distance
+    #         ahead_intersections.append(self.targets[index].end)
+    #         ahead_links.append(self.targets[index])
+    #         index += 1
+    #         distance = 0
+    #         if index >= self.length:
+    #             break
+    #     return ahead_intersections, ahead_links
+
     def get_ahead_intersections_and_link(self, ahead_distance):
         """get the intersections and future links with certain distance"""
         ahead_intersections = []
-        ahead_links = []
+        distances_to_intersections = []
         index, distance = self.index, self.distance
+        relative_distance = -distance
         while ahead_distance >= self.targets[index].length - distance:
             if type(self.targets[index]) is HoldLink:
                 index += 1
                 continue
             ahead_distance -= self.targets[index].length - distance
             ahead_intersections.append(self.targets[index].end)
-            ahead_links.append(self.targets[index])
+            relative_distance += self.targets[index].length
+            distances_to_intersections.append(relative_distance)
             index += 1
             distance = 0
             if index >= self.length:
                 break
-        return ahead_intersections, ahead_links
+        return ahead_intersections, distances_to_intersections
     
 
     def __add_delay(self):

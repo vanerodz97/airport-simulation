@@ -201,10 +201,12 @@ class Aircraft:
         relative_distance = fronter_info[1]
 
         if fronter_speed <= 0:
+            return 0
             return self.brake_hard()
 
         # Brake hard if less than MIN_DISTANCE
         if relative_distance <= self.MIN_DISTANCE:
+            return 0
             return self.brake_hard()
 
         # Adjust the speed
@@ -248,8 +250,8 @@ class Aircraft:
         """ Brake hard to avoid potential crash"""
         # TODO: revise the model
         # new_speed = self.speed / 1.5
-        new_speed = self.speed / 3
-        # new_speed = 5
+        # new_speed = self.speed / 3
+        new_speed = 5
         # self.set_speed(new_speed)
         self.logger.info("%s with speed %f brakes hard", self, self.speed)
         return new_speed
@@ -293,6 +295,7 @@ class Aircraft:
             self.tick_count += 1
             new_speed = self.get_next_speed(self.fronter_info, self.state) + self.speed_uncertainty
             self.set_speed(new_speed)
+            print("AIR %s: aircraft tick.", self)
             passed_links = self.itinerary.tick(self.tick_distance)
             if self.itinerary.is_completed:
                 self.logger.debug("%s: %s completed.", self, self.itinerary)
@@ -306,6 +309,7 @@ class Aircraft:
             self.set_location(self.itinerary.current_precise_location, Aircraft.LOCATION_LEVEL_PRECISE)
         else:
             # self.logger.debug("%s: No itinerary request.", self)
+            print("AIR %s: No itinerary request.", self)
             pass
 
         self.logger.info("%s at %s", self, self.__coarse_location)
@@ -352,7 +356,7 @@ class Aircraft:
     
     def get_ahead_intersections_and_link(self):
         """get the intersections and future links with certain distance"""
-        ahead_distance = 200.0
+        ahead_distance = 800.0
         return self.itinerary.get_ahead_intersections_and_link(ahead_distance)
 
     def set_quiet(self, logger):
