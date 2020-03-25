@@ -115,11 +115,11 @@ class Airport:
             self.add_aircraft(aircraft)
         
         for runway_gate, queue in self.runway_gate_queue.items():
-            if self.is_occupied_at(gate) or not queue:
+            if self.is_occupied_at(runway_gate) or not queue:
                 continue
             # Put the first aircraft in queue into the airport
             aircraft = queue.popleft()
-            aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
+            aircraft.set_location(runway_gate, Aircraft.LOCATION_LEVEL_COARSE)
             self.add_aircraft(aircraft)
 
     def __add_aircrafts_from_spot_queue(self):
