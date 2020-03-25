@@ -32,6 +32,7 @@ class Airport:
 
         # Queues for departure flights at gates
         self.gate_queue = {}
+        self.runway_gate_queue = {}
         self.spot_gate_queue = {}
 
         # departure control for the aircraft
@@ -112,6 +113,14 @@ class Airport:
             aircraft = queue.popleft()
             aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
             self.add_aircraft(aircraft)
+        
+        for runway_gate, queue in self.runway_gate_queue.items():
+            if self.is_occupied_at(gate) or not queue:
+                continue
+            # Put the first aircraft in queue into the airport
+            aircraft = queue.popleft()
+            aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
+            self.add_aircraft(aircraft)
 
     def __add_aircrafts_from_spot_queue(self):
         for spot, queue in self.ramp_control.spot_queue.items():
@@ -162,20 +171,30 @@ class Airport:
 
         # # Deal with the arrival flights, assume that the runway is always not
         # # occupied because this is an arrival flight
-        # current_tick_flight = scenario.arrivals.irange(Flight(None, now), Flight(None, next_tick_time), (True, False))
-        # for flight in list(current_tick_flight):
-        #     gate, aircraft = flight.to_gate, flight.aircraft
-        #     spot = gate.get_spots()
+        current_tick_flight = scenario.arrivals.irange(Flight(None, now), Flight(None, next_tick_time), (True, False))
+        for flight in list(current_tick_flight):
+            gate, aircraft = flight.to_gate, flight.aircraft
+            spot = gate.get_spots()
 
-        #     if flight.runway is None:
-        #         runway_name = next(scheduler.arrival_assigner)
-        #         runway = self.surface.get_link(runway_name)
-        #         flight.set_runway(runway)
-        #     runway, aircraft = flight.runway.end, flight.aircraft
-        #     aircraft.set_location(runway, Aircraft.LOCATION_LEVEL_COARSE)
-        #     self.add_aircraft(aircraft)
-        #     self.logger.info(
-        #         "Adds {} arrival flight into the airport".format(flight))
+            if flight.runway is None:
+                runway_name = next(scheduler.arrival_assigner)
+                runway = self.surface.get_link(runway_name)
+                flight.set_runway(runway)
+            runway_node, aircraft = flight.runway.end, flight.aircraft
+            if self.is_occupied_at(runway_node):
+                # add the aircraft to queue
+                queue = self.runway_gate_queue.get(runway_node, deque())
+                queue.append(aircraft)
+                
+                # update queue
+                self.runway_gate_queue[runway_node] = queue
+                self.logger.info("Adds %s into gate queue", flight)
+                continue
+
+            aircraft.set_location(runway_node, Aircraft.LOCATION_LEVEL_COARSE)
+            self.add_aircraft(aircraft)
+            self.logger.info(
+                "Adds {} arrival flight into the airport".format(flight))
 
     def __add_aircraft_to_departure_queue(self, aircraft,scenario):
         flight = scenario.get_flight(aircraft)
