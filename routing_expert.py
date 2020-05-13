@@ -265,27 +265,42 @@ def save_graph(nodes, links):
             x.append(node.geo_pos["lat"])
             y.append(node.geo_pos["lng"])
         plt.scatter(y, x, s=5)
-        plt.savefig("./draw_taxiway/" + "nodes_only.jpg", dpi=300)
+        plt.savefig("./draw_route_new/" + "nodes_only.jpg", dpi=300)
         plt.clf()
         cnt = 0
 
-        for link in links:
-            print(type(link))
+        for cur_link in links:
             link_x = []
             link_y = []
-            pre, nxt = None, link.nodes[0]
-            for i in range(1, len(link.nodes)):
+            pre, nxt = None, cur_link.nodes[0]
+            for i in range(1, len(cur_link.nodes)):
                 pre = nxt
-                nxt = link.nodes[i]
+                nxt = cur_link.nodes[i]
                 link_x.append(pre.geo_pos["lat"])
                 link_y.append(pre.geo_pos["lng"])
                 link_x.append(nxt.geo_pos["lat"])
                 link_y.append(nxt.geo_pos["lng"])
-            plt.scatter(y, x, s=5)
-            plt.plot(link_y, link_x, "r", linewidth=1)
-            plt.title(label=link.name + "\tdistance:%.2f" % link.length)
-            plt.savefig("./draw_taxiway/" + link.name.replace("/", "-") + ".jpg", dpi=300)
-            plt.clf()
+            plt.plot(link_y, link_x, "b", linewidth=1)
+
+            for link in links:
+                if cur_link.name == link.name:
+                    continue
+                link_x = []
+                link_y = []
+                pre, nxt = None, link.nodes[0]
+                for i in range(1, len(link.nodes)):
+                    pre = nxt
+                    nxt = link.nodes[i]
+                    link_x.append(pre.geo_pos["lat"])
+                    link_y.append(pre.geo_pos["lng"])
+                    link_x.append(nxt.geo_pos["lat"])
+                    link_y.append(nxt.geo_pos["lng"])
+                plt.plot(link_y, link_x, "r", linewidth=1)
+                cnt += 1
+            
             cnt += 1
+            plt.title(label=cur_link.name + "\tdistance:%.2f" % cur_link.length)
+            plt.savefig("./draw_route_new/" + cur_link.name.replace("/", "-") + ".jpg", dpi=300)
+            plt.clf()
 
         # plt.savefig("./draw_taxiway/nodes_taxiway.jpg", dpi=1200)

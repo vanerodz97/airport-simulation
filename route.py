@@ -18,6 +18,10 @@ class Route:
         self.__distance = None  # distance is calculated lazily
         self.__is_completed = None  # is_completed is calculated lazily
         self.__nodes = []   # nodes are calculated lazily
+    
+    def print_route(self):
+        for link in self.links:
+            print(link.name)
 
     def get_links(self):
         return self.links
