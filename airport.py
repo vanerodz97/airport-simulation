@@ -241,6 +241,7 @@ class Airport:
             self.__add_aircraft_to_departure_queue(aircraft, scenario)
             self.departure_info.append(aircraft)
             self.aircrafts.remove(aircraft)
+            self.terminal_controller.remove_departure(aircraft)
 
         for aircraft in to_remove_aircraft_arrival:
             self.logger.info("Removes arrive %s from the airport", aircraft)
@@ -341,21 +342,21 @@ class Airport:
         # self.intersection_control.set_aircraft_at_intersection()
         # passed = []
         passed = {}
-        flow_spot_access = {}
+        terminal_spot_access = {}
         for aircraft in self.aircrafts:
             # for arrival
             if aircraft in self.terminal_controller.arrival_2_gate:
-                flow_spot_access[aircraft] = self.terminal_controller.get_arrival_access_during_path(aircraft)
+                terminal_spot_access[aircraft] = self.terminal_controller.get_arrival_access_during_path(aircraft)
             # for departure
             else:
-                flow_spot_access[aircraft] = True
+                terminal_spot_access[aircraft] = True
 
         for aircraft in self.aircrafts:
-            if flow_spot_access[aircraft]:
+            if terminal_spot_access[aircraft]:
                 self.intersection_control.lock_intersections(aircraft)
         
         for aircraft in self.aircrafts:
-            if not flow_spot_access[aircraft]:
+            if not terminal_spot_access[aircraft]:
                 continue
             if self.intersection_control.is_lock_by(aircraft) is True:
                 passed_links = aircraft.tick()
@@ -376,7 +377,7 @@ class Airport:
                     continue
                 passed_intersections.append(link.end)
             self.intersection_control.unlock_intersections(passed_intersections)
-            self.terminal_controller.update_flow_spot_access(aircraft, passed_intersections)
+            self.terminal_controller.update_terminal_spot_access(aircraft, passed_intersections)
 
         #     if aircraft not in self.intersection_control.aircraft_to_stop():
         #         aircraft.tick()
