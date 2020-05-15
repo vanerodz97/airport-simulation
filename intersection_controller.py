@@ -3,6 +3,14 @@ import copy
 
 import matplotlib.pyplot as plt
 
+"""
+IntersectionController is used to control the aircraft movment near the intesections.
+To avoid aircraft collision, aircrafts need to lock intersection before it pass the 
+intersection. A intersection can only be locked by one aircraft at any given time.
+Only the aircraft that hold the lock has the access to pass the intersection.
+Other aircrafts which do not hold the lock need to wait until the  aircraft that hold the lock 
+to pass the intersection.
+"""
 class IntersectionController:
     def __init__(self, airport):
         # get all the unique nodes
@@ -30,41 +38,46 @@ class IntersectionController:
 
         save_graph = False
         if save_graph:
-            x = []
-            y = []
-            for node in self.intersection_list:
-                x.append(node.geo_pos["lat"])
-                y.append(node.geo_pos["lng"])
-            plt.scatter(y, x, s=1)
-            plt.savefig("./draw_new_intersection/" + "nodes_only.jpg", dpi=300)
+            self._draw_graph()
+            
+    # draw the airport graph for debug
+    def _draw_graph(self):
+        folder_name = "./draw_intersection/"
+        x = []
+        y = []
+        for node in self.intersection_list:
+            x.append(node.geo_pos["lat"])
+            y.append(node.geo_pos["lng"])
+        plt.scatter(y, x, s=1)
+        plt.savefig(folder_name + "nodes_only.jpg", dpi=300)
+        plt.clf()
+        cnt = 0
+
+        for node, links in self.intersection_link_map.items():
+            plt.scatter([node.geo_pos["lng"]], [node.geo_pos["lat"]], s=5)
+            for link in links:
+                link_x = []
+                link_y = []
+                pre, nxt = None, link.nodes[0]
+                for i in range(1, len(link.nodes)):
+                    pre = nxt
+                    nxt = link.nodes[i]
+                    link_x.append(pre.geo_pos["lat"])
+                    link_y.append(pre.geo_pos["lng"])
+                    link_x.append(nxt.geo_pos["lat"])
+                    link_y.append(nxt.geo_pos["lng"])
+                plt.scatter(y, x, s=1)
+                plt.plot(link_y, link_x, linewidth=1)
+            plt.title(label=node.name)
+            if len(links) > 2:
+                plt.savefig(folder_name + node.name + "_" + str(cnt) + ".jpg", dpi=800)
+            elif len(links) == 1:
+                plt.savefig(folder_name + node.name + "_" + str(cnt) + ".jpg", dpi=800)
+            elif len(links) == 2:
+                plt.savefig(folder_name + node.name + "_" + str(cnt) + ".jpg", dpi=800)
+
             plt.clf()
-            cnt = 0
-
-            for node, links in self.intersection_link_map.items():
-                plt.scatter([node.geo_pos["lng"]], [node.geo_pos["lat"]], s=5)
-                for link in links:
-                    link_x = []
-                    link_y = []
-                    pre, nxt = None, link.nodes[0]
-                    for i in range(1, len(link.nodes)):
-                        pre = nxt
-                        nxt = link.nodes[i]
-                        link_x.append(pre.geo_pos["lat"])
-                        link_y.append(pre.geo_pos["lng"])
-                        link_x.append(nxt.geo_pos["lat"])
-                        link_y.append(nxt.geo_pos["lng"])
-                    plt.scatter(y, x, s=1)
-                    plt.plot(link_y, link_x, linewidth=1)
-                plt.title(label=node.name)
-                if len(links) > 2:
-                    plt.savefig("./draw_new_intersection/" + node.name + "_" + str(cnt) + ".jpg", dpi=800)
-                elif len(links) == 1:
-                    plt.savefig("./draw_new_intersection/_onelink_" + node.name + "_" + str(cnt) + ".jpg", dpi=800)
-                elif len(links) == 2:
-                    plt.savefig("./draw_new_intersection/_twolink_" + node.name + "_" + str(cnt) + ".jpg", dpi=800)
-
-                plt.clf()
-                cnt += 1
+            cnt += 1
 
 
     def lock_intersections(self, aircraft):
@@ -73,9 +86,12 @@ class IntersectionController:
 
         tmp_set = set()
         for idx, ahead_intersection in enumerate(ahead_intersections):
+            # get the actual intersection
             actual_intersection = self.node_map[ahead_intersection]
+            # remove redundant
             if actual_intersection not in tmp_set:
                 tmp_set.add(actual_intersection)
+                # lock the intersection
                 self.intersections_status[actual_intersection] = False
                 ahead_distance = distances_to_intersections[idx]
                 if actual_intersection not in self.intersection_lock_queue:
@@ -99,6 +115,19 @@ class IntersectionController:
                 return False
         return True
     
+    def unlock_intersections(self, passed_intersections):
+        for intersection in passed_intersections:
+            actual_intersection = self.node_map[intersection]
+            self.intersections_status[actual_intersection] = True
+            self.intersection_lock_queue[actual_intersection] = []
+
+    # remove this aircraft from all the intersection lock queue(s)
+    # The reason we need this function: because of technical implementation,
+    # we treat the terminal gate also as an intersection node. So when an aircraft arrived
+    # it terminal gate, it will be removed from the system. But actually it
+    # did not pass the "intersection" (gate), so unlock_intersections function 
+    # will not be called. Therefore, we need to call this remove_aircraft when
+    # an arrival aircraft reaches its terminal gate.
     def remove_aircraft(self, aircraft):
         remove_list = []
         for intersection, aircraft_queue in self.intersection_lock_queue.items():
@@ -108,23 +137,17 @@ class IntersectionController:
                     remove_list.append((intersection, idx))
         for intersection, aircraft_idx in remove_list:
             del self.intersection_lock_queue[intersection][aircraft_idx]
-    
-    def unlock_intersections(self, passed_intersections):
-        for intersection in passed_intersections:
-            actual_intersection = self.node_map[intersection]
-            self.intersections_status[actual_intersection] = True
-            self.intersection_lock_queue[actual_intersection] = []
 
-    def unblock_intersections_lock_by_aircraft(self, aircraft):
-        remove_intersections = []
-        for actual_intersection, lock_queue in self.intersection_lock_queue.items():
-            if len(lock_queue) == 0:
-                continue
-            sorted_queue = sorted(lock_queue, key=lambda t : t[0])
-            lock_by_aircraft = sorted_queue[0][1]
-            if aircraft == lock_by_aircraft:
-                remove_intersections.append(actual_intersection)
-        self.unlock_intersections(remove_intersections)
+    # def unblock_intersections_lock_by_aircraft(self, aircraft):
+    #     remove_intersections = []
+    #     for actual_intersection, lock_queue in self.intersection_lock_queue.items():
+    #         if len(lock_queue) == 0:
+    #             continue
+    #         sorted_queue = sorted(lock_queue, key=lambda t : t[0])
+    #         lock_by_aircraft = sorted_queue[0][1]
+    #         if aircraft == lock_by_aircraft:
+    #             remove_intersections.append(actual_intersection)
+    #     self.unlock_intersections(remove_intersections)
 
     
     """

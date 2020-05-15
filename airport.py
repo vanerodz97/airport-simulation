@@ -237,10 +237,11 @@ class Airport:
 
         for aircraft in to_remove_aircraft_departure:
             self.logger.info("Removes departure %s from the airport", aircraft)
-            self.intersection_control.unblock_intersections_lock_by_aircraft(aircraft)
+            # self.intersection_control.unblock_intersections_lock_by_aircraft(aircraft)
             self.__add_aircraft_to_departure_queue(aircraft, scenario)
             self.departure_info.append(aircraft)
             self.aircrafts.remove(aircraft)
+            self.intersection_control.remove_aircraft(aircraft)
             self.terminal_controller.remove_departure(aircraft)
 
         for aircraft in to_remove_aircraft_arrival:

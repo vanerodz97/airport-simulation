@@ -2,7 +2,7 @@ from node import Node
 import json
 
 """
-TerminalController is used to control the aircraft movement around the terminal area,
+TerminalController is used to control the aircraft movement in the terminal area,
 which is between the terminal gate and the terminal spot. Definition of termianal gate:
 the start location of a departure flight. Definition of termianl spot: a special intersection
 that both departure flights and arrival flights need to cross through.
