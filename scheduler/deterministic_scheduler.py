@@ -30,6 +30,9 @@ class Scheduler(AbstractScheduler):
             # object will be used in other objects; however, be ware that the
             # object will be shared instead of being cloned in the later
             # phases.
+            print("simulation.airport.aircrafts", aircraft)
+            if aircraft.itinerary is not None:
+                continue
             itinerary = self.schedule_aircraft(aircraft, simulation)
             itineraries[aircraft] = itinerary
             aircraft.set_itinerary(itinerary)
@@ -41,12 +44,34 @@ class Scheduler(AbstractScheduler):
             priority_list[aircraft.callsign] = calltime
 
         # Resolves conflicts
-        schedule, priority = self.__resolve_conflicts(itineraries, simulation,
-                                                      priority_list)
+        # schedule, priority = self.__resolve_conflicts(itineraries, simulation,
+        #                                               priority_list)
+        schedule, priority = Schedule(itineraries, 0, 0), priority_list
+        # schedule, priority = self.__schedule(itineraries, simulation,priority_list)
 
         self.logger.info("Scheduling end")
         print(time.time() - start)
         return schedule, priority
+    
+    # def __schedule(self, itineraries, simulation, priority_list):
+    #     self.__reset_itineraries(itineraries)
+    #     predict_simulation = simulation.copy
+    #     predict_simulation.airport.apply_schedule(Schedule(itineraries, 0, 0))
+    #     tick_times = 5
+    #     for i in range(tick_times):
+    #         predict_simulation.pre_tick(self)
+    #         self.__schedule_new_aircrafts(simulation, predict_simulation,
+    #                                         itineraries, priority_list)
+    #         predict_simulation.airport.apply_priority(priority_list)
+    #         if i == tick_times - 1:
+    #             # Done, conflicts are all handled, return the schedule
+    #             self.__reset_itineraries(itineraries)
+    #             return Schedule(itineraries, 0, 0), priority_list
+
+    #         # After dealing with the conflicts in current state, tick to
+    #         # next state
+    #         predict_simulation.tick()
+    #         predict_simulation.post_tick()
 
     def __resolve_conflicts(self, itineraries, simulation, priority_list):
 
@@ -82,8 +107,8 @@ class Scheduler(AbstractScheduler):
                     predict_simulation.airport.next_conflicts,
                     unsolvable_conflicts
                 )
-                if predict_simulation.airport.intersection_control.resolve_conflict(itineraries):
-                    break
+                # if predict_simulation.airport.intersection_control.resolve_conflict(itineraries):
+                #     break
                 # if predict_simulation.airport.ramp_control.resolve_conflict(itineraries):
                 #     break
 

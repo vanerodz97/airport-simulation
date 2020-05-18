@@ -11,9 +11,12 @@ from config import Config
 from conflict import Conflict
 from controller import Controller
 from surface import SurfaceFactory
+from link import HoldLink
 from utils import get_seconds_after
 from flight import ArrivalFlight, Flight
-from ramp_controller import InterSectionController, RampController
+from ramp_controller import RampController
+from intersection_controller import IntersectionController
+from terminal_controller import TerminalController
 
 
 class Airport:
@@ -31,6 +34,7 @@ class Airport:
 
         # Queues for departure flights at gates
         self.gate_queue = {}
+        self.runway_gate_queue = {}
         self.spot_gate_queue = {}
 
         # departure control for the aircraft
@@ -52,7 +56,8 @@ class Airport:
         self.priority = None
         # Ground controller
         self.controller = Controller(self)
-        self.intersection_control = InterSectionController(self)
+        self.intersection_control = IntersectionController(self)
+        self.terminal_controller = TerminalController()
         self.ramp_control = RampController(self)
 
         self.max_airpcrafts_running = Config.params["scheduler"]["max_airpcrafts_running"]
@@ -104,12 +109,21 @@ class Airport:
 
         for gate, queue in self.gate_queue.items():
 
-            if self.is_occupied_at(gate) or not queue:
+            if self.is_occupied_at(gate) or not queue or not self.terminal_controller.get_departure_access(gate.name):
                 continue
 
             # Put the first aircraft in queue into the airport
             aircraft = queue.popleft()
             aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
+            self.add_aircraft(aircraft)
+            self.terminal_controller.add_departure_gate(aircraft, gate.name)
+        
+        for runway_gate, queue in self.runway_gate_queue.items():
+            if self.is_occupied_at(runway_gate) or not queue:
+                continue
+            # Put the first aircraft in queue into the airport
+            aircraft = queue.popleft()
+            aircraft.set_location(runway_gate, Aircraft.LOCATION_LEVEL_COARSE)
             self.add_aircraft(aircraft)
 
     def __add_aircrafts_from_spot_queue(self):
@@ -121,6 +135,7 @@ class Airport:
             gate = self.ramp_control.spot_gate_queue[spot].popleft()
             aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
             self.add_aircraft(aircraft)
+            self.terminal_controller.add_departure_gate(aircraft, gate.name)
 
     def __add_aircrafts_from_scenario(self, scenario, now, sim_time, scheduler):
 
@@ -138,7 +153,7 @@ class Airport:
                 runway = self.surface.get_link(runway_name)
                 flight.set_runway(runway)
 
-            if self.is_occupied_at(gate) or self.num_aircrafts_running >= self.max_airpcrafts_running:
+            if self.is_occupied_at(gate) or self.num_aircrafts_running >= self.max_airpcrafts_running or not self.terminal_controller.get_departure_access(gate.name):
                 # Adds the flight to queue
                 queue = self.gate_queue.get(gate, deque())
                 queue.append(aircraft)
@@ -156,22 +171,35 @@ class Airport:
                 # Adds the flight to the airport
                 aircraft.set_location(gate, Aircraft.LOCATION_LEVEL_COARSE)
                 self.add_aircraft(aircraft)
+                self.terminal_controller.add_departure_gate(aircraft, gate.name)
+                print(self.terminal_controller.depature_2_gate.keys())
                 self.logger.info("Adds %s into the airport, runway %s",
                                  flight,flight.runway)
 
-        # Deal with the arrival flights, assume that the runway is always not
-        # occupied because this is an arrival flight
+        # # Deal with the arrival flights, assume that the runway is always not
+        # # occupied because this is an arrival flight
         current_tick_flight = scenario.arrivals.irange(Flight(None, now), Flight(None, next_tick_time), (True, False))
         for flight in list(current_tick_flight):
             gate, aircraft = flight.to_gate, flight.aircraft
+            self.terminal_controller.add_arrival_gate(aircraft, gate.name)
             spot = gate.get_spots()
 
             if flight.runway is None:
                 runway_name = next(scheduler.arrival_assigner)
                 runway = self.surface.get_link(runway_name)
                 flight.set_runway(runway)
-            runway, aircraft = flight.runway.end, flight.aircraft
-            aircraft.set_location(runway, Aircraft.LOCATION_LEVEL_COARSE)
+            runway_node, aircraft = flight.runway.end, flight.aircraft
+            if self.is_occupied_at(runway_node):
+                # add the aircraft to queue
+                queue = self.runway_gate_queue.get(runway_node, deque())
+                queue.append(aircraft)
+                
+                # update queue
+                self.runway_gate_queue[runway_node] = queue
+                self.logger.info("Adds %s into gate queue", flight)
+                continue
+
+            aircraft.set_location(runway_node, Aircraft.LOCATION_LEVEL_COARSE)
             self.add_aircraft(aircraft)
             self.logger.info(
                 "Adds {} arrival flight into the airport".format(flight))
@@ -209,13 +237,20 @@ class Airport:
 
         for aircraft in to_remove_aircraft_departure:
             self.logger.info("Removes departure %s from the airport", aircraft)
+            # self.intersection_control.unblock_intersections_lock_by_aircraft(aircraft)
             self.__add_aircraft_to_departure_queue(aircraft, scenario)
             self.departure_info.append(aircraft)
             self.aircrafts.remove(aircraft)
+            self.intersection_control.remove_aircraft(aircraft)
+            self.terminal_controller.remove_departure(aircraft)
 
         for aircraft in to_remove_aircraft_arrival:
             self.logger.info("Removes arrive %s from the airport", aircraft)
+            print("Removes arrive %s from the airport", aircraft)
+            # self.intersection_control.unblock_intersections_lock_by_aircraft(aircraft)
             self.aircrafts.remove(aircraft)
+            self.intersection_control.remove_aircraft(aircraft)
+            self.terminal_controller.remove_arrival(aircraft)
 
     def remove_departure_aircrafts(self, aircrafts):
         for aircraft in aircrafts:
@@ -232,12 +267,13 @@ class Airport:
         """Retrieve a list of conflicts will observed in the next airport
         state.
         """
-        self.intersection_control.set_aircraft_at_intersection()
+        # self.intersection_control.set_aircraft_at_intersection()
         return self.__get_next_conflict()
 
     def __get_conflicts(self, is_next=False):
         # Remove departed aircraft or
         __conflicts = []
+        __conflicts_dist = []
         aircraft_pairs = list(itertools.combinations(self.aircrafts, 2))
         for pair in aircraft_pairs:
             if pair[0] == pair[1]:
@@ -250,12 +286,15 @@ class Airport:
                 loc1, loc2 = pair[0].precise_location, pair[1].precise_location
             if not loc1 or not loc2 or not loc1.is_close_to(loc2):
                 continue
+            dist = loc1.get_distance_to(loc2)
 
             __conflicts.append(Conflict((loc1, loc2), pair))
-        return __conflicts
+            __conflicts_dist.append(dist)
+        return __conflicts, __conflicts_dist
 
     def __get_next_conflict(self):
         __conflicts = []
+        __conflicts_dist = []
         aircraft_pairs = list(itertools.combinations(self.aircrafts, 2))
         for pair in aircraft_pairs:
             if pair[0] == pair[1]:
@@ -264,13 +303,15 @@ class Airport:
                          pair[1].get_next_location(Aircraft.LOCATION_LEVEL_PRECISE)
             if not loc1 or not loc2 or not loc1.is_close_to_plan(loc2):
                 continue
+            dist = loc1.get_distance_to(loc2)
             __conflicts.append(Conflict((loc1, loc2), pair))
+            __conflicts_dist.append(dist)
         return __conflicts
 
     def is_occupied_at(self, node):
         """Check if an aircraft is occupied at the given node."""
         for aircraft in self.aircrafts:
-            if aircraft.precise_location.is_close_to(node):
+            if aircraft.precise_location.is_close_to_gate(node):
                 return True
         return False
 
@@ -295,11 +336,56 @@ class Airport:
     def tick(self, predict=False):
         # Ground Controller should observe all the activities on the ground.
         if predict is False:
-            # self.controller.tick()
+            self.controller.tick()
             pass
         # Ticks on all subjects under the airport to move them into the next state
+
+        # self.intersection_control.set_aircraft_at_intersection()
+        # passed = []
+        passed = {}
+        terminal_spot_access = {}
         for aircraft in self.aircrafts:
-            aircraft.tick()
+            # for arrival
+            if aircraft in self.terminal_controller.arrival_2_gate:
+                terminal_spot_access[aircraft] = self.terminal_controller.get_arrival_access_during_path(aircraft)
+            # for departure
+            else:
+                terminal_spot_access[aircraft] = True
+
+        for aircraft in self.aircrafts:
+            if terminal_spot_access[aircraft]:
+                self.intersection_control.lock_intersections(aircraft)
+        
+        for aircraft in self.aircrafts:
+            if not terminal_spot_access[aircraft]:
+                continue
+            if self.intersection_control.is_lock_by(aircraft) is True:
+                passed_links = aircraft.tick()
+                # passed.append(passed_links)
+                passed[aircraft] = passed_links
+        
+        # for passed_links in passed:
+        #     passed_intersections = []
+        #     for link in passed_links:
+        #         if type(link) is HoldLink:
+        #             continue
+        #         passed_intersections.append(link.end)
+        #     self.intersection_control.unlock_intersections(passed_intersections)
+        for aircraft, passed_links in passed.items():
+            passed_intersections = []
+            for link in passed_links:
+                if type(link) is HoldLink:
+                    continue
+                passed_intersections.append(link.end)
+            self.intersection_control.unlock_intersections(passed_intersections)
+            self.terminal_controller.update_terminal_spot_access(aircraft, passed_intersections)
+
+        #     if aircraft not in self.intersection_control.aircraft_to_stop():
+        #         aircraft.tick()
+        #         # self.intersection_control.pass_aircrafts(aircraft, passed_links)
+        #     else:
+        #         print("delay aircraft!")
+        # self.intersection_control.reset_all_intersections()
 
     def print_stats(self):
         """Prints a summary of the current airport state.

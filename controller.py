@@ -45,13 +45,16 @@ class Controller:
             if aircraft.itinerary.is_completed:
                 continue
             try:
-                target_speed, relative_distance = self.__find_aircraft_ahead(aircraft)
+                target_speed, relative_distance, fronter_aircraft = self.__find_aircraft_ahead(aircraft)
                 self.aircraft_ahead_lookup[aircraft] = (target_speed, relative_distance)
                 # TODO: discuss with zy & what if none
                 aircraft.set_fronter_info((target_speed, relative_distance))
+                aircraft.set_fronter_aircraft(fronter_aircraft)
             except NoCloseAircraftFoundError:
                 # TODO: discuss with zy & what if none
                 aircraft.set_fronter_info(None)
+                # TODO: currently just assume the front is moving
+                # aircraft.set_fronter_info((200, 100))
                 pass
 
     def __find_aircraft_ahead(self, aircraft):
@@ -62,6 +65,7 @@ class Controller:
             link = aircraft.itinerary.targets[index]
 
             aircraft_on_same_link = self.aircraft_location_lookup.get(link, [])
+            rear_aircraft, rear_dist = None, -1
             for item in aircraft_on_same_link:
                 item_aircraft, item_distance = item
                 # Skip if the item is behind the aircraft
@@ -75,14 +79,76 @@ class Controller:
                     self.conflicts.append((aircraft, item_aircraft))
 
                 if relative_distance > self.PILOT_VISION:
-                    # Too far that the pilot can't see the aircraft
-                    raise NoCloseAircraftFoundError
-                else:
-                    return item_aircraft.speed, relative_distance
+                    continue
+                if rear_aircraft is None:
+                    rear_aircraft, rear_dist = item_aircraft, relative_distance
+                elif relative_distance < rear_dist:
+                    rear_aircraft, rear_dist = item_aircraft, relative_distance
+            if rear_aircraft is not None:
+                return rear_aircraft.speed, rear_dist, rear_aircraft
 
             relative_distance += link.length
 
         raise NoCloseAircraftFoundError
+
+    # def __find_aircraft_ahead(self, aircraft):
+    #     link_index, link_distance = aircraft.itinerary.current_target_index, aircraft.itinerary.current_distance
+
+    #     link = aircraft.itinerary.targets[link_index]
+    #     aircraft_on_same_link = self.aircraft_location_lookup.get(link, [])
+    #     relative_distance = -link_distance
+    #     for item in aircraft_on_same_link:
+    #         item_aircraft, item_distance = item
+    #         # Skip if the item is behind the aircraft
+    #         if item_distance <= link_distance:
+    #             continue
+    #         # Found an aircraft ahead!
+    #         relative_distance += item_distance
+    #         if relative_distance <= self.PILOT_VISION:
+    #             return item_aircraft.speed, relative_distance, item_aircraft
+
+    #     for index in range(link_index + 1, aircraft.itinerary.length):
+    #         link = aircraft.itinerary.targets[index]
+    #         aircraft_on_same_link = self.aircraft_location_lookup.get(link, [])
+    #         rear_aircraft, rear_dist = None, -1
+    #         for item in aircraft_on_same_link:
+    #             item_aircraft, item_distance = item
+    #             if rear_aircraft is None:
+    #                 rear_aircraft, rear_dist = item_aircraft, item_distance
+    #                 continue
+    #             if item_distance < rear_dist:
+    #                 rear_aircraft, rear_dist = item_aircraft, item_distance
+    #         if rear_aircraft is not None:
+    #             return rear_aircraft.speed, rear_dist, rear_aircraft
+    #     raise NoCloseAircraftFoundError
+
+
+    #     relative_distance = -link_distance
+    #     for index in range(link_index, aircraft.itinerary.length):
+    #         link = aircraft.itinerary.targets[index]
+
+    #         aircraft_on_same_link = self.aircraft_location_lookup.get(link, [])
+    #         for item in aircraft_on_same_link:
+    #             item_aircraft, item_distance = item
+    #             # Skip if the item is behind the aircraft
+    #             if index == link_index and item_distance <= link_distance:
+    #                 continue
+
+    #             # Found an aircraft ahead!
+    #             relative_distance += item_distance
+
+    #             if relative_distance < self.CLOSE_NODE_THRESHOLD:
+    #                 self.conflicts.append((aircraft, item_aircraft))
+
+    #             if relative_distance > self.PILOT_VISION:
+    #                 # Too far that the pilot can't see the aircraft
+    #                 raise NoCloseAircraftFoundError
+    #             else:
+    #                 return item_aircraft.speed, relative_distance, item_aircraft
+
+    #         relative_distance += link.length
+
+    #     raise NoCloseAircraftFoundError
 
     def __resolve_conflicts(self):
         """

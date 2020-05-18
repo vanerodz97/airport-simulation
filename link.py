@@ -6,7 +6,7 @@ from config import Config
 from id_generator import get_new_link_id
 from node import get_middle_node
 from utils import str2sha1
-from surface import *
+# from surface import *
 
 
 class Link:

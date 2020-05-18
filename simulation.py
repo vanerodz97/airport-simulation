@@ -80,23 +80,24 @@ class Simulation:
 
         try:
 
-            # Reschedule happens before the tick. It will resolve conflict here
-            if self.__is_time_to_reschedule():
-                self.logger.info("Time to reschedule")
-                start = time.time()
-                self.__reschedule()  # it will try to resolve conflict
-                self.last_schedule_exec_time = time.time() - start  # seconds
-                self.last_schedule_time = self.now
-                self.logger.info("Last schedule time is updated to %s",
-                                 self.last_schedule_time)
+            # # Reschedule happens before the tick. It will resolve conflict here
+            # if self.__is_time_to_reschedule():
+            #     self.logger.info("Time to reschedule")
+            #     start = time.time()
+            #     self.__reschedule()  # it will try to resolve conflict
+            #     self.last_schedule_exec_time = time.time() - start  # seconds
+            #     self.last_schedule_time = self.now
+            #     self.logger.info("Last schedule time is updated to %s",
+            #                      self.last_schedule_time)
 
             # Add aircraft
             self.airport.add_aircrafts(self.scenario, self.now,
                                        self.clock.sim_time, self.scheduler)
+            self.__reschedule()
 
-            # Inject uncertainties
-            if self.uncertainty:
-                self.uncertainty.inject(self)
+            # # Inject uncertainties
+            # if self.uncertainty:
+            #     self.uncertainty.inject(self)
 
             # Tick
             self.airport.tick()
@@ -110,11 +111,21 @@ class Simulation:
             self.airport.remove_aircrafts(self.scenario)
             self.airport.remove_departure_aircrafts(aircrafts)
             # Abort on conflict
-            conflicts = self.airport.conflicts
+            conflicts, conflicts_dist = self.airport.conflicts
             if conflicts:
-                for conflict in conflicts:
+                for idx, conflict in enumerate(conflicts):
+                    dist = conflicts_dist[idx]
                     self.logger.error("Found %s", conflict)
+                    self.logger.error("Conflict distance: %d", dist)
                     self.logger.error(conflict.detailed_description)
+                    for aircraft in self.airport.aircrafts:
+                        self.logger.error(aircraft)
+                # for conflict in conflicts:
+                #     self.logger.error("Found %s", conflict)
+                #     self.logger.error("Conflict distance: ", dist)
+                #     self.logger.error(conflict.detailed_description)
+                #     for aircraft in self.airport.aircrafts:
+                #         self.logger.error(aircraft)
                 raise SimulationException("Conflict found")
 
             # Observe
