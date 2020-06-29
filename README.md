@@ -4,8 +4,6 @@
 
 ![image](visualization/static/image/readme/1576215400409.jpg)
 
-##### Be careful: the latest version has conflicts, you can try '798aa10615d217dcdf843dda8d0c5cc251e65dc8' on Dec 3, 2019.
-
 ## About
 
 ASSET2 is a generic airport simulation tool for research purpose. It is designed to support multiple airports, to test and to evaluate customized schedulers. Please check out [our paper](https://drive.google.com/file/d/0B8ck8iyI0dnfSEtUSDl3SjBiYXgwdXpOWERvaWMzZ1NtV3A0/view?usp=sharing) for more information.
@@ -19,36 +17,22 @@ ASSET2 is a generic airport simulation tool for research purpose. It is designed
 >
 > **Please avoid Python>=3.7.0** because it breaks the legacy Cython, which one of the dependencies line-profiler (test package) depends on. The issue has not been [fixed](https://github.com/rkern/line_profiler/issues) at the moment. Try to install a lower version instead.
 
-### First-Time Installation
-**If you're on Ubuntu:**
+### First-Time Run
 
 ```sh
-$ sudo apt-get update
-$ sudo apt-get install -y python3-pip
 $ mkdir -p ~/.config/matplotlib/
 $ echo "backend : Agg" >> ~/.config/matplotlib/matplotlibrc
+$ conda create -n myenv python=3.7
+$ conda activate myenv
+$ sudo pip install -r requirements.txt # install dependencies locally
+$ cd data/real-west-all-terminals
+$ python generate_scenario.py
+$ python generate.py
+$ cd ../../
+$ python visualization/server.py
 ```
 
-**Set-up Virtual Environment (highly recommended):**
-
- - If you are using IntelliJ or any other JetBrain IDE, see [this link](https://www.jetbrains.com/help/idea/creating-virtual-environment.html) (recommended).
-
- - If you are using commend line:
- 
-    ```sh
-    $ {path/to/python3} -m venv venv # create a new virtual environment
-    $ source venv/bin/activate # activate the virtual environment
-    $ pip install -r requirements.txt # install dependencies locally
-    $ python simulator.py -f plans/base.yaml # execute the simulation
-    ```
-
-**Install dependencies:**
-
-```sh
-$ pip install -r requirements.txt
-```
-
-### Prepare Airport Map
+### Modify Airport Map
 
 Place airport related data (kml file) under `data` folder like `data/sfo-terminal-2/build/` (use IATA airport code).
 
@@ -115,11 +99,6 @@ $ pydoc <python-file-name-without-.py>
 
 ## Developer Guidelines
 
-### Collision Detection
-Currently, we try to detect the collision . All these detection methods are integrated at scheluder. 
-1. Rear end collision, which is resolved by Class deterministic_scheduler.
-2. Intersection merge collision, which is resolved by Class intersection_controller.
-3. (On-going) Face-to-Face collision at spot, which will be resolved by Class spot_controller.
 
 ### Sequential Diagram
 
@@ -208,9 +187,3 @@ each line within the function.
 
     $ kernprof -l ./simulator -f <your_plan>.yaml
     $ python3 -m line_profiler simulator.py.lprof
-    
-### Future Plan
-1. Add queue slot at departure runway on the map so that the aircraft waiting at runway can form as a queue when visualization. 
-2. Currently, the scheduler uses "unfinished_distance" as the criteria as which airplane has the higher priority to move forward. This situation may not be necessary true. Try to change the link-node model so that the rear end collision detector can distinguish which airplane is ahead. 
-3. Introduce uncertainty to the simulation. 
-
