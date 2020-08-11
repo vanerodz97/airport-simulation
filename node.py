@@ -46,7 +46,7 @@ class Node:
         node, we take them as the same node.
         """
         distance_feet = self.get_distance_to(node)
-        threshold = Config.params["simulation"]["close_node_threshold"] * 150
+        threshold = Config.params["simulation"]["close_node_threshold"]
         return distance_feet < threshold
 
     def is_close_to_plan(self, node):
