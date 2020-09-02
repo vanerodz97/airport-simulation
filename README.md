@@ -22,15 +22,17 @@ ASSET2 is a generic airport simulation tool for research purpose. It is designed
 ```sh
 $ mkdir -p ~/.config/matplotlib/
 $ echo "backend : Agg" >> ~/.config/matplotlib/matplotlibrc
-$ conda create -n myenv python=3.7
+$ conda create -n myenv python=3.6
 $ conda activate myenv
-$ sudo pip install -r requirements.txt # install dependencies locally
+$ pip install -r requirements.txt # install dependencies locally
 $ cd data/real-west-all-terminals
 $ python generate_scenario.py
 $ python generate.py
 $ cd ../../
 $ python visualization/server.py
+(or $pythonw visualization/server.py)
 ```
+
 
 ### Modify Airport Map
 
