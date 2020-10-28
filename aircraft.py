@@ -117,6 +117,7 @@ class Aircraft:
         self.MIN_DISTANCE = Config.params["aircraft_model"]["min_distance"]
         self.MAX_SPEED = self.speed_knots_to_ft_per_sec(Config.params["aircraft_model"]["max_speed"])
         self.IDEAL_SPEED = self.speed_knots_to_ft_per_sec(Config.params["aircraft_model"]["ideal_speed"])
+        self.IDEAL_ACC = Config.params["aircraft_model"]["ideal_acc"]
         self.fronter_info = None
         self.fronter_aircraft = None
         self.speed_uncertainty = 0
@@ -201,14 +202,33 @@ class Aircraft:
     """
 
     def get_next_speed(self, fronter_info, state):
+        # print ("{0}: {1}".format(self.callsign, self.state))
         # if self.is_delayed:
         #     return 0
         if fronter_info is None:
+            acceleration = 0.0
             if state is State.pushback:
-                return self.pushback_speed
-            if state is State.ramp:
-                return self.ramp_speed
-            return self.IDEAL_SPEED
+                new_speed = self.pushback_speed
+            elif state is State.ramp:
+                new_speed = self.ramp_speed
+            else:
+                new_speed = self.IDEAL_SPEED
+            if self.speed < new_speed:
+                # acceleration phase
+                acceleration = self.IDEAL_ACC
+            elif self.speed > new_speed:
+                # deceleration phase
+                acceleration = -self.IDEAL_ACC
+
+            if acceleration > 0:
+                new_speed = min(self.speed + acceleration, new_speed)
+            else:
+                new_speed = max(self.speed + acceleration, new_speed)
+            if new_speed < 0:
+                new_speed = 0
+            if new_speed > self.MAX_SPEED:
+                new_speed = self.MAX_SPEED
+            return new_speed            
 
         # calculate the new speed when it is following another aircraft
         fronter_speed = fronter_info[0]
@@ -223,18 +243,10 @@ class Aircraft:
             return 0
             return self.brake_hard()
 
-        if state is State.pushback:
-            return self.pushback_speed
-        if state is State.ramp:
-            return self.ramp_speed
-        # if state is State.queue:
-        #     return self.queue_speed
-        """ Calculate the speed based on following model."""
-        # Drive at the ideal speed if no aircraft exists in the pilot's sight
 
+        """ Calculate the speed based on following model."""
 
         # Adjust the speed
-        acc_flag = False
         if relative_distance > self.IDEAL_DISTANCE:
             # acceleration phase
             c, l, m = 1.1, 0.1, 0.2
@@ -252,12 +264,10 @@ class Aircraft:
         new_speed = self.speed + acceleration
         if new_speed < 0:
             new_speed = 0
-        if acc_flag:
-            new_speed = max(150, new_speed)
-        # TODO: consider different speed limits for different type of roads
         if new_speed > self.MAX_SPEED:
             new_speed = self.MAX_SPEED
         return new_speed
+
 
     def set_speed(self, speed):
         """ Set the speed of the aircraft"""
@@ -318,10 +328,10 @@ class Aircraft:
         passed_links = None
         if self.itinerary:
             self.tick_count += 1
-            new_speed = self.get_next_speed(self.fronter_info, self.state) + self.speed_uncertainty
-            self.set_speed(new_speed)
             print("AIR %s: aircraft tick.", self)
             passed_links = self.itinerary.tick(self.tick_distance)
+            new_speed = self.get_next_speed(self.fronter_info, self.state) + self.speed_uncertainty
+            self.set_speed(new_speed)
             if self.itinerary.is_completed:
                 self.logger.debug("%s: %s completed.", self, self.itinerary)
             last_target = self.itinerary.backup[-1]
