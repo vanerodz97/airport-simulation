@@ -185,6 +185,29 @@ class MapView {
                 case "Hold":
                     color = "#f9a825";
                     break;
+
+                // case "stop":
+                //     color = "#F33619";
+                //     break;
+                // case "hold":
+                //     color = "#F8D919";
+                //     break;
+                // case "flying":
+                //     color = "#37E60F";
+                //     break;
+                case "Pushback":
+                    color = "#0AEEF5";
+                    break;
+                case "Ramp":
+                    color = "#084BF6";
+                    break;
+                case "Taxi":
+                    color = "#F304BF";
+                    break;
+                case "Moving":
+                    color = "#000000";
+                    break;
+
                 default:
                     // moving
                     color = "#1565c0";

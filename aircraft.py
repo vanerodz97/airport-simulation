@@ -380,6 +380,10 @@ class Aircraft:
                 if self.ramp_flag:
                     # self.status = State.ramp
                     return State.ramp
+                return State.taxi
+                # print("!!!!!")
+                # print(self.ramp_flag)
+                # print("!!!!!")
         elif self.is_departure is False: 
             # print (self.callsign)
             # print ("current node",self.itinerary.current_target.nodes[0].name)
@@ -395,6 +399,10 @@ class Aircraft:
             # print("taxi!!")
             return State.taxi
         # self.status = State.moving
+        print("===========")
+        print(self.is_departure)
+        print(type(self.itinerary.current_target))
+        print("===========")
         return State.moving
 
 
