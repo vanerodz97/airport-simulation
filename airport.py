@@ -176,6 +176,10 @@ class Airport:
                 self.logger.info("Adds %s into the airport, runway %s",
                                  flight,flight.runway)
 
+            aircraft.set_estimated(flight.departure_time)
+            aircraft.set_appear_time(flight.appear_time)
+            aircraft.set_sim_time(sim_time)
+
         # # Deal with the arrival flights, assume that the runway is always not
         # # occupied because this is an arrival flight
         current_tick_flight = scenario.arrivals.irange(Flight(None, now), Flight(None, next_tick_time), (True, False))
@@ -198,6 +202,10 @@ class Airport:
                 self.runway_gate_queue[runway_node] = queue
                 self.logger.info("Adds %s into gate queue", flight)
                 continue
+
+            aircraft.set_estimated(flight.arrival_time)
+            aircraft.set_appear_time(flight.appear_time)
+            aircraft.set_sim_time(sim_time)
 
             aircraft.set_location(runway_node, Aircraft.LOCATION_LEVEL_COARSE)
             self.add_aircraft(aircraft)

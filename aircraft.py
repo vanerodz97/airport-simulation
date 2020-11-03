@@ -8,6 +8,7 @@ from surface import *
 
 from link import HoldLink
 from config import Config
+from utils import get_seconds_after
 import re
 
 AIRLINES_TO_CODE = {
@@ -130,6 +131,12 @@ class Aircraft:
         self.calculate_ramp_distance = 0
         self.prev_tick_count = 0
         self.status = None
+        self.delayed = False
+
+        self.estimated_time = ""
+        self.real_time = "";
+        self.appear_time = ""
+        self.sim_time = 0
 
     @staticmethod
     def fullname2callsign(fullname):
@@ -153,6 +160,16 @@ class Aircraft:
             self.logger.info("%s precise location changed to %s", self, location)
         else:
             raise Exception("Unrecognized location level.")
+
+
+    def set_estimated(self, estimated_time):
+        self.estimated_time = estimated_time
+
+    def set_appear_time(self, appear_time):
+        self.appear_time = appear_time
+
+    def set_sim_time(self, sim_time):
+        self.sim_time = sim_time
 
     @property
     def location(self):
@@ -323,6 +340,11 @@ class Aircraft:
         #                   self, delay_added_at)
 
     def tick(self):
+        print("???????????????????????????")
+        print(self.estimated_time)
+        print(self.appear_time)
+        print(self.real_time)
+        print("???????????????????????????")
         """Ticks on this aircraft and its subobjects to move to the next state.
         """
         passed_links = None
@@ -356,12 +378,12 @@ class Aircraft:
         targetLen = len(self.itinerary.targets)
         # print(targetIdx, targetLen)
         for link in self.itinerary.targets[targetIdx: targetLen]:
-            print(link)
+            # print(link)
             node = link.end
             # for node in self.itinerary.current_target.nodes:
                 
             if node.name.startswith('I'):
-                print(node)
+                # print(node)
                 count += 1
         # print("count:", count)
         return count
@@ -369,6 +391,9 @@ class Aircraft:
     @property
     def state(self):
         """Identify whether the aircraft is on pushbackway or taxiway"""
+        print(self.is_delayed)
+        if self.is_delayed is True:
+            self.delayed = True
         if self.itinerary is None or self.itinerary.is_completed:
             # self.status = State.stop
             return State.stop
@@ -379,8 +404,12 @@ class Aircraft:
         if self.is_departure is True: 
             if type(self.itinerary.current_target.start) is Gate:
                 #  do not update state if holdlink is added at gate
+                if self.real_time == "":
+                    self.real_time = get_seconds_after(self.appear_time, self.sim_time * self.tick_count)
                 return State.pushback
             elif type(self.itinerary.current_target) is PushbackWay:
+                if self.real_time == "":
+                    self.real_time = get_seconds_after(self.appear_time, self.sim_time * self.tick_count)
                 return State.pushback
             elif type(self.itinerary.current_target) is Taxiway:
                 if len(self.itinerary.current_target.nodes) > 0 and self.itinerary.current_target.nodes[0].name.startswith('I'):

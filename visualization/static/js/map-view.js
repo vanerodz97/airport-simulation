@@ -196,13 +196,13 @@ class MapView {
                 //     color = "#37E60F";
                 //     break;
                 case "Pushback":
-                    color = "#0AEEF5";
+                    color = "#3281FB";
                     break;
                 case "Ramp":
-                    color = "#084BF6";
+                    color = "#FB4D32";
                     break;
                 case "Taxi":
-                    color = "#F304BF";
+                    color = "#FEF304";
                     break;
                 case "Moving":
                     color = "#000000";
