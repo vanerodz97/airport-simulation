@@ -397,7 +397,7 @@ class Aircraft:
     @property
     def state(self):
         """Identify whether the aircraft is on pushbackway or taxiway"""
-        print(self.is_delayed)
+        # print(self.is_delayed)
         if self.is_delayed is True:
             self.delayed = True
         if self.itinerary is None or self.itinerary.is_completed:
