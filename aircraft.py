@@ -347,7 +347,7 @@ class Aircraft:
         # print("real_time", self.real_time)
         # print("sim_time", self.sim_time)
         if self.real_time != "":
-            print(self.estimated_time < self.real_time)
+            # print(self.estimated_time < self.real_time)
             if (self.estimated_time < self.real_time):
                 self.delayed = True
         # print("???????????????????????????")
@@ -444,10 +444,10 @@ class Aircraft:
             # print("taxi!!")
             return State.taxi
         # self.status = State.moving
-        print("===========")
-        print(self.is_departure)
-        print(type(self.itinerary.current_target))
-        print("===========")
+        # print("===========")
+        # print(self.is_departure)
+        # print(type(self.itinerary.current_target))
+        # print("===========")
         return State.moving
 
 
