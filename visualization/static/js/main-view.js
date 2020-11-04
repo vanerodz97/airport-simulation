@@ -201,6 +201,8 @@ class VisualizationView {
                 return "TakingOff";
             } else if (aircraft["state"] === "stop") {
                 return "Stopped";
+            } else if (aircraft["state"] === "atGate") {
+                return "atGate";
             } else if (aircraft["state"] === "pushback") {
                 return "Pushback";
             } else if (aircraft["state"] === "ramp") {
@@ -245,6 +247,8 @@ class VisualizationView {
                 statusLabel = `<span class="uk-label uk-label-success">Taxi</span>`;
             } else if (aircraft["state"] === "pushback"){
                 statusLabel = `<span class="uk-label uk-label-success">Pushback</span>`;
+            } else if (aircraft["state"] === "atGate") {
+                statusLabel = `<span class="uk-label uk-label-success">atGate</span>`;
             }
             else statusLabel = `<span class="uk-label uk-label-success">Moving</span>`;
             allCount += 1;

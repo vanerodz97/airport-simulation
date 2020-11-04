@@ -87,6 +87,7 @@ class State(enum.Enum):
     ramp = 6
     taxi = 7
     queue = 8
+    atGate = 9
 
 
 class Aircraft:
@@ -134,7 +135,7 @@ class Aircraft:
         self.delayed = False
 
         self.estimated_time = ""
-        self.real_time = "";
+        self.real_time = ""
         self.appear_time = ""
         self.sim_time = 0
 
@@ -341,9 +342,14 @@ class Aircraft:
 
     def tick(self):
         print("???????????????????????????")
-        print(self.estimated_time)
-        print(self.appear_time)
-        print(self.real_time)
+        print("estimated_time", self.estimated_time)
+        print("appear_time", self.appear_time)
+        print("real_time", self.real_time)
+        print("sim_time", self.sim_time)
+        if self.real_time != "":
+            print(self.estimated_time < self.real_time)
+            if (self.estimated_time < self.real_time):
+                self.delayed = true
         print("???????????????????????????")
         """Ticks on this aircraft and its subobjects to move to the next state.
         """
@@ -406,7 +412,7 @@ class Aircraft:
                 #  do not update state if holdlink is added at gate
                 if self.real_time == "":
                     self.real_time = get_seconds_after(self.appear_time, self.sim_time * self.tick_count)
-                return State.pushback
+                return State.atGate
             elif type(self.itinerary.current_target) is PushbackWay:
                 if self.real_time == "":
                     self.real_time = get_seconds_after(self.appear_time, self.sim_time * self.tick_count)
