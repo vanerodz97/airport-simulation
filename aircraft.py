@@ -349,7 +349,7 @@ class Aircraft:
         if self.real_time != "":
             print(self.estimated_time < self.real_time)
             if (self.estimated_time < self.real_time):
-                self.delayed = true
+                self.delayed = True
         print("???????????????????????????")
         """Ticks on this aircraft and its subobjects to move to the next state.
         """
