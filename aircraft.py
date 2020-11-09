@@ -343,6 +343,7 @@ class Aircraft:
     def tick(self):
         # print("???????????????????????????")
         # print("estimated_time", self.estimated_time)
+        # print(type(self.estimated_time))
         # print("appear_time", self.appear_time)
         # print("real_time", self.real_time)
         # print("sim_time", self.sim_time)
