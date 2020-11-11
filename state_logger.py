@@ -63,7 +63,7 @@ class StateLogger:
             "uncertainty_delayed_index": uc_delayed_index,
             "scheduler_delayed_index": sc_delayed_index,
             "takeoff": aircraft.take_off,
-            "estimated_time": aircraft.estimated_time.strftime("%H:%M:%S")
+            # "estimated_time": aircraft.estimated_time.strftime("%H:%M:%S")
         }
 
     @classmethod
