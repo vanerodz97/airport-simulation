@@ -18,8 +18,7 @@ class Scheduler(AbstractScheduler):
     """
 
     def schedule(self, simulation):
-
-        self.logger.info("Scheduling start")
+        self.logger.critical("Scheduling start")
         start = time.time()
         itineraries = {}
         priority_list = {}
@@ -30,7 +29,7 @@ class Scheduler(AbstractScheduler):
             # object will be used in other objects; however, be ware that the
             # object will be shared instead of being cloned in the later
             # phases.
-            print("simulation.airport.aircrafts", aircraft)
+            # print("simulation.airport.aircrafts", aircraft)
             if aircraft.itinerary is not None:
                 continue
             itinerary = self.schedule_aircraft(aircraft, simulation)
@@ -46,32 +45,32 @@ class Scheduler(AbstractScheduler):
         # Resolves conflicts
         # schedule, priority = self.__resolve_conflicts(itineraries, simulation,
         #                                               priority_list)
+        # # self.logger.critical(" itineraries ", itineraries)
         schedule, priority = Schedule(itineraries, 0, 0), priority_list
         # schedule, priority = self.__schedule(itineraries, simulation,priority_list)
 
-        self.logger.info("Scheduling end")
-        print(time.time() - start)
+        self.logger.critical("Scheduling end")
         return schedule, priority
     
-    # def __schedule(self, itineraries, simulation, priority_list):
-    #     self.__reset_itineraries(itineraries)
-    #     predict_simulation = simulation.copy
-    #     predict_simulation.airport.apply_schedule(Schedule(itineraries, 0, 0))
-    #     tick_times = 5
-    #     for i in range(tick_times):
-    #         predict_simulation.pre_tick(self)
-    #         self.__schedule_new_aircrafts(simulation, predict_simulation,
-    #                                         itineraries, priority_list)
-    #         predict_simulation.airport.apply_priority(priority_list)
-    #         if i == tick_times - 1:
-    #             # Done, conflicts are all handled, return the schedule
-    #             self.__reset_itineraries(itineraries)
-    #             return Schedule(itineraries, 0, 0), priority_list
+    def __schedule(self, itineraries, simulation, priority_list):
+        self.__reset_itineraries(itineraries)
+        predict_simulation = simulation.copy
+        predict_simulation.airport.apply_schedule(Schedule(itineraries, 0, 0))
+        tick_times = 5
+        for i in range(tick_times):
+            predict_simulation.pre_tick(self)
+            self.__schedule_new_aircrafts(simulation, predict_simulation,
+                                            itineraries, priority_list)
+            predict_simulation.airport.apply_priority(priority_list)
+            if i == tick_times - 1:
+                # Done, conflicts are all handled, return the schedule
+                self.__reset_itineraries(itineraries)
+                return Schedule(itineraries, 0, 0), priority_list
 
-    #         # After dealing with the conflicts in current state, tick to
-    #         # next state
-    #         predict_simulation.tick()
-    #         predict_simulation.post_tick()
+            # After dealing with the conflicts in current state, tick to
+            # next state
+            predict_simulation.tick()
+            predict_simulation.post_tick()
 
     def __resolve_conflicts(self, itineraries, simulation, priority_list):
 
@@ -114,6 +113,8 @@ class Scheduler(AbstractScheduler):
 
                 # If a conflict is found, tries to resolve it
                 if conflict is not None:
+                    self.logger.critical( " Get %s conflicts: %s", len(conflict), conflict)
+                
                     try:
                         self.__resolve_conflict(itineraries, conflict, attempts,
                                                 max_attempt)
@@ -181,8 +182,6 @@ class Scheduler(AbstractScheduler):
 
             self.logger.error(conflict.detailed_description)
 
-            import pdb
-            pdb.set_trace()
             # Reverse the delay
             itineraries[aircraft].restore()
             # Forget the attempts

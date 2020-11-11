@@ -2,7 +2,7 @@
 import os
 import json
 import logging
-
+import pdb
 from link import HoldLink
 from utils import get_output_dir_name
 from datetime import datetime
@@ -18,7 +18,6 @@ class StateLogger:
 
         self.states = []
         self.logger = logging.getLogger(__name__)
-
         try:
             os.remove(self.output_filename)
         except OSError:

@@ -3,14 +3,14 @@ Ground Controller oversees the aircraft movement on the ground. It continuously 
 commands to pilots when there is a notable situation.
 """
 import collections
-
+import logging
 from config import Config
 
 
 class Controller:
     def __init__(self, ground):
         self.ground = ground
-
+        self.logger = logging.getLogger(__name__)
         self.PILOT_VISION = Config.params["aircraft_model"]["pilot_vision"]
         self.CLOSE_NODE_THRESHOLD = Config.params["simulation"]["close_node_threshold"]
 
@@ -32,7 +32,7 @@ class Controller:
         Observe potential conflicts.
         """
         for aircraft in aircraft_list:
-            if aircraft.itinerary.is_completed:
+            if aircraft is None or aircraft.itinerary is None or aircraft.itinerary.is_completed:
                 continue
             link, distance = aircraft.itinerary.current_target, aircraft.itinerary.current_distance
             self.aircraft_location_lookup[link].append((aircraft, distance))
@@ -75,7 +75,9 @@ class Controller:
                 # Found an aircraft ahead!
                 relative_distance += item_distance
 
+                self.logger.critical(" relative distance %s", relative_distance)
                 if relative_distance < self.CLOSE_NODE_THRESHOLD:
+                    self.logger.critical(" conflict list %s", self.conflicts)
                     self.conflicts.append((aircraft, item_aircraft))
 
                 if relative_distance > self.PILOT_VISION:
@@ -156,6 +158,7 @@ class Controller:
         Send command to one of the pilots to wait there.
         Will call Aircraft.Pilot.Slowdown() or something alike.
         """
+        self.logger.critical(" begin to resolve conflict, self conflicts list %s: ", self.conflicts)
         priority_list = self.ground.priority
 
         # TODO: UNIMPLEMENTED

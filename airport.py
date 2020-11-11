@@ -5,6 +5,8 @@ import itertools
 import logging
 import os
 from collections import deque
+from node import Node
+from surface import *
 
 from aircraft import Aircraft
 from config import Config
@@ -66,6 +68,7 @@ class Airport:
         """Applies a schedule onto the active aircraft in the airport."""
         all_itineraries = {**self.itinerary_cache, **schedule.itineraries}
 
+        self.logger.critical("itenary: %s", all_itineraries)
         # Clean up the cache (previous states)
         self.itinerary_cache = {}
 
@@ -430,6 +433,7 @@ class Airport:
 
         # Checks if the folder exists
         if not os.path.exists(dir_path):
+            print ("path ", dir_path)
             raise Exception("Surface data is missing")
 
         surface = SurfaceFactory.create(dir_path)

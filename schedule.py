@@ -8,3 +8,6 @@ class Schedule:
         self.itineraries = itineraries
         self.n_delay_added = n_delay_added
         self.n_unsolvable_conflicts = n_unsolvable_conflicts
+
+    # def __str__(self):
+    #     return str(self.itineraries) + " n delay: "+ str(self.n_delay_added) + " unresolved conflict: " + str(self.n_unsolvable_conflicts)

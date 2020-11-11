@@ -321,10 +321,10 @@ class Aircraft:
     def set_itinerary(self, itinerary):
         """Sets the itinerary of this aircraft."""
         self.itinerary = itinerary
-        # self.logger.debug("%s: Roger, %s received.", self, itinerary)
+        self.logger.critical("%s: Roger, %s received.", self, itinerary.detailed_description)
 
         # for target in itinerary.targets:
-        #     self.logger.debug(target)
+        #     self.logger.critical(target)
 
     def add_speed_uncertainty(self, speed_bias):
         self.speed_uncertainty = speed_bias
