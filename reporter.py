@@ -76,7 +76,6 @@ def __append_expr_output(filename, expr_var_name, expr_var, metrics):
 
 def __save_metrics_bk(metrics, output_dir):
     metrics.to_csv(output_dir + "metrics.csv")
-    print (output_dir)
     for col in list(metrics):
         plt.clf()
         plt.figure(figsize=cfg.OUTPUT_FIG_SIZE)

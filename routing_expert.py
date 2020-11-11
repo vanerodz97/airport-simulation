@@ -36,7 +36,7 @@ class RoutingExpert:
         self.nodes = nodes
         self.runway_nodes = list(map(lambda l: l.start, list(filter(lambda l: type(l) == Runway, self.links))))
         self.gate_nodes = list(filter(lambda l: type(l) == Gate, self.nodes))
-        self.logger.critical("%d links and %d nodes are loaded",
+        self.logger.info("%d links and %d nodes are loaded",
                          len(self.links), len(self.nodes))
 
         # Builds or loads the routing table from cache
@@ -46,8 +46,6 @@ class RoutingExpert:
             self.__build_routes()
         if SAVE_GRAPH:
             save_graph(nodes, links)
-
-        # import pdb; pdb.set_trace()
 
     def __build_or_load_routes(self):
 
@@ -146,7 +144,7 @@ class RoutingExpert:
                         if r != u:
                             routing_table[r][v].add_links(routing_table[r][u].links)
 
-                        self.logger.critical("%s -> %s -> %s is shorter than "
+                        self.logger.debug("%s -> %s -> %s is shorter than "
                                           "%s -> %s", v, u, r, v, r)
 
                         if not candidates.has(v):
@@ -168,13 +166,12 @@ class RoutingExpert:
             for end in self.nodes:
                 if start == end:
                     continue
-                self.logger.critical("[%s - %s]", end, start)
+                self.logger.debug("[%s - %s]", end, start)
                 route = routing_table[start][end]
                 if route:
-                    self.logger.critical(route.description)
+                    self.logger.debug(route.description)
                 else:
                     self.logger.debug("No Route")
-                import pdb; pdb.set_trace()
 
     def get_shortest_route(self, start, end):
         """
@@ -302,7 +299,7 @@ def save_graph(nodes, links):
                 cnt += 1
             
             cnt += 1
-            plt.title(cur_link.name + "\tdistance:%.2f" % cur_link.length)
+            plt.title(label=cur_link.name + "\tdistance:%.2f" % cur_link.length)
             plt.savefig("./draw_route_new/" + cur_link.name.replace("/", "-") + ".jpg", dpi=300)
             plt.clf()
 

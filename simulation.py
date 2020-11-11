@@ -32,8 +32,8 @@ class Simulation:
 
         # Setups the logger
         self.logger = logging.getLogger(__name__)
-       
-       # Setups the clock
+
+        # Setups the clock
         self.clock = Clock()
 
         # Sets up the airport
@@ -76,32 +76,30 @@ class Simulation:
     def tick(self):
         """Moves the states of this simulation to the next state."""
 
-        self.logger.critical("\nCurrent Time: %s", self.now)
+        self.logger.debug("\nCurrent Time: %s", self.now)
 
         try:
+
+            # # Reschedule happens before the tick. It will resolve conflict here
+            # if self.__is_time_to_reschedule():
+            #     self.logger.info("Time to reschedule")
+            #     start = time.time()
+            #     self.__reschedule()  # it will try to resolve conflict
+            #     self.last_schedule_exec_time = time.time() - start  # seconds
+            #     self.last_schedule_time = self.now
+            #     self.logger.info("Last schedule time is updated to %s",
+            #                      self.last_schedule_time)
 
             # Add aircraft
             self.airport.add_aircrafts(self.scenario, self.now,
                                        self.clock.sim_time, self.scheduler)
-<<<<<<< Updated upstream
 
-=======
-            # # Reschedule happens before the tick. It will resolve conflict here
-            # if self.__is_time_to_reschedule():
->>>>>>> Stashed changes
             start = time.time()
             self.__reschedule()  # it will try to resolve conflict
             self.last_schedule_exec_time = time.time() - start  # seconds
             self.last_schedule_time = self.now
-<<<<<<< Updated upstream
             self.logger.info("Last schedule time is updated to %s",
                                 self.last_schedule_time)
-=======
-            self.logger.critical("Last schedule time is updated to %s",
-                                self.last_schedule_time)
-
-            # self.__reschedule()
->>>>>>> Stashed changes
 
             # # Inject uncertainties
             # if self.uncertainty:
@@ -123,17 +121,17 @@ class Simulation:
             if conflicts:
                 for idx, conflict in enumerate(conflicts):
                     dist = conflicts_dist[idx]
-                    self.logger.critical("Found %s", conflict)
-                    self.logger.critical("Conflict distance: %d", dist)
-                    self.logger.critical(conflict.detailed_description)
-                    for aircraft in self.airport.aircrafts:
-                        self.logger.critical(aircraft)
-                for conflict in conflicts:
                     self.logger.error("Found %s", conflict)
-                    self.logger.error("Conflict distance: ", dist)
+                    self.logger.error("Conflict distance: %d", dist)
                     self.logger.error(conflict.detailed_description)
                     for aircraft in self.airport.aircrafts:
-                        self.logger.info(aircraft)
+                        self.logger.error(aircraft)
+                # for conflict in conflicts:
+                #     self.logger.error("Found %s", conflict)
+                #     self.logger.error("Conflict distance: ", dist)
+                #     self.logger.error(conflict.detailed_description)
+                #     for aircraft in self.airport.aircrafts:
+                #         self.logger.error(aircraft)
                 raise SimulationException("Conflict found")
 
             # Observe
@@ -162,9 +160,7 @@ class Simulation:
         return last_time is None or next_time <= self.now
 
     def __reschedule(self):
-        # only reschedule new aircraft
         schedule, priority = self.scheduler.schedule(self)
-        self.logger.critical(" priority_list: %s", priority)
         self.airport.apply_schedule(schedule)
         self.airport.apply_priority(priority)
         if not Config.params["simulator"]["test_mode"]:

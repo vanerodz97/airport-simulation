@@ -417,7 +417,6 @@ def save_csv(type_name, dataframe):
 def save_fig(fig_name, dataframe, kind):
     """Saves the given dataframe to a figure file."""
     filename = "%s%s.png" % (get_output_dir_name(), fig_name)
-    print( filename )
     plt.clf()
     plt.figure(figsize=Config.OUTPUT_FIG_SIZE)
     dataframe.plot(kind=kind)

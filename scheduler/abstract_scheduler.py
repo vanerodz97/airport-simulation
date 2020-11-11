@@ -46,11 +46,6 @@ class AbstractScheduler:
 
     def __init__(self):
         self.logger = logging.getLogger(__name__)
-        # self.hdlr = logging.FileHandler('/var/tmp/myapp.log')
-        # self.formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-        # self.hdlr.setFormatter(formatter)
-        # self.logger.addHandler(hdlr) 
-        # self.logger.setLevel(logging.WARNING)
         self.departure_assigner = self.assign_runway_rr("departure_runway")
         self.arrival_assigner = self.assign_runway_rr("arrival_runway")
 
@@ -64,8 +59,6 @@ class AbstractScheduler:
 
         # Retrieves the route from the routing export
         flight = simulation.scenario.get_flight(aircraft)
-        if flight is None:
-            return
         if type(flight) == ArrivalFlight:
             src, dst = aircraft.location, flight.to_gate
         else:
