@@ -426,7 +426,7 @@ class Aircraft:
                 if self.ramp_flag:
                     # self.status = State.ramp
                     return State.ramp
-                return State.taxi
+            return State.taxi
                 # print("!!!!!")
                 # print(self.ramp_flag)
                 # print("!!!!!")
