@@ -158,6 +158,6 @@ def create_spots_to_taxiways_edge(flight_type):
             added_spot.add(spot.name)
             G.addEdge(runway_name, spot.name, round(distance, 2))
 
-create_spots_to_taxiways_edge("Arrival")
+create_spots_to_taxiways_edge("Departure")
 
 G.visualize(surface)
