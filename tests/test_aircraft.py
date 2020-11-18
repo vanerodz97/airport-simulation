@@ -97,3 +97,4 @@ class TestAircraft(unittest.TestCase):
         aircraft.tick()
         # targets: n2 - n3
         self.assertEqual(aircraft.itinerary.current_target, self.n2)
+    
