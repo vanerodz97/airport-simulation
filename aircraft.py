@@ -341,17 +341,10 @@ class Aircraft:
         #                   self, delay_added_at)
 
     def tick(self):
-        # print("???????????????????????????")
-        # print("estimated_time", self.estimated_time)
-        # print(type(self.estimated_time))
-        # print("appear_time", self.appear_time)
-        # print("real_time", self.real_time)
-        # print("sim_time", self.sim_time)
         if self.real_time != "":
             # print(self.estimated_time < self.real_time)
             if (self.estimated_time < self.real_time):
                 self.delayed = True
-        # print("???????????????????????????")
         """Ticks on this aircraft and its subobjects to move to the next state.
         """
         passed_links = None
@@ -398,7 +391,6 @@ class Aircraft:
     @property
     def state(self):
         """Identify whether the aircraft is on pushbackway or taxiway"""
-        # print(self.is_delayed)
         if self.is_delayed is True:
             self.delayed = True
         if self.itinerary is None or self.itinerary.is_completed:
@@ -427,13 +419,7 @@ class Aircraft:
                     # self.status = State.ramp
                     return State.ramp
             return State.taxi
-                # print("!!!!!")
-                # print(self.ramp_flag)
-                # print("!!!!!")
         elif self.is_departure is False: 
-            # print (self.callsign)
-            # print ("current node",self.itinerary.current_target.nodes[0].name)
-            # print (self.count_intersection())
             if len(self.itinerary.current_target.nodes) > 0 and self.count_intersection() == 0: # and self.itinerary.current_target.nodes[0].name.startswith('I'):
                 # self.status = State.ramp
                 self.ramp_flag = 0
@@ -442,13 +428,8 @@ class Aircraft:
             if not self.ramp_flag:
                 # self.status = State.ramp
                 return State.ramp
-            # print("taxi!!")
             return State.taxi
         # self.status = State.moving
-        # print("===========")
-        # print(self.is_departure)
-        # print(type(self.itinerary.current_target))
-        # print("===========")
         return State.moving
 
 
