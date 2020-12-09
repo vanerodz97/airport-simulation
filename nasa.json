@@ -1,0 +1,21 @@
+
+{
+    "fileLocations": [
+        {
+            "URIs": [
+                "s3://nasa-airport/states.csv",
+            ]
+        },
+        {
+            "URIPrefixes": [
+            ]
+        }
+    ],
+    "globalUploadSettings": {
+        "format": "CSV",
+        "delimiter": ",",
+        "textqualifier": "\"",
+        "containsHeader": "true"
+    }
+}
+                            
