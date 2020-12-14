@@ -1,3 +1,6 @@
+# Generate airport surface graph model for real west plan
+# Can be used for both departure model and arrival model
+
 import os
 import json
 import networkx as nx 
@@ -52,9 +55,11 @@ class GraphVisualization:
                 node_type[node] = 'Gate'
             elif node in spots_to_intersections:
                 node_type[node] = 'Spot'
+            elif node[0] == 'I':
+                node_type[node] = 'Intersection'
             else:
                 node_type[node] = 'Runway'
-        color_map = {'Gate':'#C7FFF9', 'Spot':'#FFC7CE', 'Runway':'#FFFF8A'}
+        color_map = {'Gate':'#C7FFF9', 'Spot':'#FFC7CE', 'Runway':'#FFFF8A', 'Intersection':'#CCD1D1'}
         pos = nx.drawing.nx_agraph.graphviz_layout(G, prog='sfdp')
         nx.draw(G, pos, with_labels=True, node_size=700, node_color=[color_map[node_type[node]] for node in G])
         # nx.draw_networkx_edge_labels(G, pos, font_size=2)
@@ -147,17 +152,36 @@ def create_spots_to_taxiways_edge(flight_type):
         links = route.get_links()
         spot = gate_to_spot_mapping[gate.name]
         gate_to_spot_distance = 0
+        intersections = []
+        intersection_distance = []
+        dis = 0
         for link in links:
             gate_to_spot_distance += link.length
             if (link.contain_node(gate_to_spot_mapping[gate.name]) == True):
                 break
+        for link in links:
+            dis += link.length
+            if (link.nodes[-1].name[0] == 'I'):
+                intersections.append(link.nodes[-1])
+                intersection_distance.append(dis)
+        # add gate to spot edge
         route_distance = route.distance
-        distance = route_distance - gate_to_spot_distance
         G.addEdge(gate.name, spot.name, round(gate_to_spot_distance, 2))
-        if spot.name not in added_spot:
-            added_spot.add(spot.name)
-            G.addEdge(runway_name, spot.name, round(distance, 2))
+        for idx, intersection in enumerate(intersections):
+            # skip the first intersection (is a spot)
+            if idx == 0:
+                continue
+            dist = intersection_distance[idx] - intersection_distance[idx-1]
+            # add spot to intersection edge
+            if idx == 1:
+                G.addEdge(intersection.name, spot.name, round(dist, 2))
+            # add intersection to intersection edge
+            else:
+                G.addEdge(intersection.name, intersections[idx-1].name, round(dist, 2))
+        # add intersection to runway edge
+        distance = route_distance - intersection_distance[-1]
+        G.addEdge(runway_name, intersections[-1].name, round(distance, 2))
 
-create_spots_to_taxiways_edge("Departure")
+create_spots_to_taxiways_edge("Arrival")
 
 G.visualize(surface)
