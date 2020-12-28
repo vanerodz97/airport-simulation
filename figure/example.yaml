@@ -39,17 +39,24 @@ aircraft_model:
   # Pilot's seeing distance in feet. Used to find the aircraft ahead.
   pilot_vision: 1000
   # Safe distance between two aircraft
-  ideal_distance: 800.0
+  ideal_distance: 1000.0
   # The min distance between two aircraft where brake hard should be used.
-  min_distance: 500.0
+  min_distance: 700.0
   # Initial speed of aircraft
-  init_speed: 280.0
+  init_speed: 0.0
   # Maximum speed of aircraft
   max_speed: 350.0
   # Ideal speed of aircraft
-  ideal_speed: 300.0
+  ideal_speed: 350.0
   # push back speed
   pushback_speed: 100.0
+  # ramp speed
+  ramp_speed: 200.0
+  # active movement area speed
+  active_movement_speed: 350.0
+  # queue speed of aircraft
+  # queue_speed: 100.0
+  ideal_acc: 75.0
 
 airport_model:
   # The departure runway. Options are: 10R/28L, 10L/28R
@@ -81,7 +88,7 @@ scheduler:
   # conflict threshold controlled at scheduler
   conflict_threshold: 50
   # Maximum number of attempts on trying to resolve a conflict
-  max_resolve_conflict_attempt: 10
+  max_resolve_conflict_attempt: 15
   # This is a parameter to limit the maximum number of airplanes that 
   # could be running in the airport at the same time
   max_airpcrafts_running: 1000
@@ -96,4 +103,4 @@ logger:
   # Options are: critical, error, warning, info, debug, notset
   level: error
   # Enable logging into a file instead of stdout/stderr
-  file: false
+  file: true

@@ -23,6 +23,7 @@ class Node:
         self.hash = str2sha1("%s#%.5f#%.5f" %
                              (name, geo_pos["lat"], geo_pos["lng"]))
 
+    
     def get_distance_to(self, node):
         """Returns the distance from this node to another in feets."""
         this_node = self.geo_pos

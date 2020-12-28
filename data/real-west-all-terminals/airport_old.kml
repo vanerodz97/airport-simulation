@@ -15880,8 +15880,8 @@ toilets:</value>
         <name>S1</name>
         <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
         <Point>
-          <coordinates>   
-        -122.3843067, 37.6095765, 0
+          <coordinates>
+            -122.384986,37.609791,0
           </coordinates>
         </Point>
       </Placemark>
@@ -15890,7 +15890,7 @@ toilets:</value>
         <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
         <Point>
           <coordinates>
-          -122.383978, 37.6101585, 0
+            -122.384117,37.610429,0
           </coordinates>
         </Point>
       </Placemark>
@@ -15899,7 +15899,7 @@ toilets:</value>
         <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
         <Point>
           <coordinates>
-          -122.380449, 37.615431, 0
+            -122.38098,37.615636,0
           </coordinates>
         </Point>
       </Placemark>
@@ -15908,7 +15908,7 @@ toilets:</value>
         <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
         <Point>
           <coordinates>
-          -122.3821562, 37.6197099, 0
+            -122.382507,37.619272,0
           </coordinates>
         </Point>
       </Placemark>
@@ -15917,7 +15917,7 @@ toilets:</value>
         <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3846701, 37.6207622, 0
+            -122.385354,37.620519,0
           </coordinates>
         </Point>
       </Placemark>
@@ -15926,7 +15926,7 @@ toilets:</value>
         <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3897306, 37.6225832, 0
+            -122.391641,37.62019,0
           </coordinates>
         </Point>
       </Placemark>
@@ -15935,7 +15935,7 @@ toilets:</value>
         <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.392242, 37.620453, 0
+            -122.392041,37.619595,0
           </coordinates>
         </Point>
       </Placemark>
@@ -15944,7 +15944,7 @@ toilets:</value>
         <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3930747, 37.6207975, 0
+            -122.3933,37.620454,0
           </coordinates>
         </Point>
       </Placemark>
@@ -15953,16 +15953,7 @@ toilets:</value>
         <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
         <Point>
           <coordinates>
-            -122.3818837, 37.613286, 0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>S10</name>
-        <styleUrl>#icon-1899-9C27B0-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            -122.3853907, 37.6210348, 0
+            -122.382338,37.613492,0
           </coordinates>
         </Point>
       </Placemark>

@@ -1,4 +1,6 @@
 """A collection of global helper functions."""
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 

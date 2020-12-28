@@ -5,7 +5,7 @@ import logging
 
 from link import HoldLink
 from utils import get_output_dir_name
-
+from datetime import datetime
 
 class StateLogger:
     """`StateLogger` logs the airport states in each tick, parses them into a
@@ -63,7 +63,8 @@ class StateLogger:
             "itinerary_index": itinerary_index,
             "uncertainty_delayed_index": uc_delayed_index,
             "scheduler_delayed_index": sc_delayed_index,
-            "takeoff": aircraft.take_off
+            "takeoff": aircraft.take_off,
+            # "estimated_time": aircraft.estimated_time.strftime("%H:%M:%S")
         }
 
     @classmethod

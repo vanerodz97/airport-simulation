@@ -189,3 +189,7 @@ each line within the function.
 
     $ kernprof -l ./simulator -f <your_plan>.yaml
     $ python3 -m line_profiler simulator.py.lprof
+    
+### TODO
+
+Right now, we have two types of airport surface models: node-link model and graph model. The graph model (in graph_model.py) is newly added and can be used by scheduler and controller. However, right now, this script generates an arrival and a departure model for one airport. Need to find a way to merge these two information so that scheduler can use to manage aircrafts' movements.

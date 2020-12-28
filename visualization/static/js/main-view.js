@@ -129,6 +129,18 @@ class VisualizationView {
 
         // Intersections
         for (let inter of surfaceData["inters"]) {
+            let flag = 0;
+            for (let spot of surfaceData["spots"]) {
+                if (inter["lat"] == spot["lat"] && inter["lng"] == spot["lng"])
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+            if (flag == 1)
+            {
+                continue;
+            }
             this.mapView.drawIntersection(inter["lat"], inter["lng"], inter["name"]);
         }
 
@@ -189,6 +201,14 @@ class VisualizationView {
                 return "TakingOff";
             } else if (aircraft["state"] === "stop") {
                 return "Stopped";
+            } else if (aircraft["state"] === "atGate") {
+                return "atGate";
+            } else if (aircraft["state"] === "pushback") {
+                return "Pushback";
+            } else if (aircraft["state"] === "ramp") {
+                return "Ramp";
+            } else if (aircraft["state"] === "taxi") {
+                return "Taxi";
             } else if (aircraft["is_delayed"]) {
                 return "Hold";
             } else {
@@ -221,9 +241,16 @@ class VisualizationView {
             } else if (aircraft["is_delayed"]) {
                 statusLabel = `<span class="uk-label uk-label-danger">Hold</span>`;
                 holdCount += 1;
-            } else {
-                statusLabel = `<span class="uk-label uk-label-success">Moving</span>`;
+            } else if (aircraft["state"] === "ramp"){
+                statusLabel = `<span class="uk-label uk-label-success">Ramp</span>`;
+            } else if (aircraft["state"] === "taxi"){
+                statusLabel = `<span class="uk-label uk-label-success">Taxi</span>`;
+            } else if (aircraft["state"] === "pushback"){
+                statusLabel = `<span class="uk-label uk-label-success">Pushback</span>`;
+            } else if (aircraft["state"] === "atGate") {
+                statusLabel = `<span class="uk-label uk-label-success">atGate</span>`;
             }
+            else statusLabel = `<span class="uk-label uk-label-success">Moving</span>`;
             allCount += 1;
 
             trafficTableHtml += `

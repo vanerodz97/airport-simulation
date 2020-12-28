@@ -2,7 +2,8 @@
 from link import HoldLink
 from utils import str2sha1
 from copy import deepcopy
-
+from node import Node
+from surface import *
 
 class Itinerary:
     """Itinerary is a list of target nodes that an aircraft follows per tick.
@@ -287,10 +288,37 @@ class Itinerary:
     def __ne__(self, other):
         return not self == other
 
+    @property
     def distance_to_intersection(self):
         # get the distance to the next intersection (the end of current link)
         current_target = self.targets[self.index]
+        print (current_target.detailed_description)
         if type(current_target) is HoldLink:
             return 0
         else:
             return current_target.length - self.distance
+    
+    @property
+    def distance_to_intersection_point(self):
+        # get the distance to the next intersection point in the map
+        idx = -1
+        distance = 0
+        for i in range(self.index, len(self.targets)):
+            # if type(self.targets[i]) is PushbackWay:
+            #     continue
+            target_nodes = self.targets[i].nodes
+            if len(target_nodes) <= 0:
+                continue
+            target_node = target_nodes[0]
+            if type(target_node) is not Node:
+                continue
+            distance += self.targets[i].length
+            if target_node.name.startswith("I"):
+                idx = i
+                break
+        if idx == -1:
+            return 0
+        elif type(self.targets[idx]) is HoldLink:
+            return 0
+        else:
+            return distance

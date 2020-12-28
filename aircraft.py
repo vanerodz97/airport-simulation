@@ -8,6 +8,7 @@ from surface import *
 
 from link import HoldLink
 from config import Config
+from utils import get_seconds_after
 import re
 
 AIRLINES_TO_CODE = {
@@ -83,6 +84,10 @@ class State(enum.Enum):
     hold = 3
     flying = 4  # default for arrival flights
     pushback = 5  # new added, on pushback way
+    ramp = 6
+    taxi = 7
+    queue = 8
+    atGate = 9
 
 
 class Aircraft:
@@ -106,12 +111,15 @@ class Aircraft:
 
         self.itinerary = None
         self.is_departure = is_departure
-        self.speed = Config.params["aircraft_model"]["init_speed"]
-        self.pushback_speed = Config.params["aircraft_model"]["pushback_speed"]
+        self.speed = self.speed_knots_to_ft_per_sec(Config.params["aircraft_model"]["init_speed"])
+        self.pushback_speed = self.speed_knots_to_ft_per_sec(Config.params["aircraft_model"]["pushback_speed"])
+        self.ramp_speed = self.speed_knots_to_ft_per_sec(Config.params["aircraft_model"]["ramp_speed"])
+        # self.queue_speed = self.speed_knots_to_ft_per_sec(Config.params["aircraft_model"]["queue_speed"])
         self.IDEAL_DISTANCE = Config.params["aircraft_model"]["ideal_distance"]
         self.MIN_DISTANCE = Config.params["aircraft_model"]["min_distance"]
-        self.MAX_SPEED = Config.params["aircraft_model"]["max_speed"]
-        self.IDEAL_SPEED = Config.params["aircraft_model"]["ideal_speed"]
+        self.MAX_SPEED = self.speed_knots_to_ft_per_sec(Config.params["aircraft_model"]["max_speed"])
+        self.IDEAL_SPEED = self.speed_knots_to_ft_per_sec(Config.params["aircraft_model"]["ideal_speed"])
+        self.IDEAL_ACC = Config.params["aircraft_model"]["ideal_acc"]
         self.fronter_info = None
         self.fronter_aircraft = None
         self.speed_uncertainty = 0
@@ -119,7 +127,17 @@ class Aircraft:
         self.take_off = False
 
         self.tick_count = 0
-        
+        self.ramp_distance = -1
+        self.ramp_flag = 1
+        self.calculate_ramp_distance = 0
+        self.prev_tick_count = 0
+        self.status = None
+        self.delayed = False
+
+        self.estimated_time = ""
+        self.real_time = ""
+        self.appear_time = ""
+        self.sim_time = 0
 
     @staticmethod
     def fullname2callsign(fullname):
@@ -143,6 +161,16 @@ class Aircraft:
             self.logger.info("%s precise location changed to %s", self, location)
         else:
             raise Exception("Unrecognized location level.")
+
+
+    def set_estimated(self, estimated_time):
+        self.estimated_time = estimated_time
+
+    def set_appear_time(self, appear_time):
+        self.appear_time = appear_time
+
+    def set_sim_time(self, sim_time):
+        self.sim_time = sim_time
 
     @property
     def location(self):
@@ -182,19 +210,43 @@ class Aircraft:
     def set_fronter_aircraft(self, aircraft):
         self.fronter_aircraft = aircraft
 
+    
+    def speed_knots_to_ft_per_sec(self, speed):
+        return float(speed * 1.0)
+
+    
     """
     @:param fronter_info (target_speed, relative_distance)
     """
 
     def get_next_speed(self, fronter_info, state):
+        # print ("{0}: {1}".format(self.callsign, self.state))
         # if self.is_delayed:
         #     return 0
-        if state is State.pushback:
-            return self.pushback_speed
-        """ Calculate the speed based on following model."""
-        # Drive at the ideal speed if no aircraft exists in the pilot's sight
         if fronter_info is None:
-            return self.IDEAL_SPEED
+            acceleration = 0.0
+            if state is State.pushback:
+                new_speed = self.pushback_speed
+            elif state is State.ramp:
+                new_speed = self.ramp_speed
+            else:
+                new_speed = self.IDEAL_SPEED
+            if self.speed < new_speed:
+                # acceleration phase
+                acceleration = self.IDEAL_ACC
+            elif self.speed > new_speed:
+                # deceleration phase
+                acceleration = -self.IDEAL_ACC
+
+            if acceleration > 0:
+                new_speed = min(self.speed + acceleration, new_speed)
+            else:
+                new_speed = max(self.speed + acceleration, new_speed)
+            if new_speed < 0:
+                new_speed = 0
+            if new_speed > self.MAX_SPEED:
+                new_speed = self.MAX_SPEED
+            return new_speed            
 
         # calculate the new speed when it is following another aircraft
         fronter_speed = fronter_info[0]
@@ -209,8 +261,10 @@ class Aircraft:
             return 0
             return self.brake_hard()
 
+
+        """ Calculate the speed based on following model."""
+
         # Adjust the speed
-        acc_flag = False
         if relative_distance > self.IDEAL_DISTANCE:
             # acceleration phase
             c, l, m = 1.1, 0.1, 0.2
@@ -223,16 +277,15 @@ class Aircraft:
 
         acceleration = c * (self.speed ** m) \
                        * (abs(self.speed - fronter_speed) / (relative_distance ** l))
+  
         """ Make sure the speed is always valid """
         new_speed = self.speed + acceleration
         if new_speed < 0:
             new_speed = 0
-        if acc_flag:
-            new_speed = max(10, new_speed)
-        # TODO: consider different speed limits for different type of roads
         if new_speed > self.MAX_SPEED:
             new_speed = self.MAX_SPEED
         return new_speed
+
 
     def set_speed(self, speed):
         """ Set the speed of the aircraft"""
@@ -288,15 +341,19 @@ class Aircraft:
         #                   self, delay_added_at)
 
     def tick(self):
+        if self.real_time != "":
+            # print(self.estimated_time < self.real_time)
+            if (self.estimated_time < self.real_time):
+                self.delayed = True
         """Ticks on this aircraft and its subobjects to move to the next state.
         """
         passed_links = None
         if self.itinerary:
             self.tick_count += 1
-            new_speed = self.get_next_speed(self.fronter_info, self.state) + self.speed_uncertainty
-            self.set_speed(new_speed)
             print("AIR %s: aircraft tick.", self)
             passed_links = self.itinerary.tick(self.tick_distance)
+            new_speed = self.get_next_speed(self.fronter_info, self.state) + self.speed_uncertainty
+            self.set_speed(new_speed)
             if self.itinerary.is_completed:
                 self.logger.debug("%s: %s completed.", self, self.itinerary)
             last_target = self.itinerary.backup[-1]
@@ -315,21 +372,66 @@ class Aircraft:
         self.logger.info("%s at %s", self, self.__coarse_location)
         return passed_links
 
+    def count_intersection(self):
+        count = 0
+        targetIdx = self.itinerary.current_target_index
+        targetLen = len(self.itinerary.targets)
+        # print(targetIdx, targetLen)
+        for link in self.itinerary.targets[targetIdx: targetLen]:
+            # print(link)
+            node = link.end
+            # for node in self.itinerary.current_target.nodes:
+                
+            if node.name.startswith('I'):
+                # print(node)
+                count += 1
+        # print("count:", count)
+        return count
+
     @property
     def state(self):
         """Identify whether the aircraft is on pushbackway or taxiway"""
+        if self.is_delayed is True:
+            self.delayed = True
         if self.itinerary is None or self.itinerary.is_completed:
+            # self.status = State.stop
             return State.stop
         if self.itinerary.next_target is None or \
                 self.itinerary.current_target is None:
+            # self.status = State.stop
             return State.stop
-        if self.is_departure is True:
+        if self.is_departure is True: 
             if type(self.itinerary.current_target.start) is Gate:
                 #  do not update state if holdlink is added at gate
-                return State.pushback
+                if self.real_time == "":
+                    self.real_time = get_seconds_after(self.appear_time, self.sim_time * self.tick_count)
+                return State.atGate
             elif type(self.itinerary.current_target) is PushbackWay:
+                if self.real_time == "":
+                    self.real_time = get_seconds_after(self.appear_time, self.sim_time * self.tick_count)
                 return State.pushback
+            elif type(self.itinerary.current_target) is Taxiway:
+                if len(self.itinerary.current_target.nodes) > 0 and self.itinerary.current_target.nodes[0].name.startswith('I'):
+                    self.ramp_flag = 0
+                    # self.status = State.moving
+                    return State.taxi
+                if self.ramp_flag:
+                    # self.status = State.ramp
+                    return State.ramp
+            return State.taxi
+        elif self.is_departure is False: 
+            if len(self.itinerary.current_target.nodes) > 0 and self.count_intersection() == 0: # and self.itinerary.current_target.nodes[0].name.startswith('I'):
+                # self.status = State.ramp
+                self.ramp_flag = 0
+                # self.status = State.ramp
+                return State.ramp
+            if not self.ramp_flag:
+                # self.status = State.ramp
+                return State.ramp
+            return State.taxi
+        # self.status = State.moving
         return State.moving
+
 
     @property
     def is_delayed(self):

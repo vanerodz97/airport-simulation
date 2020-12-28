@@ -185,6 +185,29 @@ class MapView {
                 case "Hold":
                     color = "#f9a825";
                     break;
+
+                // case "stop":
+                //     color = "#F33619";
+                //     break;
+                // case "hold":
+                //     color = "#F8D919";
+                //     break;
+                // case "flying":
+                //     color = "#37E60F";
+                //     break;
+                case "Pushback":
+                    color = "#3281FB";
+                    break;
+                case "Ramp":
+                    color = "#FB4D32";
+                    break;
+                case "Taxi":
+                    color = "#FEF304";
+                    break;
+                case "Moving":
+                    color = "#000000";
+                    break;
+
                 default:
                     // moving
                     color = "#1565c0";
@@ -241,17 +264,6 @@ class MapView {
         this.gates.push(gate);
     }
 
-    drawSpot(lat, lng, name) {
-        const image = {
-            url: "/image/spot.svg",
-            scaledSize: new google.maps.Size(18, 18),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(9, 9)
-        };
-        const spot = this.__drawNode(lat, lng, image, null);
-        spot.updateInfoWindow({spot: name, lat: lat, lng: lng})
-    }
-
     drawIntersection(lat, lng, name) {
         const image = {
             url: "/image/intersection.svg",
@@ -261,6 +273,17 @@ class MapView {
         };        
         const inter = this.__drawNode(lat, lng, image, null);
         inter.updateInfoWindow({intersection: name, lat: lat, lng: lng});
+    }
+
+    drawSpot(lat, lng, name) {
+        const image = {
+            url: "/image/spot.svg",
+            scaledSize: new google.maps.Size(18, 18),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(9, 9)
+        };
+        const spot = this.__drawNode(lat, lng, image, null);
+        spot.updateInfoWindow({spot: name, lat: lat, lng: lng})
     }
 
     updateAllAircraft(allAircraft, use_animation) {
