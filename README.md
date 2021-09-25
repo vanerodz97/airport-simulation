@@ -99,6 +99,11 @@ $ ls -1 *py scheduler/*py | xargs pylint # optional but recommended
 $ pydoc <python-file-name-without-.py>
 ```
 
+### Convert data to CSV for analysis
+```sh
+$ python csvdata.py real-west-all-terminals
+```
+
 ## Developer Guidelines
 
 
