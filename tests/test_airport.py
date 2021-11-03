@@ -24,10 +24,17 @@ class TestAirport(unittest.TestCase):
         def now(self):
             return datetime.time(0, 0)
 
+    class SurfaceMock():
+        def __init__(self):
+            self.gates = []
+            self.links = []
+            self.spots = []
+
     def test_conflicts(self):
 
         simulation = self.SimulationMock()
-        airport = Airport.create("simple")
+        # airport = Airport.create("simple")
+        airport = Airport("test", self.SurfaceMock())
 
         a1 = Aircraft("A1", None, self.n1, State.stop)
         a2 = Aircraft("A2", None, self.n1, State.stop)
@@ -38,10 +45,10 @@ class TestAirport(unittest.TestCase):
         airport.aircrafts.append(a3)
 
         # Get only one conflict
-        self.assertEqual(len(airport.conflicts), 1)
+        self.assertEqual(len(airport.conflicts[0]), 1)
 
         # Test if the conflict looks like what we expected
-        conflict = airport.conflicts[0]
+        conflict = airport.conflicts[0][0]
         self.assertTrue(conflict.locations[0] == self.n1)
         self.assertEqual(len(conflict.aircrafts), 2)
         self.assertTrue(a1 in conflict.aircrafts)
@@ -52,4 +59,4 @@ class TestAirport(unittest.TestCase):
         airport.aircrafts.append(a4)
 
         # Test if the third aircraft shown in conflict correctly
-        self.assertEqual(len(airport.conflicts), 3)
+        self.assertEqual(len(airport.conflicts[0]), 3)

@@ -17,6 +17,15 @@ class TestRoutingExpert(unittest.TestCase):
     """
     G1 is linked to S1 via L1 and L2. L2 is longer than L1.
     """
+
+    #                  (SP1)L1_middle,Spot
+    #              /             \
+    #      L1_start,Gate           L1_end,Runway
+    #     (G1)----------------------(S1) L3
+    #     L2_start  \             / L2_end
+    #                  L2_middle
+    #
+
     GEO_WEST = {"lat": 37.422000, "lng": -122.084057}
     GEO_EAST = {"lat": 37.422000, "lng": -122.074057}
     GEO_MIDDLE_NORTH = {"lat": 37.122000, "lng": -122.079057}
@@ -91,30 +100,30 @@ class TestRoutingExpert(unittest.TestCase):
         # Checks if the shortest distance is expected
         self.assertAlmostEqual(route.distance, 218489.353890, 6)
 
-    def test_simple_data(self):
-        airport_code = "simple"
+    # def test_simple_data(self):
+    #     airport_code = "simple"
+    #
+    #     # Sets up the airport
+    #     self.airport = Airport.create(airport_code)
+    #
+    #     # Sets up the scenario
+    #     self.scenario = Scenario.create(airport_code,
+    #                                     self.airport.surface)
+    #
+    #     links = self.airport.surface.links
+    #     nodes = self.airport.surface.nodes
+    #
+    #     # Sets up the routing expert monitoring the airport surface
+    #     routing_expert = RoutingExpert(links, nodes, False)
+    #
+    #     routeG3toR1 = routing_expert.get_shortest_route(nodes[2],
+    #                                                     links[0].start)
+    #
+    #     self.assertEqual(len(routeG3toR1.nodes), 8)
+    #     self.assertAlmostEqual(routeG3toR1.distance, 1352.6500035604972, 5)
 
-        # Sets up the airport
-        self.airport = Airport.create(airport_code)
-
-        # Sets up the scenario
-        self.scenario = Scenario.create(airport_code,
-                                        self.airport.surface)
-
-        links = self.airport.surface.links
-        nodes = self.airport.surface.nodes
-
-        # Sets up the routing expert monitoring the airport surface
-        routing_expert = RoutingExpert(links, nodes, False)
-
-        routeG3toR1 = routing_expert.get_shortest_route(nodes[2],
-                                                        links[0].start)
-
-        self.assertEqual(len(routeG3toR1.nodes), 8)
-        self.assertAlmostEqual(routeG3toR1.distance, 1352.6500035604972, 5)
-
-    def test_sfo_terminal_2_closest(self):
-        airport_code = "sfo-terminal-2"
+    def test_real_west_all_terminals_closest(self):
+        airport_code = "real-west-all-terminals"
 
         # Sets up the airport
         self.airport = Airport.create(airport_code)
@@ -134,12 +143,12 @@ class TestRoutingExpert(unittest.TestCase):
         routeG58Bto10R = \
             routing_expert.get_shortest_route(gate_58B, runway_start)
 
-        self.assertAlmostEqual(routeG58Bto10R.distance, 8198.5613013809, 5)
-        self.assertEqual(len(routeG58Bto10R.nodes), 32)
-        self.assertEqual(len(routeG58Bto10R.links), 31)
+        self.assertAlmostEqual(routeG58Bto10R.distance, 15500.519095, 5)
+        self.assertEqual(len(routeG58Bto10R.nodes), 21)
+        self.assertEqual(len(routeG58Bto10R.links), 20)
 
-    def test_sfo_terminal_2_furthest(self):
-        airport_code = "sfo-terminal-2"
+    def test_real_west_all_terminals_furthest(self):
+        airport_code = "real-west-all-terminals"
 
         # Sets up the airport
         self.airport = Airport.create(airport_code)
@@ -159,12 +168,12 @@ class TestRoutingExpert(unittest.TestCase):
 
         routeG53to10R = \
             routing_expert.get_shortest_route(gate_53, runway_start)
-        self.assertAlmostEqual(routeG53to10R.distance, 10014.749180929799, 5)
-        self.assertEqual(len(routeG53to10R.nodes), 39)
-        self.assertEqual(len(routeG53to10R.links), 38)
+        self.assertAlmostEqual(routeG53to10R.distance, 17167.291795099998, 5)
+        self.assertEqual(len(routeG53to10R.nodes), 19)
+        self.assertEqual(len(routeG53to10R.links), 18)
 
-    def test_sfo_terminal_2_all(self):
-        airport_code = "sfo-terminal-2"
+    def test_real_west_all_terminals_all(self):
+        airport_code = "real-west-all-terminals"
 
         # Sets up the airport
         self.airport = Airport.create(airport_code)
@@ -180,8 +189,8 @@ class TestRoutingExpert(unittest.TestCase):
         runway_start = self.airport.surface.get_link("10R/28L").start
 
         # Checks the gate that is far from the runway (G53)
-        gate_names = ["50", "55", "53", "52", "54A", "51A", "51B", "54B",
-                      "56B", "56A", "57", "59", "58B", "58A"]
+        gate_names = ["50B", "55", "53", "52", "54A", "51A", "51B", "54B",
+                      "56B", "56A", "57", "59A", "59B"]
         for gate_name in gate_names:
             gate = self.airport.surface.get_node(gate_name)
             route = routing_expert.get_shortest_route(gate, runway_start)

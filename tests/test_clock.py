@@ -18,7 +18,7 @@ class TestClock(unittest.TestCase):
         Config.params["simulation"]["time_unit"] = self.SIM_TIME
 
         self.assertEqual(clock.now.minute, 0)
-        self.assertEqual(clock.now.hour, 0)
+        self.assertEqual(clock.now.hour, 7)
 
     def test_tick(self):
 

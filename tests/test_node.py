@@ -20,8 +20,13 @@ class TestNode(unittest.TestCase):
     def test_invalid_geo_pos(self):
 
         name = "node-123"
-        geo_pos = {"lat": 51.5033640, "lng": -0.1276250}
-        self.assertRaises(Exception, Node(name, geo_pos))
+        geo_pos_1 = {"lat": 101.5033640, "lng": -0.1276250}
+        with self.assertRaises(Exception):
+            Node(name, geo_pos_1)
+
+        geo_pos_2 = {"lat": 101.5033640, "lng": -180.1276250}
+        with self.assertRaises(Exception):
+            Node(name, geo_pos_2)
 
     def test_compare_same(self):
 
