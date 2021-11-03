@@ -6,13 +6,9 @@ python:
 install:
   - pip install -r requirements.txt
 before_script:
-  - cd data/simple
-  - python generate.py
+  - cd data/real-west-all-terminals
   - python generate_scenario.py
-  - cd ../..
-  - cd data/sfo-terminal-2
   - python generate.py
-  - python generate_scenario.py
   - cd ../..
 script:
   - travis_wait python -m unittest discover tests
