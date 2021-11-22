@@ -84,12 +84,12 @@ uncertainty:
 
 scheduler:
   # Name of the scheduler file under the `scheduler` folder
-  name: deterministic_scheduler
+  name: naive_scheduler
   # conflict threshold controlled at scheduler
   conflict_threshold: 50
   # Maximum number of attempts on trying to resolve a conflict
   max_resolve_conflict_attempt: 15
-  # This is a parameter to limit the maximum number of airplanes that 
+  # This is a parameter to limit the maximum number of airplanes that
   # could be running in the airport at the same time
   max_airpcrafts_running: 1000
 
