@@ -191,6 +191,8 @@ class Aircraft:
         if level == Aircraft.LOCATION_LEVEL_COARSE:
             if next_index < self.itinerary.length:
                 next_target = self.itinerary.get_nth_target(next_index)
+                if type(next_target) is HoldLink:
+                    return None
                 return next_target.end
         elif level == Aircraft.LOCATION_LEVEL_PRECISE:
             return next_location
@@ -210,11 +212,11 @@ class Aircraft:
     def set_fronter_aircraft(self, aircraft):
         self.fronter_aircraft = aircraft
 
-    
+
     def speed_knots_to_ft_per_sec(self, speed):
         return float(speed * 1.0)
 
-    
+
     """
     @:param fronter_info (target_speed, relative_distance)
     """
@@ -246,7 +248,7 @@ class Aircraft:
                 new_speed = 0
             if new_speed > self.MAX_SPEED:
                 new_speed = self.MAX_SPEED
-            return new_speed            
+            return new_speed
 
         # calculate the new speed when it is following another aircraft
         fronter_speed = fronter_info[0]
@@ -277,7 +279,7 @@ class Aircraft:
 
         acceleration = c * (self.speed ** m) \
                        * (abs(self.speed - fronter_speed) / (relative_distance ** l))
-  
+
         """ Make sure the speed is always valid """
         new_speed = self.speed + acceleration
         if new_speed < 0:
@@ -381,7 +383,7 @@ class Aircraft:
             # print(link)
             node = link.end
             # for node in self.itinerary.current_target.nodes:
-                
+
             if node.name.startswith('I'):
                 # print(node)
                 count += 1
@@ -400,7 +402,7 @@ class Aircraft:
                 self.itinerary.current_target is None:
             # self.status = State.stop
             return State.stop
-        if self.is_departure is True: 
+        if self.is_departure is True:
             if type(self.itinerary.current_target.start) is Gate:
                 #  do not update state if holdlink is added at gate
                 if self.real_time == "":
@@ -419,7 +421,7 @@ class Aircraft:
                     # self.status = State.ramp
                     return State.ramp
             return State.taxi
-        elif self.is_departure is False: 
+        elif self.is_departure is False:
             if len(self.itinerary.current_target.nodes) > 0 and self.count_intersection() == 0: # and self.itinerary.current_target.nodes[0].name.startswith('I'):
                 # self.status = State.ramp
                 self.ramp_flag = 0
@@ -455,7 +457,7 @@ class Aircraft:
     def current_target(self):
         """return the current exact link"""
         return self.itinerary.current_target
-    
+
     def get_ahead_intersections_and_link(self):
         """get the intersections and future links with certain distance"""
         ahead_distance = 800.0
