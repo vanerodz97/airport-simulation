@@ -91,7 +91,7 @@ scheduler:
   max_resolve_conflict_attempt: 15
   # This is a parameter to limit the maximum number of airplanes that
   # could be running in the airport at the same time
-  max_airpcrafts_running: 1000
+  max_airpcrafts_running: 55
 
 controller:
   # The priority for airplanes to pass the intersection.
